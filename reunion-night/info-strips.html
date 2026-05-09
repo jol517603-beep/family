@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Info Strips · 20 character clues</title>
+<!--
+  PRINT: 2 × A4 portrait · 10 strips per page (2 cols × 5 rows)
+  Each strip is given by Bibi AFTER the team's tree is roughly built.
+  Pin each strip BESIDE the matching identity card on the whiteboard.
+  These strips carry the breadcrumbs for the 3 missions and the Yap secret.
+-->
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  :root { --cream:#f6ecd2; --paper:#fbf4dd; --ink:#3a2418; --gold:#b8860b; --jade:#2e7d5b; --rose:#b91c4b; --tan:#8b5a2b; --soft:#e8dab5; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background:#2a1810; font-family:'Georgia','Times New Roman',serif; color:var(--ink); }
+  body { padding: 14px; }
+  @media print { body { padding: 0; background: white; } }
+  .page { width: 210mm; height: 297mm; margin: 0 auto 14px; background: white; padding: 8mm; position: relative; page-break-after: always; box-shadow: 0 14px 36px rgba(0,0,0,0.5); }
+  @media print { .page { box-shadow: none; margin: 0; } }
+  .page:last-child { page-break-after: auto; }
+
+  .grid {
+    width: 100%; height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(5, 1fr);
+    gap: 3mm;
+  }
+
+  .strip {
+    background:
+      radial-gradient(ellipse at 90% 10%, rgba(46,125,91,0.10), transparent 60%),
+      var(--cream);
+    border: 1.5px dashed var(--tan);
+    border-radius: 2mm;
+    padding: 3mm 4mm;
+    position: relative;
+    display: flex; gap: 3mm;
+    align-items: center;
+    overflow: hidden;
+  }
+  .strip::before { content:''; position:absolute; inset:1.2mm; border:1px solid var(--gold); border-radius:1.5mm; pointer-events:none; }
+
+  .strip .num {
+    flex: 0 0 auto;
+    width: 14mm; height: 14mm; border-radius: 50%;
+    background: var(--rose); color: var(--cream);
+    display: flex; align-items: center; justify-content: center;
+    font-family:'Brush Script MT',cursive; font-size: 22pt;
+    border: 1.5px double var(--gold);
+    box-shadow: 1px 1px 0 var(--tan);
+    position: relative; z-index: 1;
+  }
+
+  .strip .body {
+    flex: 1; min-width: 0;
+    position: relative; z-index: 1;
+    display: flex; flex-direction: column;
+    gap: 1mm;
+  }
+  .strip .who {
+    color: var(--jade); font-size: 8pt;
+    font-style: italic;
+    border-bottom: 1px dotted var(--tan);
+    padding-bottom: 0.8mm;
+  }
+  .strip .who b { color: var(--ink); font-weight: normal; font-style: normal; }
+  .strip .clue {
+    font-size: 9pt; line-height: 1.45; color: var(--ink);
+  }
+  .strip .clue b { color: var(--rose); font-weight: normal; }
+  .strip .clue em { color: var(--jade); font-style: italic; }
+
+  .strip .tag {
+    position: absolute; bottom: 1.5mm; right: 3mm;
+    color: var(--tan); font-style: italic; font-size: 6.5pt;
+    letter-spacing: 1px;
+  }
+</style></head>
+<body>
+
+<!-- ============ PAGE 1 · #1 – #10 ============ -->
+<div class="page"><div class="grid">
+
+  <div class="strip">
+    <div class="num">1</div>
+    <div class="body">
+      <div class="who"><b>Tan Keo San</b> 陳橋山 · the founder</div>
+      <div class="clue">The watch was given to him at the dock in Xiamen on his <b>19th birthday</b>, 1898 — the morning he sailed.</div>
+      <div class="tag">⏱ watch · clue 1 of 4</div>
+    </div>
+  </div>
+
+  <div class="strip">
+    <div class="num">2</div>
+    <div class="body">
+      <div class="who"><b>Yap Eng Siew</b> 葉永秀 · eldest sister</div>
+      <div class="clue">On her last night she told her granddaughter: <em>"The third brooch is not what you think. Open the tin only when it is time."</em></div>
+      <div class="tag">🌺 brooch · clue 1 of 4</div>
+    </div>
+  </div>
+
+  <div class="strip">
+    <div class="num">3</div>
+    <div class="body">
+      <div class="who"><b>Auntie Mei</b> 林美蘭 · 1902–1998</div>
+      <div class="clue">Her sambal recipe lives on <b>page 17</b> of the cookbook. Count the chillies in the photo.</div>
+      <div class="tag">🍲 recipe</div>
+    </div>
+  </div>
+
+  <div class="strip">
+    <div class="num">4</div>
+    <div class="body">
+      <div class="who"><b>Yap Eng Neo</b> 葉永娘 · middle sister</div>
+      <div class="clue">Her brooch <b>Anak A</b> was returned to the tin in <b>winter 1923</b> — the same week her youngest sister was said to have died.</div>
+      <div class="tag">🌺 brooch · clue 2 of 4</div>
+    </div>
+  </div>
+
+  <div class="strip">
+    <div class="num">5</div>
+    <div class="body">
+      <div class="who"><b>Yap Eng Hooi</b> 葉永慧 · youngest sister</div>
+      <div class="clue">The grave at Batu Gantong has <b>no body inside</b>. Only her brooch box, sealed with red wax.</div>
+      <div class="tag">🌺 brooch · clue 3 of 4 · the secret</div>
+    </div>
+  </div>
+
+  <div class="strip">
+    <div class="num">6</div>
+    <div class="body">
+      <div class="who"><b>Lee Poh Soon</b> 李寶順 · cloth merchant</div>
+      <div class="clue">Folded <em>cream silk</em> for his daughter's wedding kebaya in 1946 — and a second length, the same year, for a <b>niece no one would name</b>.</div>
+      <div class="tag">🌺 brooch · clue 4 of 4</div>
+    </div>
+  </div>
+
+  <div class="strip">
+    <div class="num">7</div>
+    <div class="body">
+      <div class="who"><b>Tan Cheng Hoe</b> 陳清和 · eldest son</div>
+      <div class="clue">Inherited the watch in <b>1947</b>. Wound it every morning at six for <b>47 years</b>. Set it down in 1995 — the year of his stroke.</div>
+      <div class="tag">⏱ watch · clue 2 of 4</div>
+    </div>
+  </div>
+
+  <div class="strip">
+    <div class="num">8</div>
+    <div class="body">
+      <div class="who"><b>Lee Beng Guat</b> 李明月 · the brass-key wife</div>
+      <div class="clue">Her <b>brass key</b> opens the enamel tin. The tin has not been opened since 1923 — <em>until tonight.</em></div>
+      <div class="tag">🌺 brooch</div>
+    </div>
+  </div>
+
+  <div class="strip">
+    <div class="num">9</div>
+    <div class="body">
+      <div class="who"><b>Tan Ah Cai</b> 陳亞財 · the lost son</div>
+      <div class="clue">Last letter posted from Kulim, <b>March 1946</b>. Stamp: jungle violet. The envelope is in Bibi's pocket.</div>
+      <div class="tag">🌿 silence</div>
+    </div>
+  </div>
+
+  <div class="strip">
+    <div class="num">10</div>
+    <div class="body">
+      <div class="who"><b>Khoo Chin Nam</b> 邱振南 · Singapore tycoon</div>
+      <div class="clue"><b>Eleven months</b> married. Heart stopped at his own breakfast table in <b>1948</b>. The watch on his wrist read <b>6:47</b>.</div>
+      <div class="tag">⏱ watch · clue 3 of 4</div>
+    </div>
+  </div>
+
+</div></div>
+
+<!-- ============ PAGE 2 · #11 – #20 ============ -->
+<div class="page"><div class="grid">
+
+  <div class="strip">
+    <div class="num">11</div>
+    <div class="body">
+      <div class="who"><b>Tan Chen Neo</b> 陳珍娘 · widow · beadwork master</div>
+      <div class="clue">Her peony-toe pattern has exactly <b>9 petals</b> — one for each of her late husband's siblings.</div>
+      <div class="tag">🪡 bead · clue 1 of 2</div>
+    </div>
+  </div>
+
+  <div class="strip">
+    <div class="num">12</div>
+    <div class="body">
+      <div class="who"><b>Lee Boon Kuan</b> 李文坤 · the brother who never asked</div>
+      <div class="clue">Carried the small sister <em>wrapped in temple cloth</em> to his mother in 1923. He was <b>5</b>. Never asked who left her.</div>
+      <div class="tag">🌺 brooch · the secret</div>
+    </div>
+  </div>
+
+  <div class="strip">
+    <div class="num">13</div>
+    <div class="body">
+      <div class="who"><b>Albert Tan</b> 陳順發 · the books, not the watch</div>
+      <div class="clue">Listed See Hai Chan on Bursa in <b>2008</b>. Codename of the IPO: <em>SHC</em>. Allocation: <b>1,898 lots</b>.</div>
+      <div class="tag">📜 ledger</div>
+    </div>
+  </div>
+
+  <div class="strip">
+    <div class="num">14</div>
+    <div class="body">
+      <div class="who"><b>Alice Wong</b> 王愛麗 · St Andrew's white wedding</div>
+      <div class="clue">The white gown was Vera Wang. <em>Bibi's grandmother walked out of the church mid-vow</em> — and never returned.</div>
+      <div class="tag">🕊 outsider</div>
+    </div>
+  </div>
+
+  <div class="strip">
+    <div class="num">15</div>
+    <div class="body">
+      <div class="who"><b>Tan Soon Heng</b> 陳順興 · the brother who took the watch</div>
+      <div class="clue">Stroke in <b>2024</b>. The brass watch sits on a porcelain dish — wound by his daughter every morning at six in his place.</div>
+      <div class="tag">⏱ watch · clue 4 of 4</div>
+    </div>
+  </div>
+
+  <div class="strip">
+    <div class="num">16</div>
+    <div class="body">
+      <div class="who"><b>Lim Soo Hui</b> 林素慧 · the cookbook niece</div>
+      <div class="clue"><b>240 recipes</b> in the book. Page 240 is <em>blank</em> — reserved for the dish Auntie Mei never named.</div>
+      <div class="tag">🍲 recipe</div>
+    </div>
+  </div>
+
+  <div class="strip">
+    <div class="num">17</div>
+    <div class="body">
+      <div class="who"><b>Bibik Rose</b> 陳玫瑰 · host of tonight</div>
+      <div class="clue">Has been searching for the <b>third brooch</b> for <b>26 years</b>. Found it tonight, in the lining of the bridal cupboard.</div>
+      <div class="tag">🌺 brooch · the secret</div>
+    </div>
+  </div>
+
+  <div class="strip">
+    <div class="num">18</div>
+    <div class="body">
+      <div class="who"><b>Dr Tan Wei Wen</b> 陳偉文 · doctor · Bibi's brother</div>
+      <div class="clue">His wife's grandmother told him at Sunday lunch: <em>"Yap–Khoo, Khoo–Yap. The names always come back together."</em></div>
+      <div class="tag">🌺 brooch · the secret</div>
+    </div>
+  </div>
+
+  <div class="strip">
+    <div class="num">19</div>
+    <div class="body">
+      <div class="who"><b>Khoo Hooi Wen</b> 邱慧雯 · the 2020 bride</div>
+      <div class="clue">Wore the <b>1948 slippers</b>. Her grandmother was born in <b>1924</b> — to a mother the family said died in <b>1923</b>.</div>
+      <div class="tag">🌺 brooch · the secret</div>
+    </div>
+  </div>
+
+  <div class="strip">
+    <div class="num">20</div>
+    <div class="body">
+      <div class="who"><b>Kelvin Tan</b> 陳凱文 · See Hai Chan heir</div>
+      <div class="clue">Knows the balance sheet by heart. Has <b>never once</b> asked who Ah Cai was. (Bibi has been waiting.)</div>
+      <div class="tag">🌿 silence</div>
+    </div>
+  </div>
+
+</div></div>
+
+</body></html>

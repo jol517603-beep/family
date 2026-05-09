@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Roots of the Rose · Mission 2 · The Wrong Stone</title>
+<!--
+  PRINT: A4 portrait · 1 page = 1 mission card per team · print 5 copies
+  Hand to each team AFTER they pass Mission 1 (family tree match) and
+  collect their gold-coin chocolate from Bibi.
+
+  GOAL: Read a long paragraph of family relationships. The family tree
+  board has a coloured stone beside every name:
+       TAN  → black   YAP → RED      LEE → GREEN
+       LIM  → white   KHOO → BLUE    WONG → grey
+  ONE stone is the WRONG colour. Find it. Explain WHY.
+
+  Answer (for Bibi only):
+    Lee Beng Guat (#8) has a RED stone but should be GREEN.
+    She is not a Lee by blood — she is a Yap. The clues are on her
+    character card #8 (read it twice):
+      · born in the GOLDSMITH HOUSE (Yap house)
+      · has worn the ANAK B brooch since age 7 — ANAK B is Eng Hooi's
+      · "Lee — return to Yap if asked" (the tin label)
+      · "The Lee dressing-table has no other piece to match"
+    Therefore Beng Guat is the youngest Yap sister Eng Hooi's daughter,
+    raised by her aunt Eng Neo & uncle Lee Poh Soon as a Lee.
+
+  REWARD: another gold-coin chocolate + Bibi hands over the bead-strip
+  for Mission 3 (the digit reveal).
+-->
+<style>
+  @page { size: A4 portrait; margin: 0; }
+
+  :root {
+    --cream:#f6ecd2; --paper:#fbf4dd; --aged:#efdbb0; --ink:#3a2418;
+    --gold:#b8860b; --gold-2:#d4a73c; --jade:#2e7d5b;
+    --rose:#b91c4b; --rose-2:#d94872; --tan:#8b5a2b;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: var(--ink);
+    background: #2a1810;
+  }
+  body { padding: 12px; }
+  @media print { body { padding: 0; background: white; } }
+
+  .sheet {
+    width: 210mm;
+    height: 297mm;
+    margin: 0 auto;
+    background: var(--cream);
+    background-image:
+      radial-gradient(ellipse at 8% 8%, rgba(184,134,11,0.12), transparent 45%),
+      radial-gradient(ellipse at 92% 92%, rgba(185,28,75,0.12), transparent 45%);
+    padding: 14mm 12mm;
+    position: relative;
+    box-shadow: 0 14px 36px rgba(0,0,0,0.5);
+    page-break-after: always;
+  }
+  @media print { .sheet { box-shadow: none; padding: 14mm 12mm; } }
+
+  /* corner peonies */
+  .pe {
+    position: absolute;
+    width: 18mm; height: 18mm;
+    background:
+      radial-gradient(circle at 50% 50%, var(--rose-2) 0 18%, transparent 20%),
+      radial-gradient(circle at 30% 30%, var(--gold-2) 0 12%, transparent 14%),
+      radial-gradient(circle at 70% 70%, var(--jade) 0 10%, transparent 12%),
+      radial-gradient(circle at 30% 70%, var(--gold) 0 8%, transparent 10%),
+      radial-gradient(circle at 70% 30%, var(--rose) 0 8%, transparent 10%);
+    opacity: 0.55;
+  }
+  .pe.tl { top: 4mm; left: 4mm; }
+  .pe.tr { top: 4mm; right: 4mm; transform: scaleX(-1); }
+  .pe.bl { bottom: 4mm; left: 4mm; transform: scaleY(-1); }
+  .pe.br { bottom: 4mm; right: 4mm; transform: scale(-1,-1); }
+
+  .frame {
+    position: absolute; inset: 8mm;
+    border: 1.5px solid var(--gold);
+    border-radius: 3mm;
+    pointer-events: none;
+  }
+  .frame::before {
+    content: "";
+    position: absolute; inset: 2mm;
+    border: 0.5px solid var(--rose-2);
+    border-radius: 2mm;
+  }
+
+  .head {
+    text-align: center;
+    margin-bottom: 5mm;
+    position: relative;
+    z-index: 2;
+  }
+  .head .badge {
+    display: inline-block;
+    background: var(--rose);
+    color: var(--paper);
+    padding: 1.5mm 6mm;
+    font-size: 9pt;
+    letter-spacing: 0.4em;
+    border-radius: 1mm;
+    margin-bottom: 2mm;
+  }
+  .head h1 {
+    font-family: 'Brush Script MT', cursive;
+    font-size: 36pt;
+    color: var(--rose);
+    line-height: 1;
+    text-shadow: 1.5px 1.5px 0 var(--gold-2);
+  }
+  .head .zh {
+    font-size: 11pt;
+    color: var(--tan);
+    letter-spacing: 0.3em;
+    margin-top: 1.5mm;
+  }
+  .head .tag {
+    font-size: 8.5pt;
+    color: var(--ink);
+    font-style: italic;
+    margin-top: 2mm;
+  }
+
+  /* COLOUR LEGEND */
+  .legend {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 2mm;
+    margin: 4mm 0;
+    padding: 3mm 4mm;
+    background: var(--paper);
+    border: 1px dashed var(--tan);
+    border-radius: 2mm;
+    position: relative;
+    z-index: 2;
+  }
+  .legend .lg {
+    display: flex;
+    align-items: center;
+    gap: 2mm;
+    font-size: 8.5pt;
+    font-weight: bold;
+    color: var(--ink);
+  }
+  .stone {
+    width: 7mm; height: 7mm;
+    border-radius: 50%;
+    border: 1.5px solid var(--ink);
+    box-shadow: inset 1px 1px 2px rgba(255,255,255,0.4), inset -1px -1px 2px rgba(0,0,0,0.3);
+    flex: 0 0 auto;
+  }
+  .stone.tan  { background: radial-gradient(circle at 30% 30%, #555, #1a1a1a); }
+  .stone.yap  { background: radial-gradient(circle at 30% 30%, #d94872, #7a0e2f); }
+  .stone.lee  { background: radial-gradient(circle at 30% 30%, #4ea679, #1e5c40); }
+  .stone.lim  { background: radial-gradient(circle at 30% 30%, #fffbf0, #d8c898); }
+  .stone.khoo { background: radial-gradient(circle at 30% 30%, #4a7fc1, #1c3d75); }
+  .stone.wong { background: radial-gradient(circle at 30% 30%, #aaa, #555); }
+
+  /* BRIEF + STORY */
+  .brief {
+    background: linear-gradient(180deg, rgba(255,255,255,0.4), rgba(255,255,255,0));
+    padding: 3mm 4mm;
+    margin-bottom: 4mm;
+    border-left: 3px solid var(--rose);
+    font-size: 9.5pt;
+    line-height: 1.5;
+    position: relative;
+    z-index: 2;
+  }
+  .brief b { color: var(--rose); }
+
+  .story {
+    font-size: 9.5pt;
+    line-height: 1.55;
+    color: var(--ink);
+    text-align: justify;
+    hyphens: auto;
+    position: relative;
+    z-index: 2;
+    column-count: 2;
+    column-gap: 6mm;
+    column-rule: 1px dotted var(--tan);
+  }
+  .story p { margin-bottom: 2mm; }
+  .story b { color: var(--rose); font-weight: bold; }
+  .story em { color: var(--gold); font-style: italic; }
+  .story .seg {
+    display: inline-block;
+    background: rgba(184,134,11,0.12);
+    padding: 0.3mm 1.5mm;
+    border-radius: 1mm;
+  }
+
+  /* QUESTION BOX */
+  .qbox {
+    margin-top: 4mm;
+    padding: 4mm 5mm;
+    background: linear-gradient(135deg, var(--cream), var(--aged));
+    border: 2px solid var(--rose);
+    border-radius: 2mm;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+  }
+  .qbox h2 {
+    font-family: 'Brush Script MT', cursive;
+    color: var(--rose);
+    font-size: 22pt;
+    line-height: 1;
+    margin-bottom: 2mm;
+  }
+  .qbox .q {
+    font-size: 10.5pt;
+    color: var(--ink);
+    line-height: 1.5;
+    margin-bottom: 3mm;
+  }
+  .qbox .q b { color: var(--rose); }
+  .answers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3mm;
+    margin-top: 2mm;
+    text-align: left;
+  }
+  .answers .ans {
+    background: var(--paper);
+    border: 1px solid var(--tan);
+    border-radius: 1.5mm;
+    padding: 2mm 3mm;
+    font-size: 8.5pt;
+    line-height: 1.4;
+  }
+  .answers .ans b { color: var(--rose); }
+  .answers .ans .line {
+    border-bottom: 1px solid var(--tan);
+    height: 4.5mm;
+    margin-top: 1.5mm;
+  }
+  .answers .ans .line.tall { height: 9mm; }
+
+  .footer {
+    margin-top: 4mm;
+    text-align: center;
+    font-size: 7.5pt;
+    color: var(--tan);
+    font-style: italic;
+    position: relative;
+    z-index: 2;
+  }
+</style>
+</head>
+<body>
+
+<div class="sheet">
+
+  <span class="pe tl"></span><span class="pe tr"></span>
+  <span class="pe bl"></span><span class="pe br"></span>
+  <div class="frame"></div>
+
+  <!-- HEAD -->
+  <div class="head">
+    <div class="badge">MISSION · TWO</div>
+    <h1>Stones Do Not Lie</h1>
+    <div class="zh">石頭 · 不撒謊</div>
+    <div class="tag">"…but people forget how to read them." — Bibik Rose</div>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <div class="lg"><div class="stone tan"></div><span>TAN 陳</span></div>
+    <div class="lg"><div class="stone yap"></div><span>YAP 葉</span></div>
+    <div class="lg"><div class="stone lee"></div><span>LEE 李</span></div>
+    <div class="lg"><div class="stone lim"></div><span>LIM 林</span></div>
+    <div class="lg"><div class="stone khoo"></div><span>KHOO 邱</span></div>
+    <div class="lg"><div class="stone wong"></div><span>WONG 王</span></div>
+  </div>
+
+  <!-- BRIEF -->
+  <div class="brief">
+    Look at the family tree. Beside every face is a small <b>coloured stone</b> — one stone for each surname. Read the paragraph below carefully. Then ask yourselves: <b>does every stone match the person it sits beside?</b> One stone is the <b>wrong colour</b>. Find it. Explain <b>why</b> it is wrong.
+  </div>
+
+  <!-- STORY -->
+  <div class="story">
+    <p>The story begins in 1898 on Weld Quay. <b>Tan Keo San</b>, a sinkeh from Fujian who arrived at nineteen with one wooden trunk and his father's brass watch, married <b>Yap Eng Siew</b> — eldest daughter of the Beach Street goldsmith house. The Yap girls were three: the old nyonyas of Beach Street called them <em>三朵金蘭, the Three Golden Orchids</em>. Eng Siew the eldest was the matriarch, the one who would draw a chalk line in her own kitchen in 1920 and mean every inch of it. <b>Yap Eng Neo</b>, the middle, married the quiet Penang Road cloth merchant <b>Lee Poh Soon</b> in 1901. The youngest, <b>Yap Eng Hooi</b>, was born late — eighteen years after Eng Neo — and never married; she died at twenty-three in the back room of the goldsmith house in the winter of 1923, the cause never written down.</p>
+
+    <p>Keo San and Eng Siew had three children: <b>Tan Cheng Hoe</b> (1920), the only legitimate son and heir; and the youngest sister <b>Tan Chen Neo</b> (1925). In the back kitchen, the woman from Balik Pulau the family called <em>Auntie Mei</em> bore a fourth child the front of the house never registered: <b>Tan Ah Cai</b> (1925), Cheng Hoe's half-brother, who grew up at Weld Quay among the kulis and walked into the Kulim hills in 1942.</p>
+
+    <p>Eng Neo and Lee Poh Soon, in their Penang Road house, raised two children. The elder was their only blood son, <b>Lee Boon Kuan</b> (1918) — never married, died of fever at thirty-two. The younger was their daughter <b>Lee Beng Guat</b> (1921), who walked to school every morning with her brother carrying her satchel.</p>
+
+    <p>In 1947, Eng Siew arranged a quiet Penang–Penang alliance: her son <b>Cheng Hoe</b> would marry her sister Eng Neo's daughter <b>Beng Guat</b>. The Tan and Lee houses became one. Cheng Hoe and Beng Guat had two sons: <b>Tan Soon Heng</b> (1948), the elder and gentler, who became a heritage architect and received his grandfather's brass watch on his 21st birthday in 1969; and <b>Albert Tan</b> (1950), the younger, who took an English name in Sydney, modernised See Hai Chan, and married the KL banker <b>Alice Wong</b> in 1994 at St Andrew's, Singapore.</p>
+
+    <p>One year later, in November 1948, young <b>Chen Neo</b> at twenty-three became the second wife of the Singapore shipping tycoon <b>Khoo Chin Nam</b>. He died eleven months later. She did not return to Penang. She apprenticed in beadwork on Telok Ayer and stitched for sixty-eight years.</p>
+
+    <p>Soon Heng married <b>Lim Soo Hui</b> from Ipoh in 1990 — the girl who had taken the bus to Penang at sixteen with a school exercise book to copy down what Auntie Mei's hands did in the kitchen. They had two children: <b>Bibik Rose</b> (1974), the textile conservator who is hosting tonight; and <b>Dr Tan Wei Wen</b> (1990), the doctor at Penang General. Sixteen years apart.</p>
+
+    <p>In November 2020, Wei Wen married <b>Khoo Hooi Wen</b> — great-granddaughter of <b>Khoo Chin Nam</b> through his Singapore first marriage. The wedding closed an old promise: seventy-two years and one week after Chen Neo had married Chin Nam in 1948. Hooi Wen wore Aunt Chen Neo's never-worn peony-toe slippers under her kebaya.</p>
+
+    <p>Albert and Alice's only son, <b>Kelvin Tan</b> (1995), lives in London. He runs the European desk of a logistics fund that holds 14% of his own family's company. He takes the See Hai Chan board chair in 2027.</p>
+
+    <p>Five families. Twenty people. <em>One stone is the wrong colour.</em></p>
+  </div>
+
+  <!-- QUESTION -->
+  <div class="qbox">
+    <h2>The Question</h2>
+    <div class="q">
+      Walk to the family tree. <b>Find the stone whose colour does not match the person.</b><br>
+      Read that person's character card again — the answer is hidden in plain sight.<br>
+      <em>Bibi will check both your answers before you may proceed to Mission 3.</em>
+    </div>
+    <div class="answers">
+      <div class="ans">
+        <b>① Whose stone is wrong?</b>
+        <div class="line"></div>
+        <div style="font-size:7.5pt; color:var(--tan); margin-top:1mm;">name &amp; card number</div>
+      </div>
+      <div class="ans">
+        <b>② What colour <em>should</em> it be, and why?</b>
+        <div class="line tall"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    Mission 2 of 4 · Roots of the Rose · Penang · May 2026 · 五代家族
+  </div>
+
+</div>
+
+</body>
+</html>

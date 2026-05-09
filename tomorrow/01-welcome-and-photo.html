@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Welcome + AI Photo Challenge</title>
+<!--
+  PRINT:
+  Page 1 = WELCOME / GROUPING — print 1 copy, pin at door
+  Page 2 = AI PHOTO CHALLENGE — print 6 copies (1 door + 5 teams)
+-->
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  :root { --cream:#f6ecd2; --paper:#fbf4dd; --ink:#3a2418; --gold:#b8860b; --jade:#2e7d5b; --rose:#b91c4b; --tan:#8b5a2b; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background:#2a1810; font-family:'Georgia',serif; color:var(--ink); }
+  body { padding: 14px; }
+  @media print { body { padding: 0; background: white; } }
+  .page {
+    width: 210mm; height: 297mm; margin: 0 auto 14px;
+    background: var(--cream); padding: 13mm 14mm;
+    position: relative; box-shadow: 0 14px 36px rgba(0,0,0,0.5);
+    page-break-after: always; display: flex; flex-direction: column;
+  }
+  @media print { .page { box-shadow: none; margin: 0; } }
+  .page:last-child { page-break-after: auto; }
+  .page::before { content:''; position:absolute; inset:5mm; border:2px double var(--rose); border-radius:3mm; pointer-events:none; }
+  .page::after  { content:''; position:absolute; inset:7mm; border:1px solid var(--gold); border-radius:2mm; pointer-events:none; }
+
+  header { text-align:center; margin-bottom: 5mm; position: relative; z-index: 1; }
+  .stamp { display: inline-block; padding: 1mm 4mm; background: var(--rose); color: var(--cream); border-radius: 1mm; font-style: italic; letter-spacing: 4px; font-size: 8pt; transform: rotate(-2deg); }
+  h1 { font-family:'Brush Script MT',cursive; color: var(--rose); font-size: 38pt; line-height: 1; margin-top: 2mm; text-shadow: 1.8px 1.8px 0 var(--gold); }
+  .sub { color: var(--tan); font-style: italic; font-size: 11pt; margin-top: 1mm; }
+
+  .block {
+    background: var(--paper);
+    border: 1.5px dashed var(--tan);
+    border-radius: 3mm;
+    padding: 5mm 6mm;
+    margin-bottom: 4mm;
+    position: relative; z-index: 1;
+  }
+  .block::before { content:''; position:absolute; inset:1.5mm; border:1px solid var(--gold); border-radius:2mm; pointer-events:none; }
+  h2 {
+    font-family: 'Brush Script MT', cursive;
+    color: var(--jade); font-size: 22pt;
+    margin-bottom: 3mm; line-height: 1;
+    border-bottom: 1px dashed var(--rose); padding-bottom: 2mm;
+    position: relative; z-index: 1;
+  }
+  .body { font-size: 11pt; line-height: 1.6; position: relative; z-index: 1; }
+  .body p { margin-bottom: 2mm; }
+  .body b { color: var(--rose); }
+
+  ol { margin-left: 6mm; margin-top: 2mm; position: relative; z-index: 1; font-size: 11pt; line-height: 1.7; }
+  ol li { margin-bottom: 2mm; }
+  ol li b { color: var(--rose); }
+
+  .items-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 3mm; margin: 3mm 0;
+    position: relative; z-index: 1;
+  }
+  .item-pill {
+    background: white; border: 1px solid var(--gold); border-radius: 2mm;
+    padding: 2.5mm 3mm; text-align: center; font-size: 10pt;
+  }
+  .item-pill .ic { font-size: 16pt; display: block; margin-bottom: 1mm; }
+  .item-pill .nm { font-family: 'Brush Script MT', cursive; color: var(--jade); font-size: 13pt; line-height: 1; }
+  .item-pill .en { color: var(--tan); font-size: 8pt; font-style: italic; margin-top: 0.5mm; }
+  .item-pill.wild { background: rgba(185,28,75,0.10); border-color: var(--rose); }
+
+  .prompt-box {
+    background: white;
+    border: 2px solid var(--jade);
+    border-radius: 2mm;
+    padding: 4mm 5mm;
+    margin-top: 3mm;
+    font-family: 'Courier New', monospace;
+    font-size: 10pt;
+    line-height: 1.5;
+    position: relative; z-index: 1;
+  }
+  .prompt-box .lbl {
+    background: var(--jade); color: var(--cream);
+    padding: 1mm 3mm; font-family: 'Georgia', serif;
+    font-size: 8pt; letter-spacing: 2px; border-radius: 1mm;
+    display: inline-block; margin-bottom: 2mm;
+  }
+
+  footer { text-align: center; margin-top: auto; color: var(--tan); font-style: italic; font-size: 9pt; letter-spacing: 2px; padding-top: 4mm; position: relative; z-index: 1; }
+</style></head>
+<body>
+
+<!-- =================== PAGE 1 · WELCOME + GROUPING =================== -->
+<div class="page">
+  <header>
+    <span class="stamp">★ AT THE DOOR · 12:55 PM ★</span>
+    <h1>Selamat Datang</h1>
+    <div class="sub">~ Welcome to the Tan family reunion ~</div>
+  </header>
+
+  <div class="block">
+    <h2>1 · Take an envelope</h2>
+    <div class="body">
+      <p>One envelope per guest. Inside is one paper item — the symbol of your team for today. Don't peek at others. Don't trade. Whatever you draw, that's your seat.</p>
+      <div class="items-grid">
+        <div class="item-pill"><span class="ic">📿</span><span class="nm">Kerongsang</span><span class="en">brooch</span></div>
+        <div class="item-pill"><span class="ic">🍱</span><span class="nm">Tingkat</span><span class="en">tiffin carrier</span></div>
+        <div class="item-pill"><span class="ic">👡</span><span class="nm">Kasut Manik</span><span class="en">beaded shoes</span></div>
+        <div class="item-pill"><span class="ic">🍵</span><span class="nm">Kamcheng</span><span class="en">covered jar</span></div>
+        <div class="item-pill"><span class="ic">👘</span><span class="nm">Baju Kebaya</span><span class="en">embroidered blouse</span></div>
+        <div class="item-pill wild"><span class="ic">🍲</span><span class="nm">Babi Pongteh</span><span class="en">wildcard · join any team</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <h2>2 · Smile for the camera</h2>
+    <div class="body">
+      <p>Bibi or the door greeter takes one quick photo of you. This is your <b>arrival portrait</b> — keep it clean, you'll see it again. (Yes, AI is involved. Trust us.)</p>
+    </div>
+  </div>
+
+  <div class="block">
+    <h2>3 · Find your team</h2>
+    <div class="body">
+      <p>Walk into the hall and find <b>4 other guests with 4 different items</b>. A team of 5 must hold one of <em>each</em> item — kerongsang, tingkat, kasut manik, kamcheng, baju kebaya. No duplicates inside one team.</p>
+      <p><b>If you drew Babi Pongteh:</b> congratulations, you are the wildcard. Pick any team that wants you. They cannot refuse — that is also Peranakan.</p>
+      <p>When your team of 5 is complete, walk together to the <b>long table</b> and find the corner with your team name on the table tent. Sit. Wait for Bibi.</p>
+    </div>
+  </div>
+
+  <footer>page 1 of 2 · door area · pin at entrance · 陳家根譜</footer>
+</div>
+
+<!-- =================== PAGE 2 · AI PHOTO CHALLENGE =================== -->
+<div class="page">
+  <header>
+    <span class="stamp">★ TEAM CHALLENGE · 1:10 PM ★</span>
+    <h1>AI Heritage Portrait</h1>
+    <div class="sub">~ dress your team in baba-nyonya · win the prize ~</div>
+  </header>
+
+  <div class="block">
+    <h2>The Challenge</h2>
+    <div class="body">
+      <p>Take <b>one group photo of all 5 team members</b>. Use AI to transform it: every person in full baba-nyonya costume, standing inside a Peranakan mansion. The team with the <b>most accurate</b> portrait — correct kebaya, correct sarong, kerongsang in the right place, beaded shoes, sanggul hair, real Peranakan mansion tiles — <b>wins the prize</b>.</p>
+    </div>
+  </div>
+
+  <div class="block">
+    <h2>How (15 minutes)</h2>
+    <div class="body">
+      <ol>
+        <li>Stand together. Take <b>one good group photo</b>, all 5 faces visible.</li>
+        <li>On any phone, open <b>Nano Banana</b> (Google Gemini app) — free, fast.</li>
+        <li>Upload your photo. Paste the prompt below.</li>
+        <li>Generate. Re-prompt if it looks wrong. You have 15 minutes.</li>
+        <li><b>WhatsApp the final image to Bibi</b> at the number on her table tent.</li>
+        <li>Bibi will print all 5 portraits on the Canon Selphy during Game 1.</li>
+      </ol>
+    </div>
+
+    <div class="prompt-box">
+      <span class="lbl">★ COPY THIS PROMPT ★</span><br>
+      Transform this group photo. Dress every person in authentic
+      late-1800s Peranakan baba-nyonya formal attire — women in
+      embroidered kebaya nyonya with kerongsang brooches, batik
+      sarong, beaded kasut manik shoes, sanggul hair with
+      cucuk sanggul pins; men in baju lokchuan or batik shirt
+      with songkok. Keep all faces and skin tones exact, do not
+      change identity. Background: ornate Peranakan mansion
+      interior — encaustic tile floor, carved teak screen, marble-
+      top altar table, hanging lanterns, soft warm afternoon
+      light through louvered windows. Photorealistic, 4×6 portrait
+      orientation, sharp detail.
+    </div>
+  </div>
+
+  <div class="block">
+    <h2>Judging</h2>
+    <div class="body">
+      <p>Bibi + 2 family elders will judge. Tiebreaker = clap-meter from the room. Criteria, in order:</p>
+      <p><b>1. Accuracy of costume</b> — kerongsang, kebaya cut, sarong pattern, kasut manik visible.<br>
+      <b>2. Mansion background</b> — real Peranakan elements (tiles, teak, lanterns), not random Asian decor.<br>
+      <b>3. Faces preserved</b> — all 5 still recognisable, no swaps or distortions.<br>
+      <b>4. Composition</b> — looks like a real heritage family photograph.</p>
+    </div>
+  </div>
+
+  <footer>page 2 of 2 · 1 copy per team + 1 at door · Selphy ready · 陳家根譜</footer>
+</div>
+
+</body></html>

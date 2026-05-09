@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Gold Coin Tags</title>
+<!-- A4 portrait · 24 small round tags · cut + glue onto chocolate coins -->
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  :root { --cream:#f6ecd2; --paper:#fbf4dd; --ink:#3a2418; --gold:#b8860b; --gold-2:#d4a73c; --jade:#2e7d5b; --rose:#b91c4b; --tan:#8b5a2b; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background:#2a1810; font-family:'Georgia','Times New Roman',serif; color:var(--ink); }
+  body { padding: 14px; }
+  @media print { body { padding: 0; background: white; } }
+  .page { width: 210mm; height: 297mm; margin: 0 auto; background: white; padding: 14mm 14mm; position: relative; box-shadow: 0 14px 36px rgba(0,0,0,0.5); }
+  @media print { .page { box-shadow: none; margin: 0; } }
+
+  .grid {
+    width: 100%; height: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: 4mm;
+    place-items: center;
+  }
+
+  .coin {
+    width: 38mm; height: 38mm; border-radius: 50%;
+    background:
+      radial-gradient(circle at 32% 32%, #fff5cc 0%, var(--gold-2) 38%, var(--gold) 70%, #8a6510 100%);
+    border: 2px solid #6b4f0a;
+    box-shadow:
+      inset 0 0 0 1.5mm rgba(255,248,225,0.45),
+      inset 0 0 0 2mm var(--gold-2),
+      inset 0 0 6px rgba(0,0,0,0.25),
+      0 1.5px 0 #5b400a;
+    position: relative;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    color: #3a2418;
+    overflow: hidden;
+  }
+  .coin::before {
+    content:'';
+    position: absolute; inset: 4mm;
+    border-radius: 50%;
+    border: 1px dashed rgba(58,36,24,0.45);
+    pointer-events: none;
+  }
+  .coin .top {
+    font-family:'Brush Script MT',cursive;
+    color: #5b3a14; font-size: 6.5pt;
+    letter-spacing: 1.5px;
+    line-height: 1;
+    margin-top: 1mm;
+    position: relative; z-index: 1;
+  }
+  .coin .center {
+    font-family:'Brush Script MT',cursive;
+    color: #5b3a14; font-size: 24pt;
+    line-height: 1;
+    margin-top: 1.5mm;
+    text-shadow: 1px 1px 0 rgba(255,248,225,0.55);
+    position: relative; z-index: 1;
+  }
+  .coin .zh {
+    color: #5b3a14; font-size: 7pt;
+    letter-spacing: 3px;
+    margin-top: 1mm;
+    position: relative; z-index: 1;
+  }
+  .coin .bot {
+    font-style: italic;
+    color: #5b3a14; font-size: 5.5pt;
+    letter-spacing: 1px;
+    margin-top: 1mm;
+    position: relative; z-index: 1;
+  }
+
+  .star {
+    position: absolute;
+    color: rgba(58,36,24,0.35);
+    font-size: 6pt;
+    z-index: 1;
+  }
+  .star.t { top: 1.5mm; left: 50%; transform: translateX(-50%); }
+  .star.b { bottom: 1.5mm; left: 50%; transform: translateX(-50%); }
+  .star.l { left: 1.5mm; top: 50%; transform: translateY(-50%); }
+  .star.r { right: 1.5mm; top: 50%; transform: translateY(-50%); }
+
+  .header-note { text-align:center; padding: 0 0 4mm; color: var(--tan); font-style: italic; font-size: 8.5pt; letter-spacing: 2px; }
+  @media print { .header-note { display: none; } }
+</style></head>
+<body>
+<div class="page">
+  <div class="header-note">~ cut along the circles · glue onto chocolate coins or wooden discs ~</div>
+  <div class="grid">
+    <!-- 24 coins -->
+    <div class="coin"><span class="star t">✦</span><span class="star b">✦</span><span class="star l">✦</span><span class="star r">✦</span>
+      <div class="top">Roots of the Rose</div><div class="center">1</div><div class="zh">陳</div><div class="bot">stones do not lie</div>
+    </div>
+    <div class="coin"><span class="star t">✦</span><span class="star b">✦</span><span class="star l">✦</span><span class="star r">✦</span>
+      <div class="top">Roots of the Rose</div><div class="center">1</div><div class="zh">陳</div><div class="bot">stones do not lie</div>
+    </div>
+    <div class="coin"><span class="star t">✦</span><span class="star b">✦</span><span class="star l">✦</span><span class="star r">✦</span>
+      <div class="top">Roots of the Rose</div><div class="center">1</div><div class="zh">陳</div><div class="bot">stones do not lie</div>
+    </div>
+    <div class="coin"><span class="star t">✦</span><span class="star b">✦</span><span class="star l">✦</span><span class="star r">✦</span>
+      <div class="top">Roots of the Rose</div><div class="center">1</div><div class="zh">陳</div><div class="bot">stones do not lie</div>
+    </div>
+    <div class="coin"><span class="star t">✦</span><span class="star b">✦</span><span class="star l">✦</span><span class="star r">✦</span>
+      <div class="top">Roots of the Rose</div><div class="center">1</div><div class="zh">陳</div><div class="bot">stones do not lie</div>
+    </div>
+    <div class="coin"><span class="star t">✦</span><span class="star b">✦</span><span class="star l">✦</span><span class="star r">✦</span>
+      <div class="top">Roots of the Rose</div><div class="center">1</div><div class="zh">陳</div><div class="bot">stones do not lie</div>
+    </div>
+    <div class="coin"><span class="star t">✦</span><span class="star b">✦</span><span class="star l">✦</span><span class="star r">✦</span>
+      <div class="top">Roots of the Rose</div><div class="center">1</div><div class="zh">陳</div><div class="bot">stones do not lie</div>
+    </div>
+    <div class="coin"><span class="star t">✦</span><span class="star b">✦</span><span class="star l">✦</span><span class="star r">✦</span>
+      <div class="top">Roots of the Rose</div><div class="center">1</div><div class="zh">陳</div><div class="bot">stones do not lie</div>
+    </div>
+    <div class="coin"><span class="star t">✦</span><span class="star b">✦</span><span class="star l">✦</span><span class="star r">✦</span>
+      <div class="top">Roots of the Rose</div><div class="center">1</div><div class="zh">陳</div><div class="bot">stones do not lie</div>
+    </div>
+    <div class="coin"><span class="star t">✦</span><span class="star b">✦</span><span class="star l">✦</span><span class="star r">✦</span>
+      <div class="top">Roots of the Rose</div><div class="center">1</div><div class="zh">陳</div><div class="bot">stones do not lie</div>
+    </div>
+    <div class="coin"><span class="star t">✦</span><span class="star b">✦</span><span class="star l">✦</span><span class="star r">✦</span>
+      <div class="top">Roots of the Rose</div><div class="center">1</div><div class="zh">陳</div><div class="bot">stones do not lie</div>
+    </div>
+    <div class="coin"><span class="star t">✦</span><span class="star b">✦</span><span class="star l">✦</span><span class="star r">✦</span>
+      <div class="top">Roots of the Rose</div><div class="center">1</div><div class="zh">陳</div><div class="bot">stones do not lie</div>
+    </div>
+    <div class="coin"><span class="star t">✦</span><span class="star b">✦</span><span class="star l">✦</span><span class="star r">✦</span>
+      <div class="top">Roots of the Rose</div><div class="center">1</div><div class="zh">陳</div><div class="bot">stones do not lie</div>
+    </div>
+    <div class="coin"><span class="star t">✦</span><span class="star b">✦</span><span class="star l">✦</span><span class="star r">✦</span>
+      <div class="top">Roots of the Rose</div><div class="center">1</div><div class="zh">陳</div><div class="bot">stones do not lie</div>
+    </div>
+    <div class="coin"><span class="star t">✦</span><span class="star b">✦</span><span class="star l">✦</span><span class="star r">✦</span>
+      <div class="top">Roots of the Rose</div><div class="center">1</div><div class="zh">陳</div><div class="bot">stones do not lie</div>
+    </div>
+    <div class="coin"><span class="star t">✦</span><span class="star b">✦</span><span class="star l">✦</span><span class="star r">✦</span>
+      <div class="top">Roots of the Rose</div><div class="center">1</div><div class="zh">陳</div><div class="bot">stones do not lie</div>
+    </div>
+    <div class="coin"><span class="star t">✦</span><span class="star b">✦</span><span class="star l">✦</span><span class="star r">✦</span>
+      <div class="top">Roots of the Rose</div><div class="center">1</div><div class="zh">陳</div><div class="bot">stones do not lie</div>
+    </div>
+    <div class="coin"><span class="star t">✦</span><span class="star b">✦</span><span class="star l">✦</span><span class="star r">✦</span>
+      <div class="top">Roots of the Rose</div><div class="center">1</div><div class="zh">陳</div><div class="bot">stones do not lie</div>
+    </div>
+    <div class="coin"><span class="star t">✦</span><span class="star b">✦</span><span class="star l">✦</span><span class="star r">✦</span>
+      <div class="top">Roots of the Rose</div><div class="center">1</div><div class="zh">陳</div><div class="bot">stones do not lie</div>
+    </div>
+    <div class="coin"><span class="star t">✦</span><span class="star b">✦</span><span class="star l">✦</span><span class="star r">✦</span>
+      <div class="top">Roots of the Rose</div><div class="center">1</div><div class="zh">陳</div><div class="bot">stones do not lie</div>
+    </div>
+    <div class="coin"><span class="star t">✦</span><span class="star b">✦</span><span class="star l">✦</span><span class="star r">✦</span>
+      <div class="top">Roots of the Rose</div><div class="center">1</div><div class="zh">陳</div><div class="bot">stones do not lie</div>
+    </div>
+    <div class="coin"><span class="star t">✦</span><span class="star b">✦</span><span class="star l">✦</span><span class="star r">✦</span>
+      <div class="top">Roots of the Rose</div><div class="center">1</div><div class="zh">陳</div><div class="bot">stones do not lie</div>
+    </div>
+    <div class="coin"><span class="star t">✦</span><span class="star b">✦</span><span class="star l">✦</span><span class="star r">✦</span>
+      <div class="top">Roots of the Rose</div><div class="center">1</div><div class="zh">陳</div><div class="bot">stones do not lie</div>
+    </div>
+    <div class="coin"><span class="star t">✦</span><span class="star b">✦</span><span class="star l">✦</span><span class="star r">✦</span>
+      <div class="top">Roots of the Rose</div><div class="center">1</div><div class="zh">陳</div><div class="bot">stones do not lie</div>
+    </div>
+  </div>
+</div>
+</body></html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Welcome Note · Bibik Rose</title>
+<!--
+  PRINT: A4 portrait · 2 letters per sheet · 13 sheets = 26 letters.
+  One letter per envelope, paired with one item card (12-item-cards.html).
+-->
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  :root { --cream:#f6ecd2; --paper:#fbf4dd; --ink:#3a2418; --gold:#b8860b; --jade:#2e7d5b; --rose:#b91c4b; --tan:#8b5a2b; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background:#2a1810; font-family:'Georgia','Times New Roman',serif; color:var(--ink); }
+  body { padding: 14px; }
+  @media print { body { padding: 0; background: white; } }
+
+  .sheet { width: 210mm; height: 297mm; margin: 0 auto; background: white; position: relative; display: flex; flex-direction: column; }
+  .cut { position: absolute; left: 0; right: 0; top: 50%; border-top: 0.4mm dashed var(--tan); text-align: center; font-size: 6.5pt; color: var(--tan); letter-spacing: 4px; font-style: italic; transform: translateY(-50%); }
+  .cut::before, .cut::after { content: ' ✂  '; color: var(--rose); }
+
+  .letter {
+    width: 210mm; height: 148.5mm;
+    padding: 11mm 14mm;
+    background:
+      radial-gradient(ellipse at 12% 8%, rgba(184,134,11,0.10), transparent 50%),
+      radial-gradient(ellipse at 88% 92%, rgba(185,28,75,0.10), transparent 50%),
+      var(--cream);
+    position: relative; overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .letter::before { content:''; position:absolute; inset:4mm; border:2px double var(--rose); border-radius:2mm; pointer-events:none; }
+  .letter::after  { content:''; position:absolute; inset:5.5mm; border:0.6px solid var(--gold); border-radius:1.5mm; pointer-events:none; }
+
+  .head { text-align: center; padding-bottom: 2.5mm; margin-bottom: 3mm; border-bottom: 1px dashed var(--rose); position: relative; z-index: 1; }
+  .stamp { display: inline-block; padding: 0.8mm 4mm; background: var(--rose); color: var(--cream); border-radius: 1mm; font-style: italic; letter-spacing: 3px; font-size: 7pt; transform: rotate(-1deg); }
+  .title { font-family:'Brush Script MT',cursive; color: var(--rose); font-size: 24pt; line-height: 1; margin-top: 2mm; text-shadow: 1px 1px 0 var(--gold); }
+
+  .greet { font-family:'Brush Script MT',cursive; color: var(--jade); font-size: 16pt; line-height: 1; margin-bottom: 2.5mm; position: relative; z-index: 1; }
+
+  .body { font-size: 10.5pt; line-height: 1.6; color: var(--ink); flex: 1; position: relative; z-index: 1; }
+  .body p { margin-bottom: 2.5mm; }
+  .body strong { color: var(--rose); }
+  .body em { color: var(--jade); font-style: italic; }
+
+  .steps {
+    background: var(--paper);
+    border-left: 3px solid var(--rose);
+    border-radius: 1mm;
+    padding: 2.5mm 4mm;
+    font-size: 10pt; line-height: 1.55;
+    color: var(--ink);
+    position: relative; z-index: 1;
+  }
+  .steps ol { padding-left: 5mm; }
+  .steps li { margin-bottom: 0.8mm; }
+  .steps li:last-child { margin-bottom: 0; }
+  .steps strong { color: var(--rose); }
+  .steps em { color: var(--jade); font-style: italic; }
+
+  .sign { margin-top: 3mm; text-align: right; font-style: italic; color: var(--ink); font-size: 9pt; position: relative; z-index: 1; }
+  .sign .name { font-family:'Brush Script MT',cursive; color: var(--rose); font-size: 18pt; line-height: 1; text-shadow: 0.7px 0.7px 0 var(--gold); }
+  .sign .role { color: var(--tan); font-size: 7pt; letter-spacing: 1.5px; margin-top: 0.5mm; }
+</style></head>
+<body>
+
+<div class="sheet">
+
+  <!-- TOP LETTER -->
+  <div class="letter">
+    <div class="head">
+      <span class="stamp">★ ROOTS OF THE ROSE · 9 MAY 2026 ★</span>
+      <div class="title">Welcome home, cousin</div>
+    </div>
+
+    <div class="greet">Selamat datang —</div>
+
+    <div class="body">
+      <p>Inside this envelope is <strong>one Peranakan item card</strong>. That card is your seat at the table tonight.</p>
+
+      <div class="steps">
+        <ol>
+          <li><strong>Open your card</strong> — see what item you got.</li>
+          <li><strong>Find four cousins with four different items</strong> — Kerongsang 🌹 · Kebaya 👘 · Kamcheng 🏺 · Tingkat 🍱 · Jam Saku ⌚. Five of you, five different items, one team.</li>
+          <li><strong>Sit together</strong> at one corner of the long table.</li>
+          <li>If you drew <em>Cherki 🃏</em> — that is the wildcard. Pick any team, walk over, sit down. They cannot say no.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="sign">
+      with love,
+      <div class="name">Bibik Rose</div>
+      <div class="role">陳玫瑰 · 4TH GENERATION · HOST</div>
+    </div>
+  </div>
+
+  <div class="cut">cut here · ✂ · cut here · ✂ · cut here</div>
+
+  <!-- BOTTOM LETTER (identical) -->
+  <div class="letter">
+    <div class="head">
+      <span class="stamp">★ ROOTS OF THE ROSE · 9 MAY 2026 ★</span>
+      <div class="title">Welcome home, cousin</div>
+    </div>
+
+    <div class="greet">Selamat datang —</div>
+
+    <div class="body">
+      <p>Inside this envelope is <strong>one Peranakan item card</strong>. That card is your seat at the table tonight.</p>
+
+      <div class="steps">
+        <ol>
+          <li><strong>Open your card</strong> — see what item you got.</li>
+          <li><strong>Find four cousins with four different items</strong> — Kerongsang 🌹 · Kebaya 👘 · Kamcheng 🏺 · Tingkat 🍱 · Jam Saku ⌚. Five of you, five different items, one team.</li>
+          <li><strong>Sit together</strong> at one corner of the long table.</li>
+          <li>If you drew <em>Cherki 🃏</em> — that is the wildcard. Pick any team, walk over, sit down. They cannot say no.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="sign">
+      with love,
+      <div class="name">Bibik Rose</div>
+      <div class="role">陳玫瑰 · 4TH GENERATION · HOST</div>
+    </div>
+  </div>
+
+</div>
+</body></html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>3 Kamcheng · Outside-Tree Heritage Cards</title>
+<style>
+  /* PRINT-READY · A4 PORTRAIT — 3 cards on one sheet, double-sided */
+  @page { size: A4 portrait; margin: 0; }
+
+  :root {
+    --cream:#f6ecd2; --paper:#fbf4dd; --ink:#3a2418;
+    --gold:#b8860b; --gold-2:#d4a73c; --jade:#2e7d5b;
+    --rose:#b91c4b; --tan:#8b5a2b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background:#2a1810; font-family:'Georgia',serif; color:var(--ink); }
+  body { padding: 18px; }
+  @media print { body { padding: 0; background: white; } }
+
+  .sheet {
+    width: 210mm; height: 297mm;
+    margin: 0 auto 16px;
+    background: var(--cream);
+    position: relative;
+    page-break-after: always;
+    padding: 12mm 14mm;
+    display: flex; flex-direction: column; gap: 6mm;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.55);
+  }
+  @media print { .sheet { box-shadow: none; margin: 0; } }
+
+  .sheet-title {
+    text-align: center; font-size: 11pt; color: var(--rose); font-style: italic;
+    border-bottom: 1px dashed var(--tan); padding-bottom: 2mm;
+  }
+
+  /* Each card is ~85mm tall × 180mm wide */
+  .card {
+    width: 100%; height: 82mm;
+    background: var(--paper);
+    border: 2.5px solid var(--gold);
+    border-radius: 10px;
+    padding: 5mm 6mm;
+    position: relative;
+    box-shadow: 2px 2px 0 var(--tan);
+    overflow: hidden;
+  }
+  .card .corner-orn {
+    position: absolute; top: 3mm; right: 3mm; bottom: 3mm; left: 3mm;
+    border: 1px solid var(--rose); border-radius: 7px; pointer-events: none;
+  }
+  .card .ribbon {
+    position: absolute; top: -3mm; left: 6mm;
+    background: var(--rose); color: var(--cream);
+    padding: 1mm 5mm; font-size: 8pt; font-weight: bold;
+    letter-spacing: 2px; border-radius: 4px;
+    box-shadow: 1px 1px 0 var(--gold); z-index: 2;
+  }
+  .card .number {
+    position: absolute; top: 3mm; right: 6mm;
+    background: var(--jade); color: var(--cream);
+    width: 9mm; height: 9mm; border-radius: 50%;
+    display:flex; align-items:center; justify-content:center;
+    font-weight: bold; font-size: 11pt;
+    border: 1.5px solid var(--gold);
+    box-shadow: 1px 1px 0 var(--gold-2);
+    z-index: 2;
+  }
+
+  .row { display: grid; grid-template-columns: 56mm 1fr; gap: 5mm; height: 100%; align-items: stretch; padding-top: 1mm; }
+
+  /* Kamcheng SVG illustration block */
+  .illus {
+    background: rgba(255,248,225,0.6);
+    border: 1.5px dashed var(--tan);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    padding: 2mm;
+  }
+  .illus svg { width: 100%; height: 100%; }
+
+  .text { padding-right: 2mm; display: flex; flex-direction: column; }
+  .text .name {
+    font-family: 'Brush Script MT', cursive;
+    color: var(--rose); font-size: 24pt; line-height: 1; margin-bottom: 1mm;
+    text-shadow: 1px 1px 0 rgba(184,134,11,0.2);
+  }
+  .text .zh { font-size: 11pt; color: var(--jade); letter-spacing: 3px; margin-bottom: 2mm; }
+  .text .role { font-size: 8pt; font-style: italic; color: var(--tan); margin-bottom: 2mm; }
+  .text .role b { color: var(--rose); font-style: normal; }
+  .text .body {
+    font-size: 9pt; line-height: 1.45; color: var(--ink);
+    background: rgba(255,248,225,0.85);
+    border-left: 2.5px solid var(--gold);
+    padding: 2mm 3mm; flex: 1;
+  }
+  .text .body strong { color: var(--rose); }
+  .text .anchor {
+    font-size: 7.5pt; color: var(--jade); font-style: italic;
+    margin-top: 2mm; padding-top: 1.5mm; border-top: 1px dotted var(--tan);
+  }
+  .text .anchor b { color: var(--rose); font-style: normal; }
+
+  .footnote { text-align: center; font-size: 8pt; color: var(--tan); font-style: italic; }
+
+  /* ====== BACK SIDE ====== */
+  .back .card { background: var(--cream); }
+  .back .card .ribbon { background: var(--jade); }
+  .back-card-content {
+    height: 100%;
+    display: grid; grid-template-columns: 36mm 1fr; gap: 5mm; padding-top: 1mm;
+  }
+  .back-card-content .badge {
+    background: rgba(255,248,225,0.85);
+    border: 2px dashed var(--gold);
+    border-radius: 50%;
+    aspect-ratio: 1;
+    width: 36mm; height: 36mm;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 30pt;
+    margin-top: 2mm;
+    box-shadow: inset 0 0 0 4px var(--cream), inset 0 0 0 5px var(--rose);
+  }
+  .back-card-content .info { padding-right: 2mm; }
+  .back-card-content .info h3 {
+    color: var(--rose); font-family: 'Brush Script MT', cursive;
+    font-size: 22pt; line-height: 1; margin-bottom: 1mm;
+  }
+  .back-card-content .info .label {
+    font-size: 7.5pt; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--jade); font-weight: bold; margin: 2mm 0 1mm;
+  }
+  .back-card-content .info p {
+    font-size: 8.5pt; line-height: 1.45; margin-bottom: 1.5mm;
+  }
+  .back-card-content .info p strong { color: var(--rose); }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     SHEET 1 — FRONT SIDE OF 3 KAMCHENG CARDS
+     ============================================================ -->
+<div class="sheet">
+  <div class="sheet-title">🍵 The 3 Kamcheng · Outside the Tree (heritage column) · FRONT side</div>
+
+  <!-- ===== KAMCHENG #1 — MAS KAHWIN ===== -->
+  <div class="card">
+    <div class="corner-orn"></div>
+    <div class="ribbon">📍 OUTSIDE-TREE · SLOT 1</div>
+    <div class="number">1</div>
+    <div class="row">
+      <div class="illus">
+        <!-- Mas Kahwin kamcheng (gold dumpling jar) -->
+        <svg viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg">
+          <!-- lid -->
+          <ellipse cx="50" cy="22" rx="32" ry="6" fill="#b8860b" opacity="0.95"/>
+          <path d="M18 22 Q18 12 50 8 Q82 12 82 22 Z" fill="#d4a73c" stroke="#8b5a2b" stroke-width="1"/>
+          <ellipse cx="50" cy="9" rx="6" ry="2.5" fill="#b91c4b"/>
+          <!-- jar body -->
+          <path d="M22 28 Q15 55 22 88 Q35 96 50 96 Q65 96 78 88 Q85 55 78 28 Z"
+                fill="#fff8e1" stroke="#b8860b" stroke-width="1.4"/>
+          <!-- floral motif -->
+          <g fill="none" stroke="#b91c4b" stroke-width="1.2" opacity="0.85">
+            <circle cx="35" cy="55" r="6"/>
+            <circle cx="35" cy="55" r="2" fill="#b91c4b" opacity="0.6"/>
+            <circle cx="65" cy="55" r="6"/>
+            <circle cx="65" cy="55" r="2" fill="#b91c4b" opacity="0.6"/>
+            <circle cx="50" cy="72" r="5"/>
+            <circle cx="50" cy="72" r="1.8" fill="#b91c4b" opacity="0.6"/>
+          </g>
+          <g fill="none" stroke="#2e7d5b" stroke-width="1" opacity="0.85">
+            <path d="M28 50 Q22 60 28 70"/>
+            <path d="M72 50 Q78 60 72 70"/>
+            <path d="M40 80 Q50 86 60 80"/>
+          </g>
+          <!-- gold dumplings spilling -->
+          <g fill="#d4a73c" stroke="#8b5a2b" stroke-width="0.7">
+            <ellipse cx="38" cy="38" rx="3.5" ry="2.5"/>
+            <ellipse cx="50" cy="35" rx="3.5" ry="2.5"/>
+            <ellipse cx="62" cy="38" rx="3.5" ry="2.5"/>
+          </g>
+          <!-- base -->
+          <ellipse cx="50" cy="98" rx="22" ry="3" fill="#8b5a2b" opacity="0.5"/>
+        </svg>
+      </div>
+      <div class="text">
+        <div class="name">Kamcheng Mas Kahwin</div>
+        <div class="zh">金水饺甘望</div>
+        <div class="role">🥟 The bride's <b>first-day jar</b> · gold-dumpling kamcheng</div>
+        <div class="body">
+          On her wedding morning, the new Nyonya carries this kamcheng across the threshold of her husband's house. Inside: <strong>nine gold-glazed sweet dumplings</strong> — one for each generation she promises to feed. From the moment her foot crosses the door, <strong>no in-law sits above her</strong> in the kitchen. The house, from this morning, is hers.
+        </div>
+        <div class="anchor">🔗 mentioned only as a passing whisper in <b>Card #2 Yap Eng Siew</b> — “the eldest carried the gold dumplings in.”</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== KAMCHENG #2 — TOK PANJANG ===== -->
+  <div class="card">
+    <div class="corner-orn"></div>
+    <div class="ribbon">📍 OUTSIDE-TREE · SLOT 2</div>
+    <div class="number">2</div>
+    <div class="row">
+      <div class="illus">
+        <!-- Tok Panjang sambal kamcheng -->
+        <svg viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="50" cy="22" rx="34" ry="7" fill="#2e7d5b" opacity="0.92"/>
+          <path d="M16 22 Q16 12 50 8 Q84 12 84 22 Z" fill="#3aa074" stroke="#1d4d36" stroke-width="1"/>
+          <ellipse cx="50" cy="9" rx="6" ry="2.5" fill="#b8860b"/>
+          <path d="M20 28 Q14 56 20 90 Q35 98 50 98 Q65 98 80 90 Q86 56 80 28 Z"
+                fill="#fff8e1" stroke="#2e7d5b" stroke-width="1.4"/>
+          <!-- chrysanthemum band -->
+          <g fill="none" stroke="#b91c4b" stroke-width="1.1" opacity="0.85">
+            <circle cx="32" cy="50" r="5.5"/>
+            <circle cx="50" cy="46" r="6.5"/>
+            <circle cx="68" cy="50" r="5.5"/>
+            <circle cx="32" cy="50" r="1.8" fill="#b91c4b" opacity="0.6"/>
+            <circle cx="50" cy="46" r="2.2" fill="#b91c4b" opacity="0.6"/>
+            <circle cx="68" cy="50" r="1.8" fill="#b91c4b" opacity="0.6"/>
+          </g>
+          <!-- vines -->
+          <g fill="none" stroke="#2e7d5b" stroke-width="1" opacity="0.7">
+            <path d="M22 70 Q35 78 50 72 Q65 78 78 70"/>
+            <path d="M30 80 Q40 86 50 82 Q60 86 70 80"/>
+          </g>
+          <!-- chili dots -->
+          <g fill="#b91c4b" opacity="0.85">
+            <ellipse cx="42" cy="65" rx="1.5" ry="2.5"/>
+            <ellipse cx="58" cy="65" rx="1.5" ry="2.5"/>
+            <ellipse cx="50" cy="60" rx="1.5" ry="2.5"/>
+          </g>
+          <ellipse cx="50" cy="100" rx="22" ry="3" fill="#1d4d36" opacity="0.5"/>
+        </svg>
+      </div>
+      <div class="text">
+        <div class="name">Kamcheng Tok Panjang</div>
+        <div class="zh">长桌甘望</div>
+        <div class="role">🌶️ The <b>centre-of-the-feast</b> jar · sambal &amp; achar</div>
+        <div class="body">
+          For twelve days of <strong>Tok Panjang</strong> — the long-table feast — this kamcheng holds the sambal belacan and achar. Whoever lifts its <strong>lid</strong> is the host. Whoever <strong>refills</strong> it is the cook. The two are almost never the same person… and that, in our family, is its own quiet story.
+        </div>
+        <div class="anchor">🔗 mentioned in <b>Card #3 Lim Mei Lan</b> (“cooked every tok panjang”) and <b>Card #7 Tan Cheng Hoe</b> (head of house, lifted the lid).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== KAMCHENG #3 — CUCI MULUT ===== -->
+  <div class="card">
+    <div class="corner-orn"></div>
+    <div class="ribbon">📍 OUTSIDE-TREE · SLOT 3</div>
+    <div class="number">3</div>
+    <div class="row">
+      <div class="illus">
+        <!-- Cuci Mulut kamcheng (sealed sweet jar) -->
+        <svg viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg">
+          <!-- wax-sealed lid with ribbon -->
+          <ellipse cx="50" cy="22" rx="33" ry="6.5" fill="#b91c4b" opacity="0.95"/>
+          <path d="M17 22 Q17 12 50 8 Q83 12 83 22 Z" fill="#d94872" stroke="#7a0d34" stroke-width="1"/>
+          <ellipse cx="50" cy="9" rx="6" ry="2.5" fill="#b8860b"/>
+          <!-- red ribbon ties around lid -->
+          <path d="M30 20 Q50 6 70 20" fill="none" stroke="#b91c4b" stroke-width="2.5"/>
+          <path d="M48 7 L52 7 L54 14 L46 14 Z" fill="#b91c4b"/>
+          <path d="M44 14 Q40 18 38 22" fill="none" stroke="#b91c4b" stroke-width="1.8"/>
+          <path d="M56 14 Q60 18 62 22" fill="none" stroke="#b91c4b" stroke-width="1.8"/>
+          <!-- jar -->
+          <path d="M22 28 Q15 56 22 88 Q35 96 50 96 Q65 96 78 88 Q85 56 78 28 Z"
+                fill="#fff8e1" stroke="#b91c4b" stroke-width="1.4"/>
+          <!-- peony -->
+          <g fill="none" stroke="#b91c4b" stroke-width="1.4" opacity="0.9">
+            <circle cx="50" cy="58" r="11"/>
+            <circle cx="50" cy="58" r="6" fill="#b91c4b" opacity="0.4"/>
+            <path d="M50 47 Q42 58 50 69 Q58 58 50 47"/>
+            <path d="M39 58 Q50 50 61 58 Q50 66 39 58"/>
+          </g>
+          <!-- gula melaka droplets -->
+          <g fill="#b8860b" opacity="0.9">
+            <circle cx="35" cy="80" r="2"/>
+            <circle cx="50" cy="84" r="2.2"/>
+            <circle cx="65" cy="80" r="2"/>
+          </g>
+          <ellipse cx="50" cy="98" rx="22" ry="3" fill="#7a0d34" opacity="0.5"/>
+        </svg>
+      </div>
+      <div class="text">
+        <div class="name">Kamcheng Cuci Mulut</div>
+        <div class="zh">甜尾甘望</div>
+        <div class="role">🍯 The <b>vow-keeper</b> jar · sealed at engagement, opened at the wedding</div>
+        <div class="body">
+          On the day of betrothal, the matriarch fills it with <strong>gula melaka kueh</strong> and <strong>seals the lid with red wax</strong>. It sits on the family altar, untouched, until the wedding banquet — sometimes for a year, sometimes for ten. To open it early is to <strong>break the vow</strong>. Every Tan-Lim wedding ends with a slice from this jar.
+        </div>
+        <div class="anchor">🔗 mentioned in <b>Card #18 Wei Wen + Card #19 Hooi Wen</b> (the 2020 wedding) — “the wax was finally cracked after seventy-two years.”</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footnote">📦 Place these 3 cards in the outside-tree column — heritage that surrounds the family without entering it. 🌺</div>
+</div>
+
+
+<!-- ============================================================
+     SHEET 2 — BACK SIDE (function / heritage explanation)
+     Print double-sided · flip on long edge
+     ============================================================ -->
+<div class="sheet back">
+  <div class="sheet-title">🍵 The 3 Kamcheng · BACK side · the function in a Peranakan house</div>
+
+  <div class="card">
+    <div class="corner-orn"></div>
+    <div class="ribbon">🥟 KAMCHENG MAS KAHWIN</div>
+    <div class="number">1</div>
+    <div class="back-card-content">
+      <div class="badge">🥟</div>
+      <div class="info">
+        <h3>Why nine gold dumplings?</h3>
+        <p>In a Peranakan household, the <strong>kitchen ranks higher than the parlour</strong>. Whoever owns the kitchen owns the house. The bride's first-day kamcheng is her <em>declaration of kitchen authority</em>. Nine dumplings = nine generations she is now responsible for feeding (3 above her, 1 alongside, 5 to come).</p>
+        <div class="label">Function</div>
+        <p>Carried only once in a lifetime. Then washed, sealed, and kept on the highest kitchen shelf for the next bride.</p>
+        <div class="label">Today</div>
+        <p>Most modern Nyonya brides skip it. The Tan house never did — until now. <em>Bibi has not yet decided who carries the next one.</em> 🌺</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="corner-orn"></div>
+    <div class="ribbon">🌶️ KAMCHENG TOK PANJANG</div>
+    <div class="number">2</div>
+    <div class="back-card-content">
+      <div class="badge">🌶️</div>
+      <div class="info">
+        <h3>The lid and the ladle.</h3>
+        <p><strong>Tok Panjang</strong> means “long table.” On Cap Goh Mei, weddings, and full-month celebrations, the kamcheng of sambal &amp; achar sits at the centre. The <strong>lid is lifted by the host</strong>; the <strong>ladle is held by the cook</strong>. Two roles, two people, never confused.</p>
+        <div class="label">Function</div>
+        <p>It marks <em>who serves and who is served</em>. In our story, one woman cooked and never sat. One man sat and never cooked. The kamcheng remembers both.</p>
+        <div class="label">Today</div>
+        <p>The Tan tok panjang kamcheng has a small chip on the lid — from 1968, the year Mei Lan dropped it crying. Bibi never had it repaired. 🌺</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="corner-orn"></div>
+    <div class="ribbon">🍯 KAMCHENG CUCI MULUT</div>
+    <div class="number">3</div>
+    <div class="back-card-content">
+      <div class="badge">🍯</div>
+      <div class="info">
+        <h3>A sealed promise.</h3>
+        <p><strong>Cuci mulut</strong> means “rinse the mouth” — the sweet course that closes a Peranakan banquet. This kamcheng is sealed with <strong>red wax</strong> at engagement and may not be opened until the wedding day. To break the wax early is to break the marriage promise.</p>
+        <div class="label">Function</div>
+        <p>It is the family's <em>contract in porcelain</em>. The longer it sits sealed, the deeper the vow. Some Tan kamcheng sit twelve months. Aunt Chen Neo's sat <strong>seventy-two years</strong> — sealed at her engagement to the Singapore tycoon in 1948, never opened in her short marriage. Her step-great-granddaughter Hooi Wen broke its wax at the 2020 wedding.</p>
+        <div class="label">Today</div>
+        <p>Empty now. Bibi keeps it on the altar with a fresh stick of incense every Sunday. 🌺</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footnote">📜 Each Kamcheng is a quiet rule of the house — not a person, but a function the family revolves around. 🌺</div>
+</div>
+
+</body>
+</html>

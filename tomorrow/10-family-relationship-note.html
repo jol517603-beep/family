@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>The Relationship Note · in Bibi Rose's voice</title>
+<!--
+  PRINT: 1 × A4 portrait per team · PRINT 5 COPIES (one per team).
+  Hand out AFTER Bibi's 5-question gold-coin quiz, around 1:50 PM.
+  4 narrative cards on one A4 page (2 × 2 grid). Teams cut along dashed
+  lines if they want, or read as one sheet. Each card walks one chunk of
+  the family. Together they describe all 20 relationships in order.
+
+  Voice: Bibi Rose (#17), first person. She is the host of tonight, the
+  daughter of Soon Heng & Soo Hui, the granddaughter of Cheng Hoe &
+  Beng Guat, the great-granddaughter of Tan Keo San and Yap Eng Siew.
+-->
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  :root {
+    --cream:#f6ecd2; --paper:#fbf4dd; --aged:#efdbb0;
+    --ink:#3a2418; --gold:#b8860b; --gold-2:#d4a73c;
+    --jade:#2e7d5b; --rose:#b91c4b; --rose-2:#d94872;
+    --tan:#8b5a2b; --tan-2:#a47148;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background:#2a1810; font-family:'Georgia','Times New Roman',serif; color:var(--ink); }
+  body { padding: 14px; }
+  @media print { body { padding: 0; background: white; } }
+
+  .page {
+    width: 210mm; height: 297mm; margin: 0 auto;
+    background: white; padding: 6mm; position: relative;
+  }
+  @media print { .page { margin: 0; } }
+
+  /* outer page title strip — small, optional */
+  .header-strip {
+    text-align: center; padding: 0 0 2mm 0;
+    border-bottom: 1px dashed var(--tan);
+    margin-bottom: 3mm;
+  }
+  .header-strip .stamp {
+    display: inline-block; padding: 1mm 4mm;
+    background: var(--rose); color: var(--cream);
+    border-radius: 1mm; font-style: italic; letter-spacing: 3px;
+    font-size: 7.5pt; transform: rotate(-1deg);
+  }
+  .header-strip .title {
+    font-family:'Brush Script MT',cursive;
+    color: var(--rose); font-size: 18pt; line-height: 1;
+    margin-top: 1.5mm; text-shadow: 1px 1px 0 var(--gold);
+  }
+  .header-strip .sub {
+    font-style: italic; color: var(--tan); font-size: 8pt; margin-top: 0.8mm;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 4mm;
+    width: 100%;
+    height: calc(297mm - 12mm - 14mm); /* page minus padding minus header strip */
+  }
+
+  .card {
+    background:
+      radial-gradient(ellipse at 8% 6%, rgba(184,134,11,0.10), transparent 50%),
+      radial-gradient(ellipse at 92% 94%, rgba(185,28,75,0.10), transparent 50%),
+      var(--cream);
+    border: 1.5px dashed var(--tan);
+    border-radius: 3mm;
+    padding: 4mm 5mm 4mm 5mm;
+    position: relative; overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .card::before { content:''; position:absolute; inset:2mm; border:2px double var(--rose); border-radius:2mm; pointer-events:none; }
+  .card::after  { content:''; position:absolute; inset:3.5mm; border:1px solid var(--gold); border-radius:1.5mm; pointer-events:none; }
+
+  .card .head {
+    display: flex; align-items: center; gap: 3mm;
+    padding-bottom: 1.5mm; margin-bottom: 2mm;
+    border-bottom: 1px solid var(--rose);
+    position: relative; z-index: 1;
+  }
+  .card .head .num {
+    flex: 0 0 auto;
+    width: 11mm; height: 11mm; border-radius: 50%;
+    background: var(--rose); color: var(--cream);
+    display: flex; align-items: center; justify-content: center;
+    border: 1.5px double var(--gold);
+    box-shadow: 1.2px 1.2px 0 var(--tan);
+    font-family:'Brush Script MT',cursive; font-size: 15pt; line-height: 1;
+  }
+  .card .head .ttl { flex: 1; min-width: 0; }
+  .card .head .ttl .eyebrow {
+    color: var(--jade); font-size: 6.8pt; letter-spacing: 2.5px;
+    text-transform: uppercase; font-weight: bold;
+  }
+  .card .head .ttl .name {
+    font-family:'Brush Script MT',cursive; color: var(--rose);
+    font-size: 14pt; line-height: 1; margin-top: 0.5mm;
+    text-shadow: 0.8px 0.8px 0 var(--gold);
+  }
+  .card .head .gen {
+    flex: 0 0 auto;
+    background: rgba(255,248,225,0.85);
+    border: 1px solid var(--gold); border-radius: 1mm;
+    padding: 0.8mm 1.8mm;
+    font-size: 6.5pt; color: var(--tan); font-style: italic;
+    text-align: center; line-height: 1.2;
+  }
+
+  .body {
+    flex: 1;
+    background: var(--paper);
+    border-left: 2.5px solid var(--rose);
+    border-radius: 1mm;
+    padding: 2.8mm 3.2mm;
+    font-size: 8pt; line-height: 1.55; color: var(--ink);
+    text-align: justify; hyphens: auto;
+    position: relative; z-index: 1;
+    overflow: hidden;
+  }
+  .body p { margin-bottom: 1.4mm; }
+  .body p:last-child { margin-bottom: 0; }
+  .body strong { color: var(--rose); font-weight: bold; }
+  .body em { color: var(--jade); font-style: italic; }
+  .body .role {
+    color: var(--tan); font-style: italic; font-size: 7pt;
+    letter-spacing: 0.5px;
+  }
+
+  .stamp-foot {
+    margin-top: 2mm;
+    text-align: center;
+    font-size: 6.5pt; color: var(--tan);
+    letter-spacing: 1.5px; font-style: italic;
+    position: relative; z-index: 1;
+  }
+  .stamp-foot::before, .stamp-foot::after { content:'✦'; color: var(--gold); margin: 0 4px; }
+
+  /* faint peony watermark in corner */
+  .peony-wm {
+    position: absolute; width: 22mm; height: 22mm;
+    opacity: 0.06; pointer-events: none;
+    background:
+      radial-gradient(circle at 50% 50%, var(--rose) 0 24%, transparent 26% 100%),
+      radial-gradient(circle at 28% 28%, var(--gold) 0 12%, transparent 14% 100%),
+      radial-gradient(circle at 72% 72%, var(--gold) 0 12%, transparent 14% 100%),
+      radial-gradient(circle at 28% 72%, var(--jade) 0 9%, transparent 11% 100%),
+      radial-gradient(circle at 72% 28%, var(--jade) 0 9%, transparent 11% 100%);
+  }
+  .peony-wm.tr { top: 2mm; right: 2mm; }
+  .peony-wm.bl { bottom: 2mm; left: 2mm; transform: scale(-1,-1); }
+</style></head>
+<body>
+<div class="page">
+
+  <div class="header-strip">
+    <span class="stamp">★ THE RELATIONSHIP NOTE · IN BIBI ROSE'S VOICE ★</span>
+    <div class="title">"Let me walk you through us…"</div>
+    <div class="sub">~ read together · check your tree · the tree does not have to be perfect, it has to be honest ~</div>
+  </div>
+
+  <div class="grid">
+
+    <!-- =========================== CARD 1 =========================== -->
+    <div class="card">
+      <div class="peony-wm tr"></div>
+      <div class="head">
+        <div class="num">1</div>
+        <div class="ttl">
+          <div class="eyebrow">Generation 1 · how we begin</div>
+          <div class="name">From Fujian · the chalk line</div>
+        </div>
+        <div class="gen">1872<br>–1923</div>
+      </div>
+      <div class="body">
+        <p>My great-grandfather is the man who stepped off a Fujian boat at George Town at nineteen with one trunk and a <strong>brass pocket-watch</strong> in his palm — <strong>Tan Keo San</strong> <span class="role">(my Tua-Kong, #1)</span>. He worked the docks for seven years, then built our shipping house <strong>See Hai Chan 西海棧</strong>, and set the rule that runs us still: <em>"the eldest son carries both the books and the time."</em></p>
+
+        <p>My great-grandmother is the eldest of the three <strong>Yap goldsmith</strong> sisters of Beach Street — <strong>Yap Eng Siew</strong> <span class="role">(my Tua-Ma, #2)</span> — who walked into his house in 1898 already wearing the <strong>Ibu</strong> brooch. She had two younger sisters, the <em>Three Golden Orchids 三朵金蘭</em>: the middle, <strong>Yap Eng Neo</strong> <span class="role">(#4)</span>, who married the cloth merchant <strong>Lee Poh Soon</strong> <span class="role">(#6)</span> in 1901 and wore the <strong>Anak A</strong> brooch from her wedding day; and the youngest, <strong>Yap Eng Hooi</strong> <span class="role">(#5)</span>, who never married and died in the winter of 1923 at twenty-three. Her <strong>Anak B</strong> brooch went into a small enamel tin. <em>Or so the family was told.</em></p>
+
+        <p>In 1920 my great-grandfather brought a second woman under his roof — <strong>Auntie Mei</strong>, <strong>Lim Mei Lan 林美蘭</strong> <span class="role">(#3)</span>. My Tua-Ma drew a <strong>chalk line across the kitchen floor</strong> on her first morning and meant every inch of it. Auntie Mei stayed behind that line for seventy-six years.</p>
+      </div>
+      <div class="stamp-foot">card 1 of 4 · founders &amp; the chalk line</div>
+    </div>
+
+    <!-- =========================== CARD 2 =========================== -->
+    <div class="card">
+      <div class="peony-wm bl"></div>
+      <div class="head">
+        <div class="num">2</div>
+        <div class="ttl">
+          <div class="eyebrow">Generation 2 · two sons, two doors</div>
+          <div class="name">The wedding of 1947</div>
+        </div>
+        <div class="gen">1918<br>–1950</div>
+      </div>
+      <div class="body">
+        <p>My great-grandfather had two sons by the two women. The front son is my grandfather — <strong>Tan Cheng Hoe</strong> <span class="role">(#7)</span> — born 1920 to Tua-Ma, raised with her keys at her hip and the brass watch ticking in the next room. He inherited both at twenty-one. The back son was the one whose name the front of the house never said: <strong>Tan Ah Cai</strong> <span class="role">(#9)</span>, born to Auntie Mei in 1925; the wharf men called him <em>Seoy Yee Kia 細姨仔</em> — <em>"the mistress's son."</em> He joined the resistance in 1942 and walked into the <strong>jungle north of Kulim</strong> after the surrender in 1945. We have waited eighty-one years.</p>
+
+        <p>My grandfather married <strong>Lee Beng Guat</strong> <span class="role">(my Ah Ma, #8)</span> in 1947 — <em>"a Penang–Penang alliance"</em> his mother arranged with the words: <em>"She is the one. Do not ask further."</em> Beng Guat was born in winter 1921 in the <strong>back room of the goldsmith house</strong>, raised by the Lees, but pinned with the <strong>Anak B</strong> brooch on her seventh birthday by her own mother — Eng Neo — who told her never to let it leave her. On her wedding morning Tua-Ma lifted the <strong>Ibu</strong> from the tin onto her collar; her mother pinned <strong>Anak A</strong> beside it; <strong>Anak B</strong> was already there. The kerongsang was complete on one collar for the <strong>first time in twenty-four years</strong>.</p>
+
+        <p>Beng Guat's elder brother is <strong>Lee Boon Kuan</strong> <span class="role">(#12)</span> — the only person in the Lee house who never seemed to wonder where his small sister had come from. He simply walked her to school. He died of a fever in 1950, aged thirty-two. Their father, the cloth merchant <strong>Lee Poh Soon</strong> <span class="role">(#6)</span>, folded a length of <strong>cream silk</strong> for her wedding kebaya the year before he died — and never spoke at table about either child's birthday.</p>
+      </div>
+      <div class="stamp-foot">card 2 of 4 · the wedding of 1947 · the brooches reunited</div>
+    </div>
+
+    <!-- =========================== CARD 3 =========================== -->
+    <div class="card">
+      <div class="peony-wm tr"></div>
+      <div class="head">
+        <div class="num">3</div>
+        <div class="ttl">
+          <div class="eyebrow">Singapore + Generation 3 · the watch slides across</div>
+          <div class="name">"You keep the time. I keep the books."</div>
+        </div>
+        <div class="gen">1948<br>–1995</div>
+      </div>
+      <div class="body">
+        <p>In 1948 the families arranged a <strong>Penang–Singapore alliance</strong>: <strong>Tan Chen Neo</strong> <span class="role">(my grandaunt, #11)</span> was sent across the causeway at twenty-three to marry the Singapore shipping tycoon <strong>Khoo Chin Nam</strong> <span class="role">(#10)</span>, already a widower with a grown son. Eleven months later his heart stopped at his own breakfast table. She refused to come home. She stayed in his Singapore house, learned <strong>kasut manik</strong> beadwork from her stepson's mother-in-law, and became — by sixty — the named master of three showrooms; her <em>peony-toe</em> pattern hangs in the Peranakan Museum on Armenian Street.</p>
+
+        <p>My grandparents had two sons. The elder is my <strong>Tua-Pek Albert</strong> — <strong>Tan Soon Fatt</strong> <span class="role">(#13)</span> — who took an English name in Sydney, listed See Hai Chan on Bursa in 2008, and on the night their father died in 1995 pushed the brass watch across the table to his younger brother and said: <em>"You keep the time. I will keep the books."</em> He married <strong>Alice Wong</strong> <span class="role">(#14)</span> of KL — Wharton, banking, Catholic — at <strong>St Andrew's Cathedral, Singapore</strong>, in a white gown.</p>
+
+        <p>That younger brother is my father — <strong>Tan Soon Heng</strong> <span class="role">(#15)</span> — architect, restorer of seventeen Penang shophouses including the See Hai Chan godown on Beach Street; he has wound the brass watch every morning at six since 1995. He married my mother <strong>Lim Soo Hui</strong> <span class="role">(#16)</span> in 1990 — <em>Auntie Mei's own niece</em>, daughter of her only brother — the girl who came to the kitchen at sixteen with a notebook and the question, <em>"Auntie, may I write down what your hands do?"</em> She stood at the chopping block for ten years and published <strong>Resipi Auntie Mei</strong> in 1992 — 240 dishes, dedicated to <em>"the woman the family forgot to name."</em></p>
+      </div>
+      <div class="stamp-foot">card 3 of 4 · the watch · the cookbook · the Singapore door</div>
+    </div>
+
+    <!-- =========================== CARD 4 =========================== -->
+    <div class="card">
+      <div class="peony-wm bl"></div>
+      <div class="head">
+        <div class="num">4</div>
+        <div class="ttl">
+          <div class="eyebrow">Generation 4 · tonight</div>
+          <div class="name">"…and now there is me"</div>
+        </div>
+        <div class="gen">1990<br>–today</div>
+      </div>
+      <div class="body">
+        <p>My Tua-Pek's only son is my cousin <strong>Kelvin Tan</strong> — <strong>Tan Kai Wen</strong> <span class="role">(#20)</span> — Singapore-born, Melbourne-schooled, London-financed; he knows the See Hai Chan balance sheet by heart and could not name three of his great-aunts. He is, on paper, his father's heir.</p>
+
+        <p>My only brother is <strong>Dr Tan Wei Wen</strong> <span class="role">(#18)</span> — internal medicine at Penang General — who met his wife <strong>Khoo Hooi Wen</strong> <span class="role">(#19)</span> at a Singapore heritage conference in 2017. Hooi Wen is the <strong>great-granddaughter of Khoo Chin Nam</strong> through his Singapore <em>first</em> marriage. When Aunt Chen Neo, then 92, recognised both family names over Sunday lunch she said: <em>"You are the Tan boy. She is my husband's grand-girl. Sit down. I have been waiting seventy years for this dinner."</em> They married in 2020. Hooi Wen wore Aunt Chen Neo's <strong>1948 peony-toe slippers</strong> under her own kebaya — the first time those slippers had been worn since the eleven-month marriage ended.</p>
+
+        <p>And me — I am <strong>Bibi Rose · 陳玫瑰</strong> <span class="role">(#17)</span>, daughter of Soon Heng &amp; Soo Hui, host of tonight. I wind my father's watch every morning at six since his stroke in 2024. I found my grandmother's <strong>enamel tin</strong> on the highest shelf of the bridal cupboard in 1998 and waited twenty-six years to open it. Tonight I have lifted the <strong>nine-dumpling kamcheng</strong> down from the altar for the first time in seventy years.</p>
+
+        <p style="text-align:center; color:var(--rose); font-style:italic; font-family:'Brush Script MT',cursive; font-size:11pt; margin-top:1.5mm;">"Stones do not lie. People forget how to read them."</p>
+      </div>
+      <div class="stamp-foot">card 4 of 4 · tonight · 26 hearts · 1 family</div>
+    </div>
+
+  </div>
+</div>
+</body></html>

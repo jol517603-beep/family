@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Bibi's Game 1 Host Script</title>
+<!-- PRINT: 2 × A4 portrait. Bibi reads top to bottom. -->
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  :root { --cream:#f6ecd2; --paper:#fbf4dd; --ink:#3a2418; --gold:#b8860b; --jade:#2e7d5b; --rose:#b91c4b; --tan:#8b5a2b; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background:#2a1810; font-family:'Georgia',serif; color:var(--ink); }
+  body { padding: 14px; }
+  @media print { body { padding: 0; background: white; } }
+  .page {
+    width: 210mm; height: 297mm; margin: 0 auto 14px;
+    background: var(--cream); padding: 11mm 13mm;
+    position: relative; box-shadow: 0 14px 36px rgba(0,0,0,0.5);
+    page-break-after: always; display: flex; flex-direction: column;
+  }
+  @media print { .page { box-shadow: none; margin: 0; } }
+  .page:last-child { page-break-after: auto; }
+  .page::before { content:''; position:absolute; inset:5mm; border:2px double var(--rose); border-radius:3mm; pointer-events:none; }
+  .page::after  { content:''; position:absolute; inset:7mm; border:1px solid var(--gold); border-radius:2mm; pointer-events:none; }
+
+  header { text-align:center; margin-bottom: 3mm; position: relative; z-index: 1; }
+  .stamp { display: inline-block; padding: 1mm 4mm; background: var(--rose); color: var(--cream); border-radius: 1mm; font-style: italic; letter-spacing: 4px; font-size: 8pt; transform: rotate(-2deg); }
+  h1 { font-family:'Brush Script MT',cursive; color: var(--rose); font-size: 24pt; line-height: 1; margin-top: 2mm; text-shadow: 1.2px 1.2px 0 var(--gold); }
+  .sub { color: var(--tan); font-style: italic; font-size: 9pt; margin-top: 1mm; }
+
+  .step {
+    background: var(--paper);
+    border: 1.5px dashed var(--tan);
+    border-radius: 3mm;
+    padding: 3mm 4mm; margin-bottom: 2.5mm;
+    position: relative; z-index: 1;
+  }
+  .step::before { content:''; position:absolute; inset:1.5mm; border:1px solid var(--gold); border-radius:2mm; pointer-events:none; }
+  .step .head {
+    display: flex; align-items: center; gap: 3mm;
+    margin-bottom: 1.5mm;
+    border-bottom: 1px dashed var(--rose); padding-bottom: 1mm;
+    position: relative; z-index: 1;
+  }
+  .num {
+    width: 10mm; height: 10mm; border-radius: 50%;
+    background: var(--rose); color: var(--cream);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Brush Script MT', cursive; font-size: 15pt;
+    flex-shrink: 0;
+  }
+  .ttl { font-family: 'Brush Script MT', cursive; color: var(--jade); font-size: 14pt; line-height: 1.05; flex: 1; }
+  .time { color: var(--tan); font-style: italic; font-size: 8.5pt; letter-spacing: 1.5px; white-space: nowrap; }
+
+  .body { font-size: 9.5pt; line-height: 1.45; position: relative; z-index: 1; }
+  .body p { margin-bottom: 1mm; }
+  .say {
+    background: white; border-left: 3px solid var(--gold);
+    padding: 2mm 3mm; font-style: italic; font-size: 9.5pt; line-height: 1.45;
+    margin-top: 1mm;
+  }
+  .say::before { content:'🗣 '; color: var(--rose); font-style: normal; }
+  .do {
+    background: rgba(46,125,91,0.10);
+    border: 1px dashed var(--jade);
+    padding: 1.5mm 2.5mm; border-radius: 1.5mm;
+    margin-top: 1mm; font-size: 9pt; line-height: 1.4;
+  }
+  .do::before { content:'✋ '; color: var(--jade); }
+
+  footer { text-align: center; margin-top: auto; color: var(--tan); font-style: italic; font-size: 8pt; letter-spacing: 2px; padding-top: 3mm; position: relative; z-index: 1; }
+</style></head>
+<body>
+
+<!-- =================== PAGE 1 · DOOR → GAME START =================== -->
+<div class="page">
+  <header>
+    <span class="stamp">★ BIBI'S SCRIPT · KEEP IN APRON ★</span>
+    <h1>Welcome → Photo Challenge → Game 1 starts</h1>
+    <div class="sub">~ 1:00 PM to 1:30 PM ~</div>
+  </header>
+
+  <!-- STEP 1 -->
+  <div class="step">
+    <div class="head">
+      <div class="num">1</div>
+      <div class="ttl">Welcome the room</div>
+      <div class="time">1:00 · 5 min</div>
+    </div>
+    <div class="body">
+      <p>Stand in front of the whiteboard. Wait for the room to settle.</p>
+      <div class="say">"Selamat datang. Welcome home — even if some of you have never been to this home before. Today is the Tan family reunion. Twenty-six of you, five teams, three and a half hours, and at the end, you will leave with three things: a recipe, a piece of batik, and a photograph that does not yet exist."</div>
+      <div class="say">"Look at the envelope you took at the door. Whatever item is inside — kerongsang, tingkat, kasut manik, kamcheng, baju kebaya — that is your team's symbol. If you got Babi Pongteh, you are the wildcard. Pick any team. They cannot say no. That is also Peranakan."</div>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step">
+    <div class="head">
+      <div class="num">2</div>
+      <div class="ttl">Grouping</div>
+      <div class="time">1:05 · 5 min</div>
+    </div>
+    <div class="body">
+      <div class="say">"Now find your team. A team is <b>five people, five different items</b>. No duplicates. Walk, talk, hold up your envelope. You have five minutes."</div>
+      <div class="do"><b>Do:</b> let them mingle. Help anyone left out. Once teams of 5 are set, point them to the long table — each corner has a table tent with a team name.</div>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step">
+    <div class="head">
+      <div class="num">3</div>
+      <div class="ttl">Brief the AI Photo Challenge</div>
+      <div class="time">1:10 · 15 min</div>
+    </div>
+    <div class="body">
+      <div class="say">"Before the game begins — one team challenge. Take a group photo of your five. Use AI on your phone — Nano Banana, Gemini — and dress your team in full baba-nyonya costume, inside a Peranakan mansion. The full instructions are on your team table. WhatsApp the final photo to me. <b>The team with the most accurate portrait wins a prize at the end.</b> You have 15 minutes. Go."</div>
+      <div class="do"><b>Do:</b> walk between teams. Help anyone whose phone is slow. As photos arrive on your WhatsApp, send to Selphy and start printing. (Selphy takes ~1 min per print = 5 min total. Let it run during Game 1.)</div>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step">
+    <div class="head">
+      <div class="num">4</div>
+      <div class="ttl">Open the game</div>
+      <div class="time">1:30 · 2 min</div>
+    </div>
+    <div class="body">
+      <div class="say">"Photos sent? Good. Now — to the long table. In front of you: four character cards, four stories, one lockbox, markers, blue tack. The instructions are on the sheet on your table. Read it together. The board is empty on purpose. By 2:20pm, you will have built one family tree, cracked one lock code, and opened five boxes. Inside each box is something Auntie Mei left for you. <b>Begin.</b>"</div>
+      <div class="do"><b>Do:</b> set timer for <b>50 minutes</b>. Game 1 runs to 2:20. Walk between teams. Drop hints when asked. (See cheat sheet for hint lines.)</div>
+    </div>
+  </div>
+
+  <footer>page 1 of 2 · Bibi's apron · 陳家根譜</footer>
+</div>
+
+<!-- =================== PAGE 2 · GAME 1 RUN → BOX OPEN =================== -->
+<div class="page">
+  <header>
+    <span class="stamp">★ BIBI'S SCRIPT · GAME 1 RUN ★</span>
+    <h1>Run the game · Open the boxes</h1>
+    <div class="sub">~ 1:30 PM to 2:30 PM ~</div>
+  </header>
+
+  <!-- STEP 5 -->
+  <div class="step">
+    <div class="head">
+      <div class="num">5</div>
+      <div class="ttl">During the game · roam &amp; hint</div>
+      <div class="time">1:30 – 2:15 · 45 min</div>
+    </div>
+    <div class="body">
+      <p>Walk between teams. Don't hover. Drop hints only when a team has been stuck 5+ minutes. Whisper, don't announce.</p>
+      <div class="say">"That brooch in story G — have you read story I yet? They are <em>sisters</em>."</div>
+      <div class="say">"The watch travels through the men of the family — father, son, grandson."</div>
+      <div class="say">"Auntie Mei never sat at the long table. Where on the tree do you think she belongs?"</div>
+      <div class="do"><b>Halfway clap (2:00pm):</b> "Halfway! Twenty-five minutes left. Twenty cards on the board?"<br>
+      <b>Five-min warning (2:10pm):</b> "Five minutes. Don't stop matching — start cracking the code now too."</div>
+    </div>
+  </div>
+
+  <!-- STEP 6 -->
+  <div class="step">
+    <div class="head">
+      <div class="num">6</div>
+      <div class="ttl">The Lock-open Moment</div>
+      <div class="time">2:15 · 5 min</div>
+    </div>
+    <div class="body">
+      <p>Stop them. Walk to the centre of the table.</p>
+      <div class="say">"Pencils down. Look at what you built — twenty faces, four generations, lines of marriage and lines of blood. You did this. Some of you got it right, some beautifully wrong. Both are fine."</div>
+      <div class="say">"Now — the code. Each team, hold your lockbox in front of you. Do you have your three digits?"</div>
+      <p>Pause. Let them check. Walk between teams whispering — confirm if asked.</p>
+      <div class="say">"The code is the same for every box. We open together. <b>Three… two… one… open.</b>"</div>
+      <div class="do"><b>If a team fails:</b> walk over, whisper "<em>three, four, nine</em>", let them open. Nobody loses this round.</div>
+    </div>
+  </div>
+
+  <!-- STEP 7 -->
+  <div class="step">
+    <div class="head">
+      <div class="num">7</div>
+      <div class="ttl">The Recipe Reveal</div>
+      <div class="time">2:20 · 10 min</div>
+    </div>
+    <div class="body">
+      <p>All boxes open. Each team is holding a recipe card. Lower your voice.</p>
+      <div class="say">"Inside each box is a different recipe. Five recipes — kuih talam, kuih kaya, kuih lapis, kuih dadar, kuih bingka ubi. Each one written by Auntie Mei. <b>Lim Mei Lan</b> — the woman who cooked for this family for seventy years and whose name was not in any registry until 1992. She left these for you. Read your team's recipe out loud. One person per team. Stand."</div>
+      <div class="do"><b>Do:</b> let each team read. Don't rush. After all 5 are read:</div>
+      <div class="say">"This is what you inherit tonight. Not gold. Not land. A piece of paper with her handwriting. <b>Cook it. Teach it to one person. That is how she stays alive.</b>"</div>
+    </div>
+  </div>
+
+  <!-- STEP 8 -->
+  <div class="step">
+    <div class="head">
+      <div class="num">8</div>
+      <div class="ttl">Prizes</div>
+      <div class="time">2:25 · 5 min</div>
+    </div>
+    <div class="body">
+      <p>Three prizes. (Bibi's cheat sheet has criteria.)</p>
+      <div class="say">"<b>Best Family Tree</b> — to the team that placed the most cards correctly. [Award.]"</div>
+      <div class="say">"<b>Most Accurate AI Portrait</b> — to the team whose AI photo looked most like a real Peranakan family heirloom. [Award.]"</div>
+      <div class="say">"<b>Most Heart</b> — to the team that helped others, told the most stories, made the most noise. [Award.]"</div>
+      <div class="say">"And now — tea. Thirty minutes. Eat the kueh. Look at the tree. Take photos. We meet back here at ten past three for batik."</div>
+    </div>
+  </div>
+
+  <footer>page 2 of 2 · Bibi's apron · 陳家根譜</footer>
+</div>
+
+</body></html>

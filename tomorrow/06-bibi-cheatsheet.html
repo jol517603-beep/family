@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Bibi's Master Cheat Sheet</title>
+<!-- PRINT: 1 × A4 portrait. Bibi only. Fold and pocket. -->
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  :root { --cream:#f6ecd2; --paper:#fbf4dd; --ink:#3a2418; --gold:#b8860b; --jade:#2e7d5b; --rose:#b91c4b; --tan:#8b5a2b; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background:#2a1810; font-family:'Georgia',serif; color:var(--ink); }
+  body { padding: 14px; }
+  @media print { body { padding: 0; background: white; } }
+  .page {
+    width: 210mm; height: 297mm; margin: 0 auto;
+    background: var(--cream); padding: 11mm 13mm;
+    position: relative; box-shadow: 0 14px 36px rgba(0,0,0,0.5);
+    display: flex; flex-direction: column;
+  }
+  @media print { .page { box-shadow: none; margin: 0; } }
+  .page::before { content:''; position:absolute; inset:5mm; border:2px double var(--rose); border-radius:3mm; pointer-events:none; }
+  .page::after  { content:''; position:absolute; inset:7mm; border:1px solid var(--gold); border-radius:2mm; pointer-events:none; }
+
+  header { text-align:center; margin-bottom: 3mm; position: relative; z-index: 1; }
+  .stamp { display: inline-block; padding: 1mm 4mm; background: var(--ink); color: var(--cream); border-radius: 1mm; font-style: italic; letter-spacing: 4px; font-size: 8pt; transform: rotate(-2deg); }
+  h1 { font-family:'Brush Script MT',cursive; color: var(--rose); font-size: 26pt; line-height: 1; margin-top: 1mm; text-shadow: 1.2px 1.2px 0 var(--gold); }
+  .sub { color: var(--tan); font-style: italic; font-size: 9pt; margin-top: 1mm; }
+
+  .block {
+    background: var(--paper); border: 1.5px dashed var(--tan); border-radius: 2.5mm;
+    padding: 3mm 4mm; margin-bottom: 2.5mm;
+    position: relative; z-index: 1;
+  }
+  .block::before { content:''; position:absolute; inset:1.2mm; border:0.8px solid var(--gold); border-radius:1.5mm; pointer-events:none; }
+  h2 {
+    font-family: 'Brush Script MT', cursive; color: var(--jade);
+    font-size: 13pt; line-height: 1; margin-bottom: 1.5mm;
+    border-bottom: 1px dashed var(--rose); padding-bottom: 1mm;
+    position: relative; z-index: 1;
+  }
+  .body { font-size: 8.8pt; line-height: 1.45; position: relative; z-index: 1; }
+  .body p { margin-bottom: 1mm; }
+  .body b { color: var(--rose); }
+  .body em { color: var(--jade); font-style: italic; }
+
+  .code-strip {
+    background: var(--ink); color: var(--cream);
+    padding: 3mm 5mm; border-radius: 2mm;
+    text-align: center; margin: 1.5mm 0;
+    position: relative; z-index: 1;
+  }
+  .code-strip .lbl { color: var(--gold); font-size: 8pt; letter-spacing: 3px; font-style: italic; }
+  .code-strip .code {
+    font-family: 'Brush Script MT', cursive;
+    font-size: 32pt; line-height: 1; color: var(--cream);
+    margin: 1mm 0;
+  }
+  .code-strip .why { font-size: 8pt; font-style: italic; opacity: 0.85; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 8pt; line-height: 1.35; }
+  table td { padding: 0.8mm 1.5mm; border-bottom: 1px dotted var(--tan); vertical-align: top; }
+  table td:first-child { font-family: 'Courier New', monospace; color: var(--rose); width: 9%; font-weight: bold; }
+  table td:nth-child(2) { font-weight: bold; color: var(--ink); width: 22%; }
+  table td:nth-child(3) { color: var(--ink); }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5mm; }
+
+  .prize-row {
+    display: flex; align-items: flex-start; gap: 3mm;
+    padding: 1.5mm 0; border-bottom: 1px dotted var(--tan);
+    font-size: 8.8pt;
+  }
+  .prize-row:last-child { border-bottom: none; }
+  .prize-row .badge {
+    background: var(--rose); color: var(--cream);
+    padding: 1mm 2.5mm; border-radius: 0.8mm;
+    font-style: italic; font-size: 7.5pt; letter-spacing: 1.5px;
+    white-space: nowrap; flex-shrink: 0;
+  }
+
+  footer { text-align: center; margin-top: auto; color: var(--tan); font-style: italic; font-size: 8pt; letter-spacing: 2px; padding-top: 2mm; position: relative; z-index: 1; }
+</style></head>
+<body>
+<div class="page">
+  <header>
+    <span class="stamp">★ BIBI ONLY · DO NOT SHOW ★</span>
+    <h1>The Master Cheat Sheet</h1>
+    <div class="sub">~ everything you need to run today, on one page ~</div>
+  </header>
+
+  <!-- THE LOCK CODE -->
+  <div class="block">
+    <h2>★ THE LOCK CODE (all 5 boxes, same code)</h2>
+    <div class="code-strip">
+      <div class="lbl">★ CODE ★</div>
+      <div class="code">3 · 4 · 9</div>
+      <div class="why">3 sisters/brooches · 4 generations · 9 peony petals</div>
+    </div>
+    <div class="body">
+      <b>Set this on every lockbox before guests arrive.</b> If a team gets stuck, walk over and whisper "<em>three, four, nine</em>". Nobody fails this. All boxes open together at <b>2:20pm</b> on your countdown.
+    </div>
+  </div>
+
+  <div class="grid-2">
+
+    <!-- LETTER → NUMBER KEY -->
+    <div class="block">
+      <h2>Story → Character (match key)</h2>
+      <div class="body">
+        <table>
+          <tr><td>A</td><td>#7</td><td></td></tr>
+          <tr><td>B</td><td>#3</td><td>Auntie Mei</td></tr>
+          <tr><td>C</td><td>#11</td><td></td></tr>
+          <tr><td>D</td><td>#1</td><td>Keo San</td></tr>
+          <tr><td>E</td><td>#16</td><td></td></tr>
+          <tr><td>F</td><td>#9</td><td>Ah Cai</td></tr>
+          <tr><td>G</td><td>#4</td><td></td></tr>
+          <tr><td>H</td><td>#13</td><td></td></tr>
+          <tr><td>I</td><td>#2</td><td>Eng Siew</td></tr>
+          <tr><td>J</td><td>#19</td><td>Hooi Wen</td></tr>
+          <tr><td>K</td><td>#15</td><td></td></tr>
+          <tr><td>L</td><td>#6</td><td></td></tr>
+          <tr><td>M</td><td>#8</td><td></td></tr>
+          <tr><td>N</td><td>#5</td><td>Eng Hooi</td></tr>
+          <tr><td>O</td><td>#20</td><td></td></tr>
+          <tr><td>P</td><td>#12</td><td></td></tr>
+          <tr><td>Q</td><td>#17</td><td></td></tr>
+          <tr><td>R</td><td>#10</td><td></td></tr>
+          <tr><td>S</td><td>#14</td><td></td></tr>
+          <tr><td>T</td><td>#18</td><td></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- TEAM → CHARACTERS -->
+    <div class="block">
+      <h2>Team → 4 Characters</h2>
+      <div class="body">
+        <p><b>Kerongsang</b> 📿<br>#2 Eng Siew · #4 Eng Neo · #5 Eng Hooi · #19 Hooi Wen<br><em>(the 3 Yap sisters + the granddaughter)</em></p>
+        <p><b>Tingkat</b> 🍱<br>#3 Auntie Mei · #6 · #14 · #20<br><em>(the cook line + her kitchen helpers)</em></p>
+        <p><b>Kasut Manik</b> 👡<br>#7 · #8 · #11 · #13<br><em>(the dancing daughters)</em></p>
+        <p><b>Kamcheng</b> 🍵<br>#1 Keo San · #9 Ah Cai · #15 · #18<br><em>(the Tan men · 4 generations)</em></p>
+        <p><b>Baju Kebaya</b> 👘<br>#10 · #12 · #16 · #17<br><em>(the in-laws &amp; the new generation)</em></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOX → RECIPE -->
+  <div class="block">
+    <h2>Lockbox → Recipe (which recipe goes inside which team's box)</h2>
+    <div class="body">
+      <table style="font-size:8.5pt;">
+        <tr><td style="width:25%;">Kerongsang 📿</td><td>→ Kuih Lapis</td><td><em>nine layers, like the brooch petals</em></td></tr>
+        <tr><td>Tingkat 🍱</td><td>→ Kuih Talam</td><td><em>two layers, stacked like a tiffin</em></td></tr>
+        <tr><td>Kasut Manik 👡</td><td>→ Kuih Dadar</td><td><em>rolled tight, like a beaded shoe</em></td></tr>
+        <tr><td>Kamcheng 🍵</td><td>→ Kuih Kaya</td><td><em>covered, slow-steamed, family favourite</em></td></tr>
+        <tr><td>Baju Kebaya 👘</td><td>→ Kuih Bingka Ubi</td><td><em>golden top, the showpiece</em></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- PRIZES -->
+  <div class="block">
+    <h2>Prizes (2:25pm)</h2>
+    <div class="body">
+      <div class="prize-row">
+        <span class="badge">BEST TREE</span>
+        <span>The team that placed the most cards correctly. <em>You decide — count their right answers vs. cheat sheet above.</em></span>
+      </div>
+      <div class="prize-row">
+        <span class="badge">BEST AI PHOTO</span>
+        <span>You + 2 elders pick. Criteria: costume accuracy → mansion background → faces preserved → composition. Tiebreaker = clap-meter.</span>
+      </div>
+      <div class="prize-row">
+        <span class="badge">MOST HEART</span>
+        <span>The team that helped others, told the most stories, made the most noise. <em>Your gut.</em></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- HINTS BANK -->
+  <div class="block">
+    <h2>Hint bank (whisper, don't announce)</h2>
+    <div class="body">
+      <p><b>Stuck on matching:</b> "Story G mentions a brooch — read story I, they're sisters." / "The watch passes through the Tan men." / "Auntie Mei never sat at the long table — she's not a Tan by blood."</p>
+      <p><b>Stuck on digit 2 (generations):</b> "From Keo San at the top to the youngest baby at the bottom — count the rows." (answer: 4)</p>
+      <p><b>Stuck on digit 3 (peony):</b> "Look at the flower on the recipe card. It's the same flower in Mei's hand on her character card. Count the petals." (answer: 9)</p>
+    </div>
+  </div>
+
+  <!-- TIME WATCH -->
+  <div class="block">
+    <h2>Time-watch (don't drift)</h2>
+    <div class="body" style="font-size:8.5pt;">
+      <b>1:00</b> open · <b>1:10</b> grouping done · <b>1:30</b> Game 1 starts · <b>2:00</b> halfway clap · <b>2:10</b> 5-min warning · <b>2:15</b> stop game · <b>2:20</b> open boxes · <b>2:25</b> prizes · <b>2:40</b> tea · <b>3:10</b> batik · <b>4:10</b> joget · <b>4:30</b> end.
+    </div>
+  </div>
+
+  <footer>★ Bibi only · fold and pocket · 陳家根譜 · 9 May 2026 ★</footer>
+</div>
+</body></html>

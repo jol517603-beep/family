@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Bibi's Question Deck · Host Only</title>
+<!--
+  PRINT: 4 × A4 portrait · 6 cards per page · 24 slots (20 character Qs + 4 endgame)
+  HOST ONLY · do not put on the team table.
+  Each card: front = question to read aloud · bottom = expected answer (your eyes)
+-->
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  :root { --cream:#f6ecd2; --paper:#fbf4dd; --ink:#3a2418; --gold:#b8860b; --jade:#2e7d5b; --rose:#b91c4b; --tan:#8b5a2b; --soft:#e8dab5; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background:#2a1810; font-family:'Georgia','Times New Roman',serif; color:var(--ink); }
+  body { padding: 14px; }
+  @media print { body { padding: 0; background: white; } }
+  .page { width: 210mm; height: 297mm; margin: 0 auto 14px; background: white; padding: 8mm; position: relative; page-break-after: always; box-shadow: 0 14px 36px rgba(0,0,0,0.5); }
+  @media print { .page { box-shadow: none; margin: 0; } }
+  .page:last-child { page-break-after: auto; }
+
+  .grid {
+    width: 100%; height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 4mm;
+  }
+
+  .card {
+    background:
+      radial-gradient(ellipse at 88% 12%, rgba(185,28,75,0.08), transparent 55%),
+      var(--cream);
+    border: 1.5px dashed var(--rose);
+    border-radius: 3mm;
+    padding: 4mm 5mm;
+    position: relative;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+  .card::before { content:''; position:absolute; inset:1.8mm; border:1px solid var(--gold); border-radius:2mm; pointer-events:none; }
+
+  .head {
+    display: flex; align-items: center; gap: 4mm;
+    border-bottom: 1.5px solid var(--rose);
+    padding-bottom: 2mm; margin-bottom: 2.5mm;
+    position: relative; z-index: 1;
+  }
+  .num {
+    flex: 0 0 auto;
+    width: 14mm; height: 14mm; border-radius: 50%;
+    background: var(--rose); color: var(--cream);
+    display: flex; align-items: center; justify-content: center;
+    font-family:'Brush Script MT',cursive; font-size: 22pt;
+    border: 1.5px double var(--gold);
+    box-shadow: 1px 1px 0 var(--tan);
+  }
+  .head .ttl { flex: 1; }
+  .head .lbl { color: var(--tan); font-size: 7pt; letter-spacing: 2px; text-transform: uppercase; font-style: italic; }
+  .head .who { color: var(--ink); font-size: 9pt; margin-top: 0.5mm; }
+  .head .who b { color: var(--rose); font-weight: normal; font-style: italic; }
+
+  .q {
+    flex: 1;
+    background: var(--paper);
+    border-left: 3px solid var(--jade);
+    border-radius: 1mm;
+    padding: 3mm 3.5mm;
+    font-size: 10pt; line-height: 1.5;
+    color: var(--ink);
+    position: relative; z-index: 1;
+    display: flex; align-items: center;
+  }
+  .q em { color: var(--jade); font-style: italic; }
+  .q b { color: var(--rose); font-weight: normal; }
+  .q .ask { font-style: italic; color: var(--tan); margin-bottom: 1mm; display: block; font-size: 8pt; letter-spacing: 1px; }
+
+  .a {
+    margin-top: 2.5mm;
+    padding: 2mm 3mm;
+    background: rgba(46,125,91,0.10);
+    border: 1px dashed var(--jade);
+    border-radius: 1.5mm;
+    font-size: 8.5pt; line-height: 1.4;
+    color: var(--jade);
+    position: relative; z-index: 1;
+  }
+  .a b { color: var(--rose); font-weight: normal; font-style: italic; letter-spacing: 1px; margin-right: 2mm; }
+</style></head>
+<body>
+
+<!-- ============ PAGE 1 · #1–#6 ============ -->
+<div class="page"><div class="grid">
+
+  <div class="card">
+    <div class="head"><div class="num">1</div>
+      <div class="ttl"><div class="lbl">question for · #1</div><div class="who">about <b>Tan Keo San</b> 陳橋山</div></div>
+    </div>
+    <div class="q"><span class="ask">Bibi reads aloud:</span> <em>"What did the founder carry off the boat in 1898 — and from where?"</em></div>
+    <div class="a"><b>ANSWER:</b> a brass pocket-watch · pressed into his palm by his father at the dock in <em>Xiamen, Fujian</em>.</div>
+  </div>
+
+  <div class="card">
+    <div class="head"><div class="num">2</div>
+      <div class="ttl"><div class="lbl">question for · #2</div><div class="who">about <b>Yap Eng Siew</b> 葉永秀</div></div>
+    </div>
+    <div class="q"><span class="ask">Bibi reads aloud:</span> <em>"Who drew the chalk line in the kitchen in 1920 — and what did she say it meant?"</em></div>
+    <div class="a"><b>ANSWER:</b> the eldest mistress drew it herself · "kitchen behind, front in front · her son will not be erased."</div>
+  </div>
+
+  <div class="card">
+    <div class="head"><div class="num">3</div>
+      <div class="ttl"><div class="lbl">question for · #3</div><div class="who">about <b>Auntie Mei</b> 林美蘭</div></div>
+    </div>
+    <div class="q"><span class="ask">Bibi reads aloud:</span> <em>"What was on her kebaya — and what did the family forget to do for seventy-eight years?"</em></div>
+    <div class="a"><b>ANSWER:</b> a permanent <em>sambal stain</em> at the hem · they forgot to <b>write down her name</b>.</div>
+  </div>
+
+  <div class="card">
+    <div class="head"><div class="num">4</div>
+      <div class="ttl"><div class="lbl">question for · #4</div><div class="who">about <b>Yap Eng Neo</b> 葉永娘</div></div>
+    </div>
+    <div class="q"><span class="ask">Bibi reads aloud:</span> <em>"Which brooch did the middle sister wear — and what did she do with it in winter 1923?"</em></div>
+    <div class="a"><b>ANSWER:</b> the <em>Anak A</em> brooch · she <b>returned it to the tin</b> the same week her sister was said to have died.</div>
+  </div>
+
+  <div class="card">
+    <div class="head"><div class="num">5</div>
+      <div class="ttl"><div class="lbl">question for · #5</div><div class="who">about <b>Yap Eng Hooi</b> 葉永慧</div></div>
+    </div>
+    <div class="q"><span class="ask">Bibi reads aloud:</span> <em>"The youngest sister — where is her grave, and what is inside it?"</em></div>
+    <div class="a"><b>ANSWER:</b> Batu Gantong · <b>no body</b> · only her brooch box, sealed with red wax. <em>(this is the secret)</em></div>
+  </div>
+
+  <div class="card">
+    <div class="head"><div class="num">6</div>
+      <div class="ttl"><div class="lbl">question for · #6</div><div class="who">about <b>Lee Poh Soon</b> 李寶順</div></div>
+    </div>
+    <div class="q"><span class="ask">Bibi reads aloud:</span> <em>"He folded cream silk for his daughter's wedding in 1946. For whom did he fold the second length the same year?"</em></div>
+    <div class="a"><b>ANSWER:</b> a <b>niece no one would name</b>. <em>(hint at the secret · do not say more)</em></div>
+  </div>
+
+</div></div>
+
+<!-- ============ PAGE 2 · #7–#12 ============ -->
+<div class="page"><div class="grid">
+
+  <div class="card">
+    <div class="head"><div class="num">7</div>
+      <div class="ttl"><div class="lbl">question for · #7</div><div class="who">about <b>Tan Cheng Hoe</b> 陳清和</div></div>
+    </div>
+    <div class="q"><span class="ask">Bibi reads aloud:</span> <em>"How old was he when the watch became his — and at what hour did he wind it every morning?"</em></div>
+    <div class="a"><b>ANSWER:</b> <em>twenty-one</em> · every morning at <b>six</b>.</div>
+  </div>
+
+  <div class="card">
+    <div class="head"><div class="num">8</div>
+      <div class="ttl"><div class="lbl">question for · #8</div><div class="who">about <b>Lee Beng Guat</b> 李明月</div></div>
+    </div>
+    <div class="q"><span class="ask">Bibi reads aloud:</span> <em>"What did she give her granddaughter on her last night — and what does it open?"</em></div>
+    <div class="a"><b>ANSWER:</b> a <em>brass key</em> · it opens the <b>enamel tin</b> with the three brooches.</div>
+  </div>
+
+  <div class="card">
+    <div class="head"><div class="num">9</div>
+      <div class="ttl"><div class="lbl">question for · #9</div><div class="who">about <b>Tan Ah Cai</b> 陳亞財</div></div>
+    </div>
+    <div class="q"><span class="ask">Bibi reads aloud:</span> <em>"What did the wharf men call him — and where did he go after the surrender of 1945?"</em></div>
+    <div class="a"><b>ANSWER:</b> <em>Seoy Yee Kia</em> 細姨仔 · the mistress's son · into the <b>jungle north of Kulim</b>, never returned.</div>
+  </div>
+
+  <div class="card">
+    <div class="head"><div class="num">10</div>
+      <div class="ttl"><div class="lbl">question for · #10</div><div class="who">about <b>Khoo Chin Nam</b> 邱振南</div></div>
+    </div>
+    <div class="q"><span class="ask">Bibi reads aloud:</span> <em>"How many months was he married before his heart stopped — and what time did the watch on his wrist read?"</em></div>
+    <div class="a"><b>ANSWER:</b> <em>eleven months</em> · the watch read <b>6:47</b>.</div>
+  </div>
+
+  <div class="card">
+    <div class="head"><div class="num">11</div>
+      <div class="ttl"><div class="lbl">question for · #11</div><div class="who">about <b>Tan Chen Neo</b> 陳珍娘</div></div>
+    </div>
+    <div class="q"><span class="ask">Bibi reads aloud:</span> <em>"How many petals does her peony pattern have — and why that number?"</em></div>
+    <div class="a"><b>ANSWER:</b> <b>nine petals</b> · one for each of her late husband's siblings.</div>
+  </div>
+
+  <div class="card">
+    <div class="head"><div class="num">12</div>
+      <div class="ttl"><div class="lbl">question for · #12</div><div class="who">about <b>Lee Boon Kuan</b> 李文坤</div></div>
+    </div>
+    <div class="q"><span class="ask">Bibi reads aloud:</span> <em>"How old was he when his small sister arrived wrapped in temple cloth — and what did he never ask?"</em></div>
+    <div class="a"><b>ANSWER:</b> <em>five</em> · he never asked <b>who left her at the door</b>.</div>
+  </div>
+
+</div></div>
+
+<!-- ============ PAGE 3 · #13–#18 ============ -->
+<div class="page"><div class="grid">
+
+  <div class="card">
+    <div class="head"><div class="num">13</div>
+      <div class="ttl"><div class="lbl">question for · #13</div><div class="who">about <b>Albert Tan</b> 陳順發</div></div>
+    </div>
+    <div class="q"><span class="ask">Bibi reads aloud:</span> <em>"What did he say when he pushed the watch across the table to his brother in 1995?"</em></div>
+    <div class="a"><b>ANSWER:</b> <em>"You keep the time. I will keep the books."</em></div>
+  </div>
+
+  <div class="card">
+    <div class="head"><div class="num">14</div>
+      <div class="ttl"><div class="lbl">question for · #14</div><div class="who">about <b>Alice Wong</b> 王愛麗</div></div>
+    </div>
+    <div class="q"><span class="ask">Bibi reads aloud:</span> <em>"Where did she marry into the family — and who walked out of the church mid-vow?"</em></div>
+    <div class="a"><b>ANSWER:</b> <em>St Andrew's Cathedral, Singapore</em> · <b>Bibi's grandmother</b> walked out.</div>
+  </div>
+
+  <div class="card">
+    <div class="head"><div class="num">15</div>
+      <div class="ttl"><div class="lbl">question for · #15</div><div class="who">about <b>Tan Soon Heng</b> 陳順興</div></div>
+    </div>
+    <div class="q"><span class="ask">Bibi reads aloud:</span> <em>"After his stroke in 2024 — who winds the watch now, and at what hour?"</em></div>
+    <div class="a"><b>ANSWER:</b> <em>his daughter</em> · every morning at <b>six</b>.</div>
+  </div>
+
+  <div class="card">
+    <div class="head"><div class="num">16</div>
+      <div class="ttl"><div class="lbl">question for · #16</div><div class="who">about <b>Lim Soo Hui</b> 林素慧</div></div>
+    </div>
+    <div class="q"><span class="ask">Bibi reads aloud:</span> <em>"The cookbook has 240 recipes. What is on page 240?"</em></div>
+    <div class="a"><b>ANSWER:</b> it is <b>blank</b> · reserved for the dish Auntie Mei never named.</div>
+  </div>
+
+  <div class="card">
+    <div class="head"><div class="num">17</div>
+      <div class="ttl"><div class="lbl">question for · #17</div><div class="who">about <b>Bibik Rose</b> 陳玫瑰</div></div>
+    </div>
+    <div class="q"><span class="ask">Bibi reads aloud:</span> <em>"What has the host of tonight been searching for — and for how long?"</em></div>
+    <div class="a"><b>ANSWER:</b> the <b>third brooch</b> · for <em>twenty-six years</em>. Found tonight.</div>
+  </div>
+
+  <div class="card">
+    <div class="head"><div class="num">18</div>
+      <div class="ttl"><div class="lbl">question for · #18</div><div class="who">about <b>Dr Tan Wei Wen</b> 陳偉文</div></div>
+    </div>
+    <div class="q"><span class="ask">Bibi reads aloud:</span> <em>"What did his wife's grandmother say at Sunday lunch — about the names?"</em></div>
+    <div class="a"><b>ANSWER:</b> <em>"Yap–Khoo, Khoo–Yap. The names always come back together."</em></div>
+  </div>
+
+</div></div>
+
+<!-- ============ PAGE 4 · #19, #20, + 4 endgame ============ -->
+<div class="page"><div class="grid">
+
+  <div class="card">
+    <div class="head"><div class="num">19</div>
+      <div class="ttl"><div class="lbl">question for · #19</div><div class="who">about <b>Khoo Hooi Wen</b> 邱慧雯</div></div>
+    </div>
+    <div class="q"><span class="ask">Bibi reads aloud:</span> <em>"In what year was her grandmother born — and when did the family say her great-grandmother died?"</em></div>
+    <div class="a"><b>ANSWER:</b> grandmother born <b>1924</b> · family said the mother died <b>1923</b>. <em>(the secret · let them sit with it)</em></div>
+  </div>
+
+  <div class="card">
+    <div class="head"><div class="num">20</div>
+      <div class="ttl"><div class="lbl">question for · #20</div><div class="who">about <b>Kelvin Tan</b> 陳凱文</div></div>
+    </div>
+    <div class="q"><span class="ask">Bibi reads aloud:</span> <em>"Of all the questions he could ask about See Hai Chan — which one has he never asked?"</em></div>
+    <div class="a"><b>ANSWER:</b> <em>who Ah Cai was</em> · the brother in the jungle.</div>
+  </div>
+
+  <!-- ===== Endgame · the three thread questions ===== -->
+
+  <div class="card" style="background: radial-gradient(ellipse at 88% 12%, rgba(184,134,11,0.18), transparent 55%), var(--cream);">
+    <div class="head" style="border-bottom-color: var(--gold);"><div class="num" style="background: var(--gold);">⏱</div>
+      <div class="ttl"><div class="lbl">endgame · the watch</div><div class="who">after info strips are pinned</div></div>
+    </div>
+    <div class="q"><span class="ask">Bibi asks:</span> <em>"How many times has the watch changed hands — and on whose wrist did it stop?"</em></div>
+    <div class="a"><b>ANSWER:</b> <em>three times</em> (Keo San → Cheng Hoe → Soon Heng) · stopped on <b>Khoo Chin Nam</b>'s wrist at 6:47 in 1948.</div>
+  </div>
+
+  <div class="card" style="background: radial-gradient(ellipse at 88% 12%, rgba(232,155,181,0.20), transparent 55%), var(--cream);">
+    <div class="head" style="border-bottom-color: var(--rose);"><div class="num">🌺</div>
+      <div class="ttl"><div class="lbl">endgame · the brooches</div><div class="who">after the tin is opened</div></div>
+    </div>
+    <div class="q"><span class="ask">Bibi asks:</span> <em>"Three sisters. Three brooches. The youngest's brooch was placed in the tin unworn — true or false?"</em></div>
+    <div class="a"><b>ANSWER:</b> <b>FALSE</b> · the Anak B brooch was worn once, at a private wedding in 1923. The third brooch carries her real story.</div>
+  </div>
+
+  <div class="card" style="background: radial-gradient(ellipse at 88% 12%, rgba(46,125,91,0.18), transparent 55%), var(--cream);">
+    <div class="head" style="border-bottom-color: var(--jade);"><div class="num" style="background: var(--jade);">🌿</div>
+      <div class="ttl"><div class="lbl">endgame · the silence</div><div class="who">final question · saved for last</div></div>
+    </div>
+    <div class="q"><span class="ask">Bibi asks (quietly):</span> <em>"Who at this table is the closest blood to Ah Cai? And who has been waiting longest for him to come home?"</em></div>
+    <div class="a"><b>ANSWER:</b> closest blood = <b>#16 Soo Hui</b> (Lim niece) · waiting longest = <b>#17 Bibi Rose</b>. <em>(no coin · just silence · then the letter)</em></div>
+  </div>
+
+  <div class="card" style="background: radial-gradient(ellipse at center, rgba(255,248,225,0.95), var(--cream)); justify-content: center; align-items: center; text-align: center;">
+    <div style="font-family:'Brush Script MT',cursive; color: var(--rose); font-size: 22pt; line-height: 1.1; position: relative; z-index: 1;">When the lock opens<br>read the letter aloud.</div>
+    <div style="margin-top: 4mm; color: var(--tan); font-style: italic; font-size: 9pt; position: relative; z-index: 1;">~ no more questions ~<br>Bibi sits down with the team.</div>
+  </div>
+
+</div></div>
+
+</body></html>

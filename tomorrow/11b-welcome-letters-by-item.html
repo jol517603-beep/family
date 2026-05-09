@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>The Tan Family Chest — Welcome Letters by Item</title>
+<style>
+  :root{
+    --cream:#f6ecd2;
+    --paper:#fbf4dd;
+    --ink:#3a2418;
+    --gold:#b8860b;
+    --jade:#2e7d5b;
+    --rose:#b91c4b;
+    --tan:#8b5a2b;
+  }
+  @page { size: A4 portrait; margin: 0; }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; background:#888; color:var(--ink);
+    font-family: Georgia, 'Times New Roman', serif; }
+
+  .sheet{
+    width:210mm; height:297mm; background:var(--cream);
+    padding:7mm 10mm 7mm 10mm; display:flex; flex-direction:column; gap:5mm;
+    page-break-after: always; position:relative;
+  }
+  .sheet:last-child{ page-break-after:auto; }
+
+  .letter{
+    flex:1 1 0; min-height:0;
+    background:var(--paper);
+    padding:7mm 13mm 18mm 13mm; /* increased bottom padding */
+    position:relative;
+    border:0.6mm double var(--rose);
+    border-radius:1.5mm;
+    display:flex; flex-direction:column;
+    overflow:hidden;
+  }
+  .letter::after{
+    content:""; position:absolute; inset:1.6mm;
+    border:0.25mm solid var(--gold); border-radius:1mm; pointer-events:none;
+  }
+
+  /* dashed cut lines between letters within a sheet */
+  .cutline{
+    height:0; border-top: 0.4mm dashed var(--tan); margin:0 4mm;
+    position:relative;
+  }
+  .cutline::before{
+    content:"✂"; position:absolute; left:50%; top:-3mm; transform:translateX(-50%);
+    background:var(--cream); padding:0 3mm; color:var(--tan); font-size:8pt;
+  }
+
+  .head{
+    text-align:center; margin-bottom:1.5mm;
+  }
+  .stamp{
+    display:inline-block; font-family:'Brush Script MT','Lucida Handwriting',cursive;
+    color:var(--rose); font-size:9.5pt; letter-spacing:0.4mm;
+    border:0.3mm solid var(--rose); padding:0.4mm 2.6mm; border-radius:10mm;
+    transform:rotate(-2deg);
+  }
+  .title{
+    font-family:'Brush Script MT','Lucida Handwriting',cursive;
+    color:var(--ink); font-size:18pt; line-height:1.08; margin-top:0.7mm;
+  }
+  .rule{
+    width:32mm; height:0; border-top:0.3mm solid var(--gold);
+    margin:1.4mm auto 0;
+  }
+
+  .body{
+    flex:1; font-size:9.2pt; line-height:1.44; color:var(--ink);
+  }
+  .body p{ margin:0 0 1.5mm; }
+  .body .open{ font-weight:bold; color:var(--rose); font-size:9.7pt; }
+  .body .items{
+    text-align:center; font-size:9.7pt; color:var(--ink);
+    margin:1.2mm 0 1.7mm; letter-spacing:0.2mm;
+  }
+  .body .items strong{ color:var(--rose); font-weight:normal; }
+  .body .items .dot{ color:var(--gold); margin:0 1.2mm; }
+  .body .quiet{
+    font-style:italic; color:var(--tan); font-size:8.5pt; line-height:1.4;
+    margin-top:0.8mm;
+  }
+  .body .closing{
+    margin-top:auto; padding-top:1.2mm;
+    text-align:center;
+    font-size:8.9pt; color:var(--ink);
+  }
+  .body .closing em{ color:var(--jade); }
+  .body .keep{
+    text-align:center; font-size:8.5pt; color:var(--rose);
+    margin:4.5mm 0 0; font-style:italic; /* more margin above */
+    border-top:0.22mm dashed var(--gold); padding-top:1.6mm; /* more space above text */
+  }
+
+  .sign{
+    margin-top:6mm; text-align:right; /* more margin above sign */
+    font-family:'Brush Script MT','Lucida Handwriting',cursive;
+    font-size:11.5pt; color:var(--rose); line-height:1.1;
+  }
+  .sign small{
+    display:block; font-family:Georgia,serif; font-style:italic;
+    color:var(--tan); font-size:6.7pt; letter-spacing:0.4mm; text-transform:uppercase;
+  }
+
+  /* compact item-symbol top-right */
+  .crest{
+    position:absolute; top:4mm; right:6mm; font-size:13pt; opacity:0.85;
+  }
+
+  @media screen{
+    body{ padding:10mm; }
+    .sheet{ box-shadow:0 0 6mm rgba(0,0,0,0.3); margin:0 auto 8mm; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============== SHEET 1 — Kebaya · Kerongsang · Kamcheng-replaced-by-Tingkat? ============== -->
+<!-- Order: Kebaya · Kerongsang · Tingkat -->
+<section class="sheet">
+
+  <!-- KEBAYA -->
+  <article class="letter">
+    <span class="crest">👘</span>
+    <header class="head">
+      <span class="stamp">The Tan Family Chest</span>
+      <div class="title">Welcome home, cousin</div>
+      <div class="rule"></div>
+    </header>
+    <div class="body">
+      <p class="open">Welcome to The Tan Family Chest.</p>
+      <p>Today, you have inherited a <strong>Baju Kebaya</strong>.</p>
+      <p>In many Peranakan families, the Kebaya represented identity, tradition, and the women who quietly carried the spirit of the household through generations.</p>
+      <p>Your task now is simple — find the other guests carrying:</p>
+      <p class="items"><strong>Kerongsang 🌹</strong><span class="dot">·</span><strong>Tingkat 🍱</strong><span class="dot">·</span><strong>Jam Saku ⌚</strong><span class="dot">·</span><strong>Cerki 🃏</strong></p>
+      <p>Together, the five of you will form <strong>one family group</strong>.</p>
+      <p class="quiet">Speak to the other guests. Observe carefully. Some inheritance was never spoken aloud.</p>
+      <p class="closing">Once your group is complete, <em>please proceed to your assigned table.</em></p>
+    </div>
+    <!-- Removed the last sentence as requested -->
+    <!-- Removed the signature as requested -->
+  </article>
+
+  <div class="cutline"></div>
+
+  <!-- KERONGSANG -->
+  <article class="letter">
+    <span class="crest">🌹</span>
+    <header class="head">
+      <span class="stamp">The Tan Family Chest</span>
+      <div class="title">Welcome home, cousin</div>
+      <div class="rule"></div>
+    </header>
+    <div class="body">
+      <p class="open">Welcome to The Tan Family Chest.</p>
+      <p>Today, you have inherited a <strong>Kerongsang</strong>.</p>
+      <p>For generations, the kerongsang fastened a nyonya's kebaya at the throat — three small brooches that quietly told the room which house she came from, and which house she joined.</p>
+      <p>Your task now is simple — find the other guests carrying:</p>
+      <p class="items"><strong>Baju Kebaya 👘</strong><span class="dot">·</span><strong>Tingkat 🍱</strong><span class="dot">·</span><strong>Jam Saku ⌚</strong><span class="dot">·</span><strong>Cerki 🃏</strong></p>
+      <p>Together, the five of you will form <strong>one family group</strong>.</p>
+      <p class="quiet">Speak to the other guests. Observe carefully. Some inheritance was never spoken aloud.</p>
+      <p class="closing">Once your group is complete, <em>please proceed to your assigned table.</em></p>
+    </div>
+    <!-- Removed the last sentence as requested -->
+    <!-- Removed the signature as requested -->
+  </article>
+
+  <div class="cutline"></div>
+
+  <!-- TINGKAT -->
+  <article class="letter">
+    <span class="crest">🍱</span>
+    <header class="head">
+      <span class="stamp">The Tan Family Chest</span>
+      <div class="title">Welcome home, cousin</div>
+      <div class="rule"></div>
+    </header>
+    <div class="body">
+      <p class="open">Welcome to The Tan Family Chest.</p>
+      <p>Today, you have inherited a <strong>Tingkat</strong>.</p>
+      <p>The stacked tiffin carried the family's meals from kitchen to table, and from one home to another. It is the quiet vessel of every recipe a mother passed down without ever writing it on paper.</p>
+      <p>Your task now is simple — find the other guests carrying:</p>
+      <p class="items"><strong>Baju Kebaya 👘</strong><span class="dot">·</span><strong>Kerongsang 🌹</strong><span class="dot">·</span><strong>Jam Saku ⌚</strong><span class="dot">·</span><strong>Cerki 🃏</strong></p>
+      <p>Together, the five of you will form <strong>one family group</strong>.</p>
+      <p class="quiet">Speak to the other guests. Observe carefully. Some inheritance was never spoken aloud.</p>
+      <p class="closing">Once your group is complete, <em>please proceed to your assigned table.</em></p>
+    </div>
+    <!-- Removed the last sentence as requested -->
+    <!-- Removed the signature as requested -->
+  </article>
+
+</section>
+
+<!-- ============== SHEET 2 — Jam Saku · Cerki · Babi Ponteh ============== -->
+<section class="sheet">
+
+  <!-- JAM SAKU -->
+  <article class="letter">
+    <span class="crest">⌚</span>
+    <header class="head">
+      <span class="stamp">The Tan Family Chest</span>
+      <div class="title">Welcome home, cousin</div>
+      <div class="rule"></div>
+    </header>
+    <div class="body">
+      <p class="open">Welcome to The Tan Family Chest.</p>
+      <p>Today, you have inherited a <strong>Jam Saku</strong> — the pocket watch.</p>
+      <p>It belonged to the men of the household — kept on a gold chain across the waistcoat, wound each morning, and handed down from father to son. It marked the hours a family rose, gathered, and kept their word.</p>
+      <p>Your task now is simple — find the other guests carrying:</p>
+      <p class="items"><strong>Baju Kebaya 👘</strong><span class="dot">·</span><strong>Kerongsang 🌹</strong><span class="dot">·</span><strong>Tingkat 🍱</strong><span class="dot">·</span><strong>Cerki 🃏</strong></p>
+      <p>Together, the five of you will form <strong>one family group</strong>.</p>
+      <p class="quiet">Speak to the other guests. Observe carefully. Some inheritance was never spoken aloud.</p>
+      <p class="closing">Once your group is complete, <em>please proceed to your assigned table.</em></p>
+    </div>
+    <!-- Removed the last sentence as requested -->
+    <!-- Removed the signature as requested -->
+  </article>
+
+  <div class="cutline"></div>
+
+  <!-- CERKI -->
+  <article class="letter">
+    <span class="crest">🃏</span>
+    <header class="head">
+      <span class="stamp">The Tan Family Chest</span>
+      <div class="title">Welcome home, cousin</div>
+      <div class="rule"></div>
+    </header>
+    <div class="body">
+      <p class="open">Welcome to The Tan Family Chest.</p>
+      <p>Today, you have inherited <strong>Cerki</strong>.</p>
+      <p>For generations, Cerki brought families together around the table — through laughter, gossip, secrets, and long afternoons shared between relatives and friends.</p>
+      <p>Your task now is simple — find the other guests carrying:</p>
+      <p class="items"><strong>Baju Kebaya 👘</strong><span class="dot">·</span><strong>Kerongsang 🌹</strong><span class="dot">·</span><strong>Tingkat 🍱</strong><span class="dot">·</span><strong>Jam Saku ⌚</strong></p>
+      <p>Together, the five of you will form <strong>one family group</strong>.</p>
+      <p class="quiet">Speak to the other guests. Observe carefully. Some inheritance was never spoken aloud.</p>
+      <p class="closing">Once your group is complete, <em>please proceed to your assigned table.</em></p>
+    </div>
+    <!-- Removed the last sentence as requested -->
+    <!-- Removed the signature as requested -->
+  </article>
+
+  <div class="cutline"></div>
+
+  <!-- BABI PONTEH (wildcard) -->
+  <article class="letter">
+    <span class="crest">🍲</span>
+    <header class="head">
+      <span class="stamp">The Tan Family Chest</span>
+      <div class="title">Welcome home, cousin</div>
+      <div class="rule"></div>
+    </header>
+    <div class="body">
+      <p class="open">Welcome to The Tan Family Chest.</p>
+      <p>Today, you have inherited <strong>Babi Ponteh</strong>.</p>
+      <p>In many Peranakan homes, food was never just food. Recipes carried memory, family history, and the quiet love passed between generations.</p>
+      <p>Unlike the other heirlooms, <strong>Babi Ponteh belongs to every table</strong>. You may choose to join any family group you wish.</p>
+      <p class="quiet">Observe carefully. Speak to the other guests. Every family carries secrets waiting to be uncovered.</p>
+      <p class="closing">Once you have chosen your family, <em>please proceed to the table together.</em></p>
+    </div>
+    <!-- Removed the last sentence as requested -->
+    <!-- Removed the signature as requested -->
+  </article>
+
+</section>
+
+</body>
+</html>

@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Bibik Rose's Family Tree · TAN Team Board</title>
+<style>
+  :root {
+    --cream: #f5ecd7;
+    --ink: #3a2418;
+    --gold: #b8860b;
+    --jade: #2e7d5b;
+    --rose: #c2185b;
+    --tan: #8b5a2b;
+    --paper: #faf3e0;
+    --shadow: rgba(58, 36, 24, 0.15);
+    --line: #8b5a2b;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background: #2a1810;
+    padding: 30px;
+    color: var(--ink);
+  }
+
+  .board {
+    width: 1500px;
+    margin: 0 auto;
+    background: var(--cream);
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(184,134,11,0.08) 0, transparent 40%),
+      radial-gradient(circle at 80% 80%, rgba(46,125,91,0.08) 0, transparent 40%);
+    border: 14px solid var(--tan);
+    border-image: repeating-linear-gradient(
+      45deg,
+      var(--tan) 0 12px,
+      var(--gold) 12px 18px,
+      var(--tan) 18px 30px
+    ) 14;
+    padding: 30px 40px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    position: relative;
+  }
+
+  .header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px;
+    align-items: center;
+    border-bottom: 3px double var(--tan);
+    padding-bottom: 18px;
+    margin-bottom: 16px;
+  }
+  .title h1 {
+    font-family: 'Brush Script MT', cursive;
+    font-size: 50px;
+    color: var(--rose);
+    line-height: 1;
+  }
+  .title .zh { font-size: 24px; color: var(--jade); margin-top: 4px; }
+  .title .sub { font-style: italic; color: var(--ink); margin-top: 6px; font-size: 14px; }
+
+  .team-badge {
+    background: var(--tan);
+    color: var(--cream);
+    border-radius: 50%;
+    width: 100px; height: 100px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    font-weight: bold;
+    box-shadow: 0 4px 12px var(--shadow);
+    transform: rotate(-5deg);
+  }
+  .team-badge .team { font-size: 26px; letter-spacing: 2px; }
+  .team-badge .label { font-size: 10px; opacity: 0.85; }
+
+  .instructions {
+    background: #fff8e1;
+    border-left: 4px solid var(--gold);
+    padding: 8px 14px;
+    margin-bottom: 14px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .instructions strong { color: var(--rose); }
+
+  .main-grid {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    gap: 16px;
+  }
+
+  /* ========== FAMILY TREE ========== */
+  .tree {
+    background: var(--paper);
+    border: 2px solid var(--tan);
+    border-radius: 10px;
+    padding: 16px;
+    position: relative;
+    box-shadow: 3px 4px 0 var(--tan);
+  }
+  .tree-title {
+    text-align: center;
+    color: var(--rose);
+    font-family: 'Brush Script MT', cursive;
+    font-size: 26px;
+    margin-bottom: 14px;
+    border-bottom: 2px dashed var(--gold);
+    padding-bottom: 4px;
+  }
+
+  .gen {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    position: relative;
+    margin-bottom: 70px;
+    padding-top: 8px;
+  }
+  .gen:last-child { margin-bottom: 4px; }
+
+  .gen-label {
+    position: absolute;
+    left: -2px;
+    top: 0;
+    font-size: 10px;
+    color: var(--jade);
+    font-weight: bold;
+    letter-spacing: 2px;
+    background: var(--paper);
+    padding: 2px 6px;
+    border: 1px solid var(--jade);
+    border-radius: 4px;
+  }
+
+  .couple {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+    padding-top: 14px;
+  }
+
+  .relation {
+    border: 1.5px dashed var(--rose);
+    background: #fff8e1;
+    color: var(--rose);
+    font-size: 9px;
+    font-style: italic;
+    padding: 3px 6px;
+    border-radius: 12px;
+    text-align: center;
+    min-width: 50px;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+  .relation::before { content: '✏️ '; }
+
+  .person {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    position: relative;
+    width: 70px;
+  }
+  .silhouette {
+    width: 60px; height: 76px;
+    border: 2px dashed var(--tan);
+    border-radius: 6px;
+    background:
+      radial-gradient(circle at 50% 28%, var(--tan) 0 10px, transparent 11px),
+      linear-gradient(to bottom, transparent 50%, var(--tan) 50%, var(--tan) 78%, transparent 78%);
+    background-size: 100% 100%;
+    opacity: 0.3;
+    position: relative;
+  }
+  .name-blank {
+    width: 66px;
+    border-bottom: 1px dotted var(--ink);
+    height: 13px;
+    font-size: 8px;
+    color: var(--tan);
+    text-align: center;
+    line-height: 13px;
+    font-style: italic;
+  }
+  .hint {
+    font-size: 8.5px;
+    color: var(--jade);
+    font-style: italic;
+    text-align: center;
+    max-width: 70px;
+    line-height: 1.2;
+  }
+
+  /* descent line from couple down to next gen */
+  .descent {
+    position: absolute;
+    left: 50%;
+    bottom: -56px;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 50px;
+    background: var(--line);
+  }
+  .descent::after {
+    content: '▼';
+    position: absolute;
+    bottom: -12px;
+    left: -5px;
+    color: var(--line);
+    font-size: 12px;
+  }
+  .descent .child-label {
+    position: absolute;
+    left: 8px;
+    top: 16px;
+    font-size: 9px;
+    color: var(--jade);
+    background: var(--paper);
+    padding: 0 4px;
+    font-style: italic;
+  }
+
+  /* dotted line for secret affair */
+  .secret-line {
+    position: absolute;
+    height: 2px;
+    border-top: 2px dotted var(--rose);
+    top: 50%;
+  }
+  .secret-line::after {
+    content: '💔 secret';
+    position: absolute;
+    top: -16px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 9px;
+    color: var(--rose);
+    background: var(--paper);
+    padding: 0 4px;
+    font-style: italic;
+    white-space: nowrap;
+  }
+
+  .marker {
+    position: absolute;
+    top: -6px; right: -6px;
+    background: var(--rose);
+    color: white;
+    font-size: 8px;
+    padding: 1px 4px;
+    border-radius: 6px;
+    font-weight: bold;
+    z-index: 3;
+  }
+  .marker.death { background: #555; }
+  .marker.secret { background: var(--jade); }
+
+  .story-bubble {
+    background: #fff8e1;
+    border: 1.5px solid var(--gold);
+    padding: 5px 8px;
+    border-radius: 12px;
+    font-style: italic;
+    font-size: 10.5px;
+    color: var(--ink);
+    max-width: 180px;
+    position: absolute;
+    box-shadow: 2px 2px 4px var(--shadow);
+    z-index: 5;
+    line-height: 1.3;
+  }
+  .story-bubble strong { color: var(--rose); font-style: normal; }
+
+  /* ========== SIDE COLUMN ========== */
+  .side {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .side-card {
+    background: var(--paper);
+    border: 2px solid var(--jade);
+    border-radius: 8px;
+    padding: 10px 12px;
+    box-shadow: 2px 3px 0 var(--jade);
+  }
+  .side-card h4 {
+    color: var(--jade);
+    font-size: 12px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .scratch {
+    background: linear-gradient(135deg, #c0c0c0, #909090);
+    color: transparent;
+    padding: 14px 8px;
+    border-radius: 6px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    font-size: 10px;
+  }
+  .scratch::before {
+    content: '🎟️ Scratch me!';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-style: italic;
+  }
+  .flap {
+    background: var(--rose);
+    color: var(--cream);
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+    font-style: italic;
+    font-size: 11px;
+  }
+  .mini-list { list-style: none; font-size: 10.5px; }
+  .mini-list li {
+    padding: 3px 0;
+    border-bottom: 1px dotted var(--jade);
+  }
+  .mini-list li:last-child { border-bottom: none; }
+  .mini-list span { color: var(--rose); font-weight: bold; }
+
+  .items {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 4px;
+  }
+  .items span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 20px;
+  }
+  .items small {
+    font-size: 8px;
+    color: var(--ink);
+    margin-top: 2px;
+  }
+  .items input { transform: scale(1.1); margin-top: 2px; }
+
+  .key {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    font-size: 10px;
+  }
+  .key-swatch {
+    display: inline-block;
+    padding: 2px 5px;
+    border-radius: 6px;
+    font-size: 9px;
+    border: 1px dashed var(--rose);
+    color: var(--rose);
+    background: #fff8e1;
+    text-align: center;
+    width: 100%;
+  }
+
+  .gossip {
+    margin-top: 14px;
+    padding: 8px 14px;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent 0 60px,
+      rgba(184,134,11,0.08) 60px 120px
+    );
+    border-top: 2px dashed var(--gold);
+    border-bottom: 2px dashed var(--gold);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-style: italic;
+    font-size: 11px;
+    color: var(--tan);
+  }
+  .gossip span::before { content: '🤫 '; }
+
+  .corner {
+    position: absolute;
+    width: 40px; height: 40px;
+    border: 3px solid var(--gold);
+    opacity: 0.4;
+  }
+  .corner.tl { top: 18px; left: 18px; border-right: none; border-bottom: none; }
+  .corner.tr { top: 18px; right: 18px; border-left: none; border-bottom: none; }
+  .corner.bl { bottom: 18px; left: 18px; border-right: none; border-top: none; }
+  .corner.br { bottom: 18px; right: 18px; border-left: none; border-top: none; }
+</style>
+</head>
+<body>
+
+<div class="board">
+  <div class="corner tl"></div>
+  <div class="corner tr"></div>
+  <div class="corner bl"></div>
+  <div class="corner br"></div>
+
+  <div class="header">
+    <div class="title">
+      <h1>Bibik Rose's Family Tree</h1>
+      <div class="zh">陈家族谱 · Build the Tan Family Tree</div>
+      <div class="sub">"All 20 family members in your envelope. Place them right + write their relationships 👀"</div>
+    </div>
+    <div class="team-badge">
+      <div class="team">TAN</div>
+      <div class="label">陈 · Team 1</div>
+    </div>
+  </div>
+
+  <div class="instructions">
+    <strong>How to play:</strong>
+    ① Open Bibi's envelope — 20 character cards inside.
+    ② Read the gossip 💬 around the tree — it hints WHO goes WHERE.
+    ③ Place each card on a silhouette + write the name on the dotted line.
+    ④ Fill in the <strong>relationship band</strong> between each pair (married? mistress? siblings?).
+    ⑤ See the <strong>3 round gold frames</strong> 🟡 on the tree? Those are HEIRLOOM slots — hunt the room for the matching item and place it on the frame!
+  </div>
+
+  <div class="main-grid">
+
+    <!-- ========== FAMILY TREE ========== -->
+    <div class="tree">
+      <div class="tree-title">📜 The Tan Family Tree · 4 Generations</div>
+
+      <!-- ============ GEN 1 ============ -->
+      <div class="gen">
+        <div class="gen-label">GEN 1</div>
+
+        <!-- Couple A: Sinkeh + Nyonya -->
+        <div class="couple">
+          <div class="person">
+            <div class="silhouette"></div>
+            <div class="name-blank">name?</div>
+            <div class="hint">"crossed sea, 1905"</div>
+          </div>
+          <div class="relation">_______</div>
+          <div class="person">
+            <div class="silhouette"></div>
+            <div class="name-blank">name?</div>
+            <div class="hint">"Nyonya bride"</div>
+          </div>
+          <div class="descent"><div class="child-label">had children</div></div>
+          <div class="story-bubble" style="top: -42px; left: -10px;">
+            💬 <strong>S1:</strong> The boy who sailed from Fujian in 1905 with a wooden trunk and a dream — and the Nyonya who said yes when her family said no.
+          </div>
+        </div>
+
+        <!-- Mistress (linked by secret line to Couple A's husband) -->
+        <div class="couple" style="margin-top: 30px;">
+          <div class="person">
+            <div class="silhouette"></div>
+            <div class="name-blank">name?</div>
+            <div class="hint">"the secret love"</div>
+            <div class="marker secret">🤫</div>
+          </div>
+          <div class="descent"><div class="child-label">hidden child</div></div>
+          <div class="story-bubble" style="top: -42px; left: -20px;">
+            💬 <strong>S3:</strong> She wore jasmine every Sunday. Her son grew up calling his own father «uncle». Shhh… 🤫
+          </div>
+        </div>
+
+        <!-- Couple B: Banker + young Nyonya -->
+        <div class="couple">
+          <div class="person">
+            <div class="silhouette"></div>
+            <div class="name-blank">name?</div>
+            <div class="hint">"S'pore banker"</div>
+            <div class="marker">+33 yrs</div>
+          </div>
+          <div class="relation">_______</div>
+          <div class="person">
+            <div class="silhouette"></div>
+            <div class="name-blank">name?</div>
+            <div class="hint">"young 2nd wife"</div>
+          </div>
+          <div class="story-bubble" style="top: -42px; right: -10px;">
+            💬 <strong>S4:</strong> The banker who counted his coins twice — and married a bride 33 years younger. She ruled his house with quiet steel.
+          </div>
+        </div>
+
+        <!-- Lee parents (parents of the Lee daughter who marries Tan in Gen 2) -->
+        <div class="couple">
+          <div class="person">
+            <div class="silhouette"></div>
+            <div class="name-blank">name?</div>
+            <div class="hint">"Lee patriarch"</div>
+          </div>
+          <div class="relation">_______</div>
+          <div class="person">
+            <div class="silhouette"></div>
+            <div class="name-blank">name?</div>
+            <div class="hint">"Yap sister"</div>
+          </div>
+          <div class="descent"><div class="child-label">had children</div></div>
+          <div class="story-bubble" style="top: -42px; right: -10px;">
+            💬 <strong>S2:</strong> Two Yap sisters — one married a sinkeh, the other married a Lee. They became matriarchs of two great houses.
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ GEN 2 ============ -->
+      <div class="gen">
+        <div class="gen-label">GEN 2</div>
+
+        <!-- Couple C: Tan son (from Couple A) + Lee daughter (from Lee parents) -->
+        <div class="couple">
+          <div class="person">
+            <div class="silhouette"></div>
+            <div class="name-blank">name?</div>
+            <div class="hint">"Tan eldest son"</div>
+          </div>
+          <div class="relation">_______</div>
+          <div class="person">
+            <div class="silhouette"></div>
+            <div class="name-blank">name?</div>
+            <div class="hint">"Lee daughter"</div>
+          </div>
+          <div class="descent"><div class="child-label">had Albert</div></div>
+          <div class="story-bubble" style="top: -42px; left: -10px;">
+            💬 <strong>S5:</strong> The quiet inheritor son and the bright Lee daughter — their 1947 wedding joined Tan & Lee under one roof. What no one knew at the altar: by blood, they were first cousins.
+          </div>
+        </div>
+
+        <!-- Hidden son (illegitimate) -->
+        <div class="couple">
+          <div class="person">
+            <div class="silhouette"></div>
+            <div class="name-blank">name?</div>
+            <div class="hint">"hidden son"</div>
+            <div class="marker secret">🤫</div>
+          </div>
+        </div>
+
+        <!-- Banker's daughter (Tan Chen Neo's child, from Couple B) -->
+        <div class="couple">
+          <div class="person">
+            <div class="silhouette"></div>
+            <div class="name-blank">name?</div>
+            <div class="hint">"banker's daughter"</div>
+          </div>
+        </div>
+
+        <!-- Lee son who died young -->
+        <div class="couple">
+          <div class="person">
+            <div class="silhouette"></div>
+            <div class="name-blank">name?</div>
+            <div class="hint">"Lee son ✝"</div>
+            <div class="marker death">died young</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ============ GEN 3 ============ -->
+      <div class="gen">
+        <div class="gen-label">GEN 3</div>
+
+        <!-- Albert + Alice -->
+        <div class="couple">
+          <div class="person">
+            <div class="silhouette"></div>
+            <div class="name-blank">name?</div>
+            <div class="hint">"met at uni"</div>
+          </div>
+          <div class="relation">_______</div>
+          <div class="person">
+            <div class="silhouette"></div>
+            <div class="name-blank">name?</div>
+            <div class="hint">"matriarch's fav"</div>
+          </div>
+          <div class="descent"><div class="child-label">had Kelvin</div></div>
+          <div class="story-bubble" style="top: -42px; left: -10px;">
+            💬 <strong>S6:</strong> The first Tan to study overseas — came home with a KL-born banker who married him at St Andrew's Cathedral and never set foot in the kitchen.
+          </div>
+        </div>
+
+        <!-- Soon Heng + Soo Hui -->
+        <div class="couple">
+          <div class="person">
+            <div class="silhouette"></div>
+            <div class="name-blank">name?</div>
+            <div class="hint">"2nd Tan son"</div>
+          </div>
+          <div class="relation">_______</div>
+          <div class="person">
+            <div class="silhouette"></div>
+            <div class="name-blank">name?</div>
+            <div class="hint">"a Lim sister"</div>
+          </div>
+          <div class="descent"><div class="child-label">had Wei Wen + Rose</div></div>
+        </div>
+
+      </div>
+
+      <!-- ============ GEN 4 ============ -->
+      <div class="gen" style="margin-bottom: 0;">
+        <div class="gen-label">GEN 4</div>
+
+        <!-- Kelvin -->
+        <div class="couple">
+          <div class="person">
+            <div class="silhouette"></div>
+            <div class="name-blank">name?</div>
+            <div class="hint">"carries the name"</div>
+          </div>
+        </div>
+
+        <!-- Wei Wen + Hooi Wen -->
+        <div class="couple">
+          <div class="person">
+            <div class="silhouette"></div>
+            <div class="name-blank">name?</div>
+            <div class="hint">"groom"</div>
+          </div>
+          <div class="relation">_______</div>
+          <div class="person">
+            <div class="silhouette"></div>
+            <div class="name-blank">name?</div>
+            <div class="hint">"bride"</div>
+          </div>
+          <div class="story-bubble" style="top: -42px; left: -10px;">
+            💬 <strong>S7:</strong> The gentler Tan brother kept the watch — the elder, by the rule of gentleness, not the rule of age. His wife came from Auntie Mei's own kitchen line. Their son's wife brought the Singapore branch home in 2020.
+          </div>
+        </div>
+
+        <!-- Bibik Rose -->
+        <div class="couple">
+          <div class="person">
+            <div class="silhouette"></div>
+            <div class="name-blank">name?</div>
+            <div class="hint">"that's me! 🌺"</div>
+            <div class="marker">Bibi</div>
+          </div>
+          <div class="story-bubble" style="top: -42px; right: -10px;">
+            💬 <strong>S8:</strong> The youngest generation — one carries the Tan name into tech, the other tells everyone's secrets (that's me! 🌺).
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ========== SIDE COLUMN ========== -->
+    <div class="side">
+
+      <div class="side-card">
+        <h4>🔑 Relationship Words</h4>
+        <p style="font-size:10px; font-style:italic; margin-bottom:6px;">Write one on each pink dotted band:</p>
+        <div class="key">
+          <div><span class="key-swatch">married 夫妻</span></div>
+          <div><span class="key-swatch">mistress 情妇</span></div>
+          <div><span class="key-swatch">siblings 兄弟</span></div>
+          <div><span class="key-swatch">cousins 表亲</span></div>
+          <div><span class="key-swatch">parents 父母</span></div>
+          <div><span class="key-swatch">in-laws 姻亲</span></div>
+        </div>
+      </div>
+
+      <div class="side-card">
+        <h4>🎟️ Scratch Bonus</h4>
+        <div class="scratch">BONUS: Find the character whose dates end with a question mark → +5 pts!</div>
+      </div>
+
+      <div class="side-card">
+        <h4>🚪 Don't Open Yet!</h4>
+        <div class="flap">Wait for Bibik Rose's signal…</div>
+      </div>
+
+      <div class="side-card">
+        <h4>🎮 Mini Challenges</h4>
+        <ul class="mini-list">
+          <li><span>A.</span> Spot the only Sinkeh (Fujian-born)</li>
+          <li><span>B.</span> Match 3 Nyonyas to their kebaya</li>
+          <li><span>C.</span> Bibi sat on this auntie's kitchen stool every Sunday — find them both</li>
+        </ul>
+      </div>
+
+      <div class="side-card">
+        <h4>� 3 Heirloom Hunt</h4>
+        <p style="font-size:10px; font-style:italic; margin-bottom:4px;">The tree has <b>3 round gold frames</b>. Find the matching heirloom in the room and place it on the frame:</p>
+        <div class="items">
+          <span>📌<small>Kerongsang</small><input type="checkbox"></span>
+          <span>⌚<small>Jam Saku</small><input type="checkbox"></span>
+          <span>📜<small>Resipi Auntie Mei</small><input type="checkbox"></span>
+        </div>
+        <p style="font-size:9.5px; font-style:italic; color:var(--tan); margin-top:6px; text-align:center;">All 3 placed correctly = bonus points 🌺</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="gossip">
+    <span>Someone has TWO birthdays</span>
+    <span>The mistress wore jasmine every Sunday…</span>
+    <span>That banker? Always paid in gold coins</span>
+    <span>Sssh — don't ask about 1942</span>
+    <span>One card has a secret. Look closely 👀</span>
+  </div>
+
+</div>
+
+</body>
+</html>

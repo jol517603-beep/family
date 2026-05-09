@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Bibi's Note · Round 1.5 · The Combined-Clue Card</title>
+<style>
+  /* ===========================================================
+     PRINT-READY · A5 LANDSCAPE FOLDED CARD (210mm × 148mm)
+     A single keepsake card from Bibi to the team.
+     Outside (front cover) | Inside (5 riddles)
+     Print double-sided on A4 (2 cards per A4) and fold in half.
+     =========================================================== */
+  @page { size: A5 landscape; margin: 0; }
+
+  :root {
+    --cream:  #f6ecd2;
+    --paper:  #fbf4dd;
+    --ink:    #3a2418;
+    --gold:   #b8860b;
+    --gold-2: #d4a73c;
+    --jade:   #2e7d5b;
+    --rose:   #b91c4b;
+    --rose-2: #d94872;
+    --tan:    #8b5a2b;
+    --tan-2:  #a47148;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: #2a1810;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: var(--ink);
+  }
+  body { padding: 18px; }
+  @media print { body { padding: 0; background: white; } }
+
+  .sheet {
+    width: 210mm; height: 148mm;
+    margin: 0 auto 16px;
+    background: var(--cream);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 18px 50px rgba(0,0,0,0.55);
+    page-break-after: always;
+    display: flex;
+  }
+  @media print { .sheet { box-shadow: none; margin: 0; } }
+
+  /* shared backgrounds */
+  .bg-wash {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse at 18% 22%, rgba(184,134,11,0.10) 0, transparent 45%),
+      radial-gradient(ellipse at 82% 78%, rgba(46,125,91,0.10) 0, transparent 45%),
+      linear-gradient(135deg, #f6ecd2 0%, #f0e2c0 100%);
+  }
+  .bg-tile {
+    position: absolute; inset: 0; z-index: 1; opacity: 0.55;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'><g fill='none' stroke='%23b91c4b' stroke-width='1' opacity='0.20'><circle cx='40' cy='40' r='10'/><circle cx='40' cy='40' r='4' fill='%23b91c4b' opacity='0.4'/><path d='M40 28 Q34 22 28 28 Q34 34 40 28'/><path d='M40 52 Q34 58 28 52 Q34 46 40 52'/><path d='M52 40 Q58 34 52 28 Q46 34 52 40'/><path d='M28 40 Q22 34 28 28 Q34 34 28 40'/></g><g fill='none' stroke='%232e7d5b' stroke-width='1' opacity='0.22'><path d='M0 110 Q40 80 80 110 T160 110 T240 110' /><path d='M70 100 Q72 92 80 90 Q86 96 80 102 Q72 104 70 100 Z' fill='%232e7d5b' opacity='0.30'/></g><g fill='none' stroke='%23b8860b' stroke-width='1' opacity='0.22'><circle cx='150' cy='150' r='12'/><circle cx='150' cy='150' r='5' fill='%23b8860b' opacity='0.35'/></g></svg>");
+    background-size: 130px 130px;
+  }
+  .frame {
+    position: absolute;
+    top: 6mm; left: 6mm; right: 6mm; bottom: 6mm;
+    border: 3px double var(--rose);
+    z-index: 3; pointer-events: none;
+  }
+  .frame::before {
+    content: ''; position: absolute;
+    top: 3px; left: 3px; right: 3px; bottom: 3px;
+    border: 1px solid var(--gold);
+  }
+
+  /* fold guide */
+  .fold {
+    position: absolute;
+    top: 0; bottom: 0; left: 50%;
+    width: 0;
+    border-left: 1px dashed rgba(58,36,24,0.3);
+    z-index: 4;
+    pointer-events: none;
+  }
+  .fold::after {
+    content: '✂ fold';
+    position: absolute;
+    top: 50%; left: 0;
+    transform: translate(-50%, -50%) rotate(-90deg);
+    background: var(--cream);
+    padding: 0 6px;
+    font-size: 7pt;
+    color: var(--tan);
+    font-family: monospace;
+  }
+
+  /* corner peony */
+  .corner {
+    position: absolute;
+    width: 26mm; height: 26mm;
+    z-index: 2;
+    opacity: 0.55;
+  }
+  .corner.tl { top: 8mm;  left: 8mm; }
+  .corner.tr { top: 8mm;  right: 8mm; transform: scaleX(-1); }
+  .corner.bl { bottom: 8mm; left: 8mm; transform: scaleY(-1); }
+  .corner.br { bottom: 8mm; right: 8mm; transform: scale(-1, -1); }
+
+  /* ============ FRONT COVER (left half of sheet 1) ============ */
+  .front {
+    width: 50%; height: 100%;
+    position: relative;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12mm 14mm;
+    text-align: center;
+  }
+  .front .stamp {
+    background: var(--rose);
+    color: var(--cream);
+    padding: 2mm 6mm;
+    border-radius: 999px;
+    font-size: 8.5pt;
+    letter-spacing: 4px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: 1.5px solid var(--gold);
+    box-shadow: 1px 1px 0 var(--gold);
+    margin-bottom: 6mm;
+  }
+  .front .from {
+    font-style: italic;
+    color: var(--jade);
+    font-size: 11pt;
+    margin-bottom: 2mm;
+  }
+  .front .from::before, .front .from::after {
+    content: '✦'; margin: 0 6px; color: var(--gold);
+  }
+  .front .title {
+    font-family: 'Brush Script MT', 'Snell Roundhand', cursive;
+    font-size: 50pt;
+    color: var(--rose);
+    line-height: 1;
+    margin: 2mm 0;
+    text-shadow: 2px 2px 0 rgba(184,134,11,0.25);
+  }
+  .front .zh {
+    font-size: 16pt;
+    color: var(--jade);
+    letter-spacing: 5px;
+    margin: 1mm 0 5mm;
+  }
+  .front .opening {
+    font-style: italic;
+    font-size: 10pt;
+    color: var(--ink);
+    line-height: 1.6;
+    max-width: 85mm;
+    margin-bottom: 5mm;
+  }
+  .front .opening::before { content: '“ '; color: var(--rose); font-size: 16pt; vertical-align: -3pt; }
+  .front .opening::after  { content: ' ”'; color: var(--rose); font-size: 16pt; vertical-align: -3pt; }
+  .front .signoff {
+    font-family: 'Brush Script MT', cursive;
+    color: var(--rose);
+    font-size: 22pt;
+    margin-top: 2mm;
+  }
+  .front .meta {
+    position: absolute;
+    bottom: 12mm;
+    font-size: 7.5pt;
+    color: var(--tan);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* ============ INSIDE — RIDDLES INTRO (right half of sheet 1) ============ */
+  .intro {
+    width: 50%; height: 100%;
+    position: relative;
+    z-index: 5;
+    padding: 12mm 12mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+  .intro h2 {
+    font-family: 'Brush Script MT', cursive;
+    color: var(--rose);
+    font-size: 26pt;
+    line-height: 1;
+    margin-bottom: 1mm;
+  }
+  .intro .sub {
+    color: var(--jade);
+    font-size: 9pt;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 4mm;
+  }
+  .intro p {
+    font-size: 9.5pt;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-bottom: 3mm;
+  }
+  .intro p strong { color: var(--rose); }
+  .intro .rule {
+    background: rgba(255,248,225,0.9);
+    border: 1px dashed var(--gold);
+    border-radius: 8px;
+    padding: 3mm 5mm;
+    font-style: italic;
+    font-size: 9pt;
+    color: var(--ink);
+    line-height: 1.5;
+    margin-top: 3mm;
+  }
+  .intro .rule b { color: var(--rose); font-style: normal; }
+
+  /* ============ SHEET 2 — 5 RIDDLES ============ */
+  .riddles-page {
+    width: 100%; height: 100%;
+    position: relative;
+    z-index: 5;
+    padding: 11mm 12mm;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr 1fr 1fr;
+    gap: 3.5mm 6mm;
+  }
+  .riddles-page .header {
+    grid-column: span 2;
+    text-align: center;
+    border-bottom: 1.5px double var(--rose);
+    padding-bottom: 2mm;
+    margin-bottom: 1mm;
+  }
+  .riddles-page .header h2 {
+    font-family: 'Brush Script MT', cursive;
+    color: var(--rose);
+    font-size: 22pt;
+    line-height: 1;
+  }
+  .riddles-page .header .sub {
+    color: var(--jade);
+    font-size: 8pt;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-top: 1mm;
+  }
+
+  .riddle {
+    background: rgba(255, 248, 225, 0.92);
+    border: 1.5px solid var(--gold);
+    border-radius: 8px;
+    padding: 3mm 4mm 3mm 11mm;
+    position: relative;
+    box-shadow: 1.5px 1.5px 0 var(--gold-2);
+    font-size: 8.5pt;
+    line-height: 1.45;
+    color: var(--ink);
+  }
+  .riddle .num {
+    position: absolute;
+    top: 50%; left: 3mm;
+    transform: translateY(-50%);
+    width: 7mm; height: 7mm;
+    border-radius: 50%;
+    background: var(--rose);
+    color: var(--cream);
+    font-family: 'Brush Script MT', cursive;
+    font-size: 14pt;
+    font-weight: bold;
+    display: flex; align-items: center; justify-content: center;
+    border: 1.5px solid var(--gold);
+    box-shadow: 1px 1px 0 var(--gold);
+  }
+  .riddle .quote {
+    font-style: italic;
+    color: var(--ink);
+    margin-bottom: 1.5mm;
+  }
+  .riddle .quote::before { content: '“ '; color: var(--rose); font-weight: bold; }
+  .riddle .quote::after  { content: ' ”'; color: var(--rose); font-weight: bold; }
+  .riddle .hint {
+    font-size: 7pt;
+    color: var(--jade);
+    border-top: 1px dotted var(--tan);
+    padding-top: 1.5mm;
+    margin-top: 1mm;
+  }
+  .riddle .hint b { color: var(--rose); }
+
+  /* ============ SHEET 2 — BACK (which is the right half of sheet 2) ============ */
+  /* We'll use sheet 2 as one full A5 landscape with 5 riddles in 2 columns */
+
+  /* SVG corner peony spray */
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     SHEET 1 — OUTSIDE (left = front cover, right = inside intro)
+     Print this side first, fold down the middle.
+     ============================================================ -->
+<div class="sheet">
+  <div class="bg-wash"></div>
+  <div class="bg-tile"></div>
+  <div class="frame"></div>
+  <div class="fold"></div>
+
+  <!-- corner peonies -->
+  <svg class="corner tl" viewBox="0 0 100 100">
+    <g fill="none" stroke="#b91c4b" stroke-width="1.5" opacity="0.7">
+      <circle cx="22" cy="22" r="14"/>
+      <circle cx="22" cy="22" r="6" fill="#b91c4b" opacity="0.5"/>
+      <path d="M22 0 Q14 14 0 22"/>
+      <path d="M40 22 Q22 30 22 50"/>
+    </g>
+    <g fill="none" stroke="#2e7d5b" stroke-width="1.2" opacity="0.65">
+      <path d="M5 60 Q25 50 45 65 Q55 70 65 60"/>
+      <path d="M50 55 Q53 47 60 48 Q60 56 53 58 Z" fill="#2e7d5b" opacity="0.4"/>
+      <path d="M30 75 Q33 67 40 68 Q40 76 33 78 Z" fill="#2e7d5b" opacity="0.35"/>
+    </g>
+    <g fill="#b8860b" opacity="0.7">
+      <circle cx="65" cy="35" r="2"/>
+      <circle cx="75" cy="45" r="1.6"/>
+      <circle cx="58" cy="50" r="1.4"/>
+    </g>
+  </svg>
+  <svg class="corner tr" viewBox="0 0 100 100">
+    <g fill="none" stroke="#b91c4b" stroke-width="1.5" opacity="0.7">
+      <circle cx="22" cy="22" r="14"/>
+      <circle cx="22" cy="22" r="6" fill="#b91c4b" opacity="0.5"/>
+      <path d="M22 0 Q14 14 0 22"/>
+      <path d="M40 22 Q22 30 22 50"/>
+    </g>
+    <g fill="none" stroke="#2e7d5b" stroke-width="1.2" opacity="0.65">
+      <path d="M5 60 Q25 50 45 65 Q55 70 65 60"/>
+    </g>
+  </svg>
+  <svg class="corner bl" viewBox="0 0 100 100">
+    <g fill="none" stroke="#b91c4b" stroke-width="1.5" opacity="0.7">
+      <circle cx="22" cy="22" r="14"/>
+      <circle cx="22" cy="22" r="6" fill="#b91c4b" opacity="0.5"/>
+      <path d="M22 0 Q14 14 0 22"/>
+    </g>
+  </svg>
+  <svg class="corner br" viewBox="0 0 100 100">
+    <g fill="none" stroke="#b91c4b" stroke-width="1.5" opacity="0.7">
+      <circle cx="22" cy="22" r="14"/>
+      <circle cx="22" cy="22" r="6" fill="#b91c4b" opacity="0.5"/>
+      <path d="M22 0 Q14 14 0 22"/>
+    </g>
+  </svg>
+
+  <!-- FRONT COVER -->
+  <div class="front">
+    <div class="stamp">📜 Round 1.5 · For the Team</div>
+    <div class="from">A note from</div>
+    <div class="title">Bibik Rose</div>
+    <div class="zh">陈玫瑰 · 寄语</div>
+    <div class="opening">Dear cousin, dear friend, dear stranger at our table — once you've placed every face on the tree, sit down with me. I have five things to whisper that the cards alone will not say. None of it is straight. All of it is true. 🌺</div>
+    <div class="signoff">— Bibi 🌺</div>
+    <div class="meta">read me · second · after the matching round</div>
+  </div>
+
+  <!-- INSIDE INTRO -->
+  <div class="intro">
+    <h2>Read me twice.</h2>
+    <div class="sub">Hints · not Answers</div>
+    <p>I will not name a single person. I am not allowed to.</p>
+    <p>But every line I whisper here <strong>fits next to a line on a card</strong>. When the card and my whisper meet, an answer falls out. That is how secrets travel in a Nyonya house — never alone, never direct.</p>
+    <div class="rule">
+      <b>How to play:</b> on the worksheet there is a column called <b>“5 Special Relationships”</b>. Each of my five riddles points to one. <em>Look at the cards you placed. Find the line that completes mine.</em> Then write the names in.
+    </div>
+    <p style="margin-top:4mm; font-style:italic; color:var(--rose); font-size:9pt;">
+      ✦ Card alone? Half the truth.<br>
+      ✦ My note alone? A pretty riddle.<br>
+      ✦ Both together? The whole story. ✦
+    </p>
+  </div>
+</div>
+
+<!-- ============================================================
+     SHEET 2 — INSIDE SPREAD (5 riddles, 2 columns)
+     Print on the back of sheet 1 so when folded, the riddles
+     are revealed when the card opens.
+     ============================================================ -->
+<div class="sheet">
+  <div class="bg-wash"></div>
+  <div class="bg-tile"></div>
+  <div class="frame"></div>
+  <div class="fold"></div>
+
+  <svg class="corner tl" viewBox="0 0 100 100">
+    <g fill="none" stroke="#b91c4b" stroke-width="1.5" opacity="0.65">
+      <circle cx="22" cy="22" r="14"/>
+      <circle cx="22" cy="22" r="6" fill="#b91c4b" opacity="0.4"/>
+    </g>
+  </svg>
+  <svg class="corner br" viewBox="0 0 100 100">
+    <g fill="none" stroke="#b91c4b" stroke-width="1.5" opacity="0.65">
+      <circle cx="22" cy="22" r="14"/>
+      <circle cx="22" cy="22" r="6" fill="#b91c4b" opacity="0.4"/>
+    </g>
+  </svg>
+
+  <div class="riddles-page">
+
+    <div class="header">
+      <h2>Five Whispers from Bibi 🌺</h2>
+      <div class="sub">Each whisper meets one card · together they name a relationship</div>
+    </div>
+
+    <!-- ① STEP-MOTHER (Chen Neo → Khoo Chin Nam's grown son) -->
+    <div class="riddle">
+      <div class="num">①</div>
+      <div class="quote">A girl of twenty-three was sent south in a wedding palanquin in November 1948. The man waiting for her at the Singapore pier had grown sons of his own. Eleven months later she sat in a white kebaya at his table — and on the other side sat a man older than herself who, by paper, was now <i>her child</i>. She never corrected him when he called her by her given name.</div>
+      <div class="hint"><b>Pair me with:</b> the bead-sister card and the Singapore tycoon card. The relationship column = <b>?</b></div>
+    </div>
+
+    <!-- ② HIDDEN SON (Mei Lan → Ah Cai) -->
+    <div class="riddle">
+      <div class="num">②</div>
+      <div class="quote">She cooked for two hundred weddings and was never seated at one. There was a boy who slept on a mat by the back stove and never went to school. The dock kulis called him <i>«the small auntie's boy»</i>. He walked into the jungle with the resistance in September of forty-five and the empty plate on the kitchen shelf has been hers ever since.</div>
+      <div class="hint"><b>Pair me with:</b> the kitchen woman in the pale-jade kebaya and the boy whose dates end with a question mark. The relationship column = <b>?</b></div>
+    </div>
+
+    <!-- ③ RAISED-BY AUNT (Eng Hooi's baby → Eng Neo) -->
+    <div class="riddle">
+      <div class="num">③</div>
+      <div class="quote">Mother Yap had <i>three</i> daughters. Only two ever stood at an altar. The third left a cradle behind on a December dawn in 1923. The cradle was carried into the Lee house and rocked by hands that called the baby <i>«ours»</i>. The brooch under her wedding kebaya was small and gold-edged. The auntie who fastened it said only: <i>«this was your mother's.»</i></div>
+      <div class="hint"><b>Pair me with:</b> the middle Yap sister card and the daughter who married into the Tans in 1947. The relationship column = <b>?</b></div>
+    </div>
+
+    <!-- ④ WATCH-KEEPER BY GENTLENESS (Soon Heng holds it, not Albert) -->
+    <div class="riddle">
+      <div class="num">④</div>
+      <div class="quote">Two brothers stood in their father's study on a 21st birthday. By the old rule the brass thing should have gone to the youngest. But the father had quietly amended the rule the year both boys were small: <i>«it goes to the gentler one.»</i> The elder wound it every morning at six for fifty-five years. The younger built a shipping empire and never once asked for it back.</div>
+      <div class="hint"><b>Pair me with:</b> the heritage-architect father and the late towkay brother. The relationship column = <b>?</b></div>
+    </div>
+
+    <!-- ⑤ KITCHEN MENTOR & BLOOD (Mei Lan → Soo Hui, niece) -->
+    <div class="riddle">
+      <div class="num">⑤</div>
+      <div class="quote">A sixteen-year-old girl arrived from Ipoh in 1982 with a school exercise book and one question: <i>«Auntie, may I write down what your hands do?»</i> She sat on the low stool for ten years. In 1992 she published a cookbook and dedicated it to <i>«the woman the family forgot to name.»</i> What the family did not yet know — what only the auntie knew — was that the girl was her own brother's daughter.</div>
+      <div class="hint"><b>Pair me with:</b> the kitchen woman in the pale-jade kebaya and the wife of the heritage architect. The relationship column = <b>?</b></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- print instructions (screen only) -->
+<div style="max-width:210mm; margin:14px auto; color:#d4c5a0; font-size:11px; text-align:center; font-family:Georgia,serif;">
+  📄 Print both sheets · A5 landscape · double-sided (flip on long edge) · fold down the middle along ✂. <br>
+  Sheet 1 = front cover + inside intro · Sheet 2 = inside spread with 5 riddles. <br>
+  When closed, the team sees only the rose-coloured front cover. When opened, all 5 whispers appear.
+</div>
+
+</body>
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Item Cards · 5 × 5 + 1 wildcard = 26</title>
+<!--
+  PRINT: A4 portrait · 4 cards per sheet · 7 sheets = 28 cards (26 used + 2 spares).
+
+  Five physical item types (you own one of each):
+    🌹 Kerongsang   — three-piece nyonya brooch (Lee wears the full set tonight)
+    👘 Baju Kebaya  — embroidered nyonya blouse
+    🏺 Kamcheng     — covered porcelain wedding jar (the altar piece)
+    🍱 Tingkat      — tiered tiffin carrier
+    ⌚ Jam Saku     — gold pocket watch on a chain (the towkay's piece)
+
+  Wildcard: 🃏 Cherki — Peranakan card game; whoever draws it joins any team.
+
+  Distribution (26 cards total):
+    Sheet 1 = 4 × Kerongsang
+    Sheet 2 = 1 × Kerongsang + 3 × Kebaya
+    Sheet 3 = 2 × Kebaya  + 2 × Kamcheng
+    Sheet 4 = 3 × Kamcheng + 1 × Tingkat
+    Sheet 5 = 4 × Tingkat
+    Sheet 6 = 4 × Jam Saku
+    Sheet 7 = 1 × Jam Saku + 1 × Cherki + 2 spares
+  → 5 + 5 + 5 + 5 + 5 + 1 = 26 ✓
+-->
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  :root {
+    --cream:#f6ecd2; --paper:#fbf4dd;
+    --ink:#3a2418; --gold:#b8860b; --gold-2:#d4a73c;
+    --jade:#2e7d5b; --rose:#b91c4b; --tan:#8b5a2b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background:#2a1810; font-family:'Georgia','Times New Roman',serif; color:var(--ink); }
+  body { padding: 14px; }
+  @media print { body { padding: 0; background: white; } }
+
+  .page {
+    width: 210mm; height: 297mm; margin: 0 auto 14px;
+    background: white; padding: 6mm; position: relative;
+    page-break-after: always;
+    box-shadow: 0 14px 36px rgba(0,0,0,0.5);
+  }
+  @media print { .page { box-shadow: none; margin: 0; } }
+  .page:last-child { page-break-after: auto; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 4mm;
+    width: 100%; height: 100%;
+  }
+
+  .card {
+    background:
+      radial-gradient(ellipse at 12% 8%, rgba(184,134,11,0.12), transparent 55%),
+      radial-gradient(ellipse at 88% 92%, rgba(185,28,75,0.12), transparent 55%),
+      var(--cream);
+    border: 1.5px dashed var(--tan);
+    border-radius: 3mm;
+    padding: 5.5mm 6.5mm;
+    position: relative; overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .card::before { content:''; position:absolute; inset:2.5mm; border:2px double var(--rose); border-radius:2mm; pointer-events:none; }
+  .card::after  { content:''; position:absolute; inset:4mm; border:0.8px solid var(--gold); border-radius:1.5mm; pointer-events:none; }
+
+  .top {
+    text-align: center;
+    border-bottom: 1px dashed var(--rose);
+    padding-bottom: 2mm; margin-bottom: 2.5mm;
+    position: relative; z-index: 1;
+  }
+  .top .stamp {
+    display: inline-block; padding: 0.7mm 3.5mm;
+    background: var(--rose); color: var(--cream);
+    border-radius: 1mm; font-style: italic; letter-spacing: 3px;
+    font-size: 6.8pt; transform: rotate(-1deg);
+  }
+  .icon {
+    font-size: 32pt; line-height: 1;
+    margin: 2.5mm 0 1mm;
+    text-shadow: 1.5px 1.5px 0 rgba(184,134,11,0.4);
+  }
+  .name {
+    font-family:'Brush Script MT',cursive;
+    color: var(--rose); font-size: 26pt; line-height: 1;
+    text-shadow: 1.3px 1.3px 0 var(--gold);
+  }
+  .en {
+    color: var(--tan); font-style: italic;
+    font-size: 8.5pt; margin-top: 1mm;
+    letter-spacing: 1.5px;
+  }
+  .zh {
+    color: var(--jade); font-size: 10pt;
+    letter-spacing: 4px; margin-top: 0.8mm;
+  }
+
+  .lead {
+    font-size: 9pt; line-height: 1.4;
+    color: var(--ink); margin-bottom: 2mm;
+    position: relative; z-index: 1;
+    text-align: center;
+  }
+  .lead .you { font-family:'Brush Script MT',cursive; color: var(--jade); font-size: 13pt; line-height: 1; }
+  .lead .what { font-weight: bold; color: var(--rose); font-size: 10.5pt; }
+
+  .body {
+    flex: 1;
+    background: var(--paper);
+    border-left: 3px solid var(--rose);
+    border-radius: 1mm;
+    padding: 3mm 4mm;
+    font-size: 9.2pt; line-height: 1.55;
+    color: var(--ink);
+    text-align: justify; hyphens: auto;
+    position: relative; z-index: 1;
+  }
+  .body p { margin-bottom: 1.5mm; }
+  .body p:last-child { margin-bottom: 0; }
+  .body strong { color: var(--rose); }
+  .body em { color: var(--jade); font-style: italic; }
+  .body .clue { display: block; margin-top: 1.5mm; padding-top: 1.5mm; border-top: 0.5px dashed var(--tan); font-style: italic; color: var(--tan); font-size: 8.6pt; }
+  .body .clue strong { color: var(--rose); font-style: normal; }
+  .body .def { font-size: 7.7pt; line-height: 1.4; color: var(--tan); font-style: italic; padding-top: 1.4mm; margin-top: 1.5mm; border-top: 0.5px dashed var(--tan); }
+  .body .def strong { color: var(--rose); font-style: normal; }
+  .body .lore { font-size: 8.8pt; line-height: 1.5; padding-top: 1.5mm; margin-top: 1.5mm; border-top: 0.5px dashed var(--rose); color: var(--ink); }
+  .body .lore strong { color: var(--rose); }
+  .body .lore em { color: var(--jade); font-style: italic; }
+
+  .seat {
+    margin-top: 2mm;
+    background: rgba(46,125,91,0.10);
+    border: 1px dashed var(--jade); border-radius: 1.5mm;
+    padding: 1.8mm 3mm;
+    font-size: 7.8pt; color: var(--ink); line-height: 1.4;
+    position: relative; z-index: 1;
+    text-align: center;
+  }
+  .seat .lab { font-family:'Brush Script MT',cursive; color: var(--jade); font-size: 10pt; line-height: 1; display: block; margin-bottom: 0.3mm; }
+  .seat strong { color: var(--rose); }
+
+  .card.wild {
+    background:
+      radial-gradient(ellipse at 12% 8%, rgba(185,28,75,0.18), transparent 55%),
+      radial-gradient(ellipse at 88% 92%, rgba(184,134,11,0.18), transparent 55%),
+      var(--cream);
+  }
+  .card.wild::before { border-color: var(--gold); }
+  .card.wild .top .stamp { background: var(--gold); color: var(--ink); }
+</style></head>
+<body>
+
+<!-- ========== SHEET 1 · 4 × KERONGSANG ========== -->
+<div class="page"><div class="grid">
+
+  <div class="card">
+    <div class="top"><span class="stamp">★ YOUR ITEM · YOUR SEAT ★</span><div class="icon">🌹</div><div class="name">Kerongsang</div><div class="en">three-piece nyonya brooch</div><div class="zh">克朗讓</div></div>
+    <div class="lead"><span class="you">The item you have is —</span><br><span class="what">Kerongsang</span> · a <strong>set of three brooches</strong> that pin a nyonya kebaya shut at the throat.</div>
+    <div class="body"><p class="def">A <strong>kerongsang</strong> is a traditional, usually three-piece set of decorative brooches used to fasten the front of a <em>Nyonya kebaya</em> or <em>Malay baju kurung</em>. Often made of gold or silver with intricate filigree, it symbolised a family's <strong>wealth and heritage</strong>.</p><p class="lore"><strong>The Yap sisters' kerongsang —</strong> The three Yap sisters of <strong>Beach Street goldsmith house</strong> were called the <em>Three Golden Orchids 三朵金蘭</em>. Their mother had <strong>three gold kerongsang</strong> made — the eldest received the <em>Ibu</em> (the big mother-brooch), and the two younger sisters each kept one <em>Anak</em>. A full set is normally two Ibu and three Anak; theirs was the smaller half, deliberately. <em>"No matter how far you walk,"</em> she told them, <em>"your sister is your closest backbone."</em></p></div>
+    <div class="seat"><span class="lab">Find your team —</span> one Kebaya 👘 · one Kamcheng 🏺 · one Tingkat 🍱 · one Jam Saku ⌚</div>
+  </div>
+
+  <div class="card">
+    <div class="top"><span class="stamp">★ YOUR ITEM · YOUR SEAT ★</span><div class="icon">🌹</div><div class="name">Kerongsang</div><div class="en">three-piece nyonya brooch</div><div class="zh">克朗讓</div></div>
+    <div class="lead"><span class="you">The item you have is —</span><br><span class="what">Kerongsang</span> · a <strong>set of three brooches</strong> that pin a nyonya kebaya shut at the throat.</div>
+    <div class="body"><p class="def">A <strong>kerongsang</strong> is a traditional, usually three-piece set of decorative brooches used to fasten the front of a <em>Nyonya kebaya</em> or <em>Malay baju kurung</em>. Often made of gold or silver with intricate filigree, it symbolised a family's <strong>wealth and heritage</strong>.</p><p class="lore"><strong>The Yap sisters' kerongsang —</strong> The three Yap sisters of <strong>Beach Street goldsmith house</strong> were called the <em>Three Golden Orchids 三朵金蘭</em>. Their mother had <strong>three gold kerongsang</strong> made — the eldest received the <em>Ibu</em> (the big mother-brooch), and the two younger sisters each kept one <em>Anak</em>. A full set is normally two Ibu and three Anak; theirs was the smaller half, deliberately. <em>"No matter how far you walk,"</em> she told them, <em>"your sister is your closest backbone."</em></p></div>
+    <div class="seat"><span class="lab">Find your team —</span> one Kebaya 👘 · one Kamcheng 🏺 · one Tingkat 🍱 · one Jam Saku ⌚</div>
+  </div>
+
+  <div class="card">
+    <div class="top"><span class="stamp">★ YOUR ITEM · YOUR SEAT ★</span><div class="icon">🌹</div><div class="name">Kerongsang</div><div class="en">three-piece nyonya brooch</div><div class="zh">克朗讓</div></div>
+    <div class="lead"><span class="you">The item you have is —</span><br><span class="what">Kerongsang</span> · a <strong>set of three brooches</strong> that pin a nyonya kebaya shut at the throat.</div>
+    <div class="body"><p class="def">A <strong>kerongsang</strong> is a traditional, usually three-piece set of decorative brooches used to fasten the front of a <em>Nyonya kebaya</em> or <em>Malay baju kurung</em>. Often made of gold or silver with intricate filigree, it symbolised a family's <strong>wealth and heritage</strong>.</p><p class="lore"><strong>The Yap sisters' kerongsang —</strong> The three Yap sisters of <strong>Beach Street goldsmith house</strong> were called the <em>Three Golden Orchids 三朵金蘭</em>. Their mother had <strong>three gold kerongsang</strong> made — the eldest received the <em>Ibu</em> (the big mother-brooch), and the two younger sisters each kept one <em>Anak</em>. A full set is normally two Ibu and three Anak; theirs was the smaller half, deliberately. <em>"No matter how far you walk,"</em> she told them, <em>"your sister is your closest backbone."</em></p></div>
+    <div class="seat"><span class="lab">Find your team —</span> one Kebaya 👘 · one Kamcheng 🏺 · one Tingkat 🍱 · one Jam Saku ⌚</div>
+  </div>
+
+  <div class="card">
+    <div class="top"><span class="stamp">★ YOUR ITEM · YOUR SEAT ★</span><div class="icon">🌹</div><div class="name">Kerongsang</div><div class="en">three-piece nyonya brooch</div><div class="zh">克朗讓</div></div>
+    <div class="lead"><span class="you">The item you have is —</span><br><span class="what">Kerongsang</span> · a <strong>set of three brooches</strong> that pin a nyonya kebaya shut at the throat.</div>
+    <div class="body"><p class="def">A <strong>kerongsang</strong> is a traditional, usually three-piece set of decorative brooches used to fasten the front of a <em>Nyonya kebaya</em> or <em>Malay baju kurung</em>. Often made of gold or silver with intricate filigree, it symbolised a family's <strong>wealth and heritage</strong>.</p><p class="lore"><strong>The Yap sisters' kerongsang —</strong> The three Yap sisters of <strong>Beach Street goldsmith house</strong> were called the <em>Three Golden Orchids 三朵金蘭</em>. Their mother had <strong>three gold kerongsang</strong> made — the eldest received the <em>Ibu</em> (the big mother-brooch), and the two younger sisters each kept one <em>Anak</em>. A full set is normally two Ibu and three Anak; theirs was the smaller half, deliberately. <em>"No matter how far you walk,"</em> she told them, <em>"your sister is your closest backbone."</em></p></div>
+    <div class="seat"><span class="lab">Find your team —</span> one Kebaya 👘 · one Kamcheng 🏺 · one Tingkat 🍱 · one Jam Saku ⌚</div>
+  </div>
+
+</div></div>
+
+<!-- ========== SHEET 2 · 1 × KERONGSANG + 3 × KEBAYA ========== -->
+<div class="page"><div class="grid">
+
+  <div class="card">
+    <div class="top"><span class="stamp">★ YOUR ITEM · YOUR SEAT ★</span><div class="icon">🌹</div><div class="name">Kerongsang</div><div class="en">three-piece nyonya brooch</div><div class="zh">克朗讓</div></div>
+    <div class="lead"><span class="you">The item you have is —</span><br><span class="what">Kerongsang</span> · a <strong>set of three brooches</strong> that pin a nyonya kebaya shut at the throat.</div>
+    <div class="body"><p class="def">A <strong>kerongsang</strong> is a traditional, usually three-piece set of decorative brooches used to fasten the front of a <em>Nyonya kebaya</em> or <em>Malay baju kurung</em>. Often made of gold or silver with intricate filigree, it symbolised a family's <strong>wealth and heritage</strong>.</p><p class="lore"><strong>The Yap sisters' kerongsang —</strong> The three Yap sisters of <strong>Beach Street goldsmith house</strong> were called the <em>Three Golden Orchids 三朵金蘭</em>. Their mother had <strong>three gold kerongsang</strong> made — the eldest received the <em>Ibu</em> (the big mother-brooch), and the two younger sisters each kept one <em>Anak</em>. A full set is normally two Ibu and three Anak; theirs was the smaller half, deliberately. <em>"No matter how far you walk,"</em> she told them, <em>"your sister is your closest backbone."</em></p></div>
+    <div class="seat"><span class="lab">Find your team —</span> one Kebaya 👘 · one Kamcheng 🏺 · one Tingkat 🍱 · one Jam Saku ⌚</div>
+  </div>
+
+  <div class="card">
+    <div class="top"><span class="stamp">★ YOUR ITEM · YOUR SEAT ★</span><div class="icon">👘</div><div class="name">Baju Kebaya</div><div class="en">embroidered nyonya blouse</div><div class="zh">娘惹衫</div></div>
+    <div class="lead"><span class="you">The item you have is —</span><br><span class="what">Baju Kebaya</span> · a <strong>fitted, embroidered nyonya blouse</strong> worn over a sarong.</div>
+    <div class="body"><p>Sheer voile, cut close to the body, hand-embroidered along the front opening, cuffs and hem with peonies, butterflies and vines. It opens at the front and is pinned shut at the throat with the <em>kerongsang</em>. The kebaya is <strong>the dress of the front rooms</strong>: tok panjang dinners, weddings, temple visits, and the photographs the grandchildren keep.</p><span class="clue"><strong>Tonight's clue —</strong> Auntie Mei wore one pale jade kebaya for seventy years, with a sambal stain at the hem that never came out.</span></div>
+    <div class="seat"><span class="lab">Find your team —</span> one Kerongsang 🌹 · one Kamcheng 🏺 · one Tingkat 🍱 · one Jam Saku ⌚</div>
+  </div>
+
+  <div class="card">
+    <div class="top"><span class="stamp">★ YOUR ITEM · YOUR SEAT ★</span><div class="icon">👘</div><div class="name">Baju Kebaya</div><div class="en">embroidered nyonya blouse</div><div class="zh">娘惹衫</div></div>
+    <div class="lead"><span class="you">The item you have is —</span><br><span class="what">Baju Kebaya</span> · a <strong>fitted, embroidered nyonya blouse</strong> worn over a sarong.</div>
+    <div class="body"><p>Sheer voile, cut close to the body, hand-embroidered along the front opening, cuffs and hem with peonies, butterflies and vines. It opens at the front and is pinned shut at the throat with the <em>kerongsang</em>. The kebaya is <strong>the dress of the front rooms</strong>: tok panjang dinners, weddings, temple visits, and the photographs the grandchildren keep.</p><span class="clue"><strong>Tonight's clue —</strong> Auntie Mei wore one pale jade kebaya for seventy years, with a sambal stain at the hem that never came out.</span></div>
+    <div class="seat"><span class="lab">Find your team —</span> one Kerongsang 🌹 · one Kamcheng 🏺 · one Tingkat 🍱 · one Jam Saku ⌚</div>
+  </div>
+
+  <div class="card">
+    <div class="top"><span class="stamp">★ YOUR ITEM · YOUR SEAT ★</span><div class="icon">👘</div><div class="name">Baju Kebaya</div><div class="en">embroidered nyonya blouse</div><div class="zh">娘惹衫</div></div>
+    <div class="lead"><span class="you">The item you have is —</span><br><span class="what">Baju Kebaya</span> · a <strong>fitted, embroidered nyonya blouse</strong> worn over a sarong.</div>
+    <div class="body"><p>Sheer voile, cut close to the body, hand-embroidered along the front opening, cuffs and hem with peonies, butterflies and vines. It opens at the front and is pinned shut at the throat with the <em>kerongsang</em>. The kebaya is <strong>the dress of the front rooms</strong>: tok panjang dinners, weddings, temple visits, and the photographs the grandchildren keep.</p><span class="clue"><strong>Tonight's clue —</strong> Auntie Mei wore one pale jade kebaya for seventy years, with a sambal stain at the hem that never came out.</span></div>
+    <div class="seat"><span class="lab">Find your team —</span> one Kerongsang 🌹 · one Kamcheng 🏺 · one Tingkat 🍱 · one Jam Saku ⌚</div>
+  </div>
+
+</div></div>
+
+<!-- ========== SHEET 3 · 2 × KEBAYA + 2 × KAMCHENG ========== -->
+<div class="page"><div class="grid">
+
+  <div class="card">
+    <div class="top"><span class="stamp">★ YOUR ITEM · YOUR SEAT ★</span><div class="icon">👘</div><div class="name">Baju Kebaya</div><div class="en">embroidered nyonya blouse</div><div class="zh">娘惹衫</div></div>
+    <div class="lead"><span class="you">The item you have is —</span><br><span class="what">Baju Kebaya</span> · a <strong>fitted, embroidered nyonya blouse</strong> worn over a sarong.</div>
+    <div class="body"><p>Sheer voile, cut close to the body, hand-embroidered along the front opening, cuffs and hem with peonies, butterflies and vines. It opens at the front and is pinned shut at the throat with the <em>kerongsang</em>. The kebaya is <strong>the dress of the front rooms</strong>: tok panjang dinners, weddings, temple visits, and the photographs the grandchildren keep.</p><span class="clue"><strong>Tonight's clue —</strong> Auntie Mei wore one pale jade kebaya for seventy years, with a sambal stain at the hem that never came out.</span></div>
+    <div class="seat"><span class="lab">Find your team —</span> one Kerongsang 🌹 · one Kamcheng 🏺 · one Tingkat 🍱 · one Jam Saku ⌚</div>
+  </div>
+
+  <div class="card">
+    <div class="top"><span class="stamp">★ YOUR ITEM · YOUR SEAT ★</span><div class="icon">👘</div><div class="name">Baju Kebaya</div><div class="en">embroidered nyonya blouse</div><div class="zh">娘惹衫</div></div>
+    <div class="lead"><span class="you">The item you have is —</span><br><span class="what">Baju Kebaya</span> · a <strong>fitted, embroidered nyonya blouse</strong> worn over a sarong.</div>
+    <div class="body"><p>Sheer voile, cut close to the body, hand-embroidered along the front opening, cuffs and hem with peonies, butterflies and vines. It opens at the front and is pinned shut at the throat with the <em>kerongsang</em>. The kebaya is <strong>the dress of the front rooms</strong>: tok panjang dinners, weddings, temple visits, and the photographs the grandchildren keep.</p><span class="clue"><strong>Tonight's clue —</strong> Auntie Mei wore one pale jade kebaya for seventy years, with a sambal stain at the hem that never came out.</span></div>
+    <div class="seat"><span class="lab">Find your team —</span> one Kerongsang 🌹 · one Kamcheng 🏺 · one Tingkat 🍱 · one Jam Saku ⌚</div>
+  </div>
+
+  <div class="card">
+    <div class="top"><span class="stamp">★ YOUR ITEM · YOUR SEAT ★</span><div class="icon">🏺</div><div class="name">Kamcheng</div><div class="en">covered porcelain wedding jar</div><div class="zh">柑曾</div></div>
+    <div class="lead"><span class="you">The item you have is —</span><br><span class="what">Kamcheng</span> · a <strong>round lidded porcelain jar</strong> given to a Peranakan bride.</div>
+    <div class="body"><p>Painted with phoenix and peony in pink, green and gold, the kamcheng was filled on the wedding day with <strong>sweet glutinous-rice dumplings, <em>tang yuan 湯圓</em></strong> — round and complete, like the love the family was wishing into the marriage. The bigger the jar, the louder the hope.</p><span class="clue"><strong>Tonight's clue —</strong> our Tua-Ma carried a kamcheng of <strong>nine sweet dumplings</strong> into the Tan house in 1898. There was no mother-in-law above her, so from her first morning, <em>she was the one who ran the household</em>.</span></div>
+    <div class="seat"><span class="lab">Find your team —</span> one Kerongsang 🌹 · one Kebaya 👘 · one Tingkat 🍱 · one Jam Saku ⌚</div>
+  </div>
+
+  <div class="card">
+    <div class="top"><span class="stamp">★ YOUR ITEM · YOUR SEAT ★</span><div class="icon">🏺</div><div class="name">Kamcheng</div><div class="en">covered porcelain wedding jar</div><div class="zh">柑曾</div></div>
+    <div class="lead"><span class="you">The item you have is —</span><br><span class="what">Kamcheng</span> · a <strong>round lidded porcelain jar</strong> given to a Peranakan bride.</div>
+    <div class="body"><p>Painted with phoenix and peony in pink, green and gold, the kamcheng was filled on the wedding day with <strong>sweet glutinous-rice dumplings, <em>tang yuan 湯圓</em></strong> — round and complete, like the love the family was wishing into the marriage. The bigger the jar, the louder the hope.</p><span class="clue"><strong>Tonight's clue —</strong> our Tua-Ma carried a kamcheng of <strong>nine sweet dumplings</strong> into the Tan house in 1898. There was no mother-in-law above her, so from her first morning, <em>she was the one who ran the household</em>.</span></div>
+    <div class="seat"><span class="lab">Find your team —</span> one Kerongsang 🌹 · one Kebaya 👘 · one Tingkat 🍱 · one Jam Saku ⌚</div>
+  </div>
+
+</div></div>
+
+<!-- ========== SHEET 4 · 3 × KAMCHENG + 1 × TINGKAT ========== -->
+<div class="page"><div class="grid">
+
+  <div class="card">
+    <div class="top"><span class="stamp">★ YOUR ITEM · YOUR SEAT ★</span><div class="icon">🏺</div><div class="name">Kamcheng</div><div class="en">covered porcelain wedding jar</div><div class="zh">柑曾</div></div>
+    <div class="lead"><span class="you">The item you have is —</span><br><span class="what">Kamcheng</span> · a <strong>round lidded porcelain jar</strong> given to a Peranakan bride.</div>
+    <div class="body"><p>Painted with phoenix and peony in pink, green and gold, the kamcheng was filled on the wedding day with <strong>sweet glutinous-rice dumplings, <em>tang yuan 湯圓</em></strong> — round and complete, like the love the family was wishing into the marriage. The bigger the jar, the louder the hope.</p><span class="clue"><strong>Tonight's clue —</strong> our Tua-Ma carried a kamcheng of <strong>nine sweet dumplings</strong> into the Tan house in 1898. There was no mother-in-law above her, so from her first morning, <em>she was the one who ran the household</em>.</span></div>
+    <div class="seat"><span class="lab">Find your team —</span> one Kerongsang 🌹 · one Kebaya 👘 · one Tingkat 🍱 · one Jam Saku ⌚</div>
+  </div>
+
+  <div class="card">
+    <div class="top"><span class="stamp">★ YOUR ITEM · YOUR SEAT ★</span><div class="icon">🏺</div><div class="name">Kamcheng</div><div class="en">covered porcelain wedding jar</div><div class="zh">柑曾</div></div>
+    <div class="lead"><span class="you">The item you have is —</span><br><span class="what">Kamcheng</span> · a <strong>round lidded porcelain jar</strong> given to a Peranakan bride.</div>
+    <div class="body"><p>Painted with phoenix and peony in pink, green and gold, the kamcheng was filled on the wedding day with <strong>sweet glutinous-rice dumplings, <em>tang yuan 湯圓</em></strong> — round and complete, like the love the family was wishing into the marriage. The bigger the jar, the louder the hope.</p><span class="clue"><strong>Tonight's clue —</strong> our Tua-Ma carried a kamcheng of <strong>nine sweet dumplings</strong> into the Tan house in 1898. There was no mother-in-law above her, so from her first morning, <em>she was the one who ran the household</em>.</span></div>
+    <div class="seat"><span class="lab">Find your team —</span> one Kerongsang 🌹 · one Kebaya 👘 · one Tingkat 🍱 · one Jam Saku ⌚</div>
+  </div>
+
+  <div class="card">
+    <div class="top"><span class="stamp">★ YOUR ITEM · YOUR SEAT ★</span><div class="icon">🏺</div><div class="name">Kamcheng</div><div class="en">covered porcelain wedding jar</div><div class="zh">柑曾</div></div>
+    <div class="lead"><span class="you">The item you have is —</span><br><span class="what">Kamcheng</span> · a <strong>round lidded porcelain jar</strong> given to a Peranakan bride.</div>
+    <div class="body"><p>Painted with phoenix and peony in pink, green and gold, the kamcheng was filled on the wedding day with <strong>sweet glutinous-rice dumplings, <em>tang yuan 湯圓</em></strong> — round and complete, like the love the family was wishing into the marriage. The bigger the jar, the louder the hope.</p><span class="clue"><strong>Tonight's clue —</strong> our Tua-Ma carried a kamcheng of <strong>nine sweet dumplings</strong> into the Tan house in 1898. There was no mother-in-law above her, so from her first morning, <em>she was the one who ran the household</em>.</span></div>
+    <div class="seat"><span class="lab">Find your team —</span> one Kerongsang 🌹 · one Kebaya 👘 · one Tingkat 🍱 · one Jam Saku ⌚</div>
+  </div>
+
+  <div class="card">
+    <div class="top"><span class="stamp">★ YOUR ITEM · YOUR SEAT ★</span><div class="icon">🍱</div><div class="name">Tingkat</div><div class="en">tiered tiffin carrier</div><div class="zh">食格</div></div>
+    <div class="lead"><span class="you">The item you have is —</span><br><span class="what">Tingkat</span> · a stack of enamel tins for <strong>carrying hot food</strong>.</div>
+    <div class="body"><p>Three or four round tins clipped together with a metal handle — one tin for rice, one for sambal, one for vegetables, one for soup. The tingkat is how a nyonya kitchen <strong>fed the people who were not at her table</strong> — the men at the wharf, the children at school, the cousins down the lane.</p><span class="clue"><strong>Tonight's clue —</strong> Auntie Mei packed one every morning for seventy-six years. Anyone who ever tasted her sambal still remembers.</span></div>
+    <div class="seat"><span class="lab">Find your team —</span> one Kerongsang 🌹 · one Kebaya 👘 · one Kamcheng 🏺 · one Jam Saku ⌚</div>
+  </div>
+
+</div></div>
+
+<!-- ========== SHEET 5 · 4 × TINGKAT ========== -->
+<div class="page"><div class="grid">
+
+  <div class="card">
+    <div class="top"><span class="stamp">★ YOUR ITEM · YOUR SEAT ★</span><div class="icon">🍱</div><div class="name">Tingkat</div><div class="en">tiered tiffin carrier</div><div class="zh">食格</div></div>
+    <div class="lead"><span class="you">The item you have is —</span><br><span class="what">Tingkat</span> · a stack of enamel tins for <strong>carrying hot food</strong>.</div>
+    <div class="body"><p>Three or four round tins clipped together with a metal handle — one tin for rice, one for sambal, one for vegetables, one for soup. The tingkat is how a nyonya kitchen <strong>fed the people who were not at her table</strong> — the men at the wharf, the children at school, the cousins down the lane.</p><span class="clue"><strong>Tonight's clue —</strong> Auntie Mei packed one every morning for seventy-six years. Anyone who ever tasted her sambal still remembers.</span></div>
+    <div class="seat"><span class="lab">Find your team —</span> one Kerongsang 🌹 · one Kebaya 👘 · one Kamcheng 🏺 · one Jam Saku ⌚</div>
+  </div>
+
+  <div class="card">
+    <div class="top"><span class="stamp">★ YOUR ITEM · YOUR SEAT ★</span><div class="icon">🍱</div><div class="name">Tingkat</div><div class="en">tiered tiffin carrier</div><div class="zh">食格</div></div>
+    <div class="lead"><span class="you">The item you have is —</span><br><span class="what">Tingkat</span> · a stack of enamel tins for <strong>carrying hot food</strong>.</div>
+    <div class="body"><p>Three or four round tins clipped together with a metal handle — one tin for rice, one for sambal, one for vegetables, one for soup. The tingkat is how a nyonya kitchen <strong>fed the people who were not at her table</strong> — the men at the wharf, the children at school, the cousins down the lane.</p><span class="clue"><strong>Tonight's clue —</strong> Auntie Mei packed one every morning for seventy-six years. Anyone who ever tasted her sambal still remembers.</span></div>
+    <div class="seat"><span class="lab">Find your team —</span> one Kerongsang 🌹 · one Kebaya 👘 · one Kamcheng 🏺 · one Jam Saku ⌚</div>
+  </div>
+
+  <div class="card">
+    <div class="top"><span class="stamp">★ YOUR ITEM · YOUR SEAT ★</span><div class="icon">🍱</div><div class="name">Tingkat</div><div class="en">tiered tiffin carrier</div><div class="zh">食格</div></div>
+    <div class="lead"><span class="you">The item you have is —</span><br><span class="what">Tingkat</span> · a stack of enamel tins for <strong>carrying hot food</strong>.</div>
+    <div class="body"><p>Three or four round tins clipped together with a metal handle — one tin for rice, one for sambal, one for vegetables, one for soup. The tingkat is how a nyonya kitchen <strong>fed the people who were not at her table</strong> — the men at the wharf, the children at school, the cousins down the lane.</p><span class="clue"><strong>Tonight's clue —</strong> Auntie Mei packed one every morning for seventy-six years. Anyone who ever tasted her sambal still remembers.</span></div>
+    <div class="seat"><span class="lab">Find your team —</span> one Kerongsang 🌹 · one Kebaya 👘 · one Kamcheng 🏺 · one Jam Saku ⌚</div>
+  </div>
+
+  <div class="card">
+    <div class="top"><span class="stamp">★ YOUR ITEM · YOUR SEAT ★</span><div class="icon">🍱</div><div class="name">Tingkat</div><div class="en">tiered tiffin carrier</div><div class="zh">食格</div></div>
+    <div class="lead"><span class="you">The item you have is —</span><br><span class="what">Tingkat</span> · a stack of enamel tins for <strong>carrying hot food</strong>.</div>
+    <div class="body"><p>Three or four round tins clipped together with a metal handle — one tin for rice, one for sambal, one for vegetables, one for soup. The tingkat is how a nyonya kitchen <strong>fed the people who were not at her table</strong> — the men at the wharf, the children at school, the cousins down the lane.</p><span class="clue"><strong>Tonight's clue —</strong> Auntie Mei packed one every morning for seventy-six years. Anyone who ever tasted her sambal still remembers.</span></div>
+    <div class="seat"><span class="lab">Find your team —</span> one Kerongsang 🌹 · one Kebaya 👘 · one Kamcheng 🏺 · one Jam Saku ⌚</div>
+  </div>
+
+</div></div>
+
+<!-- ========== SHEET 6 · 4 × JAM SAKU ========== -->
+<div class="page"><div class="grid">
+
+  <div class="card">
+    <div class="top"><span class="stamp">★ YOUR ITEM · YOUR SEAT ★</span><div class="icon">⌚</div><div class="name">Jam Saku</div><div class="en">gold pocket watch on a chain</div><div class="zh">袋錶</div></div>
+    <div class="lead"><span class="you">The item you have is —</span><br><span class="what">Jam Saku</span> · a <strong>gold pocket watch on a long chain</strong>, the Baba's piece.</div>
+    <div class="body"><p>Where the nyonya wore her kerongsang at the throat, the <strong>Baba wore his jam saku at the waistcoat</strong> — chain looped across the front, watch tucked into a small pocket. It told the time of the godown, the wharf and the trading day. A father passed it to his eldest son the night before the wedding — the moment the house was handed over.</p><span class="clue"><strong>Tonight's clue —</strong> Tan Towkay's pocket watch still ticks. It has been wound by hand every Sunday morning for one hundred and twenty-eight years.</span></div>
+    <div class="seat"><span class="lab">Find your team —</span> one Kerongsang 🌹 · one Kebaya 👘 · one Kamcheng 🏺 · one Tingkat 🍱</div>
+  </div>
+
+  <div class="card">
+    <div class="top"><span class="stamp">★ YOUR ITEM · YOUR SEAT ★</span><div class="icon">⌚</div><div class="name">Jam Saku</div><div class="en">gold pocket watch on a chain</div><div class="zh">袋錶</div></div>
+    <div class="lead"><span class="you">The item you have is —</span><br><span class="what">Jam Saku</span> · a <strong>gold pocket watch on a long chain</strong>, the Baba's piece.</div>
+    <div class="body"><p>Where the nyonya wore her kerongsang at the throat, the <strong>Baba wore his jam saku at the waistcoat</strong> — chain looped across the front, watch tucked into a small pocket. It told the time of the godown, the wharf and the trading day. A father passed it to his eldest son the night before the wedding — the moment the house was handed over.</p><span class="clue"><strong>Tonight's clue —</strong> Tan Towkay's pocket watch still ticks. It has been wound by hand every Sunday morning for one hundred and twenty-eight years.</span></div>
+    <div class="seat"><span class="lab">Find your team —</span> one Kerongsang 🌹 · one Kebaya 👘 · one Kamcheng 🏺 · one Tingkat 🍱</div>
+  </div>
+
+  <div class="card">
+    <div class="top"><span class="stamp">★ YOUR ITEM · YOUR SEAT ★</span><div class="icon">⌚</div><div class="name">Jam Saku</div><div class="en">gold pocket watch on a chain</div><div class="zh">袋錶</div></div>
+    <div class="lead"><span class="you">The item you have is —</span><br><span class="what">Jam Saku</span> · a <strong>gold pocket watch on a long chain</strong>, the Baba's piece.</div>
+    <div class="body"><p>Where the nyonya wore her kerongsang at the throat, the <strong>Baba wore his jam saku at the waistcoat</strong> — chain looped across the front, watch tucked into a small pocket. It told the time of the godown, the wharf and the trading day. A father passed it to his eldest son the night before the wedding — the moment the house was handed over.</p><span class="clue"><strong>Tonight's clue —</strong> Tan Towkay's pocket watch still ticks. It has been wound by hand every Sunday morning for one hundred and twenty-eight years.</span></div>
+    <div class="seat"><span class="lab">Find your team —</span> one Kerongsang 🌹 · one Kebaya 👘 · one Kamcheng 🏺 · one Tingkat 🍱</div>
+  </div>
+
+  <div class="card">
+    <div class="top"><span class="stamp">★ YOUR ITEM · YOUR SEAT ★</span><div class="icon">⌚</div><div class="name">Jam Saku</div><div class="en">gold pocket watch on a chain</div><div class="zh">袋錶</div></div>
+    <div class="lead"><span class="you">The item you have is —</span><br><span class="what">Jam Saku</span> · a <strong>gold pocket watch on a long chain</strong>, the Baba's piece.</div>
+    <div class="body"><p>Where the nyonya wore her kerongsang at the throat, the <strong>Baba wore his jam saku at the waistcoat</strong> — chain looped across the front, watch tucked into a small pocket. It told the time of the godown, the wharf and the trading day. A father passed it to his eldest son the night before the wedding — the moment the house was handed over.</p><span class="clue"><strong>Tonight's clue —</strong> Tan Towkay's pocket watch still ticks. It has been wound by hand every Sunday morning for one hundred and twenty-eight years.</span></div>
+    <div class="seat"><span class="lab">Find your team —</span> one Kerongsang 🌹 · one Kebaya 👘 · one Kamcheng 🏺 · one Tingkat 🍱</div>
+  </div>
+
+</div></div>
+
+<!-- ========== SHEET 7 · 1 × JAM SAKU + 1 × CHERKI + 2 spares ========== -->
+<div class="page"><div class="grid">
+
+  <div class="card">
+    <div class="top"><span class="stamp">★ YOUR ITEM · YOUR SEAT ★</span><div class="icon">⌚</div><div class="name">Jam Saku</div><div class="en">gold pocket watch on a chain</div><div class="zh">袋錶</div></div>
+    <div class="lead"><span class="you">The item you have is —</span><br><span class="what">Jam Saku</span> · a <strong>gold pocket watch on a long chain</strong>, the Baba's piece.</div>
+    <div class="body"><p>Where the nyonya wore her kerongsang at the throat, the <strong>Baba wore his jam saku at the waistcoat</strong> — chain looped across the front, watch tucked into a small pocket. It told the time of the godown, the wharf and the trading day. A father passed it to his eldest son the night before the wedding — the moment the house was handed over.</p><span class="clue"><strong>Tonight's clue —</strong> Tan Towkay's pocket watch still ticks. It has been wound by hand every Sunday morning for one hundred and twenty-eight years.</span></div>
+    <div class="seat"><span class="lab">Find your team —</span> one Kerongsang 🌹 · one Kebaya 👘 · one Kamcheng 🏺 · one Tingkat 🍱</div>
+  </div>
+
+  <div class="card wild">
+    <div class="top"><span class="stamp">★ THE WILDCARD · OPEN SEAT ★</span><div class="icon">🃏</div><div class="name">Cherki</div><div class="en">·  the only wildcard in the room  ·</div><div class="zh">基里牌</div></div>
+    <div class="lead"><span class="you">The item you have is —</span><br><span class="what">Cherki</span> · the <strong>Peranakan ladies' card game</strong>, sixty narrow cards, played for hours after dinner.</div>
+    <div class="body"><p>Three or four nyonyas, one round table, a small bowl of <em>kuih</em>, a stack of coins, and a deck of cherki cards. The game ran from after dinner until the men came home. The aunties gossiped, scolded, laughed and dealt — and <strong>they always pulled in one more chair</strong> the moment another cousin walked in.</p><span class="clue"><strong>Tonight's clue —</strong> you are the <strong>26th</strong>. There are five teams of five — and there is you. <em>Choose any team. Walk over. Sit down. They cannot say no — that is the rule of the cherki table.</em></span></div>
+    <div class="seat" style="background:rgba(184,134,11,0.12); border-color:var(--gold);"><span class="lab" style="color:var(--gold);">Find your team —</span> pick the corner of the long table that needs your laughter most. Sit there.</div>
+  </div>
+
+  <div class="card">
+    <div class="top"><span class="stamp">★ SPARE · KEEP AT THE DOOR ★</span><div class="icon">🏺</div><div class="name">Kamcheng</div><div class="en">covered porcelain wedding jar</div><div class="zh">柑曾</div></div>
+    <div class="lead"><span class="you">The item you have is —</span><br><span class="what">Kamcheng</span> · a <strong>round lidded porcelain jar</strong> given to a Peranakan bride.</div>
+    <div class="body"><p>Painted with phoenix and peony in pink, green and gold, the kamcheng was filled on the wedding day with <strong>sweet glutinous-rice dumplings, <em>tang yuan 湯圓</em></strong> — round and complete, like the love the family was wishing into the marriage.</p><span class="clue"><strong>Tonight's clue —</strong> our Tua-Ma carried a kamcheng of nine sweet dumplings into the Tan house in 1898 — and from her first morning, she was the one who ran the household.</span></div>
+    <div class="seat"><span class="lab">Find your team —</span> one Kerongsang 🌹 · one Kebaya 👘 · one Tingkat 🍱 · one Jam Saku ⌚</div>
+  </div>
+
+  <div class="card">
+    <div class="top"><span class="stamp">★ SPARE · KEEP AT THE DOOR ★</span><div class="icon">🌹</div><div class="name">Kerongsang</div><div class="en">three-piece nyonya brooch</div><div class="zh">克朗讓</div></div>
+    <div class="lead"><span class="you">The item you have is —</span><br><span class="what">Kerongsang</span> · a <strong>set of three brooches</strong> that pin a nyonya kebaya shut at the throat.</div>
+    <div class="body"><p class="def">A <strong>kerongsang</strong> is a traditional, usually three-piece set of decorative brooches used to fasten the front of a <em>Nyonya kebaya</em> or <em>Malay baju kurung</em>. Often made of gold or silver with intricate filigree, it symbolised a family's <strong>wealth and heritage</strong>.</p><p class="lore"><strong>The Yap sisters' kerongsang —</strong> The three Yap sisters of <strong>Beach Street goldsmith house</strong> were called the <em>Three Golden Orchids 三朵金蘭</em>. Their mother had <strong>three gold kerongsang</strong> made — the eldest received the <em>Ibu</em> (the big mother-brooch), and the two younger sisters each kept one <em>Anak</em>. A full set is normally two Ibu and three Anak; theirs was the smaller half, deliberately. <em>"No matter how far you walk,"</em> she told them, <em>"your sister is your closest backbone."</em></p></div>
+    <div class="seat"><span class="lab">Find your team —</span> one Kebaya 👘 · one Kamcheng 🏺 · one Tingkat 🍱 · one Jam Saku ⌚</div>
+  </div>
+
+</div></div>
+
+</body></html>

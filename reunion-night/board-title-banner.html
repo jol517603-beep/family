@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Board Title Banner · Tan's Family Tree</title>
+<!--
+  PRINT: 1 × A4 LANDSCAPE · stick across the top of the blank foam board.
+  Chrome/Edge · Ctrl+P · Layout: Landscape · Margins NONE · Background graphics ON
+-->
+<style>
+  @page { size: A4 landscape; margin: 0; }
+  :root { --cream:#f6ecd2; --paper:#fbf4dd; --ink:#3a2418; --gold:#b8860b; --jade:#2e7d5b; --rose:#b91c4b; --tan:#8b5a2b; --soft:#e8dab5; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background:#2a1810; font-family:'Georgia','Times New Roman',serif; color:var(--ink); }
+  body { padding: 14px; }
+  @media print { body { padding: 0; background: white; } }
+  .page {
+    width: 297mm; height: 210mm; margin: 0 auto;
+    background:
+      radial-gradient(circle at 10% 20%, rgba(184,134,11,0.10), transparent 35%),
+      radial-gradient(circle at 90% 80%, rgba(46,125,91,0.10), transparent 35%),
+      var(--cream);
+    padding: 12mm; position: relative;
+    box-shadow: 0 14px 36px rgba(0,0,0,0.5);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  @media print { .page { box-shadow: none; margin: 0; } }
+  .page::before { content:''; position:absolute; inset:6mm; border:3px double var(--rose); border-radius:4mm; pointer-events:none; }
+  .page::after  { content:''; position:absolute; inset:9mm; border:1.5px solid var(--gold); border-radius:3mm; pointer-events:none; }
+
+  .top { text-align:center; position:relative; z-index:1; }
+  .eyebrow {
+    color: var(--rose); font-style: italic;
+    letter-spacing: 14px; font-size: 13pt;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 4mm;
+    display: inline-block;
+  }
+  h1 {
+    font-family: 'Brush Script MT', cursive;
+    color: var(--rose);
+    font-size: 130pt;
+    line-height: 1;
+    margin-top: 6mm;
+    text-shadow: 4px 4px 0 var(--gold), 8px 8px 18px rgba(0,0,0,0.18);
+    letter-spacing: 2px;
+  }
+  .chinese {
+    font-family: 'Songti SC','SimSun','Noto Serif SC',serif;
+    color: var(--ink);
+    font-size: 56pt;
+    letter-spacing: 16px;
+    margin-top: 4mm;
+    text-shadow: 2px 2px 0 var(--gold);
+  }
+  .pin-row {
+    display: flex; gap: 24mm;
+    margin-top: 8mm;
+    align-items: center;
+    color: var(--tan);
+  }
+  .pin-row .ornament {
+    width: 16mm; height: 16mm;
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, var(--paper), var(--soft));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18pt; color: var(--rose);
+  }
+  .tagline {
+    font-style: italic;
+    font-size: 14pt;
+    letter-spacing: 3px;
+    color: var(--tan);
+  }
+  .bottom {
+    position: absolute; bottom: 14mm; left: 0; right: 0;
+    text-align: center;
+    color: var(--tan);
+    font-style: italic;
+    font-size: 10pt;
+    letter-spacing: 4px;
+    z-index: 1;
+  }
+</style></head>
+<body>
+<div class="page">
+  <div class="top">
+    <div class="eyebrow">★ Reunion Night ★ May 2026 ★</div>
+    <h1>Tan's Family Tree</h1>
+    <div class="chinese">陳家根譜</div>
+    <div class="pin-row">
+      <div class="ornament">✦</div>
+      <div class="tagline">four generations · twenty faces · one table</div>
+      <div class="ornament">✦</div>
+    </div>
+  </div>
+  <div class="bottom">~ pin your matched cards on this board, in the shape your team thinks is right ~</div>
+</div>
+</body></html>

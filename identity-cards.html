@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Identity Cards · Roots of the Rose · Match to Story Cards</title>
+<!--
+  PRINT: A4 portrait · 9 cards per page · 3 pages (cards 1-20 + cover)
+  Pair with story-cards.html — players match story letter A-T to identity # 1-20.
+  Open in Chrome/Edge → Ctrl+P → margins NONE · background graphics ON
+-->
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  :root {
+    --cream:#f6ecd2; --paper:#fbf4dd; --ink:#3a2418;
+    --gold:#b8860b; --gold-2:#d4a73c; --jade:#2e7d5b;
+    --rose:#b91c4b; --tan:#8b5a2b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background:#2a1810; font-family:'Georgia','Times New Roman',serif; color:var(--ink); }
+  body { padding: 14px; }
+  @media print { body { padding: 0; background: white; } }
+
+  .page {
+    width: 210mm; height: 297mm; margin: 0 auto 14px;
+    background: white; padding: 6mm; position: relative;
+    page-break-after: always;
+    box-shadow: 0 14px 36px rgba(0,0,0,0.5);
+  }
+  @media print { .page { box-shadow: none; margin: 0; } }
+  .page:last-child { page-break-after: auto; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 3mm; width: 100%; height: 100%;
+  }
+
+  .card {
+    background:
+      radial-gradient(ellipse at 12% 8%, rgba(184,134,11,0.10), transparent 50%),
+      radial-gradient(ellipse at 88% 92%, rgba(185,28,75,0.10), transparent 50%),
+      var(--cream);
+    border: 1.5px dashed var(--tan);
+    border-radius: 2.5mm;
+    padding: 4mm 4mm 3mm;
+    position: relative;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+  .card::before { content:''; position:absolute; inset:2mm; border:2px double var(--rose); border-radius:1.8mm; pointer-events:none; }
+  .card::after  { content:''; position:absolute; inset:3.2mm; border:1px solid var(--gold); border-radius:1.4mm; pointer-events:none; }
+
+  .head {
+    display: flex; align-items: center; gap: 3mm;
+    padding-bottom: 2mm; margin-bottom: 2mm;
+    border-bottom: 1.5px solid var(--rose);
+    position: relative; z-index: 1;
+  }
+  .num {
+    flex: 0 0 auto;
+    width: 14mm; height: 14mm; border-radius: 50%;
+    background: var(--rose); color: var(--cream);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    border: 2px double var(--gold);
+    box-shadow: 1px 1px 0 var(--tan);
+  }
+  .num .n { font-family:'Brush Script MT',cursive; font-size: 17pt; line-height: 1; }
+  .num .g { font-size: 5pt; letter-spacing: 1px; margin-top: 0.5mm; }
+
+  .ttl { flex: 1; min-width: 0; }
+  .ttl .name { font-family:'Brush Script MT',cursive; color: var(--rose); font-size: 16pt; line-height: 1; }
+  .ttl .zh   { color: var(--jade); font-size: 9pt; letter-spacing: 2px; margin-top: 1mm; }
+
+  .body { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 1mm 1mm 0; position: relative; z-index: 1; }
+  .role { font-style: italic; color: var(--tan); font-size: 8pt; line-height: 1.35; text-align: center; }
+  .yrs  {
+    margin-top: 2mm;
+    text-align: center;
+    background: rgba(255,248,225,0.7);
+    border: 1px solid var(--gold);
+    border-radius: 1.2mm;
+    padding: 1.5mm;
+    font-size: 8pt; color: var(--ink);
+  }
+  .yrs b { color: var(--rose); font-size: 10pt; }
+
+  .slot {
+    margin-top: 2mm;
+    border: 1px dotted var(--tan);
+    border-radius: 1mm;
+    padding: 1.2mm;
+    text-align: center;
+    font-size: 7pt; color: var(--tan);
+    font-style: italic;
+    background: rgba(255,255,255,0.5);
+  }
+  .slot b { color: var(--rose); font-size: 9pt; font-style: normal; }
+
+  /* Cover card */
+  .cover {
+    background: radial-gradient(ellipse at 50% 50%, rgba(255,248,225,0.95), var(--cream));
+    text-align: center; padding: 6mm;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+  }
+  .cover h1 { font-family:'Brush Script MT',cursive; color: var(--rose); font-size: 22pt; line-height: 1; }
+  .cover h2 { font-family:'Brush Script MT',cursive; color: var(--jade); font-size: 11pt; margin-top: 1mm; }
+  .cover .how { font-size: 7.5pt; line-height: 1.4; margin-top: 3mm; text-align: left; padding: 2mm; background: var(--paper); border-left: 2px solid var(--rose); border-radius: 1mm; }
+  .cover .how b { color: var(--rose); }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 · cover + 1-8 ============ -->
+<div class="page"><div class="grid">
+
+  <div class="card cover">
+    <h1>The Twenty</h1>
+    <h2>~ identity cards ~</h2>
+    <div class="how">
+      <b>How to play:</b><br>
+      ① Lay these 20 cards face-up.<br>
+      ② Read a <b>story card</b> (A–T).<br>
+      ③ Decide WHO it is.<br>
+      ④ Place the story card on top of the matching identity card.<br>
+      ⑤ All 20 matched = the family is read.
+    </div>
+  </div>
+
+  <!-- 1 -->
+  <div class="card">
+    <div class="head">
+      <div class="num"><div class="n">1</div><div class="g">FOUNDER</div></div>
+      <div class="ttl"><div class="name">Tan Keo San</div><div class="zh">陳橋山</div></div>
+    </div>
+    <div class="body">
+      <div class="role">Founder of <em>See Hai Chan</em> 西海棧 · sinkeh from Fujian</div>
+      <div class="yrs"><b>1872</b> — 1941</div>
+      <div class="slot">place story card here · <b>?</b></div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="card">
+    <div class="head">
+      <div class="num"><div class="n">2</div><div class="g">MATRIARCH</div></div>
+      <div class="ttl"><div class="name">Yap Eng Siew</div><div class="zh">葉永秀</div></div>
+    </div>
+    <div class="body">
+      <div class="role">Eldest Yap sister · Beach Street goldsmiths</div>
+      <div class="yrs"><b>1880</b> — 1956</div>
+      <div class="slot">place story card here · <b>?</b></div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="card">
+    <div class="head">
+      <div class="num"><div class="n">3</div><div class="g">KITCHEN</div></div>
+      <div class="ttl"><div class="name">Auntie Mei</div><div class="zh">林美蘭</div></div>
+    </div>
+    <div class="body">
+      <div class="role">Of the kitchen · name unrecorded for 90 years</div>
+      <div class="yrs"><b>1902</b> — 1998</div>
+      <div class="slot">place story card here · <b>?</b></div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="card">
+    <div class="head">
+      <div class="num"><div class="n">4</div><div class="g">SISTER</div></div>
+      <div class="ttl"><div class="name">Yap Eng Neo</div><div class="zh">葉永娘</div></div>
+    </div>
+    <div class="body">
+      <div class="role">Middle Yap sister · wife of Lee Poh Soon</div>
+      <div class="yrs"><b>1882</b> — 1961</div>
+      <div class="slot">place story card here · <b>?</b></div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="card">
+    <div class="head">
+      <div class="num"><div class="n">5</div><div class="g">SISTER</div></div>
+      <div class="ttl"><div class="name">Yap Eng Hooi</div><div class="zh">葉永慧</div></div>
+    </div>
+    <div class="body">
+      <div class="role">Youngest Yap sister · the orchid sister</div>
+      <div class="yrs"><b>1900</b> — 1923</div>
+      <div class="slot">place story card here · <b>?</b></div>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="card">
+    <div class="head">
+      <div class="num"><div class="n">6</div><div class="g">LEE</div></div>
+      <div class="ttl"><div class="name">Lee Poh Soon</div><div class="zh">李寶順</div></div>
+    </div>
+    <div class="body">
+      <div class="role">Cloth merchant on Penang Road · husband of Eng Neo</div>
+      <div class="yrs"><b>1878</b> — 1948</div>
+      <div class="slot">place story card here · <b>?</b></div>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="card">
+    <div class="head">
+      <div class="num"><div class="n">7</div><div class="g">2ND GEN</div></div>
+      <div class="ttl"><div class="name">Tan Cheng Hoe</div><div class="zh">陳清和</div></div>
+    </div>
+    <div class="body">
+      <div class="role">Only legitimate son · 2nd-gen towkay of See Hai Chan</div>
+      <div class="yrs"><b>1920</b> — 1995</div>
+      <div class="slot">place story card here · <b>?</b></div>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="card">
+    <div class="head">
+      <div class="num"><div class="n">8</div><div class="g">2ND GEN</div></div>
+      <div class="ttl"><div class="name">Lee Beng Guat</div><div class="zh">李明月</div></div>
+    </div>
+    <div class="body">
+      <div class="role">Daughter (in name) of the Lees · wife of Cheng Hoe</div>
+      <div class="yrs"><b>1921</b> — 2005</div>
+      <div class="slot">place story card here · <b>?</b></div>
+    </div>
+  </div>
+
+</div></div>
+
+<!-- ============ PAGE 2 · 9-17 ============ -->
+<div class="page"><div class="grid">
+
+  <!-- 9 -->
+  <div class="card">
+    <div class="head">
+      <div class="num"><div class="n">9</div><div class="g">2ND GEN</div></div>
+      <div class="ttl"><div class="name">Tan Ah Cai</div><div class="zh">陳亞財</div></div>
+    </div>
+    <div class="body">
+      <div class="role"><em>Seoy Yee Kia</em> 細姨仔 · the kitchen son</div>
+      <div class="yrs"><b>1925</b> — &nbsp;?</div>
+      <div class="slot">place story card here · <b>?</b></div>
+    </div>
+  </div>
+
+  <!-- 10 -->
+  <div class="card">
+    <div class="head">
+      <div class="num"><div class="n">10</div><div class="g">SINGAPORE</div></div>
+      <div class="ttl"><div class="name">Khoo Chin Nam</div><div class="zh">邱振南</div></div>
+    </div>
+    <div class="body">
+      <div class="role">Singapore shipping tycoon · twice-married</div>
+      <div class="yrs"><b>1898</b> — 1949</div>
+      <div class="slot">place story card here · <b>?</b></div>
+    </div>
+  </div>
+
+  <!-- 11 -->
+  <div class="card">
+    <div class="head">
+      <div class="num"><div class="n">11</div><div class="g">SINGAPORE</div></div>
+      <div class="ttl"><div class="name">Tan Chen Neo</div><div class="zh">陳珍娘</div></div>
+    </div>
+    <div class="body">
+      <div class="role">Singapore widow · beadwork master · the bead-sister</div>
+      <div class="yrs"><b>1925</b> — 2018</div>
+      <div class="slot">place story card here · <b>?</b></div>
+    </div>
+  </div>
+
+  <!-- 12 -->
+  <div class="card">
+    <div class="head">
+      <div class="num"><div class="n">12</div><div class="g">LEE</div></div>
+      <div class="ttl"><div class="name">Lee Boon Kuan</div><div class="zh">李文坤</div></div>
+    </div>
+    <div class="body">
+      <div class="role">Lee firstborn · the brother who never asked</div>
+      <div class="yrs"><b>1918</b> — 1950</div>
+      <div class="slot">place story card here · <b>?</b></div>
+    </div>
+  </div>
+
+  <!-- 13 -->
+  <div class="card">
+    <div class="head">
+      <div class="num"><div class="n">13</div><div class="g">3RD GEN</div></div>
+      <div class="ttl"><div class="name">Albert Tan</div><div class="zh">陳順發</div></div>
+    </div>
+    <div class="body">
+      <div class="role">Tan Soon Fatt · towkay of See Hai Chan · the books</div>
+      <div class="yrs"><b>1948</b> — 2021</div>
+      <div class="slot">place story card here · <b>?</b></div>
+    </div>
+  </div>
+
+  <!-- 14 -->
+  <div class="card">
+    <div class="head">
+      <div class="num"><div class="n">14</div><div class="g">3RD GEN</div></div>
+      <div class="ttl"><div class="name">Alice Wong</div><div class="zh">王愛麗</div></div>
+    </div>
+    <div class="body">
+      <div class="role">Albert's wife · KL banker · modern nyonya</div>
+      <div class="yrs"><b>1970</b> — today</div>
+      <div class="slot">place story card here · <b>?</b></div>
+    </div>
+  </div>
+
+  <!-- 15 -->
+  <div class="card">
+    <div class="head">
+      <div class="num"><div class="n">15</div><div class="g">3RD GEN</div></div>
+      <div class="ttl"><div class="name">Tan Soon Heng</div><div class="zh">陳順興</div></div>
+    </div>
+    <div class="body">
+      <div class="role">Heritage architect · Bibi Rose's father · the watch</div>
+      <div class="yrs"><b>1950</b> — today</div>
+      <div class="slot">place story card here · <b>?</b></div>
+    </div>
+  </div>
+
+  <!-- 16 -->
+  <div class="card">
+    <div class="head">
+      <div class="num"><div class="n">16</div><div class="g">3RD GEN</div></div>
+      <div class="ttl"><div class="name">Lim Soo Hui</div><div class="zh">林素慧</div></div>
+    </div>
+    <div class="body">
+      <div class="role">Soon Heng's wife · Auntie Mei's niece · the recipes</div>
+      <div class="yrs"><b>1966</b> — today</div>
+      <div class="slot">place story card here · <b>?</b></div>
+    </div>
+  </div>
+
+  <!-- 17 -->
+  <div class="card">
+    <div class="head">
+      <div class="num"><div class="n">17</div><div class="g">4TH GEN</div></div>
+      <div class="ttl"><div class="name">Bibik Rose</div><div class="zh">陳玫瑰</div></div>
+    </div>
+    <div class="body">
+      <div class="role">Peranakan textile conservator · host of tonight</div>
+      <div class="yrs"><b>1974</b> — today</div>
+      <div class="slot">place story card here · <b>?</b></div>
+    </div>
+  </div>
+
+</div></div>
+
+<!-- ============ PAGE 3 · 18-20 + 6 spacers ============ -->
+<div class="page"><div class="grid">
+
+  <!-- 18 -->
+  <div class="card">
+    <div class="head">
+      <div class="num"><div class="n">18</div><div class="g">4TH GEN</div></div>
+      <div class="ttl"><div class="name">Dr Tan Wei Wen</div><div class="zh">陳偉文</div></div>
+    </div>
+    <div class="body">
+      <div class="role">Doctor · Bibi Rose's brother · Penang General</div>
+      <div class="yrs"><b>1990</b> — today</div>
+      <div class="slot">place story card here · <b>?</b></div>
+    </div>
+  </div>
+
+  <!-- 19 -->
+  <div class="card">
+    <div class="head">
+      <div class="num"><div class="n">19</div><div class="g">4TH GEN</div></div>
+      <div class="ttl"><div class="name">Khoo Hooi Wen</div><div class="zh">邱慧雯</div></div>
+    </div>
+    <div class="body">
+      <div class="role">Singapore architect · the bride of 2020</div>
+      <div class="yrs"><b>1991</b> — today</div>
+      <div class="slot">place story card here · <b>?</b></div>
+    </div>
+  </div>
+
+  <!-- 20 -->
+  <div class="card">
+    <div class="head">
+      <div class="num"><div class="n">20</div><div class="g">4TH GEN</div></div>
+      <div class="ttl"><div class="name">Kelvin Tan</div><div class="zh">陳凱文</div></div>
+    </div>
+    <div class="body">
+      <div class="role">Tan Kai Wen · See Hai Chan heir · son of Albert</div>
+      <div class="yrs"><b>1995</b> — today</div>
+      <div class="slot">place story card here · <b>?</b></div>
+    </div>
+  </div>
+
+  <!-- Hint card -->
+  <div class="card cover">
+    <h1>The Watch</h1>
+    <h2>~ ⏱ thread ~</h2>
+    <div class="how">
+      Fujian father → <b>#1</b> → <b>#7</b> → <b>#15</b> (today, on a porcelain dish at his bedside).
+    </div>
+  </div>
+
+  <!-- Hint card -->
+  <div class="card cover">
+    <h1>The Brooches</h1>
+    <h2>~ 🌺 thread ~</h2>
+    <div class="how">
+      Three Yap sisters: <b>Ibu</b> #2 · <b>Anak A</b> #4 · <b>Anak B</b> #5 (unworn). All three now in the enamel tin held by <b>#8</b>.
+    </div>
+  </div>
+
+  <!-- Hint card -->
+  <div class="card cover">
+    <h1>The Recipes</h1>
+    <h2>~ 🍲 thread ~</h2>
+    <div class="how">
+      <b>#3</b> Auntie Mei → her own niece <b>#16</b> Soo Hui (written down at last). 240 dishes. The name finally said out loud in 1992.
+    </div>
+  </div>
+
+  <!-- Hint card -->
+  <div class="card cover">
+    <h1>The Silence</h1>
+    <h2>~ 🌿 thread ~</h2>
+    <div class="how">
+      <b>#3</b> Mei → <b>#9</b> Ah Cai → the jungle, Sept 1945. Eighty-one years and counting. The empty plate is still on the kitchen shelf.
+    </div>
+  </div>
+
+  <!-- Final card -->
+  <div class="card cover">
+    <h1>Begin</h1>
+    <h2>~ shuffle the story deck ~</h2>
+    <div class="how">
+      When all 20 story cards are matched, <b>Bibi will hand the team the key</b> to the enamel tin. Until then — read carefully. The cards do the talking.
+    </div>
+  </div>
+
+</div></div>
+
+</body>
+</html>

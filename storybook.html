@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Roots of the Rose · The Tan Family Storybook · 2026</title>
+<style>
+  /* ==============================================================
+     PRINT TO PDF · A4 PORTRAIT · 1 character per page
+     Open in Chrome/Edge → Ctrl+P → "Save as PDF" → margins NONE
+     Background graphics ON.
+     ============================================================== */
+  @page { size: A4 portrait; margin: 0; }
+
+  :root {
+    --cream:#f6ecd2; --paper:#fbf4dd; --aged:#efdbb0; --ink:#3a2418;
+    --gold:#b8860b; --gold-2:#d4a73c; --jade:#2e7d5b;
+    --rose:#b91c4b; --rose-2:#d94872; --tan:#8b5a2b; --tan-2:#a47148;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #2a1810; font-family: 'Georgia', 'Times New Roman', serif; color: var(--ink); }
+  body { padding: 16px; }
+  @media print { body { padding: 0; background: white; } }
+
+  .page {
+    width: 210mm; height: 297mm;
+    margin: 0 auto 14px;
+    background:
+      radial-gradient(ellipse at 12% 8%, rgba(184,134,11,0.10), transparent 45%),
+      radial-gradient(ellipse at 88% 92%, rgba(185,28,75,0.10), transparent 45%),
+      var(--cream);
+    position: relative;
+    page-break-after: always;
+    overflow: hidden;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+  }
+  @media print { .page { box-shadow: none; margin: 0; } }
+  .page:last-child { page-break-after: auto; }
+
+  .frame {
+    position: absolute; inset: 8mm;
+    border: 3px double var(--rose);
+    border-radius: 4mm;
+    pointer-events: none;
+  }
+  .frame::after {
+    content: ''; position: absolute; inset: 2mm;
+    border: 1px solid var(--gold); border-radius: 3mm;
+  }
+
+  .corner {
+    position: absolute; width: 20mm; height: 20mm;
+    background: radial-gradient(circle at 50% 50%, var(--rose-2) 0 14%, transparent 16% 100%),
+                radial-gradient(circle at 30% 30%, var(--gold-2) 0 8%, transparent 10% 100%),
+                radial-gradient(circle at 70% 70%, var(--gold-2) 0 8%, transparent 10% 100%),
+                radial-gradient(circle at 30% 70%, var(--jade) 0 6%, transparent 8% 100%),
+                radial-gradient(circle at 70% 30%, var(--jade) 0 6%, transparent 8% 100%);
+    opacity: 0.55;
+    pointer-events: none;
+  }
+  .corner.tl { top: 12mm; left: 12mm; }
+  .corner.tr { top: 12mm; right: 12mm; transform: scaleX(-1); }
+  .corner.bl { bottom: 12mm; left: 12mm; transform: scaleY(-1); }
+  .corner.br { bottom: 12mm; right: 12mm; transform: scale(-1,-1); }
+
+  /* ====== COVER ====== */
+  .cover {
+    padding: 30mm 22mm;
+    text-align: center;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+  }
+  .cover .eyebrow {
+    color: var(--rose); font-style: italic; letter-spacing: 6px;
+    font-size: 11pt; margin-bottom: 10mm;
+  }
+  .cover h1 {
+    font-family: 'Brush Script MT', cursive;
+    color: var(--rose);
+    font-size: 80pt; line-height: 1; margin-bottom: 6mm;
+    text-shadow: 2px 2px 0 rgba(184,134,11,0.25);
+  }
+  .cover h2 {
+    font-family: 'Brush Script MT', cursive;
+    color: var(--jade);
+    font-size: 28pt; line-height: 1; margin-bottom: 14mm;
+  }
+  .cover .subtitle {
+    color: var(--ink); font-style: italic; font-size: 14pt;
+    max-width: 130mm; line-height: 1.6; margin-bottom: 16mm;
+  }
+  .cover .seal {
+    width: 60mm; height: 60mm;
+    border: 3px double var(--rose);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+    color: var(--rose);
+    margin-bottom: 10mm;
+    background: rgba(255,248,225,0.5);
+  }
+  .cover .seal .y { font-family: 'Brush Script MT'; font-size: 36pt; line-height: 1; }
+  .cover .seal .l { font-size: 9pt; letter-spacing: 3px; margin-top: 2mm; }
+  .cover .credits {
+    font-size: 10pt; color: var(--tan);
+    border-top: 1px dashed var(--tan); padding-top: 4mm;
+    width: 110mm;
+  }
+  .cover .credits b { color: var(--rose); }
+
+  /* ====== CHARACTER ====== */
+  .char { padding: 18mm 20mm; display: flex; flex-direction: column; height: 100%; }
+
+  .char .head {
+    display: grid; grid-template-columns: 30mm 1fr 30mm;
+    align-items: center;
+    gap: 6mm;
+    margin-bottom: 6mm;
+    padding-bottom: 4mm;
+    border-bottom: 2px solid var(--rose);
+  }
+  .char .num-circle {
+    width: 26mm; height: 26mm; border-radius: 50%;
+    background: var(--rose); color: var(--cream);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-family: 'Brush Script MT', cursive;
+    border: 3px double var(--gold);
+    box-shadow: 2px 2px 0 var(--tan);
+  }
+  .char .num-circle .n { font-size: 30pt; line-height: 1; }
+  .char .num-circle .t { font-size: 7pt; letter-spacing: 2px; font-family: Georgia; margin-top: 1mm; }
+
+  .char .head .title { text-align: center; }
+  .char .head h1 {
+    font-family: 'Brush Script MT', cursive;
+    color: var(--rose); font-size: 32pt; line-height: 1;
+  }
+  .char .head .zh { color: var(--jade); font-size: 13pt; letter-spacing: 4px; margin-top: 2mm; }
+  .char .head .role { font-style: italic; color: var(--tan); font-size: 10pt; margin-top: 1mm; }
+
+  .char .head .stamps {
+    display: flex; flex-direction: column; align-items: center; gap: 2mm;
+    font-size: 18pt;
+  }
+  .char .head .stamps .s {
+    width: 12mm; height: 12mm; border: 1.5px solid var(--rose); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(255,248,225,0.6);
+  }
+  .char .head .stamps .lbl {
+    font-size: 7pt; color: var(--tan); letter-spacing: 1px;
+  }
+
+  .char .meta {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 4mm;
+    margin-bottom: 6mm;
+  }
+  .char .meta .cell {
+    background: rgba(255,248,225,0.7);
+    border: 1px solid var(--gold);
+    border-left: 3px solid var(--rose);
+    padding: 2.5mm 3.5mm;
+    border-radius: 2mm;
+  }
+  .char .meta .cell .lbl { font-size: 7.5pt; letter-spacing: 1.5px; color: var(--jade); text-transform: uppercase; font-weight: bold; }
+  .char .meta .cell .val { font-size: 10pt; color: var(--ink); margin-top: 1mm; }
+
+  .char .story {
+    flex: 1;
+    background: var(--paper);
+    border: 1.5px solid var(--gold);
+    border-left: 4px solid var(--rose);
+    padding: 6mm 7mm;
+    border-radius: 2mm;
+    font-size: 10.5pt;
+    line-height: 1.65;
+    color: var(--ink);
+    text-align: justify;
+    overflow: hidden;
+  }
+  .char .story p { margin-bottom: 3mm; }
+  .char .story p:last-child { margin-bottom: 0; }
+  .char .story strong { color: var(--rose); }
+  .char .story em { color: var(--jade); font-style: italic; }
+  .char .story .pull {
+    display: block;
+    font-family: 'Brush Script MT', cursive;
+    color: var(--rose);
+    font-size: 16pt;
+    text-align: center;
+    margin: 4mm 0;
+    padding: 2mm 0;
+    border-top: 1px dotted var(--tan);
+    border-bottom: 1px dotted var(--tan);
+  }
+
+  .char .footer {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 5mm;
+    padding-top: 3mm;
+    border-top: 1px dashed var(--tan);
+    font-size: 9pt; color: var(--tan); font-style: italic;
+  }
+
+  /* ====== DIVIDER ====== */
+  .divider {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 30mm;
+    height: 100%;
+  }
+  .divider .label { font-size: 11pt; color: var(--tan); letter-spacing: 6px; margin-bottom: 6mm; }
+  .divider h2 {
+    font-family: 'Brush Script MT', cursive;
+    color: var(--rose); font-size: 60pt; line-height: 1; margin-bottom: 6mm;
+    text-shadow: 1px 1px 0 rgba(184,134,11,0.2);
+  }
+  .divider .desc { font-size: 12pt; line-height: 1.7; max-width: 130mm; color: var(--ink); margin-bottom: 10mm; }
+  .divider .ornament { font-size: 28pt; color: var(--rose); margin: 6mm 0; }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     COVER
+     ============================================================ -->
+<div class="page">
+  <div class="frame"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+
+  <div class="cover">
+    <div class="eyebrow">✦ THE TAN FAMILY · A PERANAKAN STORYBOOK ✦</div>
+    <h1>Roots of the Rose</h1>
+    <h2>~ stones do not lie ~</h2>
+    <div class="subtitle">
+      Twenty voices across four generations of one Penang Nyonya family —
+      the men who came on boats, the sisters who hid one another's secrets,
+      the woman who cooked and was never named, and the granddaughter who
+      finally opened the tin.
+    </div>
+    <div class="seal">
+      <div class="y">陳</div>
+      <div class="l">TAN · 陳家</div>
+    </div>
+    <div class="credits">
+      Compiled by <b>Bibik Rose</b> (4th generation, host of 2026) ·
+      For the Tan family reunion · <b>Penang, May 2026</b> ·
+      <em>"Cucu, before you forget who you are — read."</em>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     CHAPTER ONE DIVIDER
+     ============================================================ -->
+<div class="page">
+  <div class="frame"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+
+  <div class="divider">
+    <div class="label">CHAPTER ONE</div>
+    <h2>The Founders</h2>
+    <div class="ornament">✦  ✦  ✦</div>
+    <div class="desc">
+      Penang, 1872 – 1948. A boy steps off a Fujian junk with a brass watch in his pocket.
+      Three Yap sisters share a dressing table and a secret. A goldsmith's youngest daughter
+      dies in a back room before sunrise, and a basket is carried before dawn to her sister's door.
+    </div>
+    <div class="ornament">🌺</div>
+  </div>
+</div>
+
+<!-- ============================================================
+     #1 TAN KEO SAN
+     ============================================================ -->
+<div class="page">
+  <div class="frame"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+
+  <div class="char">
+    <div class="head">
+      <div class="num-circle"><div class="n">1</div><div class="t">FOUNDER</div></div>
+      <div class="title">
+        <h1>Tan Keo San</h1>
+        <div class="zh">陳橋山</div>
+        <div class="role">Sinkeh from Fujian · founder of See Hai Chan 西海棧</div>
+      </div>
+      <div class="stamps">
+        <div class="s">⚓</div>
+        <div class="lbl">FUJIAN</div>
+      </div>
+    </div>
+
+    <div class="meta">
+      <div class="cell"><div class="lbl">Born</div><div class="val">Fujian, 1872</div></div>
+      <div class="cell"><div class="lbl">Married</div><div class="val">Yap Eng Siew · 1898<br>Lim Mei Lan · (kept) 1920</div></div>
+      <div class="cell"><div class="lbl">Died</div><div class="val">Weld Quay jetty bombing<br>11 December 1941</div></div>
+    </div>
+
+    <div class="story">
+      <p>Keo San arrived in George Town at nineteen, with one wooden trunk and a small brass object his father had pressed into his palm before the boat pushed off the Fujian coast. <em>"Time is the only thing nobody can steal back from you,"</em> the old man had said. The watch never left Keo San's pocket for the rest of his life.</p>
+
+      <p>He worked as a porter at <strong>Weld Quay</strong>, then as a clerk for a Hokkien shipping merchant. By thirty he had three of his own godowns; by forty he had bought the merchant out and renamed the company <strong>See Hai Chan 西海棧</strong> — <em>"the warehouse that faces the western sea."</em> He moved cargo between Penang, Medan, and Rangoon for the next four decades.</p>
+
+      <p>In 1898 he married <strong>Yap Eng Siew</strong>, eldest of three Nyonya sisters from a Beach Street goldsmith family. He was twenty-six. She was eighteen. She brought three brooches, a kamcheng of nine gold dumplings, and a temper she rarely used. She bore him one son.</p>
+
+      <p>In 1920 he brought a second woman, <strong>Lim Mei Lan</strong>, into the back of the house. He never married her in any registry. She bore him one son. Eng Siew permitted her under the roof on the condition that she never crossed into the front rooms. Keo San accepted that condition for twenty-one years.</p>
+
+      <span class="pull">"The eldest gets the books. The youngest gets the time."</span>
+
+      <p>This was the rule he set the year his second son was born. He never explained it. He never wrote it down. And yet four generations later, every Tan child still knows it by heart.</p>
+
+      <p>On the morning of <strong>11 December 1941</strong>, Keo San walked down to the Weld Quay jetty to meet a delayed lighter from Medan. He was sixty-nine years old. The watch was in his coat pocket. The first Japanese plane came in low at 11:14 a.m. The bomb struck the warehouse roof. He did not come home. The watch was found three days later in the breast pocket of his coat, still ticking, still keeping perfect time.</p>
+    </div>
+
+    <div class="footer"><span>陳橋山 · 1872 – 1941</span><span>founder of See Hai Chan · keeper of the watch</span></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     #2 YAP ENG SIEW
+     ============================================================ -->
+<div class="page">
+  <div class="frame"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+
+  <div class="char">
+    <div class="head">
+      <div class="num-circle"><div class="n">2</div><div class="t">MATRIARCH</div></div>
+      <div class="title">
+        <h1>Yap Eng Siew</h1>
+        <div class="zh">葉永秀</div>
+        <div class="role">Eldest of three Yap sisters · the wife · the matriarch</div>
+      </div>
+      <div class="stamps">
+        <div class="s">🌺</div>
+        <div class="lbl">IBU</div>
+      </div>
+    </div>
+
+    <div class="meta">
+      <div class="cell"><div class="lbl">Born</div><div class="val">Yap goldsmith house, Beach Street · 1880</div></div>
+      <div class="cell"><div class="lbl">Married</div><div class="val">Tan Keo San · 1898</div></div>
+      <div class="cell"><div class="lbl">Died</div><div class="val">Tan house, Armenian Street · 1956</div></div>
+    </div>
+
+    <div class="story">
+      <p>Eng Siew was the eldest of three Yap sisters: she; the careful middle one <strong>Eng Neo</strong>; and the youngest, <strong>Eng Hooi</strong>, soft-spoken, fond of orchids, never married. The three of them were raised above their father's goldsmith shop on Beach Street, where the dressing table held three matching brooches: <em>Ibu</em>, the mother brooch, and the two daughter brooches, <em>Anak A</em> and <em>Anak B</em>. One brooch for each sister's neck.</p>
+
+      <p>On her wedding morning in 1898, Eng Siew carried a kamcheng of <strong>nine gold-glazed dumplings</strong> across her new husband's threshold — the proper hantaran of a true Nyonya bride. <em>"From this morning, no in-law sits above me. The kitchen is mine."</em> She was eighteen years old, and she meant every word.</p>
+
+      <p>She bore Keo San one son — Cheng Hoe — and ran the Tan household for fifty-eight years. In 1920, when her husband brought the kitchen woman <strong>Mei Lan</strong> through the back gate, she did not weep, she did not raise her voice; she simply walked into the kitchen, drew a chalk line on the floor between stove and parlour, and said: <em>"Cross this once and you cross it forever. Stay behind it and you may stay."</em> The chalk line wore away by 1925. The rule did not.</p>
+
+      <span class="pull">"The brooches will know. The brooches always know."</span>
+
+      <p>In 1923 her youngest sister Eng Hooi died, alone, in childbirth. Eng Siew took the news at midnight, walked the four streets to the Lee house, and arranged with her middle sister Eng Neo what would be done with the baby. The two of them swore on the kerongsang — Ibu and Anak A — that the child would be raised Lee, that the third brooch (Anak B) would never again be worn, and that the goldsmith house would be told the baby had not survived the night. Eng Siew kept the secret for thirty-three years.</p>
+
+      <p>She was a fair mother-in-law, a fearsome cook, and the only person Keo San was ever afraid of. She wore the kerongsang Ibu to the day she died in 1956, aged seventy-six. She is buried with it on her chest.</p>
+    </div>
+
+    <div class="footer"><span>葉永秀 · 1880 – 1956</span><span>matriarch · keeper of three sisters · the chalk line</span></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     #3 LIM MEI LAN  (Auntie Mei)
+     ============================================================ -->
+<div class="page">
+  <div class="frame"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+
+  <div class="char">
+    <div class="head">
+      <div class="num-circle"><div class="n">3</div><div class="t">KITCHEN</div></div>
+      <div class="title">
+        <h1>Lim Mei Lan</h1>
+        <div class="zh">林美蘭</div>
+        <div class="role">"Auntie Mei" 美姑 · the woman the family forgot to name</div>
+      </div>
+      <div class="stamps">
+        <div class="s">🥄</div>
+        <div class="lbl">COOK</div>
+      </div>
+    </div>
+
+    <div class="meta">
+      <div class="cell"><div class="lbl">Born</div><div class="val">Balik Pulau, 1902</div></div>
+      <div class="cell"><div class="lbl">Brought to Tan house</div><div class="val">1920 (age 18)</div></div>
+      <div class="cell"><div class="lbl">Died</div><div class="val">Tan kitchen · 1998 (age 96)</div></div>
+    </div>
+
+    <div class="story">
+      <p>Mei Lan was the daughter of a Balik Pulau fishmonger and the youngest sister of one quiet brother. She was eighteen when Keo San — already a married towkay of forty-eight — saw her at the village market and arranged with her father, in a single conversation, that she would be brought into the back of his Armenian Street house. There was no tea ceremony. There was no registry. There was a small cash payment her father accepted without looking up.</p>
+
+      <p>Eng Siew permitted her under the roof on one condition: she would never cross the chalk line into the front rooms. Mei Lan accepted. She was given the kitchen, a sleeping mat in the storeroom, and a single pale jade <strong>baju kebaya</strong> that she mended at the elbows for the next seventy-eight years. The hem carried a permanent <strong>sambal stain</strong> from the day in 1945 a kuli ran in to say that her son Ah Cai had walked into the jungle with the Communists.</p>
+
+      <p>She cooked every Tok Panjang the Tan house ever held — over two hundred wedding feasts, full-month celebrations, funerals, Cap Goh Mei. She was never allowed to sit at one of them. Her hands measured nothing in cups; they measured in <em>three fingers of belacan, two thumbs of gula melaka</em>, the way her own mother had taught her in a kitchen in Balik Pulau.</p>
+
+      <span class="pull">"Auntie cooks. Auntie does not sit. That is how the food stays hot."</span>
+
+      <p>In 1982 a sixteen-year-old girl from Ipoh — her <strong>own brother's daughter</strong> — walked into the kitchen with a notebook. Mei Lan looked at her once, at the Lim surname, at the shape of her face, and made room beside the chopping block. For ten years Soo Hui stood there. In 1992 the cookbook was published — <em>Resipi Auntie Mei</em>, dedication: <em>"To Auntie Mei (Lim Mei Lan 林美蘭) — the woman the family forgot to name."</em> It was the first time her full name had appeared in print anywhere in seventy years.</p>
+
+      <p>She had a good last year. Soo Hui's book was selling. Bibi Rose, then twenty-four, came every Sunday and sat on the kitchen stool beside her. Eng Siew was long dead; the chalk line had been gone for forty years. In her last week, Mei Lan walked, slowly, into the front parlour for the first time. She sat at the long teakwood table for one cup of tea, then walked back to her kitchen. Three months later she died on the same stool she had used since 1932. Her last batch of pineapple tarts was still cooling on the marble. She was ninety-six.</p>
+    </div>
+
+    <div class="footer"><span>林美蘭 · 1902 – 1998</span><span>cook · mother of one · finally named</span></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     #4 YAP ENG NEO
+     ============================================================ -->
+<div class="page">
+  <div class="frame"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+
+  <div class="char">
+    <div class="head">
+      <div class="num-circle"><div class="n">4</div><div class="t">SISTER</div></div>
+      <div class="title">
+        <h1>Yap Eng Neo</h1>
+        <div class="zh">葉永娘</div>
+        <div class="role">Middle Yap sister · wife of Lee Poh Soon · the one who took the child</div>
+      </div>
+      <div class="stamps">
+        <div class="s">🌺</div>
+        <div class="lbl">ANAK A</div>
+      </div>
+    </div>
+
+    <div class="meta">
+      <div class="cell"><div class="lbl">Born</div><div class="val">Beach Street, 1882</div></div>
+      <div class="cell"><div class="lbl">Married</div><div class="val">Lee Poh Soon · 1901</div></div>
+      <div class="cell"><div class="lbl">Died</div><div class="val">Lee house, Penang Road · 1961</div></div>
+    </div>
+
+    <div class="story">
+      <p>Eng Neo was the middle Yap sister — two years younger than Eng Siew, eighteen years older than the youngest. She wore the <em>Anak A</em> brooch from the day she could pin it to her collar. She married into the Lee house at nineteen and bore her husband one son — <strong>Boon Kuan</strong> — three years later.</p>
+
+      <p>She was the sister who held the family together with errands. When the Yap mother fell ill she nursed her. When the youngest sister Eng Hooi could not face an awkward conversation, Eng Neo went in her place. When Eng Siew needed a confidante, she was the first to be told and the last to repeat. Among the three sisters, Eng Neo was <em>the one you could call at midnight</em>.</p>
+
+      <span class="pull">"Whatever this family asks of me, I will do once. And I will not speak of it twice."</span>
+
+      <p>One night in <strong>1923</strong>, the youngest sister died, alone, in a back room of the goldsmith house. The midwife came to Eng Neo's door instead of to the Yap father's. Eng Neo took the baby in. She named her after no one. She registered her as <strong>Lee Beng Guat</strong>. Her husband Poh Soon asked one question and accepted the answer; her sister Eng Siew arrived at dawn, and between the two of them the matter was sealed.</p>
+
+      <p>Eng Neo raised Beng Guat as her own daughter — the same dowry, the same school, the same wedding. She lived to see Beng Guat married to the Tan boy in 1947 and never once said the word <em>cousin</em> aloud. She died in 1961 at seventy-nine. Her last instruction to the housemaid was: <em>"Put the three brooches back in the tin. The owner will come for them when she is ready."</em></p>
+    </div>
+
+    <div class="footer"><span>葉永娘 · 1882 – 1961</span><span>middle sister · the one who took the child</span></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     #5 YAP ENG HOOI
+     ============================================================ -->
+<div class="page">
+  <div class="frame"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+
+  <div class="char">
+    <div class="head">
+      <div class="num-circle"><div class="n">5</div><div class="t">SISTER</div></div>
+      <div class="title">
+        <h1>Yap Eng Hooi</h1>
+        <div class="zh">葉永慧</div>
+        <div class="role">Youngest Yap sister · died in childbirth, unmarried</div>
+      </div>
+      <div class="stamps">
+        <div class="s">✝</div>
+        <div class="lbl">ANAK B</div>
+      </div>
+    </div>
+
+    <div class="meta">
+      <div class="cell"><div class="lbl">Born</div><div class="val">Beach Street, 1900</div></div>
+      <div class="cell"><div class="lbl">Never married</div><div class="val">— —</div></div>
+      <div class="cell"><div class="lbl">Died</div><div class="val">Goldsmith back room · winter 1923 (age 23)</div></div>
+    </div>
+
+    <div class="story">
+      <p>Eng Hooi was the youngest of the three Yap sisters, born late, eighteen years after Eng Neo. She was the family's favourite — quiet, beautiful, fond of orchids, slow to anger, the only one who could make the old goldsmith laugh out loud. The Beach Street neighbours called her the <em>"orchid sister."</em></p>
+
+      <p>The man's name was never written down. He was a young clerk from a Chinese tea-trader on Bishop Street. He visited the goldsmith shop three times in the autumn of 1922 and stopped visiting in the new year. By March 1923 Eng Hooi knew. She did not tell her father. She did not tell the eldest sister. She told only Eng Neo, who walked her, in the rain, to a midwife in Pulau Tikus.</p>
+
+      <p>For seven months she stayed at the back of the goldsmith house, behind a screen, and the family told visitors she was nursing the old mother. The old mother was already dead.</p>
+
+      <span class="pull">"The orchid sister. They never put her name in the family Bible."</span>
+
+      <p>The labour came in the small hours of a December night. The midwife was good but the bleeding was worse. By dawn Eng Hooi was gone. The midwife wrapped the infant — a girl — in a length of temple cloth and walked, before the streetlamps were extinguished, to the door of Yap Eng Neo. The goldsmith was told the next morning that the baby had not survived.</p>
+
+      <p>Of the three Yap sisters, hers is the only brooch the eldest never let out of the tin: <strong>kerongsang Anak B</strong>, polished but never worn, engraved on the back with the year a third sister was born and never named — <strong>1900</strong>. The brooch and the truth waited in the tin for a hundred and one years.</p>
+    </div>
+
+    <div class="footer"><span>葉永慧 · 1900 – 1923</span><span>youngest · the orchid sister · mother in secret</span></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     #6 LEE POH SOON
+     ============================================================ -->
+<div class="page">
+  <div class="frame"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+
+  <div class="char">
+    <div class="head">
+      <div class="num-circle"><div class="n">6</div><div class="t">LEE</div></div>
+      <div class="title">
+        <h1>Lee Poh Soon</h1>
+        <div class="zh">李寶順</div>
+        <div class="role">Cloth merchant · husband of Eng Neo · the man who asked once</div>
+      </div>
+      <div class="stamps">
+        <div class="s">🧵</div>
+        <div class="lbl">CLOTH</div>
+      </div>
+    </div>
+
+    <div class="meta">
+      <div class="cell"><div class="lbl">Born</div><div class="val">Penang, 1878</div></div>
+      <div class="cell"><div class="lbl">Married Eng Neo</div><div class="val">1901</div></div>
+      <div class="cell"><div class="lbl">Died</div><div class="val">Lee house · 1948 (age 70)</div></div>
+    </div>
+
+    <div class="story">
+      <p>Poh Soon was a quiet, unflashy cloth merchant on Penang Road who loved his wife with the calm of a man who had won her in a properly negotiated match. He inherited his father's small shop in 1905 and turned it into one of the most reliable sources of fine batik on the north coast. He was famously polite to his sister-in-law Eng Siew, formally affectionate to his own wife, and notoriously short with anyone who tried to gossip in his hearing.</p>
+
+      <p>One winter morning in 1923, his wife came home before sunrise carrying an infant girl wrapped in temple cloth. He asked only one question.</p>
+
+      <span class="pull">"Whose child?"</span>
+
+      <p><em>"A goldsmith's helper drowned. The mother went in the night. The midwife brought her to me."</em> He looked at his wife for a long moment. He looked at the baby. He nodded once. He did not ask again — not the next year, not the next decade, not on his deathbed in 1948.</p>
+
+      <p>He raised the girl as his own daughter, gave her the family name and the same dowry he gave his son, and walked her to the same school he walked Boon Kuan to. He went to his grave believing he had done a quiet kindness. <em>"A Lee husband does not ask why"</em> — the proverb, in the family, is his epitaph.</p>
+
+      <p>He never met Beng Guat's husband. He died eleven months before her wedding to the Tan boy. His last act in the cloth shop was to fold a length of cream silk for her bridal kebaya and write, in his own hand on the receipt: <em>"For the second daughter — paid in full, by her father."</em></p>
+    </div>
+
+    <div class="footer"><span>李寶順 · 1878 – 1948</span><span>cloth merchant · the man who asked once</span></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     CHAPTER TWO DIVIDER
+     ============================================================ -->
+<div class="page">
+  <div class="frame"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+
+  <div class="divider">
+    <div class="label">CHAPTER TWO</div>
+    <h2>The Inheritors</h2>
+    <div class="ornament">✦  ✦  ✦</div>
+    <div class="desc">
+      Penang &amp; Singapore, 1918 – 2005. The generation the war marked.
+      A son who inherits a watch and a warehouse at twenty-one. A bride who
+      does not know she is marrying her cousin. A boy from the kitchen who
+      walks into the jungle and never walks out. A widow who learns to bead.
+    </div>
+    <div class="ornament">🌺</div>
+  </div>
+</div>
+
+<!-- ============================================================
+     #7 TAN CHENG HOE
+     ============================================================ -->
+<div class="page">
+  <div class="frame"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+
+  <div class="char">
+    <div class="head">
+      <div class="num-circle"><div class="n">7</div><div class="t">2ND GEN</div></div>
+      <div class="title">
+        <h1>Tan Cheng Hoe</h1>
+        <div class="zh">陳清和</div>
+        <div class="role">Only son of Keo San &amp; Eng Siew · towkay of See Hai Chan</div>
+      </div>
+      <div class="stamps">
+        <div class="s">⌚</div>
+        <div class="lbl">WATCH</div>
+      </div>
+    </div>
+
+    <div class="meta">
+      <div class="cell"><div class="lbl">Born</div><div class="val">Armenian Street, 1920</div></div>
+      <div class="cell"><div class="lbl">Married</div><div class="val">Lee Beng Guat · 1947</div></div>
+      <div class="cell"><div class="lbl">Died</div><div class="val">Penang · 1995 (age 75)</div></div>
+    </div>
+
+    <div class="story">
+      <p>Cheng Hoe was the only legitimate son. His mother's keys jingled at her hip from the time he could walk; his father's brass <em>jam saku</em> ticked in the next room, wound at six every morning. He grew up in the sky-blue corner shophouse on Armenian Street with the chalk line in the kitchen, a half-brother in the back rooms whom he was forbidden to acknowledge, and a clear understanding that the warehouse and the watch would, one day, both be his.</p>
+
+      <p>He was twenty-one when the bomb fell. On 11 December 1941 his father walked down to Weld Quay and did not come back. The watch was returned to him three days later in a small linen bag, still ticking. He inherited <strong>See Hai Chan 西海棧</strong> the same week. The Japanese took half the warehouses by January. Cheng Hoe spent the war hiding rice and cooking books — and quietly turning his half-brother Ah Cai away from the back gate the one night Ah Cai came looking for refuge from the Kempeitai. He never spoke of that night. He never forgave himself for it.</p>
+
+      <p>In 1947, his mother arranged his marriage to <strong>Lee Beng Guat</strong>, a quiet daughter of the Lee cloth merchant. He was twenty-seven; she was twenty-six. He never knew, and his mother never told him, that the bride his mother had chosen was, by blood, his own first cousin. The two old sisters had decided that a marriage between the two girls' children would put the brooches back in the same house without anyone having to say why.</p>
+
+      <span class="pull">"Some men are given a watch. Some are given the time. I was given both."</span>
+
+      <p>He ran See Hai Chan for forty-seven years. He had two sons — <strong>Albert</strong> in 1950, <strong>Soon Heng</strong> in 1948 (Soon Heng came first — the family rule placed the watch on the youngest, but Cheng Hoe had decided early that the watch would go to whichever son grew up gentlest, and Soon Heng was the gentler boy.) On Soon Heng's twenty-first birthday in 1969, Cheng Hoe placed the brass watch in his palm and said: <em>"This is the only thing my father ever gave me. Wind it in the morning. Don't forget."</em> Soon Heng has not forgotten in fifty-seven years.</p>
+
+      <p>Cheng Hoe died of heart failure in 1995, aged seventy-five. Three years before the wife who had been, all along, his cousin.</p>
+    </div>
+
+    <div class="footer"><span>陳清和 · 1920 – 1995</span><span>towkay · keeper of the watch · gave it on at twenty-one</span></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     #8 LEE BENG GUAT
+     ============================================================ -->
+<div class="page">
+  <div class="frame"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+
+  <div class="char">
+    <div class="head">
+      <div class="num-circle"><div class="n">8</div><div class="t">2ND GEN</div></div>
+      <div class="title">
+        <h1>Lee Beng Guat</h1>
+        <div class="zh">李明月</div>
+        <div class="role">Daughter (in name) of the Lees · wife of Cheng Hoe · keeper of the tin</div>
+      </div>
+      <div class="stamps">
+        <div class="s">📒</div>
+        <div class="lbl">LEDGER</div>
+      </div>
+    </div>
+
+    <div class="meta">
+      <div class="cell"><div class="lbl">Born</div><div class="val">Yap goldsmith back room · winter 1921</div></div>
+      <div class="cell"><div class="lbl">Married</div><div class="val">Tan Cheng Hoe · 1947</div></div>
+      <div class="cell"><div class="lbl">Died</div><div class="val">Penang · 2005 (age 84)</div></div>
+    </div>
+
+    <div class="story">
+      <p>She was born in the back room of the Yap goldsmith house and carried, before sunrise, in a basket of temple cloth, four streets to the door of Lee Poh Soon. By the time the streetlamps were re-lit she had a Lee surname and a Lee crib. She believed, for the first eighty-three years of her life, that she was the second daughter of a Penang cloth merchant.</p>
+
+      <p>She grew up Lee. She walked to the same school as her older brother Boon Kuan; she learned to embroider from Auntie Eng Neo (whom she did not know was her aunt by blood); she received the same dowry as a true Lee daughter. In 1947, at twenty-six, she married into the Tan house — <strong>Cheng Hoe</strong>, twenty-seven, only son of the towkay of See Hai Chan. The match was arranged by her mother and her aunt-by-marriage Eng Siew, neither of whom told her, or her husband, that the marriage was, by blood, between first cousins.</p>
+
+      <p>She bore two sons — Soon Heng in 1948, Albert in 1950. She took over the See Hai Chan ledgers in 1949 and ran them for forty-four years. She knew, to the cent, every payment the Tan house made — including the small monthly envelope that left the godown for thirty-six years, addressed in her own careful hand to a Balik Pulau fishmonger's family on behalf of a kitchen woman whose name she had never been told.</p>
+
+      <span class="pull">"A house has many lamps. Some of them burn for people you will never meet."</span>
+
+      <p>She wrote those entries simply as <em>"oil for the lamp."</em> She never asked who the lamp was for. The Tan kitchen and the Tan godown both knew her as the woman who saw everything and reported nothing.</p>
+
+      <p>She outlived her husband by ten quiet years. In her last years she grew small and sharp-eyed; she spent Sunday afternoons with her granddaughter Bibi Rose, sorting the cupboard above her dressing table. The night before she died in March 2005, she put a small brass key into Bibi's hand and said: <em>"Top shelf. The enamel tin behind the camphor box. Open it when you are ready. There are three brooches inside, and the truth of one of them will hurt the family if anyone is still alive who would mind. I will not be."</em> She died at eighty-four. The tin was marked, in her own hand: <em>"Lee — return to Yap if asked."</em></p>
+    </div>
+
+    <div class="footer"><span>李明月 · 1921 – 2005</span><span>second daughter · cousin-bride · keeper of the tin</span></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     #9 TAN AH CAI
+     ============================================================ -->
+<div class="page">
+  <div class="frame"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+
+  <div class="char">
+    <div class="head">
+      <div class="num-circle"><div class="n">9</div><div class="t">2ND GEN</div></div>
+      <div class="title">
+        <h1>Tan Ah Cai</h1>
+        <div class="zh">陳亞財</div>
+        <div class="role"><em>Seoy Yee Kia</em> 細姨仔 · son of Auntie Mei · went into the jungle</div>
+      </div>
+      <div class="stamps">
+        <div class="s">🌿</div>
+        <div class="lbl">JUNGLE</div>
+      </div>
+    </div>
+
+    <div class="meta">
+      <div class="cell"><div class="lbl">Born</div><div class="val">Tan kitchen · 1925</div></div>
+      <div class="cell"><div class="lbl">Last seen</div><div class="val">Kulim road · September 1945</div></div>
+      <div class="cell"><div class="lbl">Fate</div><div class="val">Unknown · presumed dead in the Emergency</div></div>
+    </div>
+
+    <div class="story">
+      <p>Born in the Tan kitchen to <strong>Lim Mei Lan</strong> and <strong>Tan Keo San</strong>. Eng Siew permitted his birth in the back of the house on the condition that he never appear in the front rooms, never sit at the long table, never take the surname Tan in any registry. He was given the kitchen-name Ah Cai — <em>Ah Choy</em>, "wealth boy" — by his mother, half-prayer and half-irony. The kulis at Weld Quay called him by the name the front of the house never used: <em>Seoy Yee Kia</em> 細姨仔, "the mistress's son."</p>
+
+      <p>He was never sent to school. By eight he could carry a sack of rice on each shoulder; by twelve he was a recognised face along the entire length of the quay. His older half-brother Cheng Hoe, five years his senior, was forbidden to speak to him in public and rarely did so in private. They passed each other on the back stairs of the house without acknowledgement for twenty-one years.</p>
+
+      <p>When the Japanese came in 1941, Ah Cai was sixteen. He had no protection — no school certificate, no family registration, no surname. He stayed off the streets at first, but by 1942 he had crossed into the hills around Kulim and joined the <strong>Malayan People's Anti-Japanese Army (MPAJA)</strong>. He came down once, in 1943, to the back gate of the house, asking for shelter from the Kempeitai. His half-brother Cheng Hoe — terrified for the household — turned him away. Ah Cai walked back into the hills before sunrise. Cheng Hoe never spoke of that night.</p>
+
+      <span class="pull">"He had no schoolbook to burn, no surname to lose, and no front door to knock on."</span>
+
+      <p>The war ended in August 1945. Ah Cai came down from the hills once more — a thin, sun-darkened twenty-year-old in canvas trousers — and stood at the back gate for an hour. His mother brought him rice; his half-brother brought him an envelope. He took both, said almost nothing, and walked back up the road toward Kulim with the men who would not lay down their arms when the Communist Party of Malaya refused the British surrender terms. He was last seen on the trunk road north of Kulim in September 1945. The Emergency was declared three years later. He has never been found.</p>
+
+      <p>His mother set a place for him at every Tok Panjang for fifty-three more years. The plate is still on the kitchen shelf. Bibi sets it out each Cap Goh Mei.</p>
+    </div>
+
+    <div class="footer"><span>陳亞財 · 1925 – ?</span><span>the mistress's son · the empty plate</span></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     #10 KHOO CHIN NAM
+     ============================================================ -->
+<div class="page">
+  <div class="frame"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+
+  <div class="char">
+    <div class="head">
+      <div class="num-circle"><div class="n">10</div><div class="t">SINGAPORE</div></div>
+      <div class="title">
+        <h1>Khoo Chin Nam</h1>
+        <div class="zh">邱振南</div>
+        <div class="role">Singapore shipping tycoon · widower · brief husband to Chen Neo</div>
+      </div>
+      <div class="stamps">
+        <div class="s">⛵</div>
+        <div class="lbl">SINGAPORE</div>
+      </div>
+    </div>
+
+    <div class="meta">
+      <div class="cell"><div class="lbl">Born</div><div class="val">Singapore, 1898</div></div>
+      <div class="cell"><div class="lbl">Married Chen Neo</div><div class="val">November 1948</div></div>
+      <div class="cell"><div class="lbl">Died</div><div class="val">Singapore · August 1949 (age 51)</div></div>
+    </div>
+
+    <div class="story">
+      <p>Chin Nam was head of the southern arm of the Khoo clan, with shipping offices in Singapore, Malacca, and Surabaya. He was Hokkien by descent, Peranakan by marriage, and English-educated in Raffles. By 1948 he was fifty years old, a widower of three years, with one grown son already running the Singapore office and a granddaughter learning her letters in a teakwood schoolroom in Emerald Hill.</p>
+
+      <p>He was not looking for more children. He was looking for a Penang alliance — the post-war Penang shipping trade was reopening, See Hai Chan controlled the northern jetties, and the Khoo office in Singapore needed a Penang cousin to walk into Cheng Hoe's parlour without an introduction.</p>
+
+      <p>Through a Beach Street go-between, he was introduced to <strong>Tan Chen Neo</strong> — twenty-three, youngest sister of Cheng Hoe, fluent in three languages, famous for her embroidery, and unmarried because the war had taken every suitable suitor. The match was arranged across two dinners. <em>"A Nyonya daughter does not say no, and a Tan son does not ask twice."</em></p>
+
+      <span class="pull">"Marry the alliance. The husband is a bonus."</span>
+
+      <p>Chen Neo crossed the causeway in November 1948 in a kebaya the colour of young pomelo leaf, with kasut manik she had not yet learned to make. Chin Nam died of a sudden heart attack at his own breakfast table eleven months later, in August 1949. There were no children from the marriage. The Singapore branch continued through the son of his first marriage — and one great-granddaughter of that line, <strong>Hooi Wen</strong>, would walk back into the Tan story seventy-two years later.</p>
+
+      <p>His photograph still hangs in the Emerald Hill drawing room. Chen Neo never took it down.</p>
+    </div>
+
+    <div class="footer"><span>邱振南 · 1898 – 1949</span><span>tycoon · eleven-month husband · the door he opened</span></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     #11 TAN CHEN NEO
+     ============================================================ -->
+<div class="page">
+  <div class="frame"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+
+  <div class="char">
+    <div class="head">
+      <div class="num-circle"><div class="n">11</div><div class="t">SINGAPORE</div></div>
+      <div class="title">
+        <h1>Tan Chen Neo</h1>
+        <div class="zh">陳珍娘</div>
+        <div class="role">Youngest sister of Cheng Hoe · Singapore widow · beadwork master</div>
+      </div>
+      <div class="stamps">
+        <div class="s">🪡</div>
+        <div class="lbl">BEADER</div>
+      </div>
+    </div>
+
+    <div class="meta">
+      <div class="cell"><div class="lbl">Born</div><div class="val">Armenian Street, 1925</div></div>
+      <div class="cell"><div class="lbl">Married</div><div class="val">Khoo Chin Nam · November 1948</div></div>
+      <div class="cell"><div class="lbl">Died</div><div class="val">Emerald Hill, Singapore · 2018 (age 93)</div></div>
+    </div>
+
+    <div class="story">
+      <p>Chen Neo was born five years after her brother Cheng Hoe and the same year as Ah Cai — though the two children never knew each other. She was raised in the front rooms; he was raised in the back. She lost her father in the bombing at sixteen, the war at her brother's side until twenty, and crossed the causeway as a bride the November after the Lee–Tan wedding. <em>A Nyonya daughter does not say no.</em></p>
+
+      <p>Eleven months later she was a widow. She did not return to Penang.</p>
+
+      <p>She stayed in the teakwood Emerald Hill house Chin Nam had left her, and she did the only thing the Singapore aunties did not expect of her — she <strong>learned to bead</strong>. She apprenticed herself, at twenty-five, to her stepson's mother-in-law, an old Hokkien beader from Telok Ayer who had stitched kasut manik for Singapore brides since the 1890s.</p>
+
+      <span class="pull">"If I cannot keep a husband, I will keep a craft. The needle does not die in eleven months."</span>
+
+      <p>For sixty-eight years she stitched. By 1990 she was the named master of three Singapore showrooms; by 2010 her signature <strong>peony-toe</strong> pattern hung in the Peranakan Museum on Armenian Street, four streets from the house she was born in. She trained four apprentices and outlived two of them.</p>
+
+      <p>In her last years she met the great-granddaughter of her late husband's first marriage — a young Singapore-Penang architect named <strong>Hooi Wen</strong> — and gave her, with a small smile, a pair of slippers that had not been worn since 1949. She lived to see the slippers walk down the aisle in November 2020 at the Penang Peranakan Mansion. She died eighteen months later, ninety-three years old, in her own Emerald Hill bed, beneath the photograph of the husband she barely knew.</p>
+    </div>
+
+    <div class="footer"><span>陳珍娘 · 1925 – 2018</span><span>widow at twenty-four · master at ninety</span></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     #12 LEE BOON KUAN
+     ============================================================ -->
+<div class="page">
+  <div class="frame"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+
+  <div class="char">
+    <div class="head">
+      <div class="num-circle"><div class="n">12</div><div class="t">LEE</div></div>
+      <div class="title">
+        <h1>Lee Boon Kuan</h1>
+        <div class="zh">李文坤</div>
+        <div class="role">Only blood son of the Lees · the brother who never asked</div>
+      </div>
+      <div class="stamps">
+        <div class="s">✝</div>
+        <div class="lbl">FEVER</div>
+      </div>
+    </div>
+
+    <div class="meta">
+      <div class="cell"><div class="lbl">Born</div><div class="val">Lee house · 1918</div></div>
+      <div class="cell"><div class="lbl">Married</div><div class="val">never</div></div>
+      <div class="cell"><div class="lbl">Died</div><div class="val">Lee house · 1950 (age 32)</div></div>
+    </div>
+
+    <div class="story">
+      <p>Boon Kuan was the eldest and only blood son of Lee Poh Soon and Yap Eng Neo. He was five years old when his mother came home one winter morning carrying an infant girl wrapped in temple cloth. He was the only person in the household who never seemed to wonder where she had come from. He simply called her <em>mei mei</em>, lifted her into his lap, and went on with breakfast.</p>
+
+      <p>He grew up trailing his father through the cloth shop and his sister through the kitchen, equally devoted to both. He trained as a clerk, learned to fold a length of batik in three different ways, and inherited his father's careful manner. He was the kind of older brother who carried his sister's school satchel right up to the schoolhouse gate every morning, even in 1936 when she was old enough to carry it herself.</p>
+
+      <p>He never married. The Lees teased him gently about it — there were two perfectly suitable Tan daughters and three Khoo cousins his mother had carefully introduced him to — and he was always polite, always non-committal. <em>"Soon, soon,"</em> he would say, and change the subject.</p>
+
+      <span class="pull">"The brother who walked her to school every morning. The brother who never asked the question that would have hurt her."</span>
+
+      <p>He saw his sister married into the Tan house in 1947, walked her down the aisle in his father's stead because Poh Soon was too ill, and died three years later — in the autumn of 1950 — of <em>"a fever that took three days."</em> He was thirty-two. He was conscious until the second night. He asked his sister for a glass of water and a handful of her embroidery threads. He held them in his palm. He did not let go.</p>
+
+      <p>His photograph hangs on the family altar in the Lee house. There has been an empty seat at every Lee dinner since 1950 — not formally reserved, but never offered to a guest. The family knows.</p>
+    </div>
+
+    <div class="footer"><span>李文坤 · 1918 – 1950</span><span>brother · clerk · the empty seat at every Lee dinner</span></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     CHAPTER THREE DIVIDER
+     ============================================================ -->
+<div class="page">
+  <div class="frame"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+
+  <div class="divider">
+    <div class="label">CHAPTER THREE</div>
+    <h2>The Two Branches</h2>
+    <div class="ornament">✦  ✦  ✦</div>
+    <div class="desc">
+      Penang &amp; Sydney, 1948 – 2024. The same parents, two different houses.
+      One brother takes the warehouse; the other takes the watch. One marries
+      a Catholic banker from KL; the other marries a girl from a small Ipoh
+      kitchen. The Peranakan culture passes cleanly past the elder son and
+      lands, generation later, on the younger's daughter.
+    </div>
+    <div class="ornament">🌺</div>
+  </div>
+</div>
+
+<!-- ============================================================
+     #13 ALBERT TAN
+     ============================================================ -->
+<div class="page">
+  <div class="frame"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+
+  <div class="char">
+    <div class="head">
+      <div class="num-circle"><div class="n">13</div><div class="t">3RD GEN</div></div>
+      <div class="title">
+        <h1>Albert Tan</h1>
+        <div class="zh">陳順發</div>
+        <div class="role">Tan Soon Fatt · younger son · towkay of See Hai Chan (1995–2021)</div>
+      </div>
+      <div class="stamps">
+        <div class="s">⚓</div>
+        <div class="lbl">SEE HAI CHAN</div>
+      </div>
+    </div>
+
+    <div class="meta">
+      <div class="cell"><div class="lbl">Born</div><div class="val">Penang, 1950</div></div>
+      <div class="cell"><div class="lbl">Married</div><div class="val">Alice Wong · 1994 (St Andrew's Cathedral, Singapore)</div></div>
+      <div class="cell"><div class="lbl">Died</div><div class="val">Penang · 2021 (age 71, pancreatic cancer)</div></div>
+    </div>
+
+    <div class="story">
+      <p>Albert was the second son. By the family rule, the watch was meant for the youngest — but the family rule had been quietly amended by his father long before he was old enough to ask: the watch went to whichever boy was gentlest, and Soon Heng (older by two years) had been the gentler. Albert grew up understanding, from age five, that he would inherit the warehouse and not the watch. He did not seem to mind.</p>
+
+      <p>He was sent to Sydney at eighteen for a commerce degree, took the English name <em>Albert</em> in his second year, and never quite put it down. He came home in 1976 with a rugby blue, a deep tan, and a clear plan for what See Hai Chan should look like by 2010. He worked under his father at the warehouse for nineteen years. When Cheng Hoe died in 1995 he became towkay at forty-five.</p>
+
+      <p>He modernised the warehouses, container-ised the fleet, listed the company on Bursa Malaysia in 2008 at a valuation his great-grandfather would not have believed. He wore Italian shoes. He spoke Hokkien only to suppliers. He attended Bibik Rose's biennial Tok Panjang because his mother insisted, and he ate three pieces of kuih lapis out of politeness while his wife Alice talked quietly with the cousins.</p>
+
+      <span class="pull">"The Peranakan things — the kebaya, the kuih, the tin in the cupboard — those are my brother's. The boats are mine. We agreed when we were children."</span>
+
+      <p>He met <strong>Alice Wong</strong> at a Hong Kong banking conference in 1992. They married in 1994 at St Andrew's Cathedral in Singapore, in a white gown and a morning suit. Their only son <strong>Kelvin</strong> arrived in 1995, a year after Cheng Hoe died.</p>
+
+      <p>Albert was diagnosed with pancreatic cancer in early 2021 and died in November of the same year, aged seventy-one. He left See Hai Chan in the hands of a board of trustees with his son Kelvin as designated heir, the warehouse on Beach Street to his brother to do with as he wished, and a small handwritten note to Bibik Rose asking her to make sure the kitchen tin was passed on properly. <em>"The boats are mine. The brooches are yours. Do them well."</em></p>
+    </div>
+
+    <div class="footer"><span>陳順發 · 1950 – 2021</span><span>second son · towkay · the boats man</span></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     #14 ALICE WONG
+     ============================================================ -->
+<div class="page">
+  <div class="frame"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+
+  <div class="char">
+    <div class="head">
+      <div class="num-circle"><div class="n">14</div><div class="t">3RD GEN</div></div>
+      <div class="title">
+        <h1>Alice Wong</h1>
+        <div class="zh">王愛麗</div>
+        <div class="role">Albert's wife · KL banker · widow since 2021</div>
+      </div>
+      <div class="stamps">
+        <div class="s">✚</div>
+        <div class="lbl">CATHOLIC</div>
+      </div>
+    </div>
+
+    <div class="meta">
+      <div class="cell"><div class="lbl">Born</div><div class="val">Kuala Lumpur, 1970</div></div>
+      <div class="cell"><div class="lbl">Married</div><div class="val">Albert Tan · 1994 (Singapore)</div></div>
+      <div class="cell"><div class="lbl">Living</div><div class="val">Kuala Lumpur · still on the See Hai Chan board</div></div>
+    </div>
+
+    <div class="story">
+      <p>Alice was KL-born, KL-raised, Wharton-educated, Catholic-married. Her grandmother had kept a brass kamcheng on a teak shelf — so she was, by ancestry, a true nyonya — but the kamcheng had been polished as decoration, not used as a vessel, since 1965, and Alice had grown up speaking English at home, French at school, and Cantonese to her amah. She did not learn to make a single Peranakan dish until her mother-in-law Beng Guat taught her one, gently and only once, in the spring of 2002.</p>
+
+      <p>She met Albert at a banking conference in Hong Kong in 1992. They married in 1994 at St Andrew's Cathedral, Singapore, in a white gown — the first Tan bride in three generations not to wear kebaya. Beng Guat attended the ceremony in a beige cheongsam and said nothing about it.</p>
+
+      <span class="pull">"I love this family. I keep a respectful distance from the kitchen."</span>
+
+      <p>She gave their only son an English name first and a Chinese name second. She throws Christmas dinner at the KL house every year. She attends Bibik Rose's biennial Tok Panjang in Penang faithfully, brings a thoughtful gift, drinks her tea in the parlour, and does not enter the kitchen. The cousins love her for the precise distance she keeps. <em>"Alice is the only one who has never pretended,"</em> Bibi has said.</p>
+
+      <p>Since Albert's death in 2021 she has remained on the See Hai Chan board as the family's designated voice while Kelvin is being trained into the towkay role. She has, twice, quietly approved board decisions Albert would have argued against. She has, three times, deferred to Bibi on family matters that touched the kitchen. The arrangement works.</p>
+    </div>
+
+    <div class="footer"><span>王愛麗 · 1970 –</span><span>banker · widow · respectful distance</span></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     #15 TAN SOON HENG
+     ============================================================ -->
+<div class="page">
+  <div class="frame"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+
+  <div class="char">
+    <div class="head">
+      <div class="num-circle"><div class="n">15</div><div class="t">3RD GEN</div></div>
+      <div class="title">
+        <h1>Tan Soon Heng</h1>
+        <div class="zh">陳順興</div>
+        <div class="role">Elder son of Cheng Hoe · heritage architect · keeper of the watch</div>
+      </div>
+      <div class="stamps">
+        <div class="s">⌚</div>
+        <div class="lbl">WATCH</div>
+      </div>
+    </div>
+
+    <div class="meta">
+      <div class="cell"><div class="lbl">Born</div><div class="val">Armenian Street, 1948</div></div>
+      <div class="cell"><div class="lbl">Married</div><div class="val">Lim Soo Hui · 1990</div></div>
+      <div class="cell"><div class="lbl">Living</div><div class="val">Stewart Lane, Penang (78, post-stroke)</div></div>
+    </div>
+
+    <div class="story">
+      <p>Soon Heng was the elder of Cheng Hoe and Beng Guat's two boys — born in 1948, two years before his brother Albert. He was the gentler child, slow to speak, slow to anger, the one who would sit on the kitchen step beside Mei Lan watching her chop shallots while Albert was outside organising the neighbourhood boys into a football game.</p>
+
+      <p>His father had quietly amended the family rule before either boy was old enough to ask: the watch would go to whichever son grew up gentlest, not necessarily the youngest. By the time Soon Heng was twelve, the decision was clear. On his twenty-first birthday in 1969 his father placed the brass <em>jam saku</em> in his palm. It was already sixty-four years old. It still kept perfect time.</p>
+
+      <p>He trained as a heritage architect at Universiti Sains Malaysia and restored seventeen Penang shophouses between 1980 and 2010, including the See Hai Chan godown on Beach Street and the sky-blue corner on Stewart Lane that became his own house. He moved slowly. He wound the watch at six every morning. He kept his brother out of every conversation about Peranakan heritage and his brother kept him out of every conversation about board valuations. Both arrangements worked.</p>
+
+      <span class="pull">"My brother got the boats. I got the time. Time is heavier than you think."</span>
+
+      <p>He had a daughter long before he married. <strong>Bibik Rose</strong> was born in 1974 — Soon Heng was twenty-six, the relationship a quiet one the family folded into itself without ceremony. The child's mother left the household within a year; Beng Guat raised the baby in the front room and Mei Lan in the kitchen. Soon Heng waited sixteen more years to marry. He met <strong>Lim Soo Hui</strong> properly in 1986 in his own mother's kitchen — she was twenty, four years into her apprenticeship beside Mei Lan, with bean curd on her sleeve and Bibi (then twelve) chopping shallots beside her. They married in 1990 in a small Stewart Lane ceremony with seventeen guests and a kamcheng of cuci mulut sealed by Mei Lan with her own wax. Their son <strong>Wei Wen</strong> arrived later that year. From the day Soo Hui crossed the threshold she has been Bibi's only mother — and Bibi calls her so.</p>
+
+      <p>In 2024, at seventy-six, Soon Heng suffered a stroke. He has recovered most of his speech but cannot wind the watch with his left hand any more. The brass piece now sits on his bedside table in a small porcelain dish. He looks at it every morning. His daughter takes turns winding it for him.</p>
+    </div>
+
+    <div class="footer"><span>陳順興 · 1948 –</span><span>elder son · architect · the watch on the bedside dish</span></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     #16 LIM SOO HUI
+     ============================================================ -->
+<div class="page">
+  <div class="frame"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+
+  <div class="char">
+    <div class="head">
+      <div class="num-circle"><div class="n">16</div><div class="t">3RD GEN</div></div>
+      <div class="title">
+        <h1>Lim Soo Hui</h1>
+        <div class="zh">林素慧</div>
+        <div class="role">Soon Heng's wife · Mei Lan's niece · author of <em>Resipi Auntie Mei</em></div>
+      </div>
+      <div class="stamps">
+        <div class="s">📜</div>
+        <div class="lbl">RESIPI</div>
+      </div>
+    </div>
+
+    <div class="meta">
+      <div class="cell"><div class="lbl">Born</div><div class="val">Ipoh, 1966</div></div>
+      <div class="cell"><div class="lbl">Married</div><div class="val">Tan Soon Heng · 1990</div></div>
+      <div class="cell"><div class="lbl">Living</div><div class="val">Stewart Lane, Penang</div></div>
+    </div>
+
+    <div class="story">
+      <p>Soo Hui was the daughter of <strong>Lim Mei Lan's only brother</strong> — a quiet Ipoh barber who had grown up not knowing where his elder sister had gone, and who, in 1980, finally tracked her down to a kitchen on Armenian Street. He visited her once. He left her a photograph of his daughter, then sixteen, who had inherited his sister's wide eyes and quick hands. He died of a stroke six months later. The photograph stayed pinned above Mei Lan's chopping block for the rest of her life.</p>
+
+      <p>In 1982, Soo Hui — sixteen, freshly orphaned, with one school holiday and a small inheritance from her father's barber chair — took the bus from Ipoh to Penang and walked into the Tan kitchen with a school exercise book and one question:</p>
+
+      <span class="pull">"Auntie, may I write down what your hands do?"</span>
+
+      <p>Mei Lan looked at her once — at the Lim surname, at the shape of her face, at her dead brother's wide eyes — and made room beside the chopping block. <em>"My hands cannot wait for your pen. Stand here, watch, copy."</em></p>
+
+      <p>For ten years Soo Hui stood there. She came back every school holiday, every weekend after she finished college, every day after she married into the family in 1990. She copied <strong>240 recipes</strong> by hand. She measured nothing in cups; she measured in <em>"three fingers of belacan,"</em> <em>"two thumbs of gula melaka,"</em> the way Mei Lan did.</p>
+
+      <p>In 1992 — three years before Mei Lan's good last year — the cookbook was published. The dedication is what made Mei Lan finally weep at the kitchen table: <em>"To Auntie Mei (Lim Mei Lan 林美蘭) — the woman the family forgot to name."</em> Mei Lan had not seen her own full name written down since 1920.</p>
+
+      <p>Soo Hui is also the only daughter-in-law who has ever asked, in writing, what happened to <strong>Ah Cai</strong>. She wrote three letters between 1995 and 2000 — to the Pahang state archive, to a former MPAJA veterans' association in Singapore, and to a Kulim village headman. None of the three replies told her anything. She still keeps all four letters in a folder. She still hopes.</p>
+    </div>
+
+    <div class="footer"><span>林素慧 · 1966 –</span><span>niece · apprentice · the one who finally wrote her name</span></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     CHAPTER FOUR DIVIDER
+     ============================================================ -->
+<div class="page">
+  <div class="frame"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+
+  <div class="divider">
+    <div class="label">CHAPTER FOUR</div>
+    <h2>2026</h2>
+    <div class="ornament">✦  ✦  ✦</div>
+    <div class="desc">
+      Penang, May 2026. The cousins fly home. The granddaughter who opened
+      the tin sets the long table for forty. The bride who closed the
+      Singapore alliance brings her own grandmother's slippers back across
+      the causeway. The Sydney-Melbourne-London grandson sits at the
+      head of the boats and quietly admits he does not know how to wind
+      the watch.
+    </div>
+    <div class="ornament">🌺</div>
+  </div>
+</div>
+
+<!-- ============================================================
+     #17 BIBIK ROSE
+     ============================================================ -->
+<div class="page">
+  <div class="frame"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+
+  <div class="char">
+    <div class="head">
+      <div class="num-circle"><div class="n">17</div><div class="t">HOST</div></div>
+      <div class="title">
+        <h1>Bibik Rose</h1>
+        <div class="zh">陳玫瑰</div>
+        <div class="role">Daughter of Soon Heng &amp; Soo Hui · matriarch of 2026 · host of tonight</div>
+      </div>
+      <div class="stamps">
+        <div class="s">🌺</div>
+        <div class="lbl">BIBI</div>
+      </div>
+    </div>
+
+    <div class="meta">
+      <div class="cell"><div class="lbl">Born</div><div class="val">Stewart Lane, 1974</div></div>
+      <div class="cell"><div class="lbl">Married</div><div class="val">Lim Boon Pin · 1999</div></div>
+      <div class="cell"><div class="lbl">Living</div><div class="val">Penang · the sky-blue shophouse</div></div>
+    </div>
+
+    <div class="story">
+      <p>Rose was the only daughter and elder child of Soon Heng and Soo Hui — a quiet, exact-eyed girl who learned to fold a kebaya at six, mix gula melaka syrup at eight, and pin a kerongsang at ten. She trained as a Peranakan textile conservator at the Asian Civilisations Museum in Singapore and came home to Penang in 2003 with a small studio above her father's office on Stewart Lane.</p>
+
+      <p>She is the only grandchild of Cheng Hoe and Beng Guat in whom the Peranakan culture took root completely — the kebaya, the kuih, the beadwork, the prayers, the language, the dishes the kitchen had never been allowed to teach the front rooms. Mei Lan finished what her own daughter-in-law-by-marriage had started: in Mei's last good year, twenty-four-year-old Rose sat on the kitchen stool every Sunday, then every day in the last week, and learned the seven recipes Soo Hui had not yet been able to write down.</p>
+
+      <p>She married <strong>Lim Boon Pin</strong> — a quiet bookseller from Kapitan Keling Street — in 1999 and raised two children, both now away at university. The locals called her <em>Bibik</em> before she had earned the title because she had the bearing of one already.</p>
+
+      <p>She was twenty-four when her grandmother <strong>Lee Beng Guat</strong> handed her the brass key in March 2005 and named the cupboard. She was twenty-four when she opened the door, found the small enamel tin marked <em>"Lee — return to Yap if asked,"</em> and decided, on the spot, not to open the tin yet. She put it back. She did not open it for nineteen years.</p>
+
+      <span class="pull">"Stones do not lie. People forget how to read them. So I am writing the family back into reading."</span>
+
+      <p>In 2024 her father had his stroke. The brass watch came down off his shirt and onto a porcelain dish on his bedside table. Rose understood, suddenly, that she had become the person responsible for what would happen next — to the watch, to the tin, to the recipes, to the kamcheng, to the names that the family had quietly stopped saying out loud. She opened the tin three weeks later. There were three brooches. There was a folded note in Eng Siew's handwriting and a folded reply in Eng Neo's. There was the truth of 1923. There was the truth of who Beng Guat had been all along.</p>
+
+      <p>She spent eighteen months interviewing everyone still alive — Aunt Alice in KL, Uncle Wei Wen at the hospital, Soo Hui every evening at the kitchen table, her own father in slow patient afternoons. She compiled this storybook with her own hand. It is her gift to the cousins coming home in May 2026. The tin sits, open, on the parlour altar tonight.</p>
+    </div>
+
+    <div class="footer"><span>陳玫瑰 · 1974 –</span><span>conservator · matriarch · the one who opened the tin</span></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     #18 DR TAN WEI WEN
+     ============================================================ -->
+<div class="page">
+  <div class="frame"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+
+  <div class="char">
+    <div class="head">
+      <div class="num-circle"><div class="n">18</div><div class="t">4TH GEN</div></div>
+      <div class="title">
+        <h1>Dr Tan Wei Wen</h1>
+        <div class="zh">陳偉文</div>
+        <div class="role">Younger child of Soon Heng &amp; Soo Hui · doctor · Bibi's brother</div>
+      </div>
+      <div class="stamps">
+        <div class="s">⚕</div>
+        <div class="lbl">DOCTOR</div>
+      </div>
+    </div>
+
+    <div class="meta">
+      <div class="cell"><div class="lbl">Born</div><div class="val">Penang, 1990</div></div>
+      <div class="cell"><div class="lbl">Married</div><div class="val">Khoo Hooi Wen · November 2020</div></div>
+      <div class="cell"><div class="lbl">Living</div><div class="val">Penang &amp; Singapore</div></div>
+    </div>
+
+    <div class="story">
+      <p>Wei Wen was the younger child — sixteen years younger than his sister Bibi — and the surprise of the family. His mother Soo Hui was forty-four when he was born; his father Soon Heng was already greying. Bibi taught him to read at five and he taught her to ride a bicycle at seven, and they have looked out for each other in opposite directions ever since.</p>
+
+      <p>He started university intending to follow his father into architecture — the kind of slow, careful restoration work Soon Heng was known for. In his second year he changed his mind, transferred to medicine at NUS, and never quite explained why. (His mother says it was the year of his grandfather Cheng Hoe's last illness; his sister says it was the year he watched a great-aunt die in a public hospital ward without a doctor who spoke Hokkien. He says only: <em>"Buildings outlast people. I wanted to do the other one.")</em></p>
+
+      <p>He came home to Penang in 2017 as an internal-medicine specialist at the General Hospital. He met <strong>Khoo Hooi Wen</strong> at a Singapore heritage conference that same year — she was there speaking on shophouse restoration; he was there because Bibi had insisted. They did not know, at first, that their families had once been arranged into a marriage that lasted eleven months in 1948.</p>
+
+      <p>It was Aunt Chen Neo, then ninety-two, who put the pieces together over a Sunday lunch in Emerald Hill in March 2018. <em>"You are the Tan boy. She is my husband's grand-girl. Sit down. I have been waiting seventy years for this dinner."</em></p>
+
+      <span class="pull">"What our great-grandparents could not finish — we will."</span>
+
+      <p>They married in November 2020 at the Penang Peranakan Mansion, on the same date Chin Nam and Chen Neo had married seventy-two years earlier. The wax of an old kamcheng cuci mulut — sealed at Chen Neo's engagement in October 1948, never opened — was finally cracked at the banquet. Hooi Wen did it herself with her own thumbnail. Aunt Chen Neo, ninety-five, watched from a teak chair in the front row and did not cry.</p>
+
+      <p>Wei Wen still keeps a small framed photograph of Khoo Chin Nam on his Penang desk, beside one of his own grandfather Cheng Hoe — so the two old men can finally meet.</p>
+    </div>
+
+    <div class="footer"><span>陳偉文 · 1990 –</span><span>doctor · groom of 2020 · the brother</span></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     #19 KHOO HOOI WEN
+     ============================================================ -->
+<div class="page">
+  <div class="frame"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+
+  <div class="char">
+    <div class="head">
+      <div class="num-circle"><div class="n">19</div><div class="t">4TH GEN</div></div>
+      <div class="title">
+        <h1>Khoo Hooi Wen</h1>
+        <div class="zh">邱慧雯</div>
+        <div class="role">Great-granddaughter of Khoo Chin Nam (1st-marriage line) · architect · the bride who closed the alliance</div>
+      </div>
+      <div class="stamps">
+        <div class="s">⛵</div>
+        <div class="lbl">SINGAPORE</div>
+      </div>
+    </div>
+
+    <div class="meta">
+      <div class="cell"><div class="lbl">Born</div><div class="val">Singapore, 1991</div></div>
+      <div class="cell"><div class="lbl">Married</div><div class="val">Tan Wei Wen · November 2020</div></div>
+      <div class="cell"><div class="lbl">Living</div><div class="val">Singapore &amp; Penang</div></div>
+    </div>
+
+    <div class="story">
+      <p>Hooi Wen is the great-granddaughter of Khoo Chin Nam through his first marriage — the line that continued in Singapore long after the brief Penang chapter of 1948–1949. Her grandfather Khoo Boon Siang (Chin Nam's only son) ran the Singapore office until 1992. Her father runs it today. She grew up in a teakwood Emerald Hill house four streets from Aunt Chen Neo's, knowing her great-grandfather had once had a Penang wife who outlived him by sixty-nine years. She did not know, until 2017, that the Penang wife had become a beadwork master and was still alive.</p>
+
+      <span class="pull">"Some marriages take three generations to finish their conversation."</span>
+
+      <p>She trained as an architect at NUS and met <strong>Wei Wen</strong> at a Singapore heritage conference in 2017 — both speaking on the same panel, both visibly bored by the same keynote. They had coffee afterwards and discovered, by way of a mutual photograph in Wei Wen's phone, that her great-grandfather and his great-aunt had once been husband and wife.</p>
+
+      <p>She met Aunt Chen Neo for the first time in March 2018. They drank kopi-o for three hours. Chen Neo gave her a pair of <em>kasut manik</em> on that visit — slippers from her own brief wedding to Chin Nam in November 1948, never worn after his death eleven months later. The peony-toe pattern is Chen Neo's signature. Hooi Wen wore the slippers under her own wedding kebaya in November 2020 — seventy-two years and one week after they were first stitched.</p>
+
+      <p>She is, in a quiet way, the bride who closed the longest open promise in the Tan-Khoo family. She and Wei Wen now run a joint heritage studio with offices in both cities. Their first child is due in October 2026.</p>
+    </div>
+
+    <div class="footer"><span>邱慧雯 · 1991 –</span><span>great-granddaughter · architect · bride of 2020</span></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     #20 KELVIN TAN
+     ============================================================ -->
+<div class="page">
+  <div class="frame"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+
+  <div class="char">
+    <div class="head">
+      <div class="num-circle"><div class="n">20</div><div class="t">4TH GEN</div></div>
+      <div class="title">
+        <h1>Kelvin Tan</h1>
+        <div class="zh">陳凱文</div>
+        <div class="role">Tan Kai Wen · only son of Albert &amp; Alice · See Hai Chan heir</div>
+      </div>
+      <div class="stamps">
+        <div class="s">⚓</div>
+        <div class="lbl">HEIR</div>
+      </div>
+    </div>
+
+    <div class="meta">
+      <div class="cell"><div class="lbl">Born</div><div class="val">Singapore, 1995</div></div>
+      <div class="cell"><div class="lbl">Lives</div><div class="val">Singapore (since 2018) · London (since 2022)</div></div>
+      <div class="cell"><div class="lbl">Inheriting</div><div class="val">See Hai Chan board chair, 2027</div></div>
+    </div>
+
+    <div class="story">
+      <p>Kelvin was born in Singapore the year his grandfather Cheng Hoe died, raised between KL and Melbourne (his mother insisted on a Catholic boarding school for the senior years), and now lives in London where he runs the European desk of a logistics fund that has bought a 14% stake in his own family's company. The recursion does not embarrass him. He thinks it is funny.</p>
+
+      <p>He was twenty-six when his father Albert died of pancreatic cancer in November 2021. He flew home for the funeral, sat through the wake in a black suit borrowed from his uncle Soon Heng, and signed his first See Hai Chan board paper four days later. He has chaired the strategy committee since 2023 and will take the full chair in 2027 when his mother steps down.</p>
+
+      <p>He knows the See Hai Chan balance sheet to four decimal places. He does not know which of his great-aunts wore which brooch. He has, until tonight, never been told the story of <strong>Ah Cai</strong>. He met Bibi properly for the first time at his father's funeral. They have spoken twice since.</p>
+
+      <span class="pull">"I know the boats. I do not yet know the kitchen. Tonight is the first time anyone has invited me into both rooms at once."</span>
+
+      <p>He flew in this morning from London for the 2026 reunion. Bibi has seated him beside Hooi Wen at the long table — deliberately. Hooi Wen is teaching him, between courses, the order in which the brooches should appear.</p>
+
+      <p>By tomorrow morning he will have heard, for the first time, the names <em>Lim Mei Lan</em>, <em>Yap Eng Hooi</em>, <em>Lee Beng Guat</em>, and <em>Tan Ah Cai</em> spoken aloud at his own family table. He will, in the months that follow, quietly endow a small Tan Family Archive at the Penang Peranakan Mansion in his late father's name. The first volume will be Soo Hui's cookbook. The second will be this storybook.</p>
+    </div>
+
+    <div class="footer"><span>陳凱文 · 1995 –</span><span>heir · the boats man's son · the next page</span></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     CLOSING — THE COUSIN
+     ============================================================ -->
+<div class="page">
+  <div class="frame"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+
+  <div class="char">
+    <div class="head">
+      <div class="num-circle"><div class="n">★</div><div class="t">YOU</div></div>
+      <div class="title">
+        <h1>You — the Cousin</h1>
+        <div class="zh">親人</div>
+        <div class="role">Newest face at the long table · May 2026</div>
+      </div>
+      <div class="stamps">
+        <div class="s">🪑</div>
+        <div class="lbl">SEATED</div>
+      </div>
+    </div>
+
+    <div class="meta">
+      <div class="cell"><div class="lbl">Arrived</div><div class="val">Penang reunion · May 2026</div></div>
+      <div class="cell"><div class="lbl">Generation</div><div class="val">4th, 5th, or by marriage</div></div>
+      <div class="cell"><div class="lbl">Tonight</div><div class="val">Listen. Ask. Read.</div></div>
+    </div>
+
+    <div class="story">
+      <p>You walked into this house tonight expecting dinner. Bibik Rose has handed you a card with your name on it, sat you at the long teakwood table, and put a glass of bandung in your hand before you could say hello. The kueh is already on the table. The candles are lit. The enamel tin is open on the altar.</p>
+
+      <p>Around you sit the people whose stories fill these pages — some of them in person, some only in photographs above the altar. You may already have noticed that some of them never met one another. You may already have noticed that some of them shared a kitchen, or a husband, or a secret, without ever sharing a sentence. You may already have noticed an empty plate on the kitchen shelf — that is for Ah Cai.</p>
+
+      <p>You are now, by sitting down, part of the conversation.</p>
+
+      <span class="pull">"You are not a stranger. You are the next page."</span>
+
+      <p>Read. Ask. Eat. Ask again. Bibik Rose will tell you everything you want to know — but only if you ask the right person about the right object. Some answers are in the brooches. Some are in the recipes. Some are in the chipped lid of a sambal jar. Some are sewn into a slipper. The watch is on Soon Heng's bedside table; he will let you wind it once if you ask gently.</p>
+
+      <p>By the end of tonight you will know things about this family that the family itself only learned in 2024. Carry them gently. They were quiet for a long time.</p>
+
+      <p><em>Welcome home, cousin.</em></p>
+    </div>
+
+    <div class="footer"><span>親人 · 2026 –</span><span>guest · cousin · the next page</span></div>
+  </div>
+</div>
+
+</body>
+</html>

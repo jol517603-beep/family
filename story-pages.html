@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Roots of the Rose · Mission 1 · The Story Cards (anonymous)</title>
+<!--
+  PRINT: A4 portrait · 5 pages · 4 anonymous story cards per page = 20 cards
+  Print 5 sets (one per team). Cut along dashed lines, shuffle, hand to team.
+
+  Goal: each card describes ONE Tan-family member without naming them.
+  Guests must read it and decide which character card (1–20) it belongs to.
+
+  HIDDEN secrets (never mentioned in any snippet):
+    · Eng Hooi being Beng Guat's biological mother
+    · The cousin marriage of Cheng Hoe & Beng Guat
+    · Mei Lan being Soo Hui's blood aunt
+    · Mei Lan's full real name "Lim Mei Lan"
+  These are revealed only when the locked recipe tin is opened.
+
+  Card labels are SHUFFLED — the order ①…⑳ does NOT match cards 1…20.
+-->
+<style>
+  @page { size: A4 portrait; margin: 0; }
+
+  :root {
+    --cream:#f6ecd2; --paper:#fbf4dd; --aged:#efdbb0; --ink:#3a2418;
+    --gold:#b8860b; --gold-2:#d4a73c; --jade:#2e7d5b;
+    --rose:#b91c4b; --rose-2:#d94872; --tan:#8b5a2b; --tan-2:#a47148;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: #2a1810;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: var(--ink);
+  }
+  body { padding: 12px; }
+  @media print { body { padding: 0; background: white; } }
+
+  .sheet {
+    width: 210mm;
+    height: 297mm;
+    margin: 0 auto 14px;
+    background: var(--cream);
+    background-image:
+      radial-gradient(ellipse at 8% 6%, rgba(184,134,11,0.10), transparent 45%),
+      radial-gradient(ellipse at 92% 94%, rgba(185,28,75,0.10), transparent 45%);
+    padding: 8mm;
+    page-break-after: always;
+    position: relative;
+    box-shadow: 0 14px 36px rgba(0,0,0,0.5);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 4mm;
+  }
+  @media print { .sheet { box-shadow: none; margin: 0; } }
+  .sheet:last-child { page-break-after: auto; }
+
+  .card {
+    background: var(--paper);
+    border: 2px dashed var(--tan);
+    border-radius: 3mm;
+    padding: 6mm 6mm 5mm 6mm;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .card::before {
+    content: "";
+    position: absolute; inset: 2mm;
+    border: 1px solid rgba(184,134,11,0.35);
+    border-radius: 2mm;
+    pointer-events: none;
+  }
+
+  /* corner ornaments — same family motif as character cards */
+  .card .corner {
+    position: absolute;
+    width: 10mm; height: 10mm;
+    background:
+      radial-gradient(circle at 50% 50%, var(--rose-2) 0 18%, transparent 20%),
+      radial-gradient(circle at 30% 30%, var(--gold-2) 0 12%, transparent 14%),
+      radial-gradient(circle at 70% 70%, var(--jade) 0 10%, transparent 12%);
+    opacity: 0.45;
+  }
+  .card .corner.tl { top: 4mm; left: 4mm; }
+  .card .corner.br { bottom: 4mm; right: 4mm; transform: scale(-1,-1); }
+
+  .label {
+    text-align: center;
+    color: var(--rose);
+    font-family: 'Brush Script MT', cursive;
+    font-size: 30pt;
+    line-height: 1;
+    margin-bottom: 1mm;
+  }
+  .sub {
+    text-align: center;
+    font-size: 8pt;
+    color: var(--tan-2);
+    font-style: italic;
+    letter-spacing: 0.2em;
+    margin-bottom: 4mm;
+  }
+
+  .body {
+    font-size: 10.5pt;
+    line-height: 1.45;
+    color: var(--ink);
+    flex: 1;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .body em { color: var(--rose); font-style: italic; }
+  .body b { color: var(--ink); font-weight: bold; }
+
+  .who {
+    margin-top: 3mm;
+    padding-top: 2mm;
+    border-top: 1px dotted var(--tan);
+    font-size: 8.5pt;
+    color: var(--ink-2, #5a3a24);
+    text-align: center;
+    font-style: italic;
+  }
+  .who b { color: var(--rose); font-style: normal; }
+
+  /* CUT line indicator */
+  .cut-icon {
+    position: absolute;
+    top: 50%; left: -3mm;
+    transform: translateY(-50%);
+    font-size: 10pt;
+    color: var(--tan-2);
+  }
+
+  /* FIRST PAGE HEADER (mission instructions) */
+  .intro {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    background: linear-gradient(135deg, var(--cream), var(--aged));
+    border: 2px solid var(--rose);
+    border-radius: 3mm;
+    padding: 6mm;
+    text-align: center;
+  }
+  .intro h1 {
+    font-family: 'Brush Script MT', cursive;
+    color: var(--rose);
+    font-size: 28pt;
+    line-height: 1;
+    margin-bottom: 2mm;
+    text-shadow: 1px 1px 0 var(--gold-2);
+  }
+  .intro .miss {
+    font-size: 11pt;
+    color: var(--ink);
+    margin-bottom: 3mm;
+  }
+  .intro .miss b { color: var(--rose); }
+  .intro .how {
+    font-size: 9pt;
+    color: var(--ink);
+    line-height: 1.4;
+    text-align: left;
+    max-width: 170mm;
+    margin: 0 auto;
+  }
+  .intro .how ol { padding-left: 6mm; }
+  .intro .how li { margin-bottom: 1mm; }
+
+  /* sheet title strip */
+  .sheet::after {
+    content: "Roots of the Rose · Mission 1 · cut & shuffle · match each story to a character card 1–20";
+    position: absolute;
+    bottom: 2mm; left: 0; right: 0;
+    text-align: center;
+    font-size: 7pt;
+    color: var(--tan-2);
+    font-style: italic;
+    letter-spacing: 0.1em;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ==================================================================
+     PAGE 1 · INTRO + 3 cards (① ② ③)
+     ================================================================== -->
+<div class="sheet">
+
+  <!-- INTRO BLOCK (top half full width) -->
+  <div class="intro" style="grid-column: 1 / -1;">
+    <h1>Mission 1 · The Family Speaks</h1>
+    <div class="miss">
+      <b>Twenty stories. Twenty faces. Match them.</b>
+    </div>
+    <div class="how">
+      <ol>
+        <li>You will receive <b>20 character cards</b> (numbered 1–20, with face &amp; name) and <b>20 story cards</b> (labelled ① to ⑳, no name).</li>
+        <li>Read each story. Decide who it belongs to. <b>Place the matching character card on top of the story.</b></li>
+        <li>When all 20 are matched, write the pairs on your team worksheet (e.g. <em>① → 11</em>).</li>
+        <li>Some stories hide a clue you'll need for missions 2, 3 &amp; 4 — read carefully.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- CARD ① (Chen Neo) -->
+  <div class="card">
+    <span class="corner tl"></span><span class="corner br"></span>
+    <div class="label">①</div>
+    <div class="sub">a story · no name</div>
+    <div class="body">
+      Youngest sister of the Tan towkay. Twenty-three when she crossed the causeway as a Singapore bride in 1948 — a widow eleven months later. Did not return to Penang. Apprenticed at twenty-five to an old Telok Ayer beadwork master and stitched <em>kasut manik</em> for sixty-eight years. Her signature <em>peony-toe</em> pattern hangs in the Peranakan Museum today.
+    </div>
+    <div class="who">who is she? <b>card # ____</b></div>
+  </div>
+
+  <!-- CARD ② (Cheng Hoe) -->
+  <div class="card">
+    <span class="corner tl"></span><span class="corner br"></span>
+    <div class="label">②</div>
+    <div class="sub">a story · no name</div>
+    <div class="body">
+      Only legitimate son of the docks man and the matriarch. Twenty-one when his father died in the December 1941 bombing — inherited <b>See Hai Chan 西海棧</b> the same week. Carried the brass watch in his pocket every day until his elder son's twenty-first birthday in 1969, when he placed it in the boy's palm. Died of heart failure in 1995 at seventy-five.
+    </div>
+    <div class="who">who is he? <b>card # ____</b></div>
+  </div>
+
+</div>
+
+
+<!-- ==================================================================
+     PAGE 2 · cards ③ ④ ⑤ ⑥
+     ================================================================== -->
+<div class="sheet">
+
+  <!-- CARD ③ (Hooi Wen) -->
+  <div class="card">
+    <span class="corner tl"></span><span class="corner br"></span>
+    <div class="label">③</div>
+    <div class="sub">a story · no name</div>
+    <div class="body">
+      Singapore-born, 1991. Great-granddaughter of a Khoo shipping tycoon through his first marriage. Architect trained at NUS. Met her husband at a heritage conference in 2017 — neither of them knew, at first, that their families had once been bound by an eleven-month Penang marriage in 1948. Wore her great-grandfather's second wife's never-worn <em>kasut manik</em> under her wedding kebaya in 2020 — <b>seventy-two years</b> after they were stitched.
+    </div>
+    <div class="who">who is she? <b>card # ____</b></div>
+  </div>
+
+  <!-- CARD ④ (Keo San) -->
+  <div class="card">
+    <span class="corner tl"></span><span class="corner br"></span>
+    <div class="label">④</div>
+    <div class="sub">a story · no name</div>
+    <div class="body">
+      Came from <b>China at nineteen</b> with one wooden trunk and a brass watch his father pressed into his palm before the boat pushed off the Fujian coast. Worked the docks at Weld Quay; by forty he owned the warehouse he started in. Married into a Penang Nyonya goldsmith family in 1898. The watch never left his pocket. Killed when Japanese bombs hit the Weld Quay jetty on <b>11 December 1941</b>.
+    </div>
+    <div class="who">who is he? <b>card # ____</b></div>
+  </div>
+
+  <!-- CARD ⑤ (Soo Hui) -->
+  <div class="card">
+    <span class="corner tl"></span><span class="corner br"></span>
+    <div class="label">⑤</div>
+    <div class="sub">a story · no name</div>
+    <div class="body">
+      Born in Ipoh, 1966. Took the bus to Penang at sixteen with a school exercise book and one question for an old kitchen woman she had never met: <em>"Auntie, may I write down what your hands do?"</em> Stood beside the chopping block for ten years copying recipes. Married into the Tan family in 1990. Her cookbook <em>Resipi Auntie Mei</em> was published in 1992 and finally named the woman the family had spent seventy years not naming.
+    </div>
+    <div class="who">who is she? <b>card # ____</b></div>
+  </div>
+
+  <!-- CARD ⑥ (Eng Neo) -->
+  <div class="card">
+    <span class="corner tl"></span><span class="corner br"></span>
+    <div class="label">⑥</div>
+    <div class="sub">a story · no name</div>
+    <div class="body">
+      <b>Middle</b> of three sisters from a Beach Street goldsmith family. Married a quiet Penang Road cloth merchant in 1901. Wore the <b>ANAK A</b> brooch from the day she could pin it to her collar. Famously the sister you could call at midnight — when the family asked her for a favour, she did it once and never spoke of it twice. Died 1961 at seventy-nine.
+    </div>
+    <div class="who">who is she? <b>card # ____</b></div>
+  </div>
+
+</div>
+
+
+<!-- ==================================================================
+     PAGE 3 · cards ⑦ ⑧ ⑨ ⑩
+     ================================================================== -->
+<div class="sheet">
+
+  <!-- CARD ⑦ (Albert) -->
+  <div class="card">
+    <span class="corner tl"></span><span class="corner br"></span>
+    <div class="label">⑦</div>
+    <div class="sub">a story · no name</div>
+    <div class="body">
+      Second son of the Tan towkay. Sent to Sydney at eighteen for commerce; took an English name in his second year and never put it down. Inherited <b>See Hai Chan</b> in 1995 — modernised the warehouses, container-ised the fleet, listed the company on Bursa Malaysia in 2008. Wore Italian shoes. Spoke Hokkien only to suppliers. Married in 1994 in a white gown at <b>St Andrew's Cathedral, Singapore</b>. Died of pancreatic cancer in November 2021, aged seventy-one.
+    </div>
+    <div class="who">who is he? <b>card # ____</b></div>
+  </div>
+
+  <!-- CARD ⑧ (Bibik Rose) -->
+  <div class="card">
+    <span class="corner tl"></span><span class="corner br"></span>
+    <div class="label">⑧</div>
+    <div class="sub">a story · no name</div>
+    <div class="body">
+      Daughter of the heritage architect and the cookbook author. Born 1974. Trained as a Peranakan textile conservator at the Asian Civilisations Museum, Singapore. Came home to Penang in 2003 with a small studio above her father's office on Stewart Lane. The only grandchild in whom the Peranakan culture took root completely — kebaya, kuih, beadwork, prayers, the recipes the kitchen had never been allowed to teach the front rooms. <em>Your host tonight.</em>
+    </div>
+    <div class="who">who is she? <b>card # ____</b></div>
+  </div>
+
+  <!-- CARD ⑨ (Ah Cai) -->
+  <div class="card">
+    <span class="corner tl"></span><span class="corner br"></span>
+    <div class="label">⑨</div>
+    <div class="sub">a story · no name</div>
+    <div class="body">
+      Born in the back kitchen in 1925. Never sent to school. Never given the family surname in any registry. Carried sacks at Weld Quay by twelve. The kulis called him <em>Seoy Yee Kia 細姨仔</em> — "the mistress's son." Walked into the Kulim hills in 1942 to join the wartime resistance, came down once in <b>September 1945</b>, and walked back up the road with the men who would not lay down their arms. Never seen again. His mother set a place for him at every dinner for fifty-three more years.
+    </div>
+    <div class="who">who is he? <b>card # ____</b></div>
+  </div>
+
+  <!-- CARD ⑩ (Eng Siew) -->
+  <div class="card">
+    <span class="corner tl"></span><span class="corner br"></span>
+    <div class="label">⑩</div>
+    <div class="sub">a story · no name</div>
+    <div class="body">
+      <b>Eldest</b> of three sisters from a Beach Street goldsmith family. Married the Weld Quay docks man in 1898 at eighteen. Brought a kamcheng of <em>nine gold-glazed dumplings</em> across her new threshold. Drew a chalk line on her own kitchen floor in 1920 and meant every inch of it. Ran the Tan household for fifty-eight years and wore the <b>IBU</b> brooch to her grave in 1956 at seventy-six.
+    </div>
+    <div class="who">who is she? <b>card # ____</b></div>
+  </div>
+
+</div>
+
+
+<!-- ==================================================================
+     PAGE 4 · cards ⑪ ⑫ ⑬ ⑭
+     ================================================================== -->
+<div class="sheet">
+
+  <!-- CARD ⑪ (Kelvin) -->
+  <div class="card">
+    <span class="corner tl"></span><span class="corner br"></span>
+    <div class="label">⑪</div>
+    <div class="sub">a story · no name</div>
+    <div class="body">
+      Born in Singapore the year his grandfather died. Raised between KL and a Melbourne Catholic boarding school. Now lives in <b>London</b>, running the European desk of a logistics fund that has bought a 14% stake in his own family's company. Twenty-six when his father died in 2021 — flew home, sat through the wake in a borrowed black suit, signed his first See Hai Chan board paper four days later. Knows the boats. Does not yet know the kitchen.
+    </div>
+    <div class="who">who is he? <b>card # ____</b></div>
+  </div>
+
+  <!-- CARD ⑫ (Lee Poh Soon) -->
+  <div class="card">
+    <span class="corner tl"></span><span class="corner br"></span>
+    <div class="label">⑫</div>
+    <div class="sub">a story · no name</div>
+    <div class="body">
+      A quiet, unflashy <b>Penang Road cloth merchant</b> who took over his father's small shop in 1905 and turned it into the most reliable batik source on the north coast. Married a middle Yap sister in 1901. Famously short with anyone who tried to gossip in his hearing. Folded a length of cream silk for his daughter's wedding kebaya the year before he died in 1948.
+    </div>
+    <div class="who">who is he? <b>card # ____</b></div>
+  </div>
+
+  <!-- CARD ⑬ (Alice) -->
+  <div class="card">
+    <span class="corner tl"></span><span class="corner br"></span>
+    <div class="label">⑬</div>
+    <div class="sub">a story · no name</div>
+    <div class="body">
+      KL-born, Wharton-educated, Catholic-married. By ancestry a true Nyonya — her grandmother kept a brass kamcheng on a teak shelf — but she grew up speaking English at home and French at school. Married the Tan towkay's younger son in 1994 in a white gown at <b>St Andrew's, Singapore</b> — the first Tan bride in three generations not to wear kebaya. Attends every Tok Panjang in Penang faithfully, brings a thoughtful gift, and has never entered the kitchen.
+    </div>
+    <div class="who">who is she? <b>card # ____</b></div>
+  </div>
+
+  <!-- CARD ⑭ (Eng Hooi) -->
+  <div class="card">
+    <span class="corner tl"></span><span class="corner br"></span>
+    <div class="label">⑭</div>
+    <div class="sub">a story · no name</div>
+    <div class="body">
+      <b>Youngest</b> of three sisters, born late — eighteen years after the middle one. Quiet, beautiful, fond of orchids, slow to anger. The Beach Street neighbours called her <em>"the orchid sister."</em> She never married. She died at <b>twenty-three</b> in the winter of 1923, in the back of the goldsmith house. Her brooch — <b>ANAK B</b> — was put away in a tin and never worn.
+    </div>
+    <div class="who">who is she? <b>card # ____</b></div>
+  </div>
+
+</div>
+
+
+<!-- ==================================================================
+     PAGE 5 · cards ⑮ ⑯ ⑰ ⑱
+     ================================================================== -->
+<div class="sheet">
+
+  <!-- CARD ⑮ (Khoo Chin Nam) -->
+  <div class="card">
+    <span class="corner tl"></span><span class="corner br"></span>
+    <div class="label">⑮</div>
+    <div class="sub">a story · no name</div>
+    <div class="body">
+      <b>Singapore shipping tycoon</b>, head of the southern arm of his clan with offices in Singapore, Malacca, and Surabaya. Hokkien by descent, Peranakan by marriage, English-educated at Raffles. Widower at forty-seven. Married a young Tan daughter in November 1948 to seal a post-war Penang shipping alliance. Died of a sudden heart attack at his own breakfast table eleven months later, in August 1949.
+    </div>
+    <div class="who">who is he? <b>card # ____</b></div>
+  </div>
+
+  <!-- CARD ⑯ (Beng Guat) -->
+  <div class="card">
+    <span class="corner tl"></span><span class="corner br"></span>
+    <div class="label">⑯</div>
+    <div class="sub">a story · no name</div>
+    <div class="body">
+      Daughter of the quiet Penang Road cloth merchant and his Yap-sister wife. Married into the Tan house in 1947 at twenty-six. Took over the See Hai Chan ledgers in 1949 and ran them for forty-four years. Knew, to the cent, every payment the house ever made — including a small monthly envelope that left the godown for thirty-six years, addressed in her own careful hand to a Balik Pulau fishmonger's family. <em>"Oil for the lamp,"</em> she wrote in the ledger. She never asked who the lamp was for. Died 2005 at eighty-four.
+    </div>
+    <div class="who">who is she? <b>card # ____</b></div>
+  </div>
+
+  <!-- CARD ⑰ (Soon Heng) -->
+  <div class="card">
+    <span class="corner tl"></span><span class="corner br"></span>
+    <div class="label">⑰</div>
+    <div class="sub">a story · no name</div>
+    <div class="body">
+      Elder of the towkay's two sons, born 1948 — the gentler child, slow to speak, slow to anger, always the one on the kitchen step beside Auntie Mei. His father bent the family rule in his favour: on his <b>twenty-first birthday in 1969</b> he received the brass watch instead of his younger brother. Heritage architect. Restored seventeen Penang shophouses including the family godown. Stroke in 2024. Watch now on his bedside table; his daughter winds it for him every morning.
+    </div>
+    <div class="who">who is he? <b>card # ____</b></div>
+  </div>
+
+  <!-- CARD ⑱ (Mei Lan) -->
+  <div class="card">
+    <span class="corner tl"></span><span class="corner br"></span>
+    <div class="label">⑱</div>
+    <div class="sub">a story · no name</div>
+    <div class="body">
+      A <b>Balik Pulau</b> fisherman's daughter, brought into the back of the Armenian Street house at eighteen. Slept in the storeroom. Wore the same pale jade kebaya for seventy-eight years — its hem still carries a sambal stain from the day in 1945 her son walked into the jungle. Cooked every Tok Panjang in that house — over <b>two hundred</b> — and was never allowed to sit at one. Died on her kitchen stool in 1998 at ninety-six. Her last batch of pineapple tarts was still cooling on the marble.
+    </div>
+    <div class="who">who is she? <b>card # ____</b></div>
+  </div>
+
+</div>
+
+
+<!-- ==================================================================
+     PAGE 6 · cards ⑲ ⑳
+     ================================================================== -->
+<div class="sheet">
+
+  <!-- CARD ⑲ (Boon Kuan) -->
+  <div class="card">
+    <span class="corner tl"></span><span class="corner br"></span>
+    <div class="label">⑲</div>
+    <div class="sub">a story · no name</div>
+    <div class="body">
+      Eldest and only blood son of the Penang Road cloth merchant. Five years old when his sister joined the family one winter morning. Walked her to school every day with her satchel in his hand, even when she was old enough to carry it herself. Trained as a clerk in his father's cloth shop. <b>Never married</b> — politely deflected every match his mother proposed. Died of fever in autumn 1950, at thirty-two. The Lee dinner table has had an empty seat since.
+    </div>
+    <div class="who">who is he? <b>card # ____</b></div>
+  </div>
+
+  <!-- CARD ⑳ (Wei Wen) -->
+  <div class="card">
+    <span class="corner tl"></span><span class="corner br"></span>
+    <div class="label">⑳</div>
+    <div class="sub">a story · no name</div>
+    <div class="body">
+      Younger child of the heritage architect and the cookbook author — <b>sixteen years younger</b> than his sister. Started university in architecture, transferred to medicine in his second year, never quite explained why. Internal medicine specialist at the Penang General Hospital since 2017. Met his wife at a Singapore heritage conference that year — and discovered, by way of an old photograph on his phone, that their families had once been arranged into a marriage that lasted eleven months in 1948. Married November 2020 at the Penang Peranakan Mansion.
+    </div>
+    <div class="who">who is he? <b>card # ____</b></div>
+  </div>
+
+  <!-- spare slot 1 -->
+  <div class="card" style="border-style: solid; border-color: var(--rose); background: linear-gradient(135deg, var(--cream), var(--aged));">
+    <span class="corner tl"></span><span class="corner br"></span>
+    <div class="label" style="font-size:22pt;">✶ Bibi's hint ✶</div>
+    <div class="sub">read carefully — these matter for later</div>
+    <div class="body" style="font-size:10pt;">
+      Some stories carry a <b>year</b> a person was born, or a <b>year</b> something happened — keep a pencil mark beside any year that catches your eye. Some stories mention an <b>object</b> (a watch · a brooch · a cookbook · a slipper · a ledger · a chalk line). Keep notes. Mission 2 will ask you to find a <em>brooch hidden in plain sight</em>; mission 3 will ask you five small questions; mission 4 will give you a digit you cannot guess. <em>The kitchen woman's full name is not in any of these stories. She has waited a long time. She will be named when the tin opens.</em>
+    </div>
+    <div class="who" style="border-top-color: var(--rose); color: var(--rose);"><b>good luck, cousin</b></div>
+  </div>
+
+  <!-- spare slot 2 -->
+  <div class="card" style="border-style: solid; border-color: var(--gold); background: linear-gradient(135deg, var(--paper), var(--aged));">
+    <span class="corner tl"></span><span class="corner br"></span>
+    <div class="label" style="font-size:22pt;">✎ Worksheet</div>
+    <div class="sub">write your matches on the team worksheet</div>
+    <div class="body" style="font-size:9.5pt; line-height:1.6;">
+      <b>Format:</b> story label → character card #<br><br>
+      ① → ___ &nbsp; ② → ___ &nbsp; ③ → ___ &nbsp; ④ → ___<br>
+      ⑤ → ___ &nbsp; ⑥ → ___ &nbsp; ⑦ → ___ &nbsp; ⑧ → ___<br>
+      ⑨ → ___ &nbsp; ⑩ → ___ &nbsp; ⑪ → ___ &nbsp; ⑫ → ___<br>
+      ⑬ → ___ &nbsp; ⑭ → ___ &nbsp; ⑮ → ___ &nbsp; ⑯ → ___<br>
+      ⑰ → ___ &nbsp; ⑱ → ___ &nbsp; ⑲ → ___ &nbsp; ⑳ → ___<br><br>
+      <em>Show Bibi when all 20 are filled in. She will check.</em>
+    </div>
+    <div class="who"><b>20 matches = mission 1 complete</b></div>
+  </div>
+
+</div>
+
+
+</body>
+</html>

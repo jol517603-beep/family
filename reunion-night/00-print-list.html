@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Print List · Reunion Night</title>
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  :root { --cream:#f6ecd2; --paper:#fbf4dd; --ink:#3a2418; --gold:#b8860b; --jade:#2e7d5b; --rose:#b91c4b; --tan:#8b5a2b; --soft:#e8dab5; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background:#2a1810; font-family:'Georgia','Times New Roman',serif; color:var(--ink); }
+  body { padding: 14px; }
+  @media print { body { padding: 0; background: white; } }
+  .page { width: 210mm; height: 297mm; margin: 0 auto; background: var(--cream); padding: 14mm 16mm; position: relative; box-shadow: 0 14px 36px rgba(0,0,0,0.5); display: flex; flex-direction: column; }
+  @media print { .page { box-shadow: none; margin: 0; } }
+  .page::before { content:''; position:absolute; inset:5mm; border:2px double var(--rose); border-radius:3mm; pointer-events:none; }
+  .page::after  { content:''; position:absolute; inset:7mm; border:1px solid var(--gold); border-radius:2mm; pointer-events:none; }
+  header { text-align:center; margin-bottom:5mm; position:relative; z-index:1; }
+  .eyebrow { color:var(--rose); font-style:italic; letter-spacing:5px; font-size:8.5pt; text-transform:uppercase; }
+  h1 { font-family:'Brush Script MT',cursive; color:var(--rose); font-size:30pt; line-height:1; margin-top:1mm; text-shadow:1px 1px 0 var(--gold); }
+  .sub { color:var(--tan); font-style:italic; font-size:10pt; margin-top:1mm; }
+  table { width:100%; border-collapse:collapse; margin-top:3mm; font-size:9.5pt; position:relative; z-index:1; background:rgba(255,255,255,0.6); border:1.5px solid var(--tan); border-radius:2mm; overflow:hidden; }
+  thead { background:var(--jade); color:var(--cream); }
+  thead th { padding:2.5mm 3mm; text-align:left; font-style:italic; font-size:9pt; letter-spacing:1px; }
+  tbody td { padding:2.5mm 3mm; border-bottom:1px dashed var(--soft); vertical-align:top; }
+  tbody tr:last-child td { border-bottom:none; }
+  tbody tr.host { background:rgba(184,134,11,0.10); }
+  tbody td b { color:var(--rose); font-weight:normal; }
+  tbody td em { color:var(--jade); font-style:italic; }
+  .legend { margin-top:5mm; padding:4mm 5mm; background:var(--paper); border-left:3px solid var(--rose); border-radius:1mm; font-size:9pt; line-height:1.55; position:relative; z-index:1; }
+  .legend h3 { font-family:'Brush Script MT',cursive; color:var(--jade); font-size:14pt; margin-bottom:1.5mm; }
+  footer { text-align:center; margin-top:auto; color:var(--tan); font-style:italic; font-size:8pt; letter-spacing:2px; position:relative; z-index:1; padding-top:4mm; }
+</style></head><body>
+<div class="page">
+  <header>
+    <div class="eyebrow">✦ ROOTS OF THE ROSE · REUNION NIGHT ✦</div>
+    <h1>Print List for the Print Shop</h1>
+    <div class="sub">~ all A4 paper · home or shop · ~10 sheets per team ~</div>
+  </header>
+
+  <table>
+    <thead><tr><th style="width:38mm;">file</th><th>what it is</th><th style="width:30mm;">paper</th><th style="width:28mm;">copies</th></tr></thead>
+    <tbody>
+      <tr><td><b>whiteboard-title.html</b></td><td>banner — tape across <em>top</em> of the whiteboard</td><td>A4 landscape</td><td>1 per team</td></tr>
+      <tr><td><b>whiteboard-instructions.html</b></td><td>4-step strip — tape across <em>bottom</em> of the whiteboard</td><td>A4 landscape</td><td>1 per team</td></tr>
+      <tr><td><b>../identity-cards.html</b></td><td>20 identity cards (already done)</td><td>3 × A4 portrait</td><td>1 set per team</td></tr>
+      <tr><td><b>../story-cards.html</b><br>pages 1–4</td><td>20 story cards A–T (already done)</td><td>4 × A4 portrait</td><td>1 set per team</td></tr>
+      <tr><td><b>info-strips.html</b></td><td>20 small paper strips · 1 per character · pinned <em>after</em> Bibi approves the match</td><td>2 × A4 portrait</td><td>1 set per team</td></tr>
+      <tr><td><b>mission-cards.html</b></td><td>3 mission stations: ⏱ Watch · 🌺 Brooches · 🪡 Beads</td><td>1 × A4 portrait</td><td>1 set per team</td></tr>
+      <tr><td><b>bead-corner-card.html</b></td><td>peony pattern + rotation rule for the bead corner</td><td>1 × A4 portrait</td><td>1 (shared station)</td></tr>
+      <tr><td><b>gold-coin-tags.html</b></td><td>printable coin tags · cut + glue onto chocolate coins</td><td>1 × A4 portrait</td><td>1–2 (shared)</td></tr>
+      <tr class="host"><td><b>bibi-question-deck.html</b></td><td>host question cards · Bibi reads, team answers, gold coin if right</td><td>4 × A4 portrait</td><td><b>1 (Bibi only)</b></td></tr>
+      <tr class="host"><td><b>bibi-master-key.html</b></td><td>everything in one place: matches · answers · the secret · lock code</td><td>2 × A4 portrait</td><td><b>1 (Bibi only)</b></td></tr>
+      <tr class="host"><td><b>../story-cards.html</b><br>page 5</td><td>letter→character answer key (already done)</td><td>1 × A4 portrait</td><td><b>1 (Bibi only)</b></td></tr>
+    </tbody>
+  </table>
+
+  <div class="legend">
+    <h3>Per team, you print:</h3>
+    ~ 11 A4 sheets total (3 identity + 4 story + 2 info strips + 1 mission + 1 title/instruction = ~11)<br>
+    ~ Plus shared station printouts (bead card, coin tags) — 2 sheets total<br>
+    ~ Plus host-only — 7 sheets, kept in Bibi's apron<br><br>
+    <b>For 4 teams:</b> ~44 team sheets + 9 shared/host = <em>~53 A4 sheets total.</em>
+  </div>
+
+  <footer>20 stories · 4 generations · 1 reunion night ~ stones do not lie</footer>
+</div>
+</body></html>

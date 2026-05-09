@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Auntie Mei's 5 Recipes</title>
+<!--
+  PRINT: 5 × A4 portrait. Each page = one recipe.
+  Cut/fold each one and place inside one lockbox.
+  Recipes (in order): Kuih Talam · Kuih Kaya · Kuih Lapis · Kuih Dadar · Kuih Bingka Ubi
+-->
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  :root { --cream:#f6ecd2; --paper:#fbf4dd; --ink:#3a2418; --gold:#b8860b; --jade:#2e7d5b; --rose:#b91c4b; --tan:#8b5a2b; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background:#2a1810; font-family:'Georgia',serif; color:var(--ink); }
+  body { padding: 14px; }
+  @media print { body { padding: 0; background: white; } }
+  .page {
+    width: 210mm; height: 297mm; margin: 0 auto 14px;
+    background:
+      radial-gradient(circle at 8% 6%, rgba(184,134,11,0.10), transparent 30%),
+      radial-gradient(circle at 92% 94%, rgba(46,125,91,0.08), transparent 30%),
+      var(--cream);
+    padding: 11mm 13mm;
+    position: relative; box-shadow: 0 14px 36px rgba(0,0,0,0.5);
+    page-break-after: always; display: flex; flex-direction: column;
+  }
+  @media print { .page { box-shadow: none; margin: 0; } }
+  .page:last-child { page-break-after: auto; }
+  .page::before { content:''; position:absolute; inset:5mm; border:2px double var(--rose); border-radius:3mm; pointer-events:none; }
+  .page::after  { content:''; position:absolute; inset:7mm; border:1px solid var(--gold); border-radius:2mm; pointer-events:none; }
+
+  /* peony watermark */
+  .peony {
+    position: absolute; top: 14mm; right: 14mm;
+    width: 28mm; height: 28mm;
+    opacity: 0.18; pointer-events: none; z-index: 0;
+  }
+
+  header { text-align:center; margin-bottom: 4mm; position: relative; z-index: 1; }
+  .stamp { display: inline-block; padding: 1mm 4mm; background: var(--rose); color: var(--cream); border-radius: 1mm; font-style: italic; letter-spacing: 4px; font-size: 8pt; transform: rotate(-2deg); }
+  h1 {
+    font-family:'Brush Script MT',cursive;
+    color: var(--rose); font-size: 36pt; line-height: 1;
+    margin-top: 2mm; text-shadow: 1.5px 1.5px 0 var(--gold);
+  }
+  .malay { font-family: 'Brush Script MT', cursive; color: var(--jade); font-size: 16pt; margin-top: 1mm; }
+  .sub { color: var(--tan); font-style: italic; font-size: 10pt; margin-top: 1mm; }
+
+  .from-mei {
+    background: white;
+    border-left: 3px solid var(--gold);
+    padding: 3mm 4mm;
+    margin-bottom: 4mm;
+    font-style: italic; font-size: 10pt; line-height: 1.55;
+    color: var(--ink);
+    position: relative; z-index: 1;
+  }
+  .from-mei .who {
+    font-family: 'Brush Script MT', cursive;
+    font-style: normal; color: var(--rose);
+    font-size: 13pt; margin-bottom: 1mm; display: block;
+  }
+
+  .grid-2 {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4mm; margin-bottom: 4mm;
+    position: relative; z-index: 1;
+  }
+  .col {
+    background: var(--paper); border: 1.5px dashed var(--tan);
+    border-radius: 2mm; padding: 3mm 4mm;
+    position: relative;
+  }
+  .col::before { content:''; position:absolute; inset:1.2mm; border:0.8px solid var(--gold); border-radius:1.5mm; pointer-events:none; }
+  .col h3 {
+    font-family: 'Brush Script MT', cursive;
+    color: var(--jade); font-size: 14pt; line-height: 1;
+    margin-bottom: 1.5mm; padding-bottom: 1mm;
+    border-bottom: 1px dashed var(--rose);
+    position: relative; z-index: 1;
+  }
+  .col ul, .col ol {
+    margin-left: 4mm; font-size: 9pt; line-height: 1.5;
+    position: relative; z-index: 1;
+  }
+  .col li { margin-bottom: 0.8mm; }
+  .col li b { color: var(--rose); }
+
+  .meta {
+    display: flex; justify-content: space-between;
+    background: var(--paper);
+    border: 1px dashed var(--tan); border-radius: 2mm;
+    padding: 2mm 4mm; font-size: 8.5pt;
+    margin-bottom: 3mm;
+    position: relative; z-index: 1;
+  }
+  .meta span b { color: var(--rose); font-style: italic; }
+
+  .closing {
+    background: rgba(185,28,75,0.08);
+    border: 1px dashed var(--rose); border-radius: 2mm;
+    padding: 3mm 4mm; font-size: 9.5pt; line-height: 1.5;
+    font-style: italic; color: var(--ink);
+    position: relative; z-index: 1;
+  }
+  .closing::before { content:'❀ '; color: var(--rose); }
+
+  footer {
+    text-align: center; margin-top: auto;
+    color: var(--tan); font-style: italic; font-size: 8pt;
+    letter-spacing: 2px; padding-top: 3mm;
+    position: relative; z-index: 1;
+  }
+
+  /* recipe-specific tints */
+  .talam h1 { color: #2e7d5b; }
+  .kaya h1 { color: #b8860b; }
+  .lapis h1 { color: #b91c4b; }
+  .dadar h1 { color: #2e7d5b; }
+  .bingka h1 { color: #8b5a2b; }
+</style></head>
+<body>
+
+<!-- ============== RECIPE 1 · KUIH TALAM ============== -->
+<div class="page talam">
+  <svg class="peony" viewBox="0 0 100 100"><g fill="#b91c4b">
+    <circle cx="50" cy="50" r="8"/>
+    <ellipse cx="50" cy="28" rx="9" ry="14"/>
+    <ellipse cx="50" cy="72" rx="9" ry="14"/>
+    <ellipse cx="28" cy="50" rx="14" ry="9"/>
+    <ellipse cx="72" cy="50" rx="14" ry="9"/>
+    <ellipse cx="34" cy="34" rx="10" ry="12" transform="rotate(-45 34 34)"/>
+    <ellipse cx="66" cy="34" rx="10" ry="12" transform="rotate(45 66 34)"/>
+    <ellipse cx="34" cy="66" rx="10" ry="12" transform="rotate(45 34 66)"/>
+    <ellipse cx="66" cy="66" rx="10" ry="12" transform="rotate(-45 66 66)"/>
+  </g></svg>
+
+  <header>
+    <span class="stamp">★ AUNTIE MEI · RECIPE 1 OF 5 ★</span>
+    <h1>Kuih Talam</h1>
+    <div class="malay">~ 兩層糕 · the two-layer cake ~</div>
+    <div class="sub">green pandan bottom · white coconut top</div>
+  </header>
+
+  <div class="from-mei">
+    <span class="who">From Lim Mei Lan, in her own hand —</span>
+    "Two layers, never one. The green is the earth, the white is the rain. If you rush the bottom, the top will not sit. This is true of cakes, and of people."
+  </div>
+
+  <div class="meta">
+    <span><b>Serves:</b> 9 squares</span>
+    <span><b>Time:</b> 1 hour + cooling</span>
+    <span><b>Difficulty:</b> easy</span>
+  </div>
+
+  <div class="grid-2">
+    <div class="col">
+      <h3>Bottom (green pandan)</h3>
+      <ul>
+        <li>120 g rice flour</li>
+        <li>30 g tapioca flour</li>
+        <li>30 g green pea flour (hoen kwe)</li>
+        <li>180 g gula melaka, chopped</li>
+        <li>250 ml fresh pandan juice <em>(blend 8 leaves + 200 ml water, strain)</em></li>
+        <li>250 ml water</li>
+        <li>pinch salt</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>Top (white coconut)</h3>
+      <ul>
+        <li>50 g rice flour</li>
+        <li>20 g tapioca flour</li>
+        <li>10 g hoen kwe flour</li>
+        <li>250 ml thick coconut milk (santan)</li>
+        <li>100 ml water</li>
+        <li>1/2 tsp salt</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col" style="margin-bottom: 3mm;">
+    <h3>Method</h3>
+    <ol>
+      <li><b>Bottom:</b> dissolve gula melaka in water on low heat, strain. Mix with pandan juice. Whisk in all bottom flours + salt until smooth. Cook on low, stirring, 5 min until thick like glue. Pour into greased 8" square pan. Steam 20 min on medium.</li>
+      <li><b>Top:</b> whisk all top ingredients until smooth. Cook on low, stirring, 3 min until thick. Pour gently over the steamed green layer. Steam another 15 min.</li>
+      <li>Cool completely (2 hours). Cut with a wet knife into 9 squares.</li>
+    </ol>
+  </div>
+
+  <div class="closing">
+    Mei's note: "Cut clean, or don't cut at all. A messy talam tells the cook was angry."
+  </div>
+
+  <footer>★ inheritance of the Tan family · 9 May 2026 · 陳家根譜 ★</footer>
+</div>
+
+<!-- ============== RECIPE 2 · KUIH KAYA ============== -->
+<div class="page kaya">
+  <svg class="peony" viewBox="0 0 100 100"><g fill="#b8860b">
+    <circle cx="50" cy="50" r="8"/>
+    <ellipse cx="50" cy="28" rx="9" ry="14"/>
+    <ellipse cx="50" cy="72" rx="9" ry="14"/>
+    <ellipse cx="28" cy="50" rx="14" ry="9"/>
+    <ellipse cx="72" cy="50" rx="14" ry="9"/>
+    <ellipse cx="34" cy="34" rx="10" ry="12" transform="rotate(-45 34 34)"/>
+    <ellipse cx="66" cy="34" rx="10" ry="12" transform="rotate(45 66 34)"/>
+    <ellipse cx="34" cy="66" rx="10" ry="12" transform="rotate(45 34 66)"/>
+    <ellipse cx="66" cy="66" rx="10" ry="12" transform="rotate(-45 66 66)"/>
+  </g></svg>
+
+  <header>
+    <span class="stamp">★ AUNTIE MEI · RECIPE 2 OF 5 ★</span>
+    <h1>Kuih Kaya</h1>
+    <div class="malay">~ 椰漿蛋糕 · coconut egg jam cake ~</div>
+    <div class="sub">pandan custard layer · sticky glutinous base</div>
+  </header>
+
+  <div class="from-mei">
+    <span class="who">From Lim Mei Lan —</span>
+    "Towkay's first wife asked me for this every Sunday for thirty-one years. She never thanked me. But she never asked anyone else either. That is also love."
+  </div>
+
+  <div class="meta">
+    <span><b>Serves:</b> 12 squares</span>
+    <span><b>Time:</b> 1.5 hours</span>
+    <span><b>Difficulty:</b> easy</span>
+  </div>
+
+  <div class="grid-2">
+    <div class="col">
+      <h3>Glutinous rice base</h3>
+      <ul>
+        <li>300 g glutinous rice, soaked 4 hours</li>
+        <li>200 ml thin coconut milk</li>
+        <li>1/2 tsp salt</li>
+        <li>2 pandan leaves, knotted</li>
+        <li>1 tbsp blue pea flower water <em>(optional, for the marbled look)</em></li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>Kaya (pandan custard)</h3>
+      <ul>
+        <li>5 large eggs</li>
+        <li>200 g caster sugar</li>
+        <li>250 ml thick coconut milk</li>
+        <li>120 ml fresh pandan juice <em>(blend 6 leaves + 100 ml water, strain)</em></li>
+        <li>40 g rice flour</li>
+        <li>20 g plain flour</li>
+        <li>1/4 tsp salt</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col" style="margin-bottom: 3mm;">
+    <h3>Method</h3>
+    <ol>
+      <li><b>Base:</b> drain rice. Mix with coconut milk + salt + pandan leaves. (Drizzle blue pea water in random spots for marbling.) Steam in 8" pan for 25 min until tender. Press flat with wet spoon.</li>
+      <li><b>Kaya:</b> whisk eggs + sugar until pale. Add coconut milk + pandan juice. Sift in flours. Strain twice — no lumps allowed.</li>
+      <li>Pour kaya gently over the rice base. Steam on lowest heat for 40 min, lid wrapped in cloth so no water drips. Toothpick should come out clean.</li>
+      <li>Cool 2 hours. Cut into squares.</li>
+    </ol>
+  </div>
+
+  <div class="closing">
+    Mei's note: "Strain the kaya twice or your guests will know. They will not say it. But they will know."
+  </div>
+
+  <footer>★ inheritance of the Tan family · 9 May 2026 · 陳家根譜 ★</footer>
+</div>
+
+<!-- ============== RECIPE 3 · KUIH LAPIS ============== -->
+<div class="page lapis">
+  <svg class="peony" viewBox="0 0 100 100"><g fill="#b91c4b">
+    <circle cx="50" cy="50" r="8"/>
+    <ellipse cx="50" cy="28" rx="9" ry="14"/>
+    <ellipse cx="50" cy="72" rx="9" ry="14"/>
+    <ellipse cx="28" cy="50" rx="14" ry="9"/>
+    <ellipse cx="72" cy="50" rx="14" ry="9"/>
+    <ellipse cx="34" cy="34" rx="10" ry="12" transform="rotate(-45 34 34)"/>
+    <ellipse cx="66" cy="34" rx="10" ry="12" transform="rotate(45 66 34)"/>
+    <ellipse cx="34" cy="66" rx="10" ry="12" transform="rotate(45 34 66)"/>
+    <ellipse cx="66" cy="66" rx="10" ry="12" transform="rotate(-45 66 66)"/>
+  </g></svg>
+
+  <header>
+    <span class="stamp">★ AUNTIE MEI · RECIPE 3 OF 5 ★</span>
+    <h1>Kuih Lapis</h1>
+    <div class="malay">~ 九層糕 · the nine-layer cake ~</div>
+    <div class="sub">pink &middot; white &middot; pink &middot; white &middot; nine times</div>
+  </header>
+
+  <div class="from-mei">
+    <span class="who">From Lim Mei Lan —</span>
+    "Nine layers, like the peony on my apron. Nine layers, like the petals of patience. The trick is not the colour — it is the waiting between each pour. Don't rush. The cake remembers."
+  </div>
+
+  <div class="meta">
+    <span><b>Serves:</b> 12 strips</span>
+    <span><b>Time:</b> 1 hour 45 min</span>
+    <span><b>Difficulty:</b> easy <em>(but slow)</em></span>
+  </div>
+
+  <div class="grid-2">
+    <div class="col">
+      <h3>Single batter</h3>
+      <ul>
+        <li>250 g rice flour</li>
+        <li>100 g tapioca flour</li>
+        <li>50 g hoen kwe flour</li>
+        <li>250 g caster sugar</li>
+        <li>500 ml thick coconut milk</li>
+        <li>500 ml water</li>
+        <li>1 tsp salt</li>
+        <li>2 pandan leaves, knotted</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>To divide</h3>
+      <ul>
+        <li>Split batter in half:</li>
+        <li><b>Pink half</b> — add 4-5 drops red food colour (or beetroot juice)</li>
+        <li><b>White half</b> — leave plain</li>
+        <li>You will need <b>9 layers</b> total: pink-white-pink-white-pink-white-pink-white-pink</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col" style="margin-bottom: 3mm;">
+    <h3>Method</h3>
+    <ol>
+      <li>Heat coconut milk + water + sugar + salt + pandan leaves until sugar dissolves. Cool fully. Remove leaves.</li>
+      <li>Whisk all flours into the cooled liquid. Strain. Divide in half. Colour one half pink.</li>
+      <li>Grease 8" square pan. Steam empty for 5 min on high.</li>
+      <li>Pour 1 ladle of <b>pink</b> into hot pan. Steam 5 min on high. Pour 1 ladle of <b>white</b>. Steam 5 min. Repeat — alternate pink, white — until you have <b>9 layers</b>. (Total ~45 min steaming.)</li>
+      <li>Final layer steam 10 min. Cool 2 hours. Cut into long strips. <b>Eat with fingers.</b> Peel one layer at a time.</li>
+    </ol>
+  </div>
+
+  <div class="closing">
+    Mei's note: "If the layers blur, your steam was too low. If they crack, too high. Find the middle. Like the middle sister."
+  </div>
+
+  <footer>★ inheritance of the Tan family · 9 May 2026 · 陳家根譜 ★</footer>
+</div>
+
+<!-- ============== RECIPE 4 · KUIH DADAR ============== -->
+<div class="page dadar">
+  <svg class="peony" viewBox="0 0 100 100"><g fill="#2e7d5b">
+    <circle cx="50" cy="50" r="8"/>
+    <ellipse cx="50" cy="28" rx="9" ry="14"/>
+    <ellipse cx="50" cy="72" rx="9" ry="14"/>
+    <ellipse cx="28" cy="50" rx="14" ry="9"/>
+    <ellipse cx="72" cy="50" rx="14" ry="9"/>
+    <ellipse cx="34" cy="34" rx="10" ry="12" transform="rotate(-45 34 34)"/>
+    <ellipse cx="66" cy="34" rx="10" ry="12" transform="rotate(45 66 34)"/>
+    <ellipse cx="34" cy="66" rx="10" ry="12" transform="rotate(45 34 66)"/>
+    <ellipse cx="66" cy="66" rx="10" ry="12" transform="rotate(-45 66 66)"/>
+  </g></svg>
+
+  <header>
+    <span class="stamp">★ AUNTIE MEI · RECIPE 4 OF 5 ★</span>
+    <h1>Kuih Dadar</h1>
+    <div class="malay">~ 椰絲卷餅 · ketayap · pandan rolls with coconut ~</div>
+    <div class="sub">green crepe wrapping warm gula melaka coconut</div>
+  </header>
+
+  <div class="from-mei">
+    <span class="who">From Lim Mei Lan —</span>
+    "Ah Cai loved this one. He would eat six in a row, standing by the back door. I made it the morning he left for the jungle in 1942. He took two with him in a banana leaf. He never came back. I still make six every Sunday."
+  </div>
+
+  <div class="meta">
+    <span><b>Serves:</b> 10 rolls</span>
+    <span><b>Time:</b> 45 min</span>
+    <span><b>Difficulty:</b> easy</span>
+  </div>
+
+  <div class="grid-2">
+    <div class="col">
+      <h3>Pandan crepe</h3>
+      <ul>
+        <li>120 g plain flour</li>
+        <li>1 tbsp tapioca flour</li>
+        <li>1 large egg</li>
+        <li>180 ml fresh pandan juice <em>(6 leaves + 150 ml water, strained)</em></li>
+        <li>120 ml thin coconut milk</li>
+        <li>1/4 tsp salt</li>
+        <li>1 tsp oil + extra for pan</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>Inti (coconut filling)</h3>
+      <ul>
+        <li>200 g freshly grated coconut <em>(white part only)</em></li>
+        <li>120 g gula melaka, chopped fine</li>
+        <li>50 ml water</li>
+        <li>2 pandan leaves, knotted</li>
+        <li>pinch salt</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col" style="margin-bottom: 3mm;">
+    <h3>Method</h3>
+    <ol>
+      <li><b>Inti:</b> melt gula melaka + water + pandan leaves on low heat until syrupy. Strain. Toss with coconut + salt in a wok over very low heat 5 min until just sticky, not dry. Cool.</li>
+      <li><b>Crepe:</b> whisk egg + pandan juice + coconut milk. Add salt and oil. Sift in flours. Whisk smooth. Strain. Rest 15 min.</li>
+      <li>Heat a small non-stick pan, lightly oiled. Pour ~2 tbsp batter, swirl thin. Cook 30 sec — top should look matte. Slide off onto plate. Repeat.</li>
+      <li>Place 1 tbsp inti at one edge of each crepe. Fold sides in, roll like a spring roll. Serve warm or room temp.</li>
+    </ol>
+  </div>
+
+  <div class="closing">
+    Mei's note: "Don't flip the crepe. One side cooked is enough. The other side should remember it was once batter."
+  </div>
+
+  <footer>★ inheritance of the Tan family · 9 May 2026 · 陳家根譜 ★</footer>
+</div>
+
+<!-- ============== RECIPE 5 · KUIH BINGKA UBI ============== -->
+<div class="page bingka">
+  <svg class="peony" viewBox="0 0 100 100"><g fill="#8b5a2b">
+    <circle cx="50" cy="50" r="8"/>
+    <ellipse cx="50" cy="28" rx="9" ry="14"/>
+    <ellipse cx="50" cy="72" rx="9" ry="14"/>
+    <ellipse cx="28" cy="50" rx="14" ry="9"/>
+    <ellipse cx="72" cy="50" rx="14" ry="9"/>
+    <ellipse cx="34" cy="34" rx="10" ry="12" transform="rotate(-45 34 34)"/>
+    <ellipse cx="66" cy="34" rx="10" ry="12" transform="rotate(45 66 34)"/>
+    <ellipse cx="34" cy="66" rx="10" ry="12" transform="rotate(45 34 66)"/>
+    <ellipse cx="66" cy="66" rx="10" ry="12" transform="rotate(-45 66 66)"/>
+  </g></svg>
+
+  <header>
+    <span class="stamp">★ AUNTIE MEI · RECIPE 5 OF 5 ★</span>
+    <h1>Kuih Bingka Ubi</h1>
+    <div class="malay">~ 木薯糕 · baked tapioca cake ~</div>
+    <div class="sub">golden caramelised top · soft chewy middle</div>
+  </header>
+
+  <div class="from-mei">
+    <span class="who">From Lim Mei Lan —</span>
+    "The only kuih in this house I baked, not steamed. The towkay's second daughter said it tasted like the sun. I told her the sun was free, and so was this. I lied. The eggs were not free. But the recipe is now."
+  </div>
+
+  <div class="meta">
+    <span><b>Serves:</b> 12 squares</span>
+    <span><b>Time:</b> 1 hour 15 min</span>
+    <span><b>Difficulty:</b> easy</span>
+  </div>
+
+  <div class="grid-2">
+    <div class="col">
+      <h3>Ingredients</h3>
+      <ul>
+        <li>500 g grated tapioca <em>(fresh or thawed frozen, well-drained)</em></li>
+        <li>200 g caster sugar</li>
+        <li>2 large eggs</li>
+        <li>250 ml thick coconut milk</li>
+        <li>50 g melted butter</li>
+        <li>1/2 tsp salt</li>
+        <li>1 tsp vanilla <em>(or 2 pandan leaves blended in)</em></li>
+        <li>1 tbsp tapioca flour <em>(if mixture too wet)</em></li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>For the golden top</h3>
+      <ul>
+        <li>2 tbsp coconut milk</li>
+        <li>1 tsp sugar</li>
+        <li>pinch salt</li>
+      </ul>
+      <p style="font-size:8.5pt; margin-top:2mm; font-style:italic; color:var(--tan);">Brushed on at 30-min mark to caramelise.</p>
+    </div>
+  </div>
+
+  <div class="col" style="margin-bottom: 3mm;">
+    <h3>Method</h3>
+    <ol>
+      <li>Pre-heat oven to 175°C. Grease 8" square pan.</li>
+      <li>Squeeze grated tapioca well — get rid of all excess water. (Watery tapioca = sad bingka.)</li>
+      <li>Whisk eggs + sugar + salt until pale. Add coconut milk, melted butter, vanilla. Fold in tapioca and tapioca flour.</li>
+      <li>Pour into pan. Bake 30 min — top should be just setting.</li>
+      <li>Brush top with glaze (coconut milk + sugar + salt). Bake another <b>20-25 min</b> until top is deep golden brown and glossy.</li>
+      <li>Cool fully (1 hour minimum) before cutting. The middle firms up as it cools.</li>
+    </ol>
+  </div>
+
+  <div class="closing">
+    Mei's note: "If the top is pale, you took it out too early. A bingka with no colour is a bingka with no story."
+  </div>
+
+  <footer>★ inheritance of the Tan family · 9 May 2026 · 陳家根譜 ★</footer>
+</div>
+
+</body></html>

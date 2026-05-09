@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Station Signage · Tea / Batik / Joget</title>
+<!--
+  PRINT: 3 × A4 portrait. One per station table.
+  Page 1 = Tea Break sign + menu
+  Page 2 = Batik Painting station instructions
+  Page 3 = Joget closing instructions + simple steps
+-->
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  :root { --cream:#f6ecd2; --paper:#fbf4dd; --ink:#3a2418; --gold:#b8860b; --jade:#2e7d5b; --rose:#b91c4b; --tan:#8b5a2b; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background:#2a1810; font-family:'Georgia',serif; color:var(--ink); }
+  body { padding: 14px; }
+  @media print { body { padding: 0; background: white; } }
+  .page {
+    width: 210mm; height: 297mm; margin: 0 auto 14px;
+    background: var(--cream); padding: 13mm 14mm;
+    position: relative; box-shadow: 0 14px 36px rgba(0,0,0,0.5);
+    page-break-after: always; display: flex; flex-direction: column;
+  }
+  @media print { .page { box-shadow: none; margin: 0; } }
+  .page:last-child { page-break-after: auto; }
+  .page::before { content:''; position:absolute; inset:5mm; border:2px double var(--rose); border-radius:3mm; pointer-events:none; }
+  .page::after  { content:''; position:absolute; inset:7mm; border:1px solid var(--gold); border-radius:2mm; pointer-events:none; }
+
+  header { text-align:center; margin-bottom: 6mm; position: relative; z-index: 1; }
+  .stamp { display: inline-block; padding: 1mm 4mm; background: var(--rose); color: var(--cream); border-radius: 1mm; font-style: italic; letter-spacing: 4px; font-size: 8pt; transform: rotate(-2deg); }
+  h1 { font-family:'Brush Script MT',cursive; color: var(--rose); font-size: 56pt; line-height: 1; margin-top: 3mm; text-shadow: 2.5px 2.5px 0 var(--gold); }
+  .sub { color: var(--tan); font-style: italic; font-size: 12pt; margin-top: 2mm; }
+  .time-tag { background: var(--jade); color: var(--cream); padding: 1.5mm 5mm; border-radius: 1mm; display: inline-block; font-size: 11pt; letter-spacing: 3px; margin-top: 3mm; }
+
+  .block {
+    background: var(--paper); border: 1.5px dashed var(--tan); border-radius: 3mm;
+    padding: 5mm 6mm; margin-bottom: 4mm;
+    position: relative; z-index: 1;
+  }
+  .block::before { content:''; position:absolute; inset:1.5mm; border:1px solid var(--gold); border-radius:2mm; pointer-events:none; }
+  h2 {
+    font-family: 'Brush Script MT', cursive; color: var(--jade);
+    font-size: 22pt; line-height: 1; margin-bottom: 3mm;
+    border-bottom: 1px dashed var(--rose); padding-bottom: 2mm;
+    position: relative; z-index: 1;
+  }
+  .body { font-size: 11pt; line-height: 1.6; position: relative; z-index: 1; }
+  .body p { margin-bottom: 2mm; }
+  .body b { color: var(--rose); }
+  .body em { color: var(--jade); font-style: italic; }
+  ol { margin-left: 6mm; font-size: 11pt; line-height: 1.7; position: relative; z-index: 1; }
+  ol li { margin-bottom: 2mm; }
+  ol li b { color: var(--rose); }
+
+  .menu-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 3mm; margin-top: 2mm;
+    position: relative; z-index: 1;
+  }
+  .menu-item {
+    background: white; border: 1px dashed var(--rose); border-radius: 1.5mm;
+    padding: 3mm 4mm;
+  }
+  .menu-item .nm { font-family: 'Brush Script MT', cursive; color: var(--rose); font-size: 16pt; line-height: 1; }
+  .menu-item .desc { font-size: 9.5pt; color: var(--ink); margin-top: 1mm; line-height: 1.4; }
+
+  .step-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 3mm; margin-top: 3mm;
+    position: relative; z-index: 1;
+  }
+  .step-card {
+    background: white; border: 1px dashed var(--jade); border-radius: 1.5mm;
+    padding: 3mm 4mm; text-align: center;
+  }
+  .step-card .ic { font-family: 'Brush Script MT', cursive; color: var(--rose); font-size: 28pt; line-height: 1; }
+  .step-card .nm { font-weight: bold; color: var(--ink); font-size: 11pt; margin-top: 1mm; }
+  .step-card .desc { font-size: 9pt; color: var(--tan); font-style: italic; margin-top: 1mm; line-height: 1.3; }
+
+  footer { text-align: center; margin-top: auto; color: var(--tan); font-style: italic; font-size: 9pt; letter-spacing: 2px; padding-top: 3mm; position: relative; z-index: 1; }
+</style></head>
+<body>
+
+<!-- =================== PAGE 1 · TEA BREAK =================== -->
+<div class="page">
+  <header>
+    <span class="stamp">★ STATION SIGN · 2:40 – 3:10 PM ★</span>
+    <h1>Nyonya Tea</h1>
+    <div class="sub">~ thirty minutes · sit, eat, talk ~</div>
+    <div class="time-tag">★ 30 MIN · then back to long table for batik ★</div>
+  </header>
+
+  <div class="block">
+    <h2>What's on the table</h2>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="nm">Kuih Talam</div>
+        <div class="desc">two-layer pandan & coconut</div>
+      </div>
+      <div class="menu-item">
+        <div class="nm">Kuih Lapis</div>
+        <div class="desc">nine layers of patience</div>
+      </div>
+      <div class="menu-item">
+        <div class="nm">Pineapple Tarts</div>
+        <div class="desc">kuih tart · for prosperity</div>
+      </div>
+      <div class="menu-item">
+        <div class="nm">Ang Ku Kueh</div>
+        <div class="desc">red tortoise · for long life</div>
+      </div>
+      <div class="menu-item">
+        <div class="nm">Teh Tarik</div>
+        <div class="desc">pulled tea · hot, sweet, strong</div>
+      </div>
+      <div class="menu-item">
+        <div class="nm">Air Bunga</div>
+        <div class="desc">cold rose syrup water</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <h2>While you eat</h2>
+    <div class="body">
+      <p>Walk to the whiteboard. Look at the family tree you all just built. <b>Take photos.</b> Find someone you didn't know an hour ago — ask them which character was on their team, and what surprised them most.</p>
+      <p>The 5 AI Heritage Portraits are pinned at the front. <b>The winner is announced when batik begins.</b></p>
+    </div>
+  </div>
+
+  <footer>tea station · 30 min · 陳家根譜</footer>
+</div>
+
+<!-- =================== PAGE 2 · BATIK =================== -->
+<div class="page">
+  <header>
+    <span class="stamp">★ STATION SIGN · 3:10 – 4:10 PM ★</span>
+    <h1>Batik</h1>
+    <div class="sub">~ paint your square · take it home ~</div>
+    <div class="time-tag">★ 60 MIN · joget begins at 4:10 sharp ★</div>
+  </header>
+
+  <div class="block">
+    <h2>What you'll get</h2>
+    <div class="body">
+      <p>One small white cotton square (about 25 × 25 cm), already stretched on a wooden frame, with the wax outline of a Peranakan motif drawn on it: <em>peony, hibiscus, butterfly, phoenix, or geometric tile</em>. Pick one. The wax keeps your colours from running.</p>
+    </div>
+  </div>
+
+  <div class="block">
+    <h2>How to paint</h2>
+    <div class="step-grid">
+      <div class="step-card">
+        <div class="ic">1</div>
+        <div class="nm">Pick your colours</div>
+        <div class="desc">3-4 max · less is more</div>
+      </div>
+      <div class="step-card">
+        <div class="ic">2</div>
+        <div class="nm">Dip brush, dab once on cloth</div>
+        <div class="desc">remove excess so it doesn't bleed</div>
+      </div>
+      <div class="step-card">
+        <div class="ic">3</div>
+        <div class="nm">Paint inside the wax lines</div>
+        <div class="desc">the wax stops the colour</div>
+      </div>
+      <div class="step-card">
+        <div class="ic">4</div>
+        <div class="nm">Let dry on the rack</div>
+        <div class="desc">~15 min · take home in tube</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <h2>Tips from the helper</h2>
+    <div class="body">
+      <p><b>Start light, build dark.</b> You can always add more colour. You can never take it out.<br>
+      <b>Don't paint over wet paint</b> — it muddies. Wait or move to another area of the cloth.<br>
+      <b>Mistake?</b> Make it part of the design. Peranakans don't waste cloth.<br>
+      <b>Sign your square</b> in the bottom corner — small, in pencil. We'll add the date.</p>
+    </div>
+  </div>
+
+  <footer>batik station · 60 min · joget at 4:10 · 陳家根譜</footer>
+</div>
+
+<!-- =================== PAGE 3 · JOGET =================== -->
+<div class="page">
+  <header>
+    <span class="stamp">★ STATION SIGN · 4:10 – 4:30 PM ★</span>
+    <h1>Joget</h1>
+    <div class="sub">~ everyone dances · no exceptions ~</div>
+    <div class="time-tag">★ 20 MIN · the closing ★</div>
+  </header>
+
+  <div class="block">
+    <h2>The dance, simply</h2>
+    <div class="body">
+      <p>Joget is a fast, flirtatious Malay social dance — quick footwork, gentle swaying hands, eye contact, smiles. <b>You do not need to know the steps.</b> The point is movement together, not technique.</p>
+      <p>Bibi will lead. Form a loose circle. Pair up if you want, or dance solo in the circle — both are joget. Music will be three songs: a slow one to warm up, a fast one to commit, a slow one to close.</p>
+    </div>
+  </div>
+
+  <div class="block">
+    <h2>The 4 simple steps</h2>
+    <div class="step-grid">
+      <div class="step-card">
+        <div class="ic">1</div>
+        <div class="nm">Step right · tap left</div>
+        <div class="desc">on the beat</div>
+      </div>
+      <div class="step-card">
+        <div class="ic">2</div>
+        <div class="nm">Step left · tap right</div>
+        <div class="desc">mirror</div>
+      </div>
+      <div class="step-card">
+        <div class="ic">3</div>
+        <div class="nm">Hands at waist height</div>
+        <div class="desc">soft wrists, palms turning out and in</div>
+      </div>
+      <div class="step-card">
+        <div class="ic">4</div>
+        <div class="nm">Smile · make eye contact</div>
+        <div class="desc">that is the whole dance</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <h2>The closing</h2>
+    <div class="body">
+      <p>When the third song ends, Bibi calls everyone to the centre. <b>Big group photo</b> with all 5 AI portraits held up. Then guests leave with three things:</p>
+      <p>1. Their team's <b>recipe card</b> (cook it, teach it, spread it).<br>
+      2. Their <b>batik square</b> (signed and dated, in a tube to take home).<br>
+      3. Their <b>Selphy AI portrait</b> (handed out at the door on the way out).</p>
+      <p style="margin-top: 3mm; font-style: italic; color: var(--rose); text-align: center; font-size: 13pt; font-family: 'Brush Script MT', cursive;">Selamat tinggal, sampai jumpa lagi.</p>
+    </div>
+  </div>
+
+  <footer>joget · closing · 陳家根譜 · 9 May 2026</footer>
+</div>
+
+</body></html>

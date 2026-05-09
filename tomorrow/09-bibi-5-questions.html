@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Bibi's 5 Questions · Round 1 Reward · Gold Coin Quiz</title>
+<!--
+  PRINT: 1 × A4 portrait. Bibi only. Keep in apron pocket next to the cheat sheet.
+  Use at the 15-min mark of Round 1 (≈ 1:45 PM).
+  Each correct answer = 1 gold coin chocolate to the answering team.
+  After all 5 questions are asked → hand out the 4-card RELATIONSHIP NOTE
+  (file 10-family-relationship-note.html) to every team.
+-->
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  :root { --cream:#f6ecd2; --paper:#fbf4dd; --ink:#3a2418; --gold:#b8860b; --jade:#2e7d5b; --rose:#b91c4b; --tan:#8b5a2b; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background:#2a1810; font-family:'Georgia',serif; color:var(--ink); }
+  body { padding: 14px; }
+  @media print { body { padding: 0; background: white; } }
+  .page {
+    width: 210mm; height: 297mm; margin: 0 auto;
+    background: var(--cream); padding: 10mm 12mm;
+    position: relative; box-shadow: 0 14px 36px rgba(0,0,0,0.5);
+    display: flex; flex-direction: column;
+  }
+  @media print { .page { box-shadow: none; margin: 0; } }
+  .page::before { content:''; position:absolute; inset:5mm; border:2px double var(--rose); border-radius:3mm; pointer-events:none; }
+  .page::after  { content:''; position:absolute; inset:7mm; border:1px solid var(--gold); border-radius:2mm; pointer-events:none; }
+
+  header { text-align:center; margin-bottom: 4mm; position: relative; z-index: 1; }
+  .stamp { display: inline-block; padding: 1mm 4mm; background: var(--ink); color: var(--gold); border-radius: 1mm; font-style: italic; letter-spacing: 4px; font-size: 8pt; transform: rotate(-2deg); }
+  h1 { font-family:'Brush Script MT',cursive; color: var(--rose); font-size: 26pt; line-height: 1; margin-top: 2mm; text-shadow: 1.3px 1.3px 0 var(--gold); }
+  .sub { color: var(--tan); font-style: italic; font-size: 9pt; margin-top: 1mm; }
+
+  .preamble {
+    background: rgba(184,134,11,0.10); border: 1px dashed var(--gold);
+    border-radius: 2mm; padding: 2.5mm 4mm; margin-bottom: 3mm;
+    font-size: 8.5pt; line-height: 1.45; color: var(--ink);
+    position: relative; z-index: 1;
+  }
+  .preamble b { color: var(--rose); }
+  .preamble em { color: var(--jade); font-style: italic; }
+
+  .qa {
+    background: var(--paper);
+    border: 1.5px dashed var(--tan);
+    border-radius: 3mm;
+    padding: 3mm 4mm; margin-bottom: 2.5mm;
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 12mm 1fr;
+    gap: 3mm; align-items: start;
+  }
+  .qa::before { content:''; position:absolute; inset:1.5mm; border:1px solid var(--gold); border-radius:2mm; pointer-events:none; }
+  .qnum {
+    width: 12mm; height: 12mm; border-radius: 50%;
+    background: var(--rose); color: var(--cream);
+    display: flex; align-items: center; justify-content: center;
+    font-family:'Brush Script MT',cursive; font-size: 18pt;
+    border: 1.5px double var(--gold);
+    flex-shrink: 0; align-self: center;
+    box-shadow: 1.2px 1.2px 0 var(--tan);
+  }
+  .qbody { position: relative; z-index: 1; min-width: 0; }
+  .qask {
+    font-style: italic;
+    color: var(--ink);
+    font-size: 10.5pt; line-height: 1.4;
+    margin-bottom: 1.5mm;
+  }
+  .qask::before { content:'🗣 '; color: var(--rose); font-style: normal; }
+  .qask b { color: var(--rose); font-style: normal; }
+
+  .ans {
+    background: white;
+    border-left: 3px solid var(--jade);
+    padding: 1.8mm 3mm; border-radius: 1mm;
+    font-size: 9pt; line-height: 1.4; color: var(--ink);
+  }
+  .ans .lab {
+    color: var(--jade); font-weight: bold; letter-spacing: 1.5px;
+    font-size: 7.5pt;
+  }
+  .ans .a {
+    color: var(--rose); font-weight: bold; font-size: 10pt;
+    margin-top: 0.5mm; display: block;
+  }
+  .ans .src { color: var(--tan); font-style: italic; font-size: 7.5pt; margin-top: 0.5mm; }
+
+  .accept { background: rgba(46,125,91,0.10); border: 1px dotted var(--jade); border-radius: 1.5mm; padding: 1.2mm 2.5mm; margin-top: 1.5mm; font-size: 7.5pt; color: var(--ink); line-height: 1.4; }
+  .accept b { color: var(--jade); }
+
+  .closer {
+    background: var(--ink); color: var(--cream);
+    border-radius: 2mm; padding: 3mm 5mm; margin-top: 2mm;
+    text-align: center; position: relative; z-index: 1;
+  }
+  .closer .ttl { font-family:'Brush Script MT',cursive; color: var(--gold); font-size: 14pt; line-height: 1; }
+  .closer .body { font-size: 8.5pt; line-height: 1.5; margin-top: 1.5mm; font-style: italic; }
+  .closer .body b { color: var(--gold); font-style: normal; letter-spacing: 1px; }
+
+  footer { text-align: center; margin-top: auto; color: var(--tan); font-style: italic; font-size: 8pt; letter-spacing: 2px; padding-top: 2mm; position: relative; z-index: 1; }
+</style></head>
+<body>
+<div class="page">
+  <header>
+    <span class="stamp">★ BIBI ONLY · GOLD COIN QUIZ ★</span>
+    <h1>5 Questions at the 15-Minute Mark</h1>
+    <div class="sub">~ ask at 1:45 PM · 1 chocolate coin per correct answer ~</div>
+  </header>
+
+  <div class="preamble">
+    <b>How to run this:</b> at the 15-minute mark of Round 1, clap once. <em>"Pencils down. Whether your tree is finished or not — five questions. First team to shout the right answer wins one gold coin."</em> Hold up the chocolate. Ask in order. After all 5 are asked, walk around with the basket — every team that won a coin claims one. Then hand each team the <b>4-card Relationship Note</b> and say: <em>"Now check your tree against this. You have ten more minutes."</em>
+  </div>
+
+  <!-- Q1 -->
+  <div class="qa">
+    <div class="qnum">1</div>
+    <div class="qbody">
+      <div class="qask">Who stepped off the boat at George Town at nineteen, with a <b>brass pocket-watch</b> in his palm — and built our family shipping house?</div>
+      <div class="ans">
+        <span class="lab">ANSWER</span>
+        <span class="a">Tan Keo San · 陳橋山 · #1 (story D)</span>
+        <span class="src">the founder · See Hai Chan 西海棧 · 1872–1941</span>
+      </div>
+      <div class="accept"><b>Also accept:</b> "the founder" · "the Fujian boat man" · "Tua-Kong" · "card #1" · "story D"</div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="qa">
+    <div class="qnum">2</div>
+    <div class="qbody">
+      <div class="qask">Which Yap sister — the eldest of the <em>Three Golden Orchids 三朵金蘭</em> — drew the <b>chalk line across the kitchen floor</b> in 1920 when the second woman arrived?</div>
+      <div class="ans">
+        <span class="lab">ANSWER</span>
+        <span class="a">Yap Eng Siew · 葉永秀 · #2 (story I)</span>
+        <span class="src">the eldest sister · wore the Ibu brooch for 58 years</span>
+      </div>
+      <div class="accept"><b>Also accept:</b> "the Ibu" · "Tua-Ma" · "the eldest Yap" · "card #2" · "story I"</div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="qa">
+    <div class="qnum">3</div>
+    <div class="qbody">
+      <div class="qask">What was the wharf men's nickname for <b>Auntie Mei's son</b> — the boy born in the kitchen, never sent to school, who walked into the jungle north of Kulim after the surrender in 1945?</div>
+      <div class="ans">
+        <span class="lab">ANSWER</span>
+        <span class="a">Seoy Yee Kia · 細姨仔 · "the mistress's son"</span>
+        <span class="src">Tan Ah Cai · 陳亞財 · #9 (story F)</span>
+      </div>
+      <div class="accept"><b>Also accept:</b> any pronunciation of <em>Seoy Yee Kia</em> / <em>Sai Yee Kia</em> / 細姨仔 · "the mistress's son" · "Ah Cai"</div>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="qa">
+    <div class="qnum">4</div>
+    <div class="qbody">
+      <div class="qask">In <b>which year</b> did the kerongsang — Ibu, Anak A, Anak B — finally sit complete on one collar for the first time… and on <b>whose collar</b>?</div>
+      <div class="ans">
+        <span class="lab">ANSWER</span>
+        <span class="a">1947 · on Lee Beng Guat's collar · #8 (story M)</span>
+        <span class="src">her wedding day · cream silk kebaya · 24 years after Eng Hooi died</span>
+      </div>
+      <div class="accept"><b>Also accept the year:</b> 1947 · "the wedding of 1947." <b>Also accept the bride:</b> "Beng Guat" · "Ah Ma" · "the Lee girl who married Cheng Hoe" · "card #8"</div>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="qa">
+    <div class="qnum">5</div>
+    <div class="qbody">
+      <div class="qask">Aunt Chen Neo kept the <b>1948 peony-toe slippers</b> in tissue paper for seventy-two years. Whose feet finally wore them — under whose wedding kebaya, in what year?</div>
+      <div class="ans">
+        <span class="lab">ANSWER</span>
+        <span class="a">Khoo Hooi Wen · #19 (story J) · her own wedding · 2020</span>
+        <span class="src">she married Dr Tan Wei Wen · #18 · closing the Penang–Singapore loop</span>
+      </div>
+      <div class="accept"><b>Also accept:</b> "Hooi Wen" · "Wei Wen's wife" · "the Singapore great-granddaughter" · "card #19" · the year 2020</div>
+    </div>
+  </div>
+
+  <div class="closer">
+    <div class="ttl">After the 5 questions</div>
+    <div class="body">
+      Hand each team the <b>4-CARD RELATIONSHIP NOTE</b> and say:<br>
+      <em>"This is Bibi Rose's voice — she walks you through all twenty of us, in order. Read it together. Fix your tree. You have ten minutes. After that, the lock code."</em>
+    </div>
+  </div>
+
+  <footer>★ bibi's apron · gold coin quiz · 陳家根譜 · 9 may 2026 ★</footer>
+</div>
+</body></html>

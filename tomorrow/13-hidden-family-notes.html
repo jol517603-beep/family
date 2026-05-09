@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Hidden Family Notes — The Tan Family Chest</title>
+<style>
+  :root{
+    --cream:#f6ecd2;
+    --paper:#fbf4dd;
+    --ink:#3a2418;
+    --gold:#b8860b;
+    --rose:#b91c4b;
+    --tan:#8b5a2b;
+    --jade:#2e7d5b;
+  }
+  @page { size: A3 landscape; margin: 0; }
+  html,body{ margin:0; padding:0; background:#888; color:var(--ink);
+    font-family: Georgia, 'Times New Roman', serif; }
+  body{ padding:0; }
+  .sheet{
+    width:420mm; height:297mm; background:var(--cream);
+    display:grid; grid-template-columns:repeat(9,1fr); grid-template-rows:1fr;
+    gap:0; page-break-after:always; position:relative;
+    box-sizing:border-box;
+  }
+  .note{
+    background:var(--paper); margin:7mm 5mm 7mm 5mm;
+    border:0.6mm double var(--rose); border-radius:2.2mm;
+    box-shadow:0 0 2.5mm #b8860b22;
+    display:flex; flex-direction:column; justify-content:space-between;
+    padding:7mm 6mm 6mm 7mm; min-width:0; min-height:0;
+    position:relative;
+    font-size:10.1pt; line-height:1.48;
+    color:var(--ink);
+    overflow:hidden;
+  }
+  .note .poem{ font-size:10.2pt; line-height:1.5; white-space:pre-line; margin-bottom:2.5mm; }
+  .note .byline{ color:var(--rose); font-family:'Brush Script MT','Lucida Handwriting',cursive; font-size:11pt; text-align:right; margin-bottom:2.2mm; }
+  .note .pw{ color:var(--jade); font-size:9.5pt; text-align:right; font-family:Georgia,serif; letter-spacing:0.2mm; }
+  .note .pw strong{ color:var(--gold); font-size:11pt; }
+  .note .orchid{ position:absolute; left:7mm; bottom:7mm; font-size:15pt; color:var(--rose); opacity:0.18; pointer-events:none; }
+  @media screen{
+    body{ padding:10mm; }
+    .sheet{ box-shadow:0 0 8mm rgba(0,0,0,0.18); margin:0 auto 8mm; }
+  }
+</style>
+</head>
+<body>
+<section class="sheet">
+  <div class="note">
+    <div class="poem">The world knew me
+by another family name.
+
+But before my wedding,
+two women placed the final Kerongsang brooch into my hands.
+
+Only then did I finally understand
+why my gemstone never matched the family I grew up in.
+
+My mother and aunt carried a promise
+their entire lives.
+
+Before their youngest sister died,
+they swore her child would never be abandoned.
+
+And they carried that promise with them
+to the grave.</div>
+    <div class="byline">— The Third Orchid</div>
+    <div class="pw">Password Digit: <strong>3</strong></div>
+    <div class="orchid">🌸</div>
+  </div>
+  <div class="note"></div>
+  <div class="note"></div>
+  <div class="note"></div>
+  <div class="note"></div>
+  <div class="note"></div>
+  <div class="note"></div>
+  <div class="note"></div>
+  <div class="note"></div>
+</section>
+</body>
+</html>

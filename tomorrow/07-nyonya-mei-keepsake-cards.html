@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Honouring Nyonya Mei · 5 Recipes</title>
+<!--
+  PRINT: 6 × A4 portrait.
+  Page 1 = dedication cover.
+  Pages 2-6 = one recipe per page (Talam · Kaya · Lapis · Dadar · Bingka Ubi).
+  Print on cream / ivory card stock if you have it.
+  Margins NONE · background graphics ON.
+-->
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  :root {
+    --cream:#faf3e0;
+    --paper:#fffaee;
+    --ink:#2b1810;
+    --gold:#c9962b;
+    --jade:#3a7a5e;
+    --rose:#a8264f;
+    --tan:#8b5a2b;
+    --soft:#e8dcc0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background:#1f140d; font-family: 'Georgia', 'Cambria', serif; color: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { padding: 16px; }
+  @media print { body { padding: 0; background: white; } }
+
+  .page {
+    width: 210mm; height: 297mm; margin: 0 auto 16px;
+    background: var(--cream);
+    padding: 16mm 18mm;
+    position: relative;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.55);
+    page-break-after: always;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+  @media print { .page { box-shadow: none; margin: 0; } }
+  .page:last-child { page-break-after: auto; }
+
+  /* clean single thin gold frame · understated */
+  .page::before {
+    content:''; position:absolute; inset: 8mm;
+    border: 0.6mm solid var(--gold);
+    pointer-events:none;
+  }
+  .page::after {
+    content:''; position:absolute; inset: 9.5mm;
+    border: 0.2mm solid var(--gold);
+    pointer-events:none;
+    opacity: 0.55;
+  }
+
+  /* corner peony ornaments */
+  .corner {
+    position: absolute; width: 22mm; height: 22mm;
+    pointer-events: none; opacity: 0.55;
+  }
+  .corner.tl { top: 12mm; left: 12mm; }
+  .corner.tr { top: 12mm; right: 12mm; transform: scaleX(-1); }
+  .corner.bl { bottom: 12mm; left: 12mm; transform: scaleY(-1); }
+  .corner.br { bottom: 12mm; right: 12mm; transform: scale(-1,-1); }
+
+  /* large faded watermark peony */
+  .watermark {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 130mm; height: 130mm;
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .content { position: relative; z-index: 1; display: flex; flex-direction: column; flex: 1; }
+
+  /* ============ COVER PAGE ============ */
+  .cover { text-align: center; justify-content: center; }
+  .cover .dedication-stamp {
+    font-family: 'Brush Script MT', 'Lucida Handwriting', cursive;
+    color: var(--rose);
+    font-size: 13pt;
+    letter-spacing: 1px;
+    margin-bottom: 4mm;
+    font-style: italic;
+  }
+  .cover h1 {
+    font-family: 'Brush Script MT', 'Lucida Handwriting', cursive;
+    color: var(--rose);
+    font-size: 64pt;
+    line-height: 1.05;
+    margin-bottom: 6mm;
+    text-shadow: 1.5px 1.5px 0 var(--gold);
+  }
+  .cover .chinese {
+    font-family: 'Georgia', serif;
+    color: var(--jade);
+    font-size: 22pt;
+    letter-spacing: 8px;
+    margin-bottom: 8mm;
+  }
+  .cover .who {
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    color: var(--ink);
+    font-size: 14pt;
+    line-height: 1.7;
+    max-width: 130mm;
+    margin: 0 auto 10mm;
+  }
+  .cover .who b { color: var(--rose); font-style: normal; }
+  .cover .divider {
+    width: 60mm; height: 1px; background: var(--gold);
+    margin: 4mm auto; position: relative;
+  }
+  .cover .divider::before {
+    content: '❀'; position: absolute; top: -8mm; left: 50%;
+    transform: translateX(-50%);
+    color: var(--rose); font-size: 16pt;
+    background: var(--cream); padding: 0 4mm;
+  }
+  .cover .recipes-list {
+    margin-top: 6mm;
+    font-family: 'Brush Script MT', cursive;
+    color: var(--jade);
+    font-size: 18pt;
+    line-height: 2;
+  }
+  .cover .recipes-list span { color: var(--gold); margin: 0 5mm; }
+  .cover .footer-line {
+    margin-top: auto; padding-top: 10mm;
+    color: var(--tan); font-style: italic; font-size: 10pt;
+    letter-spacing: 4px;
+  }
+
+  /* ============ RECIPE PAGES ============ */
+  .recipe-header {
+    text-align: center;
+    padding-bottom: 5mm;
+    border-bottom: 0.4mm solid var(--gold);
+    margin-bottom: 5mm;
+  }
+  .recipe-header .number {
+    font-family: 'Georgia', serif;
+    color: var(--tan);
+    font-size: 9pt;
+    letter-spacing: 6px;
+    font-style: italic;
+    margin-bottom: 2mm;
+  }
+  .recipe-header h1 {
+    font-family: 'Brush Script MT', 'Lucida Handwriting', cursive;
+    color: var(--rose);
+    font-size: 44pt;
+    line-height: 1;
+    text-shadow: 1.5px 1.5px 0 var(--gold);
+  }
+  .recipe-header .malay {
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    color: var(--jade);
+    font-size: 12pt;
+    margin-top: 2mm;
+    letter-spacing: 1px;
+  }
+  .recipe-header .english {
+    font-family: 'Georgia', serif;
+    color: var(--tan);
+    font-size: 9.5pt;
+    margin-top: 1mm;
+    font-style: italic;
+  }
+
+  .meta-row {
+    display: flex; justify-content: center;
+    gap: 12mm;
+    padding: 3mm 0;
+    margin-bottom: 5mm;
+    border-bottom: 0.2mm dashed var(--gold);
+    font-size: 9pt;
+    letter-spacing: 2px;
+  }
+  .meta-row span { color: var(--ink); font-style: italic; }
+  .meta-row b { color: var(--rose); font-style: normal; letter-spacing: 1px; margin-left: 1.5mm; }
+
+  .quote {
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    color: var(--ink);
+    font-size: 10.5pt;
+    line-height: 1.65;
+    text-align: center;
+    padding: 0 8mm;
+    margin-bottom: 6mm;
+    position: relative;
+  }
+  .quote::before, .quote::after {
+    content: '"';
+    font-family: 'Brush Script MT', cursive;
+    color: var(--rose);
+    font-size: 28pt;
+    line-height: 0;
+    position: absolute;
+  }
+  .quote::before { left: 0; top: 5mm; }
+  .quote::after { right: 0; bottom: -2mm; }
+
+  .columns {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 8mm;
+    flex: 1;
+  }
+
+  .col h3 {
+    font-family: 'Brush Script MT', cursive;
+    color: var(--jade);
+    font-size: 17pt;
+    margin-bottom: 3mm;
+    border-bottom: 0.3mm solid var(--gold);
+    padding-bottom: 1.5mm;
+  }
+  .ingredients ul {
+    list-style: none;
+    font-size: 9.5pt;
+    line-height: 1.85;
+  }
+  .ingredients li {
+    padding-left: 6mm;
+    position: relative;
+    color: var(--ink);
+  }
+  .ingredients li::before {
+    content: '❀';
+    position: absolute; left: 0; top: 0;
+    color: var(--rose);
+    font-size: 7pt;
+  }
+  .ingredients li b { color: var(--rose); font-weight: normal; font-style: italic; }
+  .ingredients li em { color: var(--tan); font-size: 8.5pt; }
+
+  .ingredients .subhead {
+    font-family: 'Brush Script MT', cursive;
+    color: var(--rose);
+    font-size: 13pt;
+    margin: 4mm 0 1mm;
+    padding-left: 0;
+  }
+  .ingredients .subhead::before { content: none; }
+
+  .method ol {
+    list-style: none;
+    counter-reset: step;
+    font-size: 10pt;
+    line-height: 1.65;
+  }
+  .method li {
+    counter-increment: step;
+    padding-left: 9mm;
+    position: relative;
+    margin-bottom: 3mm;
+    color: var(--ink);
+  }
+  .method li::before {
+    content: counter(step);
+    position: absolute; left: 0; top: 0.3mm;
+    width: 6mm; height: 6mm;
+    background: var(--rose);
+    color: var(--cream);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Georgia', serif;
+    font-size: 9pt;
+    font-weight: bold;
+  }
+  .method li b { color: var(--rose); font-style: italic; font-weight: normal; }
+
+  .footer-note {
+    margin-top: 6mm;
+    padding: 4mm 5mm;
+    border-top: 0.3mm solid var(--gold);
+    border-bottom: 0.3mm solid var(--gold);
+    text-align: center;
+    font-style: italic;
+    font-size: 10pt;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  .footer-note .label {
+    font-family: 'Brush Script MT', cursive;
+    color: var(--rose);
+    font-size: 13pt;
+    font-style: normal;
+    display: block;
+    margin-bottom: 1mm;
+  }
+
+  .page-stamp {
+    text-align: center;
+    margin-top: 4mm;
+    font-size: 8pt;
+    letter-spacing: 5px;
+    color: var(--tan);
+    font-style: italic;
+  }
+  .page-stamp .heart { color: var(--rose); margin: 0 3mm; }
+</style></head>
+<body>
+
+<!-- ================== SVG defs (corner peony) ================== -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="peony-corner" viewBox="0 0 100 100">
+      <g fill="#a8264f" opacity="0.85">
+        <ellipse cx="20" cy="20" rx="6" ry="10" transform="rotate(-30 20 20)"/>
+        <ellipse cx="40" cy="15" rx="6" ry="10" transform="rotate(-10 40 15)"/>
+        <ellipse cx="15" cy="40" rx="10" ry="6" transform="rotate(20 15 40)"/>
+        <ellipse cx="35" cy="35" rx="9" ry="11" transform="rotate(-45 35 35)"/>
+        <circle cx="32" cy="32" r="4" fill="#c9962b"/>
+      </g>
+      <g stroke="#3a7a5e" stroke-width="1.2" fill="none" opacity="0.7">
+        <path d="M 50 50 Q 65 60 75 80"/>
+        <path d="M 50 50 Q 60 65 80 75"/>
+      </g>
+      <g fill="#3a7a5e" opacity="0.7">
+        <ellipse cx="68" cy="68" rx="3" ry="6" transform="rotate(45 68 68)"/>
+        <ellipse cx="78" cy="78" rx="3" ry="6" transform="rotate(45 78 78)"/>
+      </g>
+    </symbol>
+    <symbol id="peony-full" viewBox="0 0 100 100">
+      <g fill="#a8264f">
+        <ellipse cx="50" cy="22" rx="11" ry="16"/>
+        <ellipse cx="50" cy="78" rx="11" ry="16"/>
+        <ellipse cx="22" cy="50" rx="16" ry="11"/>
+        <ellipse cx="78" cy="50" rx="16" ry="11"/>
+        <ellipse cx="32" cy="32" rx="12" ry="14" transform="rotate(-45 32 32)"/>
+        <ellipse cx="68" cy="32" rx="12" ry="14" transform="rotate(45 68 32)"/>
+        <ellipse cx="32" cy="68" rx="12" ry="14" transform="rotate(45 32 68)"/>
+        <ellipse cx="68" cy="68" rx="12" ry="14" transform="rotate(-45 68 68)"/>
+      </g>
+      <circle cx="50" cy="50" r="10" fill="#c9962b"/>
+      <circle cx="50" cy="50" r="4" fill="#a8264f"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ============================================================== -->
+<!-- COVER PAGE                                                     -->
+<!-- ============================================================== -->
+<div class="page cover">
+  <svg class="corner tl"><use href="#peony-corner"/></svg>
+  <svg class="corner tr"><use href="#peony-corner"/></svg>
+  <svg class="corner bl"><use href="#peony-corner"/></svg>
+  <svg class="corner br"><use href="#peony-corner"/></svg>
+  <svg class="watermark"><use href="#peony-full"/></svg>
+
+  <div class="content cover">
+    <div style="margin-top: 18mm;">
+      <div class="dedication-stamp">~ in honour of the lady with no name in the game ~</div>
+      <h1>Nyonya Mei</h1>
+      <div class="chinese">林梅蘭</div>
+      <div style="font-family:'Georgia',serif; font-style:italic; color:var(--tan); font-size:11pt; letter-spacing:3px;">Lim Mei Lan &middot; 1908 – 1996</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="who">
+      She was not born a Tan. She married no Tan. No grandchild carried her name. <br>
+      But for <b>fifty-one years</b> she stood at the back kitchen of the house on Lebuh Aceh, <br>
+      stirring santan, folding pandan, layering kuih nine times over —<br>
+      while the family upstairs ate, and laughed, and forgot her name.
+    </div>
+
+    <div class="who" style="font-family:'Brush Script MT',cursive; color:var(--rose); font-size:18pt; line-height:1.5;">
+      Today we remember.<br>
+      These are her five recipes.
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="recipes-list">
+      Kuih Talam <span>·</span> Kuih Kaya <span>·</span> Kuih Lapis<br>
+      Kuih Dadar <span>·</span> Kuih Bingka Ubi
+    </div>
+
+    <div class="footer-line">
+      ★ TAN FAMILY REUNION &middot; 9 MAY 2026 &middot; 陳家根譜 ★
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- RECIPE 1 · KUIH TALAM                                          -->
+<!-- ============================================================== -->
+<div class="page">
+  <svg class="corner tl"><use href="#peony-corner"/></svg>
+  <svg class="corner tr"><use href="#peony-corner"/></svg>
+  <svg class="corner bl"><use href="#peony-corner"/></svg>
+  <svg class="corner br"><use href="#peony-corner"/></svg>
+  <svg class="watermark"><use href="#peony-full"/></svg>
+
+  <div class="content">
+    <div class="recipe-header">
+      <div class="number">~ R E C I P E &nbsp; O N E &nbsp; O F &nbsp; F I V E ~</div>
+      <h1>Kuih Talam</h1>
+      <div class="malay">兩層糕 &middot; the two-layer cake</div>
+      <div class="english">green pandan below &middot; white coconut above</div>
+    </div>
+
+    <div class="quote">
+      Two layers, never one. The green is the earth, the white is the rain.
+      If you rush the bottom, the top will not sit.
+      This is true of cakes, and of people.
+    </div>
+
+    <div class="meta-row">
+      <span>serves <b>9</b></span>
+      <span>time <b>1 h + cool</b></span>
+      <span>level <b>easy</b></span>
+    </div>
+
+    <div class="columns">
+      <div class="col ingredients">
+        <h3>What you need</h3>
+        <div class="subhead">Bottom · pandan</div>
+        <ul>
+          <li>120 g <b>rice flour</b></li>
+          <li>30 g <b>tapioca flour</b></li>
+          <li>30 g <b>green pea flour</b> <em>(hoen kwe)</em></li>
+          <li>180 g <b>gula melaka</b>, chopped</li>
+          <li>250 ml fresh <b>pandan juice</b> <em>(8 leaves blended in 200 ml water, strained)</em></li>
+          <li>250 ml <b>water</b></li>
+          <li>pinch of <b>salt</b></li>
+        </ul>
+        <div class="subhead">Top · coconut</div>
+        <ul>
+          <li>50 g <b>rice flour</b></li>
+          <li>20 g <b>tapioca flour</b></li>
+          <li>10 g <b>hoen kwe flour</b></li>
+          <li>250 ml thick <b>coconut milk</b> (santan)</li>
+          <li>100 ml <b>water</b></li>
+          <li>½ tsp <b>salt</b></li>
+        </ul>
+      </div>
+
+      <div class="col method">
+        <h3>How to make it</h3>
+        <ol>
+          <li><b>Bottom layer.</b> Dissolve gula melaka in water on low heat, strain. Combine with pandan juice. Whisk in all bottom flours and salt until smooth. Cook on low, stirring constantly, about 5 minutes until thick like glue.</li>
+          <li><b>Steam.</b> Pour into a greased 8" square pan. Steam 20 minutes on medium heat. The surface should look set and matte.</li>
+          <li><b>Top layer.</b> Whisk all top ingredients smooth. Cook on low, stirring, about 3 minutes until thickened.</li>
+          <li><b>Layer.</b> Pour the white mixture gently over the steamed green layer. Steam another 15 minutes.</li>
+          <li><b>Cool &amp; cut.</b> Cool completely, at least 2 hours. Cut into 9 squares with a wet knife between each cut.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      <span class="label">Mei's note</span>
+      Cut clean, or don't cut at all. A messy talam tells the cook was angry.
+    </div>
+
+    <div class="page-stamp">N Y O N Y A &nbsp; M E I <span class="heart">❀</span> R E C I P E &nbsp; 1</div>
+  </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- RECIPE 2 · KUIH KAYA                                           -->
+<!-- ============================================================== -->
+<div class="page">
+  <svg class="corner tl"><use href="#peony-corner"/></svg>
+  <svg class="corner tr"><use href="#peony-corner"/></svg>
+  <svg class="corner bl"><use href="#peony-corner"/></svg>
+  <svg class="corner br"><use href="#peony-corner"/></svg>
+  <svg class="watermark"><use href="#peony-full"/></svg>
+
+  <div class="content">
+    <div class="recipe-header">
+      <div class="number">~ R E C I P E &nbsp; T W O &nbsp; O F &nbsp; F I V E ~</div>
+      <h1>Kuih Kaya</h1>
+      <div class="malay">椰漿蛋糕 &middot; coconut egg jam cake</div>
+      <div class="english">pandan custard above &middot; sticky glutinous rice below</div>
+    </div>
+
+    <div class="quote">
+      Towkay's first wife asked me for this every Sunday for thirty-one years.
+      She never thanked me. But she never asked anyone else, either.
+      That is also love.
+    </div>
+
+    <div class="meta-row">
+      <span>serves <b>12</b></span>
+      <span>time <b>1½ h</b></span>
+      <span>level <b>easy</b></span>
+    </div>
+
+    <div class="columns">
+      <div class="col ingredients">
+        <h3>What you need</h3>
+        <div class="subhead">Glutinous base</div>
+        <ul>
+          <li>300 g <b>glutinous rice</b>, soaked 4 hours</li>
+          <li>200 ml thin <b>coconut milk</b></li>
+          <li>½ tsp <b>salt</b></li>
+          <li>2 <b>pandan leaves</b>, knotted</li>
+          <li>1 tbsp <b>blue pea flower water</b> <em>(optional, for marbling)</em></li>
+        </ul>
+        <div class="subhead">Pandan custard</div>
+        <ul>
+          <li>5 large <b>eggs</b></li>
+          <li>200 g <b>caster sugar</b></li>
+          <li>250 ml thick <b>coconut milk</b></li>
+          <li>120 ml <b>pandan juice</b> <em>(6 leaves + 100 ml water)</em></li>
+          <li>40 g <b>rice flour</b></li>
+          <li>20 g <b>plain flour</b></li>
+          <li>¼ tsp <b>salt</b></li>
+        </ul>
+      </div>
+
+      <div class="col method">
+        <h3>How to make it</h3>
+        <ol>
+          <li><b>Base.</b> Drain rice. Mix with coconut milk, salt, and pandan leaves. Drizzle blue pea water in random spots if marbling. Steam in an 8" pan for 25 minutes. Press flat with a wet spoon.</li>
+          <li><b>Custard.</b> Whisk eggs and sugar until pale. Add coconut milk and pandan juice. Sift in flours. <b>Strain twice.</b> No lumps allowed.</li>
+          <li><b>Layer.</b> Pour the custard gently over the pressed rice base.</li>
+          <li><b>Slow steam.</b> Steam on the lowest heat for 40 minutes. Wrap the lid in cloth so no condensation drips down. Toothpick should come out clean.</li>
+          <li><b>Cool.</b> Two hours minimum. Then slice with a wet knife.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      <span class="label">Mei's note</span>
+      Strain the kaya twice or your guests will know. They will not say it. But they will know.
+    </div>
+
+    <div class="page-stamp">N Y O N Y A &nbsp; M E I <span class="heart">❀</span> R E C I P E &nbsp; 2</div>
+  </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- RECIPE 3 · KUIH LAPIS                                          -->
+<!-- ============================================================== -->
+<div class="page">
+  <svg class="corner tl"><use href="#peony-corner"/></svg>
+  <svg class="corner tr"><use href="#peony-corner"/></svg>
+  <svg class="corner bl"><use href="#peony-corner"/></svg>
+  <svg class="corner br"><use href="#peony-corner"/></svg>
+  <svg class="watermark"><use href="#peony-full"/></svg>
+
+  <div class="content">
+    <div class="recipe-header">
+      <div class="number">~ R E C I P E &nbsp; T H R E E &nbsp; O F &nbsp; F I V E ~</div>
+      <h1>Kuih Lapis</h1>
+      <div class="malay">九層糕 &middot; the nine-layer cake</div>
+      <div class="english">pink &middot; white &middot; pink &middot; white &middot; nine times over</div>
+    </div>
+
+    <div class="quote">
+      Nine layers, like the peony on my apron. Nine layers, like the petals of patience.
+      The trick is not the colour — it is the waiting between each pour.
+      Don't rush. The cake remembers.
+    </div>
+
+    <div class="meta-row">
+      <span>serves <b>12</b></span>
+      <span>time <b>1¾ h</b></span>
+      <span>level <b>easy but slow</b></span>
+    </div>
+
+    <div class="columns">
+      <div class="col ingredients">
+        <h3>What you need</h3>
+        <div class="subhead">Single batter</div>
+        <ul>
+          <li>250 g <b>rice flour</b></li>
+          <li>100 g <b>tapioca flour</b></li>
+          <li>50 g <b>hoen kwe flour</b></li>
+          <li>250 g <b>caster sugar</b></li>
+          <li>500 ml thick <b>coconut milk</b></li>
+          <li>500 ml <b>water</b></li>
+          <li>1 tsp <b>salt</b></li>
+          <li>2 <b>pandan leaves</b>, knotted</li>
+        </ul>
+        <div class="subhead">To divide</div>
+        <ul>
+          <li>Split batter in half</li>
+          <li><b>Pink half:</b> 4–5 drops red colour <em>(or beetroot juice)</em></li>
+          <li><b>White half:</b> leave plain</li>
+          <li>You will pour <b>9 layers</b> total: pink-white-pink-white-pink-white-pink-white-pink</li>
+        </ul>
+      </div>
+
+      <div class="col method">
+        <h3>How to make it</h3>
+        <ol>
+          <li><b>Syrup.</b> Heat coconut milk, water, sugar, salt, and pandan leaves until sugar dissolves. Cool fully. Remove leaves.</li>
+          <li><b>Batter.</b> Whisk all flours into the cooled liquid. Strain. Divide in half. Colour one half pink.</li>
+          <li><b>Heat the pan.</b> Grease an 8" square pan. Steam empty for 5 minutes on high.</li>
+          <li><b>Pour, layer by layer.</b> Pour 1 ladle of pink. Steam 5 minutes on high. Pour 1 ladle of white. Steam 5 minutes. Repeat — alternating — until you have 9 layers total. About 45 minutes of steaming.</li>
+          <li><b>Final steam &amp; cool.</b> Steam the last layer 10 minutes. Cool 2 hours. Cut into long strips. Eat with fingers — peel one layer at a time.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      <span class="label">Mei's note</span>
+      If the layers blur, your steam was too low. If they crack, too high. Find the middle. Like the middle sister.
+    </div>
+
+    <div class="page-stamp">N Y O N Y A &nbsp; M E I <span class="heart">❀</span> R E C I P E &nbsp; 3</div>
+  </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- RECIPE 4 · KUIH DADAR                                          -->
+<!-- ============================================================== -->
+<div class="page">
+  <svg class="corner tl"><use href="#peony-corner"/></svg>
+  <svg class="corner tr"><use href="#peony-corner"/></svg>
+  <svg class="corner bl"><use href="#peony-corner"/></svg>
+  <svg class="corner br"><use href="#peony-corner"/></svg>
+  <svg class="watermark"><use href="#peony-full"/></svg>
+
+  <div class="content">
+    <div class="recipe-header">
+      <div class="number">~ R E C I P E &nbsp; F O U R &nbsp; O F &nbsp; F I V E ~</div>
+      <h1>Kuih Dadar</h1>
+      <div class="malay">椰絲卷餅 &middot; ketayap</div>
+      <div class="english">pandan crepe wrapped around warm gula melaka coconut</div>
+    </div>
+
+    <div class="quote">
+      Ah Cai loved this one. He would eat six in a row, standing by the back door.
+      I made it the morning he left for the jungle in 1942 — he took two with him in a banana leaf.
+      He never came back. I still make six every Sunday.
+    </div>
+
+    <div class="meta-row">
+      <span>serves <b>10</b></span>
+      <span>time <b>45 min</b></span>
+      <span>level <b>easy</b></span>
+    </div>
+
+    <div class="columns">
+      <div class="col ingredients">
+        <h3>What you need</h3>
+        <div class="subhead">Pandan crepe</div>
+        <ul>
+          <li>120 g <b>plain flour</b></li>
+          <li>1 tbsp <b>tapioca flour</b></li>
+          <li>1 large <b>egg</b></li>
+          <li>180 ml <b>pandan juice</b> <em>(6 leaves + 150 ml water)</em></li>
+          <li>120 ml thin <b>coconut milk</b></li>
+          <li>¼ tsp <b>salt</b></li>
+          <li>1 tsp <b>oil</b> + extra for pan</li>
+        </ul>
+        <div class="subhead">Inti · coconut filling</div>
+        <ul>
+          <li>200 g freshly grated <b>coconut</b> <em>(white part only)</em></li>
+          <li>120 g <b>gula melaka</b>, chopped fine</li>
+          <li>50 ml <b>water</b></li>
+          <li>2 <b>pandan leaves</b>, knotted</li>
+          <li>pinch of <b>salt</b></li>
+        </ul>
+      </div>
+
+      <div class="col method">
+        <h3>How to make it</h3>
+        <ol>
+          <li><b>Make the inti first.</b> Melt gula melaka with water and pandan leaves on low heat until syrupy. Strain. Toss with coconut and salt in a wok over very low heat for 5 minutes — just sticky, not dry. Cool.</li>
+          <li><b>Crepe batter.</b> Whisk egg with pandan juice and coconut milk. Add salt and oil. Sift in flours. Whisk smooth. Strain. Rest 15 minutes.</li>
+          <li><b>Cook the crepes.</b> Heat a small non-stick pan, lightly oiled. Pour ~2 tbsp batter and swirl thin. Cook 30 seconds — top should look matte. Slide off onto a plate. Do not flip. Repeat.</li>
+          <li><b>Roll.</b> Place 1 tbsp inti at one edge of each crepe. Fold the sides in, then roll like a spring roll.</li>
+          <li><b>Serve.</b> Warm or room temperature. Best within 4 hours.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      <span class="label">Mei's note</span>
+      Don't flip the crepe. One side cooked is enough. The other side should remember it was once batter.
+    </div>
+
+    <div class="page-stamp">N Y O N Y A &nbsp; M E I <span class="heart">❀</span> R E C I P E &nbsp; 4</div>
+  </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- RECIPE 5 · KUIH BINGKA UBI                                     -->
+<!-- ============================================================== -->
+<div class="page">
+  <svg class="corner tl"><use href="#peony-corner"/></svg>
+  <svg class="corner tr"><use href="#peony-corner"/></svg>
+  <svg class="corner bl"><use href="#peony-corner"/></svg>
+  <svg class="corner br"><use href="#peony-corner"/></svg>
+  <svg class="watermark"><use href="#peony-full"/></svg>
+
+  <div class="content">
+    <div class="recipe-header">
+      <div class="number">~ R E C I P E &nbsp; F I V E &nbsp; O F &nbsp; F I V E ~</div>
+      <h1>Kuih Bingka Ubi</h1>
+      <div class="malay">木薯糕 &middot; baked tapioca cake</div>
+      <div class="english">deep golden caramelised top &middot; soft chewy middle</div>
+    </div>
+
+    <div class="quote">
+      The only kuih in this house I baked, not steamed.
+      The towkay's second daughter said it tasted like the sun.
+      I told her the sun was free, and so was this.
+      I lied. The eggs were not free. But the recipe is now.
+    </div>
+
+    <div class="meta-row">
+      <span>serves <b>12</b></span>
+      <span>time <b>1¼ h</b></span>
+      <span>level <b>easy</b></span>
+    </div>
+
+    <div class="columns">
+      <div class="col ingredients">
+        <h3>What you need</h3>
+        <div class="subhead">Cake</div>
+        <ul>
+          <li>500 g grated <b>tapioca</b> <em>(fresh or thawed, well drained)</em></li>
+          <li>200 g <b>caster sugar</b></li>
+          <li>2 large <b>eggs</b></li>
+          <li>250 ml thick <b>coconut milk</b></li>
+          <li>50 g <b>melted butter</b></li>
+          <li>½ tsp <b>salt</b></li>
+          <li>1 tsp <b>vanilla</b> <em>(or 2 pandan leaves blended in)</em></li>
+          <li>1 tbsp <b>tapioca flour</b> <em>(only if mixture too wet)</em></li>
+        </ul>
+        <div class="subhead">Golden glaze</div>
+        <ul>
+          <li>2 tbsp <b>coconut milk</b></li>
+          <li>1 tsp <b>sugar</b></li>
+          <li>pinch of <b>salt</b></li>
+        </ul>
+      </div>
+
+      <div class="col method">
+        <h3>How to make it</h3>
+        <ol>
+          <li><b>Prepare.</b> Pre-heat oven to 175 °C. Grease an 8" square pan.</li>
+          <li><b>Drain well.</b> Squeeze grated tapioca thoroughly. Watery tapioca makes a sad bingka.</li>
+          <li><b>Mix.</b> Whisk eggs, sugar, and salt until pale. Add coconut milk, melted butter, vanilla. Fold in tapioca and tapioca flour.</li>
+          <li><b>First bake.</b> Pour into pan. Bake 30 minutes — top should just be setting.</li>
+          <li><b>Glaze and finish.</b> Brush with glaze. Bake another 20–25 minutes until top is deep golden brown and glossy.</li>
+          <li><b>Cool fully.</b> At least 1 hour before cutting. The middle firms as it cools.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      <span class="label">Mei's note</span>
+      If the top is pale, you took it out too early. A bingka with no colour is a bingka with no story.
+    </div>
+
+    <div class="page-stamp">N Y O N Y A &nbsp; M E I <span class="heart">❀</span> R E C I P E &nbsp; 5</div>
+  </div>
+</div>
+
+</body></html>

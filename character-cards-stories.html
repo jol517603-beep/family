@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Character Cards · Round 1 · Match by Story</title>
+<style>
+  :root {
+    --cream: #f5ecd7;
+    --ink: #3a2418;
+    --gold: #b8860b;
+    --jade: #2e7d5b;
+    --rose: #c2185b;
+    --tan: #8b5a2b;
+    --paper: #faf3e0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background: #2a1810;
+    padding: 22px;
+    color: var(--ink);
+  }
+  h1 {
+    color: var(--cream);
+    text-align: center;
+    font-family: 'Brush Script MT', cursive;
+    font-size: 38px;
+    margin-bottom: 4px;
+  }
+  .sub {
+    color: #d4c5a0;
+    text-align: center;
+    font-style: italic;
+    margin-bottom: 8px;
+    font-size: 13px;
+  }
+  .round-banner {
+    max-width: 1400px;
+    margin: 0 auto 20px;
+    background: var(--rose);
+    color: var(--cream);
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.55;
+    border: 2px dashed var(--gold);
+    text-align: center;
+  }
+  .round-banner strong { color: #fff8e1; letter-spacing: 1px; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .card {
+    background: var(--paper);
+    border: 2px solid var(--tan);
+    border-radius: 8px;
+    padding: 10px 11px 12px;
+    text-align: center;
+    box-shadow: 3px 3px 0 var(--tan);
+    background-image:
+      radial-gradient(circle at 90% 10%, rgba(184,134,11,0.15) 0, transparent 30%),
+      radial-gradient(circle at 10% 90%, rgba(46,125,91,0.10) 0, transparent 30%);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 360px;
+  }
+  .card .num {
+    position: absolute;
+    top: 6px; left: 8px;
+    background: var(--rose);
+    color: white;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  }
+  .card .marker {
+    position: absolute;
+    top: 6px; right: 6px;
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 8px;
+    font-weight: bold;
+    color: white;
+  }
+  .marker.secret { background: var(--jade); }
+  .marker.death  { background: #555; }
+  .marker.bibi   { background: var(--rose); }
+  .marker.guest  { background: var(--gold); }
+
+  .photo {
+    width: 100%;
+    aspect-ratio: 1;
+    border: 2px dashed var(--tan);
+    border-radius: 6px;
+    background:
+      radial-gradient(circle at 50% 35%, var(--tan) 0 22px, transparent 23px),
+      linear-gradient(to bottom, transparent 55%, var(--tan) 55%, var(--tan) 80%, transparent 80%);
+    background-size: 100% 100%;
+    opacity: 0.32;
+    margin: 16px auto 8px;
+    max-width: 88px;
+  }
+  .name {
+    font-weight: bold;
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.15;
+  }
+  .name-zh {
+    color: var(--rose);
+    font-size: 13px;
+    margin-top: 1px;
+  }
+  .year {
+    color: var(--tan);
+    font-style: italic;
+    font-size: 11px;
+    margin-top: 4px;
+    border-top: 1px dotted var(--tan);
+    padding-top: 4px;
+  }
+  .story {
+    margin-top: 9px;
+    background: #fff8e1;
+    border: 1.5px solid var(--gold);
+    border-radius: 6px;
+    padding: 7px 8px;
+    font-size: 11px;
+    line-height: 1.4;
+    color: var(--ink);
+    text-align: left;
+    font-style: italic;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    box-shadow: inset 0 0 0 1px rgba(184,134,11,0.15);
+  }
+  .story strong { color: var(--rose); font-style: normal; }
+  .story .tag {
+    display: inline-block;
+    background: var(--jade);
+    color: #fff8e1;
+    font-style: normal;
+    font-size: 9px;
+    padding: 1px 5px;
+    border-radius: 4px;
+    margin-right: 4px;
+    letter-spacing: 0.5px;
+    vertical-align: middle;
+  }
+
+  .gen-divider {
+    grid-column: span 5;
+    color: var(--gold);
+    font-size: 14px;
+    border-top: 2px dashed var(--gold);
+    padding: 18px 8px 8px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-align: center;
+  }
+  .note {
+    max-width: 1400px;
+    margin: 24px auto 0;
+    background: var(--paper);
+    padding: 14px 18px;
+    border-radius: 8px;
+    border-left: 4px solid var(--gold);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .note strong { color: var(--rose); }
+
+  @media print {
+    body { background: white; padding: 0; }
+    h1, .sub, .round-banner, .note { display: none; }
+    .card { box-shadow: none; page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<h1>🌺 Roots of the Rose · The Story Deck 🌺</h1>
+<p class="sub">20 character cards · 4 rounds · the family tree, the heirlooms, and the Yap secret</p>
+
+<div class="round-banner">
+  <strong>🎯 ROUND 1 — Match the Character</strong> · read the story 💬 → find the silhouette → place the card.<br>
+  <strong>📝 ROUND 1.5 — Bibi's Note</strong> · one folded note from Bibi, full of riddles. She <em>never</em> names a relationship. Use her clues to fill the <b>5 Special Relationships</b> column on your worksheet.<br>
+  <strong>🟡 ROUND 2 — Place the 10 Heirlooms</strong> · the envelope holds <b>10 items</b>. Decide which go in the 3 tree circles, the 3 outside-tree column, and which 2 are <em>tucked inside character cards</em>.<br>
+  <strong>🤫 ROUND 3 — Crack the Yap Secret</strong> · two folded secret notes hide inside <b>two of the three Yap sisters' cards</b> (#2 Eng Siew &amp; #4 Eng Neo). Find them. Read them. Write what they reveal.<br>
+  <strong>👠 ROUND 4 — Sew the Kasut Manik</strong> · in tribute to <b>Aunt Chen Neo</b>. Team of 5 takes the bead kit, follows the pattern, finishes the slipper toe. A <b>hidden number</b> appears in the finished beadwork — write it on the worksheet.<br>
+  <em style="opacity:0.85">Watch for the 🤫 stamp — it whispers where to look. Watch for the 👠 stamp — that's the bead-sister.</em>
+</div>
+
+<div class="grid">
+
+  <!-- ============ GEN 1 · THE FOUNDERS ============ -->
+  <div class="gen-divider">Gen 1 · The Founders (1872 – 1948)</div>
+
+  <div class="card">
+    <div class="num">1</div>
+    <div class="photo"></div>
+    <div>
+      <div class="name">Tan Keo San</div>
+      <div class="name-zh">陳橋山</div>
+      <div class="year">1872 – 1941 · sinkeh from Fujian</div>
+    </div>
+    <div class="story">
+      <span><span class="tag">S1·⌚</span>Stepped off a Fujian junk in 1891 with a <strong>brass pocket watch</strong> his father pressed into his palm: <em>«time is the only thing nobody can steal back from you.»</em> Built <strong>See Hai Chan 西海棧</strong> from porter to towkay in 30 years. On <strong>11 Dec 1941</strong> he walked to Weld Quay to meet a delayed lighter — the first Japanese bomb fell at 11:14. The watch came home in his coat pocket, still ticking. ⌚</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="num">2</div>
+    <div class="marker secret">🤫 sister</div>
+    <div class="photo"></div>
+    <div>
+      <div class="name">Yap Eng Siew</div>
+      <div class="name-zh">葉永秀</div>
+      <div class="year">1880 – 1956 · eldest Yap sister</div>
+    </div>
+    <div class="story">
+      <span><span class="tag">S2·📌</span><strong>Eldest of three Yap sisters.</strong> Married Keo San in 1898 wearing the <strong>Ibu (母)</strong> kerongsang. Drew a chalk line on the kitchen floor when her husband brought a second woman home — and kept her sister's secret of 1923 until the day she died. <em>Note ① is folded inside this card.</em> 🤫</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="num">3</div>
+    <div class="marker secret">🤫 named</div>
+    <div class="photo"></div>
+    <div>
+      <div class="name">Lim Mei Lan</div>
+      <div class="name-zh">林美蘭</div>
+      <div class="year">1902 – 1998 · "Auntie Mei" 美姑</div>
+    </div>
+    <div class="story">
+      <span><span class="tag">S3·📜</span>Brought into the back of the Tan house at <strong>18</strong>. Cooked over <strong>200 wedding feasts</strong> — never sat at one. Wore one pale-jade kebaya for 78 years with a permanent <strong>sambal stain</strong> on the hem. Bore one son. Her own brother's daughter walked into her kitchen at sixteen and finally <em>wrote her name</em>. Died at 96. 🌿</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="num">4</div>
+    <div class="marker secret">🤫 sister</div>
+    <div class="photo"></div>
+    <div>
+      <div class="name">Yap Eng Neo</div>
+      <div class="name-zh">葉永娘</div>
+      <div class="year">1882 – 1961 · middle Yap sister</div>
+    </div>
+    <div class="story">
+      <span><span class="tag">S2·📌</span><strong>Middle of three Yap sisters.</strong> Married into the Lee house wearing the <strong>Anak A (子)</strong> kerongsang. One winter dawn in 1923 a midwife knocked at her door with a baby wrapped in temple cloth — and she took the child in without telling her own husband what she had done. <em>Note ② is folded inside this card.</em> 🤫</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="num">5</div>
+    <div class="marker death">died young ✝</div>
+    <div class="photo"></div>
+    <div>
+      <div class="name">Yap Eng Hooi</div>
+      <div class="name-zh">葉永慧</div>
+      <div class="year">1900 – 1923 · youngest Yap sister</div>
+    </div>
+    <div class="story">
+      <span><span class="tag">S2·✝</span>The <strong>orchid sister</strong> — youngest, beautiful, never married. Pregnant by a Bishop Street tea-clerk in 1922, hidden behind a screen in the goldsmith back room for seven months, gone before sunrise on a December night in 1923. The baby left in a basket of temple cloth. The <strong>Anak B</strong> brooch — engraved <em>1900</em> — was polished but never worn again. ✝</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="num">6</div>
+    <div class="photo"></div>
+    <div>
+      <div class="name">Lee Poh Soon</div>
+      <div class="name-zh">李寶順</div>
+      <div class="year">1878 – 1948 · Lee patriarch</div>
+    </div>
+    <div class="story">
+      <span><span class="tag">S2</span>Quiet cloth merchant on Penang Road. Married Eng Neo in 1901. One winter morning in 1923 his wife came home before sunrise carrying an infant girl. He asked one question — <em>«whose child?»</em> — accepted the answer, and never asked again. Folded a length of cream silk for her bridal kebaya in 1948 and wrote on the receipt: <em>«for the second daughter — paid in full.»</em></span>
+    </div>
+  </div>
+
+  <!-- ============ GEN 2 · THE INHERITORS ============ -->
+  <div class="gen-divider">Gen 2 · The Inheritors (1918 – 2005)</div>
+
+  <div class="card">
+    <div class="num">7</div>
+    <div class="photo"></div>
+    <div>
+      <div class="name">Tan Cheng Hoe</div>
+      <div class="name-zh">陳清和</div>
+      <div class="year">1920 – 1995 · only legitimate son</div>
+    </div>
+    <div class="story">
+      <span><span class="tag">S5·⌚</span>The watch came home in his father's coat in Dec 1941. He inherited <strong>See Hai Chan</strong> at 21 and ran it for 47 years. Married a Lee girl in 1947 — never knew his mother had quietly arranged him a marriage with his own first cousin. On his youngest son's 21st birthday in 1969 he placed the brass watch in the boy's palm: <em>«wind it in the morning. don't forget.»</em> ⌚→</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="num">8</div>
+    <div class="marker secret">🤫 cousin</div>
+    <div class="photo"></div>
+    <div>
+      <div class="name">Lee Beng Guat</div>
+      <div class="name-zh">李明月</div>
+      <div class="year">1921 – 2005 · daughter (in name) of the Lees</div>
+    </div>
+    <div class="story">
+      <span><span class="tag">S5·📌</span>Born in the back room of the goldsmith house, carried before dawn to the door of her aunt and uncle Lee. Grew up Lee, married Tan in 1947 — <strong>never told her wedding was, by blood, between cousins.</strong> Ran the See Hai Chan ledgers for 44 years. The night before she died she handed her granddaughter Rose a brass key and said: <em>«open the tin when you are ready.»</em> 🤫</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="num">9</div>
+    <div class="marker secret">🤫 jungle</div>
+    <div class="photo"></div>
+    <div>
+      <div class="name">Tan Ah Cai</div>
+      <div class="name-zh">陳亞財</div>
+      <div class="year">1925 – ? · the kitchen son</div>
+    </div>
+    <div class="story">
+      <span><span class="tag">S3·🌿</span>Born in the Tan kitchen to Auntie Mei. Never sent to school. Mingled with the kulis at Weld Quay — they called him <strong>Seoy Yee Kia 細姨仔</strong>, "the mistress's son." Joined the <strong>MPAJA</strong> when the Japanese came. Walked back into the jungle with the men who refused the British surrender terms in Sept 1945. The family has waited 81 years. His mother set a place at every Tok Panjang. 🌿</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="num">10</div>
+    <div class="photo"></div>
+    <div>
+      <div class="name">Khoo Chin Nam</div>
+      <div class="name-zh">邱振南</div>
+      <div class="year">1898 – 1949 · Singapore tycoon</div>
+    </div>
+    <div class="story">
+      <span><span class="tag">S4</span>The <strong>Singapore shipping tycoon</strong> — already a widower with a grown son when, in November 1948, the families arranged a Penang–Singapore alliance. He married <strong>Tan Chen Neo</strong>, then 23. Eleven months later his heart stopped at his own breakfast table. The Singapore branch continued through his first-marriage son — and one great-granddaughter from that line would walk back into the story 72 years later. ⛵</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="num">11</div>
+    <div class="marker guest" style="background:var(--gold);">👠 manik</div>
+    <div class="photo"></div>
+    <div>
+      <div class="name">Tan Chen Neo</div>
+      <div class="name-zh">陳珍娘</div>
+      <div class="year">1925 – 2018 · the bead-sister</div>
+    </div>
+    <div class="story">
+      <span><span class="tag">S4·👠</span>Cheng Hoe's youngest sister. Married off to the Singapore tycoon at 23 — <em>«a Nyonya daughter does not say no.»</em> Widowed eleven months later. Refused to come home. Apprenticed herself to her stepson's mother-in-law and learned <strong>kasut manik</strong>. Became, by 60, the named master of three Singapore showrooms. Returned the 1948 wedding slippers to her step-great-granddaughter Hooi Wen in 2018. 🌸👠</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="num">12</div>
+    <div class="marker death">died young ✝</div>
+    <div class="photo"></div>
+    <div>
+      <div class="name">Lee Boon Kuan</div>
+      <div class="name-zh">李文坤</div>
+      <div class="year">1918 – 1950 · Lee firstborn</div>
+    </div>
+    <div class="story">
+      <span><span class="tag">✝</span>Eldest blood son of the Lees. Five years older than the small sister who arrived one morning wrapped in temple cloth — <strong>and the only person in the household who never wondered where she had come from.</strong> He simply called her <em>mei mei</em> and walked her to school. Took ill in 1950, three years after walking her down the aisle. Died at 32 of a fever that took three days. ✝</span>
+    </div>
+  </div>
+
+  <!-- ============ GEN 3 · THE TWO BRANCHES ============ -->
+  <div class="gen-divider">Gen 3 · The Two Branches (1948 – today)</div>
+
+  <div class="card">
+    <div class="num">13</div>
+    <div class="marker death" style="background:#555;">d. 2021</div>
+    <div class="photo"></div>
+    <div>
+      <div class="name">Albert Tan</div>
+      <div class="name-zh">陳順發</div>
+      <div class="year">1950 – 2021 · towkay of See Hai Chan</div>
+    </div>
+    <div class="story">
+      <span><span class="tag">S6</span>Younger Tan son. Took the English name <em>Albert</em> at university in Sydney. Inherited <strong>See Hai Chan</strong> at 45 when his father died, listed it on Bursa in 2008. Wore Italian shoes, spoke Hokkien only to suppliers. The Peranakan things — the kebaya, the kuih, the prayers — passed cleanly past him. Died of pancreatic cancer in 2021 at 71. Left the boats to his son Kelvin and the brooches to his brother. 🚢</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="num">14</div>
+    <div class="photo"></div>
+    <div>
+      <div class="name">Alice Wong</div>
+      <div class="name-zh">王愛麗</div>
+      <div class="year">1970 – today · Albert's widow</div>
+    </div>
+    <div class="story">
+      <span><span class="tag">S6·✚</span>KL-born, Wharton-educated, Catholic-married. Met Albert at a Hong Kong banking conference in 1992; married him at <strong>St Andrew's Cathedral</strong> in 1994 — first Tan bride in three generations not to wear kebaya. Throws Christmas dinner at the KL house every year. Attends Bibi's Tok Panjang faithfully — drinks tea in the parlour, never enters the kitchen. Widowed since 2021. ✚</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="num">15</div>
+    <div class="marker bibi" style="background:var(--gold);">⌚ watch</div>
+    <div class="photo"></div>
+    <div>
+      <div class="name">Tan Soon Heng</div>
+      <div class="name-zh">陳順興</div>
+      <div class="year">1948 – today · heritage architect</div>
+    </div>
+    <div class="story">
+      <span><span class="tag">S7·⌚</span>Elder, gentler Tan son. The family rule said the watch goes to the youngest — but his father had quietly amended the rule before either boy was old enough to ask: <em>the watch goes to the gentler one.</em> Took the brass <strong>jam saku</strong> on his 21st birthday in 1969 and wound it every morning at six for 55 years. Restored 17 Penang shophouses. Stroke in 2024 — the watch now sits on a porcelain dish on his bedside table. <em>Rose's father.</em> ⌚🌺</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="num">16</div>
+    <div class="marker bibi" style="background:#c2185b;">📜 resipi</div>
+    <div class="photo"></div>
+    <div>
+      <div class="name">Lim Soo Hui</div>
+      <div class="name-zh">林素慧</div>
+      <div class="year">1966 – today · Mei Lan's niece</div>
+    </div>
+    <div class="story">
+      <span><span class="tag">S7·📜</span><strong>Daughter of Auntie Mei's only brother.</strong> Walked into the Tan kitchen from Ipoh at 16 with a school exercise book and one question: <em>«Auntie, may I write down what your hands do?»</em> Stood beside the chopping block for 10 years. In 1992 published <strong>«Resipi Auntie Mei»</strong> — dedication: <em>«To Auntie Mei (Lim Mei Lan 林美蘭) — the woman the family forgot to name.»</em> Married Soon Heng in 1990. 📜🌿</span>
+    </div>
+  </div>
+
+  <!-- ============ GEN 4 · 2026 ============ -->
+  <div class="gen-divider">Gen 4 · 2026</div>
+
+  <div class="card">
+    <div class="num">17</div>
+    <div class="marker bibi">🌺 BIBI</div>
+    <div class="photo"></div>
+    <div>
+      <div class="name">Bibik Rose</div>
+      <div class="name-zh">陳玫瑰</div>
+      <div class="year">1974 – today · host of tonight</div>
+    </div>
+    <div class="story">
+      <span><span class="tag">S8·🌺</span>That's me. Daughter of Soon Heng. Trained Peranakan textile conservator. Sat on Auntie Mei's kitchen stool every Sunday in her last good year. My grandmother handed me a brass key in 2005 — I waited <strong>19 years</strong> to open the tin. I read the notes inside in 2024 when my father had his stroke. Tonight you read what I read. 🌺</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="num">18</div>
+    <div class="photo"></div>
+    <div>
+      <div class="name">Dr Tan Wei Wen</div>
+      <div class="name-zh">陳偉文</div>
+      <div class="year">1990 – today · doctor · Bibi's brother</div>
+    </div>
+    <div class="story">
+      <span><span class="tag">S7·⚕</span>Surprise late child of Soon Heng &amp; Soo Hui. Switched from architecture to medicine in his second year — never quite explained why. Internal-medicine specialist at Penang General. Met <strong>Khoo Hooi Wen</strong> at a Singapore heritage conference in 2017 — neither knew their families had been arranged into a marriage that lasted 11 months in 1948. Aunt Chen Neo put the pieces together over Sunday lunch. ⚕</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="num">19</div>
+    <div class="marker guest" style="background:var(--gold);">🔗 alliance</div>
+    <div class="photo"></div>
+    <div>
+      <div class="name">Khoo Hooi Wen</div>
+      <div class="name-zh">邱慧雯</div>
+      <div class="year">1991 – today · Wei Wen's bride</div>
+    </div>
+    <div class="story">
+      <span><span class="tag">S7·🔗</span>Great-granddaughter of <strong>Khoo Chin Nam</strong> through his first marriage — the Singapore line that continued. Architect. Met Wei Wen on a heritage panel in 2017. Married him in November 2020 at the Penang Peranakan Mansion — same November date as her great-grandfather's brief 1948 wedding. Wore Aunt Chen Neo's <strong>1948 kasut manik</strong>, never worn for 72 years. The longest open promise in the family — <em>finally closed.</em> 🔗</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="num">20</div>
+    <div class="marker guest">heir</div>
+    <div class="photo"></div>
+    <div>
+      <div class="name">Kelvin Tan</div>
+      <div class="name-zh">陳凱文</div>
+      <div class="year">1995 – today · See Hai Chan heir</div>
+    </div>
+    <div class="story">
+      <span><span class="tag">S8·⚓</span>Albert &amp; Alice's only son. Born the year his grandfather died, raised between KL and Melbourne, lives in London. Was 26 when his father died in 2021 — flew home, sat through the wake, signed his first board paper four days later. Will chair See Hai Chan in 2027. <strong>Knows the boats. Doesn't yet know the kitchen.</strong> Bibi has seated him beside Hooi Wen tonight. ⚓</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="note">
+  <strong>📋 Designer notes — the 4 rounds + the heirloom story arcs:</strong>
+  <br><br>
+  <strong>🎯 ROUND 1 — Match.</strong> 20 cards, each with a story 💬. Match → silhouette → place. Story tags S1–S8 mirror the bubbles on the family-tree board.
+  <br><br>
+  <strong>📝 ROUND 1.5 — Bibi's Note (1 card).</strong> A single folded note packed with riddles. Bibi never names anyone. Players use her hints to fill the <b>5 Special Relationships</b> column on the team worksheet:<br>
+  &nbsp;&nbsp;① <b>step-mother</b> (Chen Neo → Khoo Chin Nam's grown son) ·
+  ② <b>hidden son</b> (Mei Lan → Ah Cai) ·
+  ③ <b>raised-by aunt</b> (Eng Hooi's baby → Eng Neo) ·
+  ④ <b>watch-keeper by gentleness</b> (Soon Heng holds it, not his younger brother Albert) ·
+  ⑤ <b>kitchen mentor &amp; blood</b> (Mei Lan → Soo Hui, who turned out to be her own niece).
+  <br><br>
+  <strong>🟡 ROUND 2 — The 10 envelope items.</strong>
+  <br>3 go in the <b>tree circles</b>: 📌 Kerongsang stack (3 brooches → ONE circle bridging cards #2 · #4 · #5) · ⌚ Jam Saku (Keo San → Cheng Hoe → Soon Heng) · 📜 Resipi Auntie Mei (1992 cookbook).
+  <br>3 go in the <b>outside-tree column</b> (heritage enhancers): a Fujian dock photo, the See Hai Chan godown brass plate, the kamcheng of nine gold dumplings.
+  <br>2 are <b>tucked inside character cards</b> as folded inserts (the 2 Yap secret notes — Round 3, inside #2 Eng Siew &amp; #4 Eng Neo).
+  <br>2 are <b>red herrings</b> — a beautiful bunga rampai sachet and a chipped sambal jar lid that look heirloom-y but belong nowhere. <em>(Discard pile.)</em>
+  <br><br>
+  <strong>🤫 ROUND 3 — The Yap Secret.</strong> Two folded notes inside two of the three Yap-sister cards: ① in <b>#2 Eng Siew</b> (the eldest, who arranged the cover-up), ② in <b>#4 Eng Neo</b> (the middle, who took the baby in). Card #5 Eng Hooi has nothing tucked in her — she is the secret.
+  <br><br>
+  <strong>👠 ROUND 4 — Kasut Manik.</strong> Team of 5 receives a small bead kit and a pattern grid based on Aunt Chen Neo's signature <em>peony toe</em>. Each member sews a section. When complete, the finished pattern reveals a <b>hidden number</b> woven in a contrasting bead colour. Write the number on the worksheet — it's the lock code for Bibi's final envelope.
+  <br><br>
+  <strong>📌 KERONGSANG arc (#2 · #4 · #5):</strong> Ibu (母) with eldest Eng Siew → Anak A (子) with middle Eng Neo → Anak B (engraved 1900) belonged to youngest Eng Hooi, polished but never worn. Stack all 3 into ONE tree circle.
+  <br>
+  <strong>⌚ JAM SAKU arc (#1 · #7 · #15):</strong> Fujian father → Keo San (1872, sailed 1891) → Cheng Hoe (1941, jetty bomb) → Soon Heng on his 21st (1969) → bedside dish (2024).
+  <br>
+  <strong>📜 RESIPI arc (#3 · #16):</strong> Mei Lan cooked everything, sat at nothing. Her own niece Soo Hui spent 10 years in her kitchen, wrote 240 dishes, dedicated the cookbook in her name. Mei Lan saw it published and lived 6 more good years.
+  <br><br>
+  <strong>🌿 SILENCE arc (#3 · #9):</strong> The fourth thread no one has pulled — Mei Lan and her son Ah Cai, the kitchen line that vanished into the jungle in Sept 1945. The empty plate is still on the kitchen shelf. Bibi sets it out at every Cap Goh Mei.
+  <br><br>
+  <strong>🎨 Print:</strong> A4 portrait, 4 cards × 5 rows. Cut along card borders. Cards #2 and #4 need a <b>fold-line down the middle</b> so a small insert tucks inside without falling out. Card #11 Chen Neo carries the 👠 stamp — she's your bead mistress.
+</div>
+
+</body>
+</html>

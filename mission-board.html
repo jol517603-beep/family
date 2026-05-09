@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mission Board · Roots of the Rose</title>
+<style>
+  /* PRINT TO PDF · A3 LANDSCAPE · 1 page · the master game board
+     One sheet to rule them all. Family tree centre, 4 missions on
+     the right, the locked recipe reveal bottom-right.
+     Open in Chrome/Edge → Ctrl+P → Save as PDF
+     Margins: NONE  |  Background graphics: ON                       */
+  @page { size: A3 landscape; margin: 0; }
+
+  :root {
+    --cream:#f6ecd2; --paper:#fbf4dd; --aged:#efdbb0; --ink:#3a2418;
+    --gold:#b8860b; --gold-2:#d4a73c; --jade:#2e7d5b;
+    --rose:#b91c4b; --rose-2:#d94872; --tan:#8b5a2b; --tan-2:#a47148;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background:#2a1810; font-family:'Georgia','Times New Roman',serif; color:var(--ink); }
+  body { padding: 14px; }
+  @media print { body { padding: 0; background: white; } }
+
+  .page {
+    width: 420mm; height: 297mm; margin: 0 auto;
+    background:
+      radial-gradient(ellipse at 20% 15%, rgba(184,134,11,0.07), transparent 55%),
+      radial-gradient(ellipse at 85% 85%, rgba(185,28,75,0.07), transparent 55%),
+      var(--cream);
+    padding: 6mm 7mm;
+    position: relative;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+    display: grid;
+    grid-template-columns: 1fr 105mm;
+    grid-template-rows: auto 1fr;
+    gap: 4mm;
+  }
+  @media print { .page { box-shadow: none; margin: 0; } }
+  .page::before {
+    content:''; position:absolute; inset:3mm; pointer-events:none;
+    border: 1.5px double var(--rose); border-radius: 2mm;
+  }
+  .page::after {
+    content:''; position:absolute; inset:4.5mm; pointer-events:none;
+    border: 0.5px solid var(--gold); border-radius: 1.5mm;
+  }
+
+  /* ============ HEADER ============ */
+  .header { grid-column: 1 / -1; text-align:center; padding: 1mm 0 1.5mm; position:relative; z-index:2; }
+  .header .crown { font-size: 9pt; color: var(--gold); letter-spacing: 4px; margin-bottom: 1mm; }
+  .header h1 { font-family:'Brush Script MT',cursive; color:var(--rose); font-size: 28pt; line-height:1; }
+  .header .sub { font-style:italic; color:var(--tan); font-size: 8.5pt; margin-top: 1mm; letter-spacing: 0.5px; }
+  .header .divider {
+    width: 80mm; height: 4mm; margin: 1.5mm auto 0;
+    background: linear-gradient(90deg, transparent, var(--gold) 20%, var(--rose) 50%, var(--gold) 80%, transparent);
+    mask: radial-gradient(circle at center, black 30%, transparent 70%);
+  }
+
+  /* ============ TREE PANEL (left) ============ */
+  .tree-panel {
+    position:relative; z-index:1;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(46,125,91,0.07), transparent 60%),
+      var(--paper);
+    border: 1.2px solid var(--gold);
+    border-radius: 2mm;
+    padding: 4mm 4mm 3mm;
+    overflow: hidden;
+  }
+  .tree-title {
+    text-align:center;
+    font-family:'Brush Script MT',cursive;
+    color: var(--jade);
+    font-size: 14pt;
+    margin-bottom: 1mm;
+  }
+  .tree-title .small { font-family:'Georgia',serif; font-size: 8pt; color: var(--tan); font-style: italic; display:block; margin-top: 0.5mm; }
+
+  .tree-canvas {
+    position: relative;
+    width: 100%;
+    height: 218mm;
+    margin-top: 2mm;
+  }
+  .tree-canvas svg { position:absolute; inset:0; width:100%; height:100%; }
+
+  /* generation rails */
+  .gen-rail {
+    position:absolute; left:0; right:0;
+    border-top: 0.6px dashed rgba(139,90,43,0.35);
+    text-align: left;
+  }
+  .gen-rail .label {
+    position:absolute; top:-3mm; left: 1mm;
+    font-size: 6.5pt; color: var(--tan); letter-spacing: 1px; font-style: italic;
+    background: var(--paper); padding: 0 1mm;
+  }
+
+  /* person nodes */
+  .node {
+    position:absolute;
+    width: 28mm;
+    text-align:center;
+    z-index: 2;
+  }
+  .node .silhouette {
+    width: 16mm; height: 16mm; border-radius: 50%;
+    margin: 0 auto;
+    background:
+      radial-gradient(circle at 35% 30%, rgba(255,255,255,0.4), transparent 50%),
+      var(--aged);
+    border: 1.2px solid var(--tan);
+    display:flex; align-items:center; justify-content:center;
+    font-size: 11pt;
+    position: relative;
+  }
+  .node .num {
+    position:absolute; top:-2.5mm; right:-1mm;
+    width: 5.5mm; height: 5.5mm; border-radius: 50%;
+    background: var(--rose); color: var(--cream);
+    font-family:'Brush Script MT',cursive; font-size: 8.5pt;
+    display:flex; align-items:center; justify-content:center;
+    border: 1px solid var(--gold);
+    box-shadow: 0.5px 0.5px 0 var(--tan);
+  }
+  .node .nm { font-size: 7pt; line-height: 1.1; margin-top: 1mm; color: var(--ink); font-weight: bold; }
+  .node .nm em { color: var(--jade); font-style: italic; font-weight: normal; font-size: 6pt; display: block; }
+  .node .yr { font-size: 5.5pt; color: var(--tan); font-style: italic; margin-top: 0.3mm; }
+
+  /* heirloom marker (gold ring around silhouette) */
+  .node.heirloom .silhouette {
+    border: 2.2px solid var(--gold);
+    box-shadow: 0 0 0 1px var(--gold-2), 0 0 6px rgba(184,134,11,0.4);
+  }
+  .node.heirloom::after {
+    content: attr(data-item);
+    position: absolute; top: -1mm; left: -1mm;
+    background: var(--gold); color: var(--ink);
+    font-size: 7.5pt; padding: 0.5mm 1mm;
+    border-radius: 1mm;
+    font-style: normal;
+    border: 0.5px solid var(--ink);
+  }
+  /* MYSTERY heirloom: red question */
+  .node.mystery .silhouette {
+    border: 2.2px solid var(--rose);
+    box-shadow: 0 0 0 1px var(--rose-2), 0 0 6px rgba(185,28,75,0.4);
+    background:
+      repeating-linear-gradient(45deg, rgba(185,28,75,0.08) 0 1.5mm, transparent 1.5mm 3mm),
+      var(--aged);
+  }
+  .node.mystery::after {
+    content: '📌 ?';
+    position: absolute; top: -1mm; left: -1mm;
+    background: var(--rose); color: var(--cream);
+    font-size: 7.5pt; padding: 0.5mm 1.2mm;
+    border-radius: 1mm; font-weight: bold;
+  }
+  /* HIDDEN node — Mei Lan locked */
+  .node.locked .silhouette {
+    background:
+      repeating-linear-gradient(135deg, rgba(58,36,24,0.18) 0 2mm, transparent 2mm 4mm),
+      #d9c9a3;
+    border: 1.5px solid var(--ink);
+  }
+  .node.locked .nm { color: var(--ink); }
+  .node.locked::before {
+    content: '🔒';
+    position: absolute; top: 4mm; left: 50%; transform: translateX(-50%);
+    font-size: 8pt; z-index: 3;
+  }
+  /* deceased before reunion */
+  .node.memorial .silhouette {
+    background: repeating-linear-gradient(0deg, rgba(58,36,24,0.06) 0 0.5mm, transparent 0.5mm 1.5mm), var(--aged);
+    border: 1px dashed var(--ink);
+    opacity: 0.8;
+  }
+  .node.memorial .nm::before { content:'🕯️ '; }
+
+  /* ============ RIGHT COLUMN ============ */
+  .right-col {
+    display: flex; flex-direction: column; gap: 3mm;
+    position:relative; z-index:1;
+  }
+
+  .panel {
+    background: var(--paper);
+    border: 1.2px solid var(--gold);
+    border-radius: 2mm;
+    padding: 3mm 3.5mm;
+    position: relative;
+  }
+  .panel h2 {
+    font-family:'Brush Script MT',cursive;
+    color: var(--rose);
+    font-size: 13pt;
+    margin-bottom: 2mm;
+    border-bottom: 0.6px solid var(--gold);
+    padding-bottom: 1mm;
+  }
+  .panel h2 .badge {
+    float: right;
+    background: var(--gold); color: var(--ink);
+    font-family:'Georgia',serif;
+    font-size: 7pt; padding: 0.5mm 2mm;
+    border-radius: 1mm;
+    letter-spacing: 0.5px;
+  }
+
+  /* MISSIONS */
+  .mission {
+    background: var(--cream);
+    border-left: 2.5px solid var(--rose);
+    padding: 2mm 2.5mm;
+    margin-bottom: 2mm;
+    border-radius: 0 1mm 1mm 0;
+    position: relative;
+  }
+  .mission:last-child { margin-bottom: 0; }
+  .mission .m-head {
+    display:flex; align-items:center; gap: 2mm;
+    margin-bottom: 1mm;
+  }
+  .mission .m-num {
+    width: 6mm; height: 6mm; border-radius: 50%;
+    background: var(--rose); color: var(--cream);
+    font-family:'Brush Script MT',cursive; font-size: 10pt;
+    display:flex; align-items:center; justify-content:center;
+    border: 1px solid var(--gold);
+    flex-shrink: 0;
+  }
+  .mission .m-title { font-weight: bold; color: var(--ink); font-size: 9pt; }
+  .mission .m-body { font-size: 7.5pt; line-height: 1.4; color: var(--ink); }
+  .mission .m-body em { color: var(--jade); font-style: italic; }
+  .mission .m-body b { color: var(--rose); font-weight: normal; font-style: italic; }
+  .mission .m-how {
+    display: block;
+    margin-top: 1mm;
+    font-size: 6.8pt; color: var(--tan); font-style: italic;
+  }
+  .mission .m-how::before { content: '✏️ '; }
+
+  /* The 3 items legend */
+  .items-legend { display: flex; gap: 1.5mm; margin-top: 2mm; }
+  .item-chip {
+    flex:1;
+    background: rgba(184,134,11,0.10);
+    border: 0.6px dashed var(--gold);
+    border-radius: 1mm;
+    padding: 1.5mm 1mm;
+    text-align: center;
+    font-size: 6.5pt;
+    line-height: 1.2;
+  }
+  .item-chip .icon { font-size: 11pt; display:block; margin-bottom: 0.5mm; }
+  .item-chip b { color: var(--rose); font-style: italic; font-weight: normal; }
+
+  /* LOCKED REVEAL panel */
+  .reveal {
+    background:
+      repeating-linear-gradient(45deg, rgba(58,36,24,0.04) 0 2mm, transparent 2mm 4mm),
+      var(--paper);
+    border: 1.5px solid var(--ink);
+  }
+  .reveal h2 { color: var(--ink); border-bottom-color: var(--ink); }
+  .reveal .lock-row {
+    display:flex; align-items:center; gap: 2mm;
+    background: rgba(58,36,24,0.08);
+    border: 0.5px dashed var(--ink);
+    border-radius: 1mm;
+    padding: 2mm 2.5mm;
+    margin-bottom: 2mm;
+  }
+  .reveal .lock-icon { font-size: 16pt; }
+  .reveal .lock-text { font-size: 8pt; line-height: 1.35; }
+  .reveal .lock-text b { color: var(--rose); font-style: italic; font-weight:normal; }
+  .reveal .reveal-note {
+    font-size: 7.2pt; line-height: 1.4; color: var(--ink);
+    padding: 1.5mm 2mm;
+    background: rgba(46,125,91,0.08);
+    border-left: 2px solid var(--jade);
+    border-radius: 0 1mm 1mm 0;
+  }
+  .reveal .reveal-note em { color: var(--jade); font-style: italic; }
+
+  /* HOW TO PLAY footer band */
+  .how-band {
+    grid-column: 1 / -1;
+    background:
+      linear-gradient(180deg, rgba(184,134,11,0.08), transparent),
+      var(--paper);
+    border: 0.8px solid var(--gold);
+    border-radius: 2mm;
+    padding: 2.5mm 4mm;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3mm;
+    font-size: 7.5pt; line-height: 1.4;
+    position: relative; z-index: 1;
+  }
+  .how-step { text-align: center; }
+  .how-step .step-num {
+    display: inline-block;
+    width: 7mm; height: 7mm; border-radius: 50%;
+    background: var(--rose); color: var(--cream);
+    font-family:'Brush Script MT',cursive; font-size: 11pt;
+    line-height: 7mm;
+    margin-bottom: 1mm;
+    border: 1px solid var(--gold);
+  }
+  .how-step .step-title { font-weight: bold; color: var(--rose); font-style: italic; display: block; margin-bottom: 0.5mm; font-size: 8pt; }
+
+  /* connecting lines (drawn inside SVG) */
+  .conn { stroke: var(--tan); stroke-width: 0.7; fill: none; opacity: 0.55; }
+  .conn.marriage { stroke-dasharray: 1.5,1; }
+  .conn.descent { stroke: var(--gold); stroke-width: 0.9; }
+  .conn.secret { stroke: var(--jade); stroke-dasharray: 1,1; opacity: 0.6; }
+
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="crown">✦ ✦ ✦   T A N   F A M I L Y   R E U N I O N   ✦   M A Y   2 0 2 6   ✦ ✦ ✦</div>
+    <h1>🌹 Roots of the Rose 🌹</h1>
+    <div class="sub">a Peranakan parlour mystery · 4 generations · 3 heirlooms · 1 missing piece</div>
+    <div class="divider"></div>
+  </div>
+
+  <!-- ============ LEFT: THE TREE ============ -->
+  <div class="tree-panel">
+    <div class="tree-title">
+      Tan · Yap · Lee · Khoo · Lim
+      <span class="small">match each character card to its silhouette</span>
+    </div>
+
+    <div class="tree-canvas">
+
+      <!-- SVG connections layer -->
+      <svg viewBox="0 0 280 220" preserveAspectRatio="none">
+        <!-- Gen 1 marriages -->
+        <line class="conn marriage" x1="22" y1="30" x2="50" y2="30"/>
+        <line class="conn marriage" x1="120" y1="30" x2="150" y2="30"/>
+        <line class="conn marriage" x1="200" y1="30" x2="232" y2="30"/>
+        <!-- Yap sisters connecting bracket (memorial included) -->
+        <path class="conn secret" d="M 50 30 Q 100 12 150 30 Q 175 12 95 6 Q 85 6 75 8" />
+        <text x="100" y="9" font-family="Georgia" font-size="3" font-style="italic" fill="#2e7d5b">three Yap sisters</text>
+
+        <!-- Gen1 → Gen2 descents -->
+        <line class="conn descent" x1="36" y1="42" x2="36" y2="78"/>      <!-- Tan-Yap → Cheng Hoe -->
+        <line class="conn descent" x1="36" y1="42" x2="80" y2="78"/>      <!-- Tan-Yap → Mei Lan -->
+        <line class="conn descent" x1="135" y1="42" x2="135" y2="78"/>    <!-- Lee-Yap → Beng Guat -->
+        <line class="conn descent" x1="135" y1="42" x2="175" y2="78"/>    <!-- Lee-Yap → Boon Kuan -->
+        <line class="conn descent" x1="216" y1="42" x2="216" y2="78"/>    <!-- Khoo → Chen Neo -->
+
+        <!-- secret link Mei Lan → Ah Cai -->
+        <path class="conn secret" d="M 80 90 Q 70 100 60 110" />
+
+        <!-- Gen2 marriages -->
+        <line class="conn marriage" x1="48" y1="90" x2="123" y2="90"/>    <!-- Cheng Hoe × Beng Guat -->
+        <line class="conn marriage" x1="187" y1="90" x2="216" y2="90"/>   <!-- Boon Kuan × Chen Neo (the cousins didn't marry — Chen Neo married Khoo Chin Nam) -->
+
+        <!-- Gen2 → Gen3 -->
+        <line class="conn descent" x1="86" y1="102" x2="36" y2="142"/>    <!-- → Albert -->
+        <line class="conn descent" x1="86" y1="102" x2="120" y2="142"/>   <!-- → Soon Heng -->
+        <line class="conn descent" x1="216" y1="102" x2="216" y2="142"/>  <!-- Chen Neo line → next gen Khoo -->
+
+        <!-- Gen3 marriages -->
+        <line class="conn marriage" x1="48" y1="154" x2="80" y2="154"/>   <!-- Albert × Alice -->
+        <line class="conn marriage" x1="132" y1="154" x2="170" y2="154"/> <!-- Soon Heng × Soo Hui -->
+
+        <!-- Soo Hui ← Mei Lan (the niece line, jade dotted) -->
+        <path class="conn secret" d="M 86 102 Q 130 130 170 152" />
+        <text x="155" y="124" font-family="Georgia" font-size="2.6" font-style="italic" fill="#2e7d5b">niece line 🔒</text>
+
+        <!-- Gen3 → Gen4 -->
+        <line class="conn descent" x1="60" y1="166" x2="36" y2="200"/>    <!-- Albert → Wei Wen -->
+        <line class="conn descent" x1="148" y1="166" x2="148" y2="200"/>  <!-- Soon Heng → Bibi -->
+        <line class="conn descent" x1="148" y1="166" x2="200" y2="200"/>  <!-- Soon Heng/Soo Hui → Kelvin -->
+        <line class="conn descent" x1="216" y1="154" x2="80" y2="200"/>   <!-- Khoo Hooi Wen line - wraps -->
+
+        <!-- Gen4 marriage -->
+        <line class="conn marriage" x1="48" y1="212" x2="80" y2="212"/>   <!-- Wei Wen × Hooi Wen 2020 -->
+        <text x="58" y="219" font-family="Georgia" font-size="2.8" font-style="italic" fill="#b91c4b">⚭ 2020</text>
+      </svg>
+
+      <!-- Generation rails -->
+      <div class="gen-rail" style="top: 8mm;">  <span class="label">GEN 1 · 1880s</span></div>
+      <div class="gen-rail" style="top: 70mm;"> <span class="label">GEN 2 · 1918–25</span></div>
+      <div class="gen-rail" style="top: 130mm;"><span class="label">GEN 3 · 1948–70</span></div>
+      <div class="gen-rail" style="top: 188mm;"><span class="label">GEN 4 · 1990–95</span></div>
+
+      <!-- ===== GEN 1 ===== -->
+      <!-- 5 MEMORIAL Eng Hooi -->
+      <div class="node memorial" style="top: 0mm; left: 92mm;">
+        <div class="silhouette">🌸</div>
+        <div class="nm">Yap Eng Hooi <em>(youngest)</em></div>
+        <div class="yr">1900 † 1923</div>
+      </div>
+
+      <!-- 1 Tan Keo San -->
+      <div class="node" style="top: 16mm; left: 5mm;">
+        <div class="silhouette">👴<span class="num">1</span></div>
+        <div class="nm">Tan Keo San <em>sinkeh</em></div>
+        <div class="yr">1872 – 1941</div>
+      </div>
+      <!-- 2 Eng Siew · IBU -->
+      <div class="node heirloom" data-item="📌 IBU" style="top: 16mm; left: 38mm;">
+        <div class="silhouette">👵<span class="num">2</span></div>
+        <div class="nm">Yap Eng Siew <em>eldest Yap</em></div>
+        <div class="yr">1880 – 1956</div>
+      </div>
+      <!-- 6 Lee Poh Soon -->
+      <div class="node" style="top: 16mm; left: 100mm;">
+        <div class="silhouette">👴<span class="num">6</span></div>
+        <div class="nm">Lee Poh Soon <em>Melaka</em></div>
+        <div class="yr">1878 – 1948</div>
+      </div>
+      <!-- 4 Eng Neo · ANAK A -->
+      <div class="node heirloom" data-item="📌 ANAK A" style="top: 16mm; left: 133mm;">
+        <div class="silhouette">👵<span class="num">4</span></div>
+        <div class="nm">Yap Eng Neo <em>middle Yap</em></div>
+        <div class="yr">1882 – 1961</div>
+      </div>
+      <!-- 10 Khoo Chin Nam -->
+      <div class="node" style="top: 16mm; left: 184mm;">
+        <div class="silhouette">👴<span class="num">10</span></div>
+        <div class="nm">Khoo Chin Nam <em>SG banker</em></div>
+        <div class="yr">1898 – 1949</div>
+      </div>
+      <!-- (his 1st wife — implied, no card) -->
+      <div class="node memorial" style="top: 16mm; left: 217mm;">
+        <div class="silhouette">👵</div>
+        <div class="nm">1st wife <em>(died young)</em></div>
+        <div class="yr">– 1942</div>
+      </div>
+
+      <!-- ===== GEN 2 ===== -->
+      <!-- 7 Cheng Hoe · WATCH -->
+      <div class="node heirloom" data-item="⌚ WATCH" style="top: 78mm; left: 18mm;">
+        <div class="silhouette">👨<span class="num">7</span></div>
+        <div class="nm">Tan Cheng Hoe <em>eldest son</em></div>
+        <div class="yr">1920 – 1995</div>
+      </div>
+      <!-- 3 LOCKED Mei Lan -->
+      <div class="node locked" style="top: 78mm; left: 65mm;">
+        <div class="silhouette">👩</div>
+        <div class="nm">Auntie Mei <em>?</em></div>
+        <div class="yr">1902 – 1998</div>
+      </div>
+      <!-- 8 Beng Guat -->
+      <div class="node mystery" style="top: 78mm; left: 109mm;">
+        <div class="silhouette">👩<span class="num">8</span></div>
+        <div class="nm">Lee Beng Guat <em>"Eng Neo's"</em></div>
+        <div class="yr">1921 – 2005</div>
+      </div>
+      <!-- 9 Boon Kuan -->
+      <div class="node memorial" style="top: 78mm; left: 162mm;">
+        <div class="silhouette">👨<span class="num">9</span></div>
+        <div class="nm">Lee Boon Kuan <em>(drowned)</em></div>
+        <div class="yr">1918 † 1950</div>
+      </div>
+      <!-- 11 Chen Neo -->
+      <div class="node" style="top: 78mm; left: 200mm;">
+        <div class="silhouette">👰<span class="num">11</span></div>
+        <div class="nm">Tan Chen Neo <em>Khoo wife</em></div>
+        <div class="yr">1925 – 2018</div>
+      </div>
+
+      <!-- 12 Ah Cai HIDDEN -->
+      <div class="node memorial" style="top: 102mm; left: 42mm;">
+        <div class="silhouette">🤫<span class="num">12</span></div>
+        <div class="nm">Tan Ah Cai <em>(missing)</em></div>
+        <div class="yr">1925 † Sept '45</div>
+      </div>
+
+      <!-- ===== GEN 3 ===== -->
+      <!-- 13 Albert -->
+      <div class="node" style="top: 142mm; left: 10mm;">
+        <div class="silhouette">👨<span class="num">13</span></div>
+        <div class="nm">Albert Tan <em>architect</em></div>
+        <div class="yr">1950 – 2021</div>
+      </div>
+      <!-- 14 Alice -->
+      <div class="node" style="top: 142mm; left: 45mm;">
+        <div class="silhouette">👩<span class="num">14</span></div>
+        <div class="nm">Alice Wong <em>KL banker</em></div>
+        <div class="yr">1970 – today</div>
+      </div>
+      <!-- 15 Soon Heng · WATCH (passed gentler) -->
+      <div class="node heirloom" data-item="⌚ 1969" style="top: 142mm; left: 100mm;">
+        <div class="silhouette">👨<span class="num">15</span></div>
+        <div class="nm">Tan Soon Heng <em>gentler son</em></div>
+        <div class="yr">1948 – today</div>
+      </div>
+      <!-- 16 Soo Hui · RESIPI (locked partner with Mei Lan) -->
+      <div class="node heirloom" data-item="📜 RESIPI" style="top: 142mm; left: 136mm;">
+        <div class="silhouette">👩<span class="num">16</span></div>
+        <div class="nm">Lim Soo Hui <em>cookbook 1992</em></div>
+        <div class="yr">1966 – today</div>
+      </div>
+
+      <!-- ===== GEN 4 ===== -->
+      <!-- 18 Wei Wen -->
+      <div class="node" style="top: 200mm; left: 10mm;">
+        <div class="silhouette">🤵<span class="num">18</span></div>
+        <div class="nm">Dr Tan Wei Wen <em>groom 2020</em></div>
+        <div class="yr">1990 – today</div>
+      </div>
+      <!-- 19 Hooi Wen -->
+      <div class="node" style="top: 200mm; left: 45mm;">
+        <div class="silhouette">👰<span class="num">19</span></div>
+        <div class="nm">Khoo Hooi Wen <em>bride 2020</em></div>
+        <div class="yr">1991 – today</div>
+      </div>
+      <!-- 17 Bibi -->
+      <div class="node" style="top: 200mm; left: 122mm;">
+        <div class="silhouette">🌺<span class="num">17</span></div>
+        <div class="nm">Bibik Rose <em>your host</em></div>
+        <div class="yr">1974 – today</div>
+      </div>
+      <!-- 20 Kelvin -->
+      <div class="node" style="top: 200mm; left: 175mm;">
+        <div class="silhouette">🎓<span class="num">20</span></div>
+        <div class="nm">Kelvin Tan <em>London</em></div>
+        <div class="yr">1995 – today</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============ RIGHT: MISSIONS + LOCKED REVEAL ============ -->
+  <div class="right-col">
+
+    <!-- THE 3 ITEMS LEGEND -->
+    <div class="panel">
+      <h2>🎴 The 3 Heirlooms <span class="badge">find them</span></h2>
+      <div class="items-legend">
+        <div class="item-chip">
+          <span class="icon">📌</span>
+          <b>3 Brooches</b><br>(Kerongsang)<br>Ibu · Anak A · <b>Anak B?</b>
+        </div>
+        <div class="item-chip">
+          <span class="icon">⌚</span>
+          <b>Pocket Watch</b><br>(Jam Saku)<br>by gentleness
+        </div>
+        <div class="item-chip">
+          <span class="icon">📜</span>
+          <b>Resipi</b><br>(Cookbook)<br>locked 🔒
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 MISSIONS -->
+    <div class="panel">
+      <h2>🎯 Your 4 Missions</h2>
+
+      <div class="mission">
+        <div class="m-head">
+          <div class="m-num">1</div>
+          <div class="m-title">Place the 20 faces on the tree</div>
+        </div>
+        <div class="m-body">
+          Match each <b>character card</b> (red number 1–20) to its silhouette on the family tree. <em>One slot is locked 🔒 — leave that card aside for now.</em>
+          <span class="m-how">write the name on the silhouette · or place the card on top</span>
+        </div>
+      </div>
+
+      <div class="mission">
+        <div class="m-head">
+          <div class="m-num">2</div>
+          <div class="m-title">Find the 3rd brooch (📌 ANAK B)</div>
+        </div>
+        <div class="m-body">
+          The mystery brooch is <em>engraved 1900</em>. Find the silhouette whose <b>birth year is 1900</b>. The brooch was hidden in her daughter's card.
+          <span class="m-how">circle the daughter's card # on your worksheet</span>
+        </div>
+      </div>
+
+      <div class="mission">
+        <div class="m-head">
+          <div class="m-num">3</div>
+          <div class="m-title">Crack the 5 riddles in Bibi's note</div>
+        </div>
+        <div class="m-body">
+          Each riddle points to one card on the tree. Solve all five → you may open the <b>locked recipe box 🔒</b> and reveal who Auntie Mei really is.
+          <span class="m-how">write the card # next to each riddle on the worksheet</span>
+        </div>
+      </div>
+
+      <div class="mission" style="border-color: var(--jade);">
+        <div class="m-head">
+          <div class="m-num" style="background: var(--jade);">4</div>
+          <div class="m-title">🪡 Sew the Manik → reveal a lock digit</div>
+        </div>
+        <div class="m-body">
+          While teammates crack the riddles, <b>hands keep moving</b>. Each member sews <b>20 lines of beads</b> on the cloth strip — the way Nyonya girls did before their wedding slippers. <em>Rotate every few minutes</em> so everyone sews and everyone solves.
+          <br><br>
+          When all strips are laid <b>side by side</b> in card-number order, the bead colours form a <b>single digit</b> — that's the <b>3rd number</b> of the padlock on Bibi's recipe box. <em>(Hint: it's 7. Don't tell them.)</em>
+          <span class="m-how">pass the needle clockwise · count your 20 lines · lay strips in order · read the digit</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOCKED REVEAL -->
+    <div class="panel reveal">
+      <h2>🔒 The Sealed Recipe Box <span class="badge" style="background:var(--ink); color:var(--cream);">do not open</span></h2>
+      <div class="lock-row">
+        <div class="lock-icon">📜🔒</div>
+        <div class="lock-text">
+          The locked tin on the table holds Bibi's <b>recipe book of 1992</b> — and the answer to who <em>Auntie Mei</em> really was. Solve all <b>4 missions</b> (yes, including the beads!) → Bibi will open it for you.
+        </div>
+      </div>
+      <div class="reveal-note">
+        <em>The padlock has <b>3 digits</b>. Each mission gives you one:</em><br>
+        ➊ Mission 2 · brooch year → the <b>1st digit</b> (year 1900 → <b>9</b>)<br>
+        ➋ Mission 3 · 5 riddles → the <b>2nd digit</b> (count the riddles → <b>5</b>)<br>
+        ➌ Mission 4 · manik strips → the <b>3rd digit</b> (🪡 → <b>7</b>)<br>
+        <b style="color: var(--rose); font-size: 14pt;">🔓 Combination: 9 – 5 – 7</b>
+        <br><br>
+        <em>Inside the box:</em> Auntie Mei's real name · her bond to <b>Lim Soo Hui</b> · the empty-plate story · a taste of the family's secret kueh.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- HOW TO PLAY footer -->
+  <div class="how-band">
+    <div class="how-step">
+      <div class="step-num">1</div>
+      <span class="step-title">LISTEN</span>
+      Bibi reads the short story aloud. Lights soft, tea in hand.
+    </div>
+    <div class="how-step">
+      <div class="step-num">2</div>
+      <span class="step-title">PLACE</span>
+      Open the envelope · shuffle the 20 cards · match faces to the tree.
+    </div>
+    <div class="how-step">
+      <div class="step-num">3</div>
+      <span class="step-title">SOLVE & SEW</span>
+      Some crack the riddles &amp; brooch · others sew 20 lines of manik · <b>rotate</b> every few minutes so all hands try both.
+    </div>
+    <div class="how-step">
+      <div class="step-num">4</div>
+      <span class="step-title">UNLOCK</span>
+      First team to finish all 4 calls Bibi · she opens the recipe box · reveal Auntie Mei · share the kueh.
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

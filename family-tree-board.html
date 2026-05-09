@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Roots of the Rose · Bibik Rose's Family Tree Game Board</title>
+<style>
+  /* ===========================================================
+     PRINT-READY · A3 LANDSCAPE (420mm × 297mm)
+     Bleed handled by .board outer; safe margin = 12mm
+     =========================================================== */
+  @page {
+    size: A3 landscape;
+    margin: 0;
+  }
+
+  :root {
+    --cream:   #f6ecd2;
+    --paper:   #fbf4dd;
+    --ink:     #3a2418;
+    --gold:    #b8860b;
+    --gold-2:  #d4a73c;
+    --jade:    #2e7d5b;
+    --jade-2:  #4a9c78;
+    --rose:    #b91c4b;
+    --rose-2:  #d94872;
+    --tan:     #8b5a2b;
+    --tan-2:   #a47148;
+    --indigo:  #2a4a6b;
+    --shadow:  rgba(58, 36, 24, 0.18);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: #2a1810;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: var(--ink);
+  }
+
+  /* On screen, give the board some breathing room.
+     On print, fill the page edge-to-edge. */
+  body { padding: 18px; }
+  @media print {
+    body { padding: 0; background: white; }
+  }
+
+  /* ===========================================================
+     BOARD CANVAS · A3 landscape proportions
+     =========================================================== */
+  .board {
+    width: 420mm;
+    height: 297mm;
+    margin: 0 auto;
+    background: var(--cream);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.55);
+    page-break-after: always;
+  }
+  @media print { .board { box-shadow: none; } }
+
+  /* ===========================================================
+     PERANAKAN PORCELAIN FLORAL BACKGROUND
+     Multi-layer: aged paper wash + repeating floral tile + corner sprays
+     All pure CSS so it prints cleanly.
+     =========================================================== */
+  .bg-wash {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 18% 22%, rgba(184,134,11,0.10) 0, transparent 45%),
+      radial-gradient(ellipse at 82% 78%, rgba(46,125,91,0.10) 0, transparent 45%),
+      radial-gradient(ellipse at 50% 50%, rgba(251,244,221,0.4) 0, transparent 70%),
+      linear-gradient(135deg, #f6ecd2 0%, #f0e2c0 100%);
+    z-index: 0;
+  }
+
+  /* SVG floral tile — peony, plum blossom, vine — repeated as wallpaper */
+  .bg-tile {
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'><g fill='none' stroke='%23b91c4b' stroke-width='1.1' opacity='0.18'><circle cx='40' cy='40' r='10'/><circle cx='40' cy='40' r='4' fill='%23b91c4b' opacity='0.4'/><path d='M40 28 Q34 22 28 28 Q34 34 40 28'/><path d='M40 52 Q34 58 28 52 Q34 46 40 52'/><path d='M52 40 Q58 34 52 28 Q46 34 52 40'/><path d='M28 40 Q22 34 28 28 Q34 34 28 40'/></g><g fill='none' stroke='%232e7d5b' stroke-width='1' opacity='0.20'><path d='M0 110 Q40 80 80 110 T160 110 T240 110' /><path d='M70 100 Q72 92 80 90 Q86 96 80 102 Q72 104 70 100 Z' fill='%232e7d5b' opacity='0.35'/><path d='M150 120 Q152 112 160 110 Q166 116 160 122 Q152 124 150 120 Z' fill='%232e7d5b' opacity='0.35'/></g><g fill='none' stroke='%23b8860b' stroke-width='1' opacity='0.22'><circle cx='170' cy='170' r='12'/><circle cx='170' cy='170' r='5' fill='%23b8860b' opacity='0.35'/><path d='M170 155 L170 145 M170 185 L170 195 M155 170 L145 170 M185 170 L195 170 M160 160 L152 152 M180 180 L188 188 M180 160 L188 152 M160 180 L152 188' stroke-width='0.8'/></g><g fill='none' stroke='%23b91c4b' stroke-width='0.9' opacity='0.18'><path d='M110 180 Q105 170 110 165 Q115 170 110 180 Z' fill='%23b91c4b' opacity='0.25'/><path d='M105 175 Q95 175 92 182 Q98 188 105 182' /><path d='M115 175 Q125 175 128 182 Q122 188 115 182' /></g></svg>");
+    background-size: 160px 160px;
+    opacity: 0.85;
+    z-index: 1;
+  }
+
+  /* Corner sprays — bigger porcelain peony bouquets at the 4 corners */
+  .bg-corner {
+    position: absolute;
+    width: 280px; height: 280px;
+    z-index: 2;
+    opacity: 0.55;
+    pointer-events: none;
+  }
+  .bg-corner.tl { top: -40px;    left: -40px;   transform: rotate(0deg); }
+  .bg-corner.tr { top: -40px;    right: -40px;  transform: rotate(90deg); }
+  .bg-corner.br { bottom: -40px; right: -40px;  transform: rotate(180deg); }
+  .bg-corner.bl { bottom: -40px; left: -40px;   transform: rotate(270deg); }
+  .bg-corner svg { width: 100%; height: 100%; }
+
+  /* Outer decorative frame — Peranakan tile-style border */
+  .frame {
+    position: absolute;
+    top: 10mm; left: 10mm; right: 10mm; bottom: 10mm;
+    border: 4px double var(--rose);
+    z-index: 3;
+    pointer-events: none;
+  }
+  .frame::before {
+    content: '';
+    position: absolute;
+    top: 4px; left: 4px; right: 4px; bottom: 4px;
+    border: 1px solid var(--gold);
+  }
+  .frame::after {
+    content: '';
+    position: absolute;
+    top: -8px; left: -8px; right: -8px; bottom: -8px;
+    border: 2px solid var(--gold);
+    border-radius: 2px;
+  }
+
+  /* Inner ornamental corner flourishes on the frame */
+  .frame-corner {
+    position: absolute;
+    width: 60px; height: 60px;
+    z-index: 4;
+    pointer-events: none;
+  }
+  .frame-corner.tl { top: 6mm;    left: 6mm; }
+  .frame-corner.tr { top: 6mm;    right: 6mm; transform: scaleX(-1); }
+  .frame-corner.bl { bottom: 6mm; left: 6mm; transform: scaleY(-1); }
+  .frame-corner.br { bottom: 6mm; right: 6mm; transform: scale(-1, -1); }
+
+  /* ===========================================================
+     CONTENT LAYER
+     =========================================================== */
+  .content {
+    position: absolute;
+    top: 16mm; left: 16mm; right: 16mm; bottom: 16mm;
+    z-index: 10;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 8mm;
+  }
+
+  /* ---------- TITLE BAR ---------- */
+  .title-bar {
+    text-align: center;
+    position: relative;
+    padding-bottom: 6mm;
+    border-bottom: 2px double var(--tan);
+  }
+  .title-eyebrow {
+    color: var(--jade);
+    font-size: 11pt;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  .title-eyebrow::before, .title-eyebrow::after {
+    content: '✦'; margin: 0 14px; color: var(--gold);
+  }
+  .title-main {
+    font-family: 'Brush Script MT', 'Snell Roundhand', cursive;
+    font-size: 64pt;
+    color: var(--rose);
+    line-height: 1;
+    margin: 4px 0 2px;
+    text-shadow: 2px 2px 0 rgba(184,134,11,0.25);
+  }
+  .title-zh {
+    font-size: 22pt;
+    color: var(--jade);
+    letter-spacing: 6px;
+    margin-bottom: 4px;
+  }
+  .title-sub {
+    font-style: italic;
+    color: var(--ink);
+    font-size: 11pt;
+    opacity: 0.85;
+  }
+  .title-team {
+    position: absolute;
+    top: 0; right: 0;
+    background: var(--tan);
+    color: var(--cream);
+    border-radius: 50%;
+    width: 70px; height: 70px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    font-weight: bold;
+    box-shadow: 0 4px 10px var(--shadow);
+    transform: rotate(-6deg);
+    border: 3px solid var(--gold);
+  }
+  .title-team .t { font-size: 15pt; letter-spacing: 2px; }
+  .title-team .l { font-size: 7pt; opacity: 0.9; margin-top: 2px; }
+
+  /* ---------- TREE AREA ---------- */
+  .tree-area {
+    position: relative;
+    background: rgba(251, 244, 221, 0.55);
+    border: 1.5px solid var(--tan);
+    border-radius: 10px;
+    padding: 8mm 10mm 10mm;
+    box-shadow: inset 0 0 0 4px var(--cream), inset 0 0 0 5px var(--gold-2);
+  }
+
+  .gen-row {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    position: relative;
+    padding: 4mm 0 14mm;
+  }
+  .gen-row:last-child { padding-bottom: 0; }
+
+  .gen-tag {
+    position: absolute;
+    left: -2mm; top: -3mm;
+    background: var(--jade);
+    color: var(--cream);
+    font-size: 8pt;
+    font-weight: bold;
+    letter-spacing: 3px;
+    padding: 2px 10px;
+    border-radius: 4px;
+    box-shadow: 1px 1px 0 var(--gold);
+  }
+
+  /* ---------- PERSON SLOT ---------- */
+  .couple {
+    display: flex;
+    align-items: center;
+    gap: 4mm;
+    position: relative;
+  }
+  .person {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 26mm;
+    position: relative;
+  }
+  .slot {
+    width: 22mm;
+    height: 28mm;
+    border: 2px dashed var(--tan);
+    border-radius: 6px;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(184,134,11,0.08) 100%),
+      radial-gradient(circle at 50% 32%, var(--tan) 0 6mm, transparent 6.2mm),
+      linear-gradient(to bottom, transparent 52%, var(--tan) 52%, var(--tan) 80%, transparent 80%);
+    background-blend-mode: normal, multiply, multiply;
+    background-size: 100% 100%, 100% 100%, 100% 100%;
+    background-color: rgba(251,244,221,0.6);
+    position: relative;
+    box-shadow: 1px 1px 0 var(--tan-2);
+  }
+  /* the silhouette inside is faint; reduce by overlaying */
+  .slot::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: rgba(251,244,221,0.55);
+    border-radius: 4px;
+  }
+
+  .name-line {
+    width: 24mm;
+    border-bottom: 1px dotted var(--ink);
+    height: 5mm;
+    font-size: 7pt;
+    color: var(--tan);
+    text-align: center;
+    line-height: 5mm;
+    font-style: italic;
+    margin-top: 2mm;
+  }
+  .hint {
+    font-size: 7.5pt;
+    color: var(--jade);
+    font-style: italic;
+    text-align: center;
+    line-height: 1.2;
+    margin-top: 1mm;
+    max-width: 26mm;
+  }
+
+  /* ---------- HEIRLOOM ROUND FRAMES (3 of them) ---------- */
+  .person.heirloom .slot {
+    border: 3px solid var(--gold-2);
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 50% 50%, rgba(255,248,225,0.9) 0%, rgba(212,167,60,0.18) 70%, transparent 100%),
+      repeating-conic-gradient(from 0deg, var(--gold) 0 6deg, var(--gold-2) 6deg 12deg);
+    background-size: 100% 100%, 100% 100%;
+    box-shadow:
+      inset 0 0 0 3px var(--cream),
+      inset 0 0 0 4px var(--rose),
+      0 0 0 2px var(--gold) ,
+      2px 2px 6px rgba(0,0,0,0.25);
+    width: 26mm; height: 26mm;
+  }
+  .person.heirloom .slot::after {
+    content: '?';
+    position: absolute; inset: 0;
+    background: rgba(251,244,221,0.85);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--rose);
+    font-family: 'Brush Script MT', cursive;
+    font-size: 28pt;
+    font-weight: bold;
+  }
+  .person.heirloom .heirloom-tag {
+    position: absolute;
+    top: -5mm;
+    background: var(--rose);
+    color: var(--cream);
+    font-size: 7pt;
+    padding: 1px 6px;
+    border-radius: 8px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 1px 1px 0 var(--gold);
+    white-space: nowrap;
+  }
+
+  /* ---------- RELATION BAND ---------- */
+  .relation {
+    border: 1.5px dashed var(--rose);
+    background: #fff8e1;
+    color: var(--rose);
+    font-size: 7pt;
+    font-style: italic;
+    padding: 2px 6px;
+    border-radius: 10px;
+    text-align: center;
+    min-width: 12mm;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+  .relation::before { content: '✏ '; }
+
+  /* ---------- DESCENT LINES ---------- */
+  .descent {
+    position: absolute;
+    left: 50%;
+    bottom: -12mm;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 11mm;
+    background: var(--tan);
+  }
+  .descent::after {
+    content: '▼';
+    position: absolute;
+    bottom: -3mm; left: -3mm;
+    color: var(--tan);
+    font-size: 9pt;
+  }
+  .descent .child-label {
+    position: absolute;
+    left: 4mm; top: 2mm;
+    font-size: 7pt;
+    color: var(--jade);
+    background: var(--paper);
+    padding: 0 4px;
+    font-style: italic;
+    white-space: nowrap;
+  }
+
+  /* ---------- SECRET / DEATH MARKERS ---------- */
+  .marker {
+    position: absolute;
+    top: -3mm; right: -3mm;
+    background: var(--rose);
+    color: white;
+    font-size: 7pt;
+    padding: 1px 5px;
+    border-radius: 6px;
+    font-weight: bold;
+    z-index: 3;
+    box-shadow: 1px 1px 0 var(--gold);
+  }
+  .marker.death  { background: #555; }
+  .marker.secret { background: var(--jade); }
+  .marker.bibi   { background: var(--rose); }
+
+  /* ---------- STORY BUBBLES ---------- */
+  .story {
+    background: #fff8e1;
+    border: 1.2px solid var(--gold);
+    padding: 2mm 3mm;
+    border-radius: 10px;
+    font-style: italic;
+    font-size: 7.5pt;
+    color: var(--ink);
+    max-width: 56mm;
+    position: absolute;
+    box-shadow: 1px 2px 0 var(--gold-2);
+    z-index: 5;
+    line-height: 1.3;
+  }
+  .story strong { color: var(--rose); font-style: normal; }
+  .story::before {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 14px;
+    width: 8px; height: 8px;
+    background: #fff8e1;
+    border-right: 1.2px solid var(--gold);
+    border-bottom: 1.2px solid var(--gold);
+    transform: rotate(45deg);
+  }
+
+  /* ---------- BOTTOM STRIP ---------- */
+  .bottom-strip {
+    display: grid;
+    grid-template-columns: 2fr 1.3fr 1.3fr;
+    gap: 6mm;
+    align-items: stretch;
+  }
+  .strip-card {
+    background: rgba(251,244,221,0.78);
+    border: 1.5px solid var(--jade);
+    border-radius: 8px;
+    padding: 4mm 5mm;
+    box-shadow: 2px 2px 0 var(--jade);
+    position: relative;
+  }
+  .strip-card h4 {
+    color: var(--jade);
+    font-size: 9.5pt;
+    margin-bottom: 3mm;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 1px dotted var(--jade);
+    padding-bottom: 2mm;
+  }
+  .strip-card p,
+  .strip-card li {
+    font-size: 8.5pt;
+    line-height: 1.45;
+    color: var(--ink);
+  }
+  .strip-card ol {
+    padding-left: 4mm;
+  }
+  .strip-card ol li { margin-bottom: 1mm; }
+  .strip-card strong { color: var(--rose); }
+
+  .heirloom-list {
+    list-style: none;
+    padding: 0;
+  }
+  .heirloom-list li {
+    display: flex;
+    align-items: center;
+    gap: 3mm;
+    margin-bottom: 2mm;
+    padding: 2mm;
+    background: #fff8e1;
+    border: 1px dashed var(--gold);
+    border-radius: 6px;
+  }
+  .heirloom-list .ring {
+    width: 9mm; height: 9mm;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    background: repeating-conic-gradient(from 0deg, var(--gold) 0 6deg, var(--gold-2) 6deg 12deg);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--rose);
+    font-weight: bold;
+    font-size: 11pt;
+    flex-shrink: 0;
+    box-shadow: inset 0 0 0 1.5px var(--cream);
+  }
+  .heirloom-list .ring span {
+    background: var(--cream);
+    width: 6mm; height: 6mm;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9pt;
+  }
+  .heirloom-list .name { font-weight: bold; color: var(--ink); font-size: 9pt; }
+  .heirloom-list .meta { font-size: 7.5pt; color: var(--tan); font-style: italic; display: block; }
+
+  .relation-key {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2mm;
+  }
+  .relation-key span {
+    font-size: 8pt;
+    padding: 2px 5px;
+    border: 1px dashed var(--rose);
+    background: #fff8e1;
+    color: var(--rose);
+    border-radius: 6px;
+    text-align: center;
+  }
+
+  /* ---------- BIBI'S WHISPERS (gossip strip at very bottom) ---------- */
+  .whispers {
+    position: absolute;
+    bottom: 4mm; left: 16mm; right: 16mm;
+    z-index: 11;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6mm;
+    font-style: italic;
+    font-size: 8pt;
+    color: var(--tan);
+    padding-top: 3mm;
+    border-top: 1.5px dashed var(--gold);
+  }
+  .whispers span::before { content: '🤫 '; }
+
+</style>
+</head>
+<body>
+
+<div class="board">
+
+  <!-- ===== Background layers ===== -->
+  <div class="bg-wash"></div>
+  <div class="bg-tile"></div>
+
+  <!-- Corner peony sprays (SVG, pure decoration) -->
+  <div class="bg-corner tl">
+    <svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="#b91c4b" stroke-width="1.6" opacity="0.7">
+        <!-- big peony -->
+        <circle cx="90" cy="90" r="32"/>
+        <circle cx="90" cy="90" r="22"/>
+        <circle cx="90" cy="90" r="12"/>
+        <circle cx="90" cy="90" r="5" fill="#b91c4b" opacity="0.5"/>
+        <path d="M90 50 Q70 40 60 60 Q70 80 90 70" fill="#d94872" opacity="0.25"/>
+        <path d="M90 130 Q70 140 60 120 Q70 100 90 110" fill="#d94872" opacity="0.25"/>
+        <path d="M50 90 Q40 110 60 120 Q80 110 70 90" fill="#d94872" opacity="0.25"/>
+        <path d="M130 90 Q140 70 120 60 Q100 70 110 90" fill="#d94872" opacity="0.25"/>
+      </g>
+      <!-- vine -->
+      <g fill="none" stroke="#2e7d5b" stroke-width="1.4" opacity="0.7">
+        <path d="M120 110 Q160 130 180 170 Q200 210 240 230"/>
+        <path d="M150 130 Q145 120 155 115 Q165 122 158 132 Z" fill="#2e7d5b" opacity="0.4"/>
+        <path d="M180 170 Q175 160 185 155 Q195 162 188 172 Z" fill="#2e7d5b" opacity="0.4"/>
+        <path d="M210 200 Q205 190 215 185 Q225 192 218 202 Z" fill="#2e7d5b" opacity="0.4"/>
+      </g>
+      <!-- plum blossoms -->
+      <g fill="#b8860b" opacity="0.6">
+        <circle cx="170" cy="60" r="3"/>
+        <circle cx="200" cy="80" r="3"/>
+        <circle cx="220" cy="120" r="3"/>
+        <circle cx="60" cy="160" r="3"/>
+        <circle cx="40" cy="200" r="3"/>
+      </g>
+      <!-- gold accent dots -->
+      <g fill="#d4a73c" opacity="0.5">
+        <circle cx="170" cy="60" r="6" fill="none" stroke="#d4a73c"/>
+        <circle cx="200" cy="80" r="6" fill="none" stroke="#d4a73c"/>
+        <circle cx="220" cy="120" r="6" fill="none" stroke="#d4a73c"/>
+      </g>
+    </svg>
+  </div>
+  <div class="bg-corner tr">
+    <svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="#b91c4b" stroke-width="1.6" opacity="0.7">
+        <circle cx="90" cy="90" r="32"/><circle cx="90" cy="90" r="22"/>
+        <circle cx="90" cy="90" r="12"/>
+        <circle cx="90" cy="90" r="5" fill="#b91c4b" opacity="0.5"/>
+        <path d="M90 50 Q70 40 60 60 Q70 80 90 70" fill="#d94872" opacity="0.25"/>
+        <path d="M50 90 Q40 110 60 120 Q80 110 70 90" fill="#d94872" opacity="0.25"/>
+        <path d="M130 90 Q140 70 120 60 Q100 70 110 90" fill="#d94872" opacity="0.25"/>
+      </g>
+      <g fill="none" stroke="#2e7d5b" stroke-width="1.4" opacity="0.7">
+        <path d="M120 110 Q160 130 180 170 Q200 210 240 230"/>
+      </g>
+      <g fill="#b8860b" opacity="0.6">
+        <circle cx="170" cy="60" r="3"/><circle cx="200" cy="80" r="3"/>
+        <circle cx="60" cy="160" r="3"/><circle cx="40" cy="200" r="3"/>
+      </g>
+    </svg>
+  </div>
+  <div class="bg-corner bl">
+    <svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="#b91c4b" stroke-width="1.6" opacity="0.7">
+        <circle cx="90" cy="90" r="32"/><circle cx="90" cy="90" r="22"/>
+        <circle cx="90" cy="90" r="12"/>
+        <circle cx="90" cy="90" r="5" fill="#b91c4b" opacity="0.5"/>
+        <path d="M50 90 Q40 110 60 120 Q80 110 70 90" fill="#d94872" opacity="0.25"/>
+        <path d="M130 90 Q140 70 120 60 Q100 70 110 90" fill="#d94872" opacity="0.25"/>
+      </g>
+      <g fill="none" stroke="#2e7d5b" stroke-width="1.4" opacity="0.7">
+        <path d="M120 110 Q160 130 180 170 Q200 210 240 230"/>
+      </g>
+      <g fill="#b8860b" opacity="0.6">
+        <circle cx="170" cy="60" r="3"/><circle cx="220" cy="120" r="3"/>
+      </g>
+    </svg>
+  </div>
+  <div class="bg-corner br">
+    <svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="#b91c4b" stroke-width="1.6" opacity="0.7">
+        <circle cx="90" cy="90" r="32"/><circle cx="90" cy="90" r="22"/>
+        <circle cx="90" cy="90" r="12"/>
+        <circle cx="90" cy="90" r="5" fill="#b91c4b" opacity="0.5"/>
+        <path d="M50 90 Q40 110 60 120 Q80 110 70 90" fill="#d94872" opacity="0.25"/>
+        <path d="M130 90 Q140 70 120 60 Q100 70 110 90" fill="#d94872" opacity="0.25"/>
+      </g>
+      <g fill="none" stroke="#2e7d5b" stroke-width="1.4" opacity="0.7">
+        <path d="M120 110 Q160 130 180 170 Q200 210 240 230"/>
+      </g>
+      <g fill="#b8860b" opacity="0.6">
+        <circle cx="200" cy="80" r="3"/><circle cx="60" cy="160" r="3"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Decorative frame -->
+  <div class="frame"></div>
+  <svg class="frame-corner tl" viewBox="0 0 60 60">
+    <g fill="none" stroke="#b8860b" stroke-width="1.4">
+      <path d="M0 30 Q0 0 30 0"/>
+      <path d="M5 30 Q5 5 30 5"/>
+      <circle cx="14" cy="14" r="3" fill="#b91c4b" opacity="0.6"/>
+      <path d="M14 8 Q10 4 6 8 Q10 12 14 8" fill="#d94872" opacity="0.4"/>
+      <path d="M14 20 Q10 24 6 20 Q10 16 14 20" fill="#d94872" opacity="0.4"/>
+      <path d="M20 14 Q24 10 20 6 Q16 10 20 14" fill="#d94872" opacity="0.4"/>
+    </g>
+  </svg>
+  <svg class="frame-corner tr" viewBox="0 0 60 60">
+    <g fill="none" stroke="#b8860b" stroke-width="1.4">
+      <path d="M0 30 Q0 0 30 0"/>
+      <path d="M5 30 Q5 5 30 5"/>
+      <circle cx="14" cy="14" r="3" fill="#b91c4b" opacity="0.6"/>
+    </g>
+  </svg>
+  <svg class="frame-corner bl" viewBox="0 0 60 60">
+    <g fill="none" stroke="#b8860b" stroke-width="1.4">
+      <path d="M0 30 Q0 0 30 0"/>
+      <path d="M5 30 Q5 5 30 5"/>
+      <circle cx="14" cy="14" r="3" fill="#b91c4b" opacity="0.6"/>
+    </g>
+  </svg>
+  <svg class="frame-corner br" viewBox="0 0 60 60">
+    <g fill="none" stroke="#b8860b" stroke-width="1.4">
+      <path d="M0 30 Q0 0 30 0"/>
+      <path d="M5 30 Q5 5 30 5"/>
+      <circle cx="14" cy="14" r="3" fill="#b91c4b" opacity="0.6"/>
+    </g>
+  </svg>
+
+  <!-- ===========================================================
+       CONTENT
+       =========================================================== -->
+  <div class="content">
+
+    <!-- ===== Title bar ===== -->
+    <div class="title-bar">
+      <div class="title-eyebrow">A Peranakan Heritage Game</div>
+      <div class="title-main">Roots of the Rose</div>
+      <div class="title-zh">陈家族谱 · The Tan Family Tree</div>
+      <div class="title-sub">Match the cards · whisper the stories · uncover the 3 heirlooms 🌺</div>
+      <div class="title-team">
+        <div class="t">TAN</div>
+        <div class="l">陈 · TEAM 1</div>
+      </div>
+    </div>
+
+    <!-- ===== Tree area ===== -->
+    <div class="tree-area">
+
+      <!-- ============ GEN 1 ============ -->
+      <div class="gen-row">
+        <div class="gen-tag">GEN 1 · 1880s</div>
+
+        <!-- Couple A: Sinkeh + Nyonya (HEIRLOOM: Kerongsang on the Nyonya bride) -->
+        <div class="couple">
+          <div class="person">
+            <div class="slot"></div>
+            <div class="name-line">name?</div>
+            <div class="hint">"crossed sea, 1905"</div>
+          </div>
+          <div class="relation">_______</div>
+          <div class="person heirloom">
+            <div class="heirloom-tag">📌 KERONGSANG</div>
+            <div class="slot"></div>
+            <div class="name-line">name?</div>
+            <div class="hint">"Nyonya bride"</div>
+          </div>
+          <div class="descent"><div class="child-label">had children</div></div>
+          <div class="story" style="top: -16mm; left: -6mm;">
+            💬 <strong>S1:</strong> The boy who sailed from Fujian in 1905 — and the Nyonya who said yes when her family said no.
+          </div>
+        </div>
+
+        <!-- Mistress -->
+        <div class="couple">
+          <div class="person">
+            <div class="slot"></div>
+            <div class="name-line">name?</div>
+            <div class="hint">"the secret love"</div>
+            <div class="marker secret">🤫</div>
+          </div>
+          <div class="descent"><div class="child-label">hidden child</div></div>
+          <div class="story" style="top: -16mm; left: -10mm;">
+            💬 <strong>S3:</strong> She wore jasmine every Sunday. Her son called his own father «uncle». Shhh… 🤫
+          </div>
+        </div>
+
+        <!-- Couple B: Banker (HEIRLOOM: Jam Saku) + young Nyonya wife -->
+        <div class="couple">
+          <div class="person heirloom">
+            <div class="heirloom-tag">⌚ JAM SAKU</div>
+            <div class="slot"></div>
+            <div class="name-line">name?</div>
+            <div class="hint">"S'pore banker"</div>
+            <div class="marker">+33y</div>
+          </div>
+          <div class="relation">_______</div>
+          <div class="person">
+            <div class="slot"></div>
+            <div class="name-line">name?</div>
+            <div class="hint">"young 2nd wife"</div>
+          </div>
+          <div class="story" style="top: -16mm; right: -6mm;">
+            💬 <strong>S4:</strong> The banker who counted his coins twice — married a bride 33 years younger.
+          </div>
+        </div>
+
+        <!-- Lee parents -->
+        <div class="couple">
+          <div class="person">
+            <div class="slot"></div>
+            <div class="name-line">name?</div>
+            <div class="hint">"Lee patriarch"</div>
+          </div>
+          <div class="relation">_______</div>
+          <div class="person">
+            <div class="slot"></div>
+            <div class="name-line">name?</div>
+            <div class="hint">"Yap sister"</div>
+          </div>
+          <div class="descent"><div class="child-label">had children</div></div>
+          <div class="story" style="top: -16mm; right: -6mm;">
+            💬 <strong>S2:</strong> Two Yap sisters — one married a sinkeh, the other married a Lee.
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ GEN 2 ============ -->
+      <div class="gen-row">
+        <div class="gen-tag">GEN 2 · 1918–22</div>
+
+        <div class="couple">
+          <div class="person">
+            <div class="slot"></div>
+            <div class="name-line">name?</div>
+            <div class="hint">"Tan eldest son"</div>
+          </div>
+          <div class="relation">_______</div>
+          <div class="person">
+            <div class="slot"></div>
+            <div class="name-line">name?</div>
+            <div class="hint">"Lee daughter"</div>
+          </div>
+          <div class="descent"><div class="child-label">had Albert</div></div>
+          <div class="story" style="top: -16mm; left: -6mm;">
+            💬 <strong>S5:</strong> The peacekeeper son and the sharp-tongued embroidery girl.
+          </div>
+        </div>
+
+        <div class="couple">
+          <div class="person">
+            <div class="slot"></div>
+            <div class="name-line">name?</div>
+            <div class="hint">"hidden son"</div>
+            <div class="marker secret">🤫</div>
+          </div>
+        </div>
+
+        <div class="couple">
+          <div class="person">
+            <div class="slot"></div>
+            <div class="name-line">name?</div>
+            <div class="hint">"banker's daughter"</div>
+          </div>
+        </div>
+
+        <div class="couple">
+          <div class="person">
+            <div class="slot"></div>
+            <div class="name-line">name?</div>
+            <div class="hint">"Lee son ✝"</div>
+            <div class="marker death">died young</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ GEN 3 ============ -->
+      <div class="gen-row">
+        <div class="gen-tag">GEN 3 · 1950s</div>
+
+        <!-- Albert + Alice (HEIRLOOM: Nyonya Recipe on Alice — "baked kueh better than the aunties") -->
+        <div class="couple">
+          <div class="person">
+            <div class="slot"></div>
+            <div class="name-line">name?</div>
+            <div class="hint">"met at uni"</div>
+          </div>
+          <div class="relation">_______</div>
+          <div class="person heirloom">
+            <div class="heirloom-tag">📜 RESIPI NYONYA</div>
+            <div class="slot"></div>
+            <div class="name-line">name?</div>
+            <div class="hint">"matriarch's fav"</div>
+          </div>
+          <div class="descent"><div class="child-label">had Kelvin</div></div>
+          <div class="story" style="top: -16mm; left: -6mm;">
+            💬 <strong>S6:</strong> First Tan to study overseas — came home with a KL banker who married him at St Andrew's Cathedral and never set foot in the kitchen.
+          </div>
+        </div>
+
+        <div class="couple">
+          <div class="person">
+            <div class="slot"></div>
+            <div class="name-line">name?</div>
+            <div class="hint">"2nd Tan son"</div>
+          </div>
+          <div class="relation">_______</div>
+          <div class="person">
+            <div class="slot"></div>
+            <div class="name-line">name?</div>
+            <div class="hint">"a Lim sister"</div>
+          </div>
+          <div class="descent"><div class="child-label">had Wei Wen + Rose</div></div>
+        </div>
+      </div>
+
+      <!-- ============ GEN 4 ============ -->
+      <div class="gen-row" style="padding-bottom: 2mm;">
+        <div class="gen-tag">GEN 4 · 1978–85</div>
+
+        <div class="couple">
+          <div class="person">
+            <div class="slot"></div>
+            <div class="name-line">name?</div>
+            <div class="hint">"carries the name"</div>
+          </div>
+        </div>
+
+        <div class="couple">
+          <div class="person">
+            <div class="slot"></div>
+            <div class="name-line">name?</div>
+            <div class="hint">"groom"</div>
+          </div>
+          <div class="relation">_______</div>
+          <div class="person">
+            <div class="slot"></div>
+            <div class="name-line">name?</div>
+            <div class="hint">"bride"</div>
+          </div>
+          <div class="story" style="top: -16mm; left: -6mm;">
+            💬 <strong>S7:</strong> Two cousins, two weddings, same year — the family hall ran for 3 days.
+          </div>
+        </div>
+
+        <div class="couple">
+          <div class="person">
+            <div class="slot"></div>
+            <div class="name-line">name?</div>
+            <div class="hint">"that's me! 🌺"</div>
+            <div class="marker bibi">Bibi</div>
+          </div>
+          <div class="story" style="top: -16mm; right: -6mm;">
+            💬 <strong>S8:</strong> The youngest generation — one tells everyone's secrets (that's me! 🌺).
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /tree-area -->
+
+    <!-- ===== Bottom strip ===== -->
+    <div class="bottom-strip">
+
+      <div class="strip-card">
+        <h4>📜 How to Play</h4>
+        <ol>
+          <li>Open Bibi's envelope — <strong>20 character cards</strong> inside.</li>
+          <li>Read each card's story 💬 → match the same <strong>S#</strong> on the tree → place the card on that silhouette.</li>
+          <li>Write the name on the dotted line. Fill the pink <strong>relationship band</strong> between each pair.</li>
+          <li>Spot the <strong>3 round gold frames</strong> 🟡 — those are <strong>heirloom slots</strong>. Hunt the room and place the matching item!</li>
+        </ol>
+      </div>
+
+      <div class="strip-card">
+        <h4>🟡 The 3 Heirlooms</h4>
+        <ul class="heirloom-list">
+          <li><div class="ring"><span>📌</span></div><div><div class="name">Kerongsang</div><span class="meta">Nyonya brooch · Gen 1 bride</span></div></li>
+          <li><div class="ring"><span>⌚</span></div><div><div class="name">Jam Saku</div><span class="meta">Pocket watch · to the gentler son</span></div></li>
+          <li><div class="ring"><span>📜</span></div><div><div class="name">Resipi Auntie Mei</div><span class="meta">1992 cookbook · Soo Hui wrote what Mei Lan cooked</span></div></li>
+        </ul>
+      </div>
+
+      <div class="strip-card">
+        <h4>✏ Relationship Words</h4>
+        <p style="font-style:italic; margin-bottom:2mm;">Write one on each pink dotted band:</p>
+        <div class="relation-key">
+          <span>married 夫妻</span>
+          <span>mistress 情妇</span>
+          <span>siblings 兄弟</span>
+          <span>cousins 表亲</span>
+          <span>parents 父母</span>
+          <span>in-laws 姻亲</span>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /content -->
+
+  <!-- ===== Whisper strip at very bottom ===== -->
+  <div class="whispers">
+    <span>Someone has TWO birthdays</span>
+    <span>The mistress wore jasmine every Sunday…</span>
+    <span>That banker? Always paid in gold coins</span>
+    <span>Sssh — don't ask about 1942</span>
+    <span>One card has a secret. Look closely 👀</span>
+  </div>
+
+</div><!-- /board -->
+
+</body>
+</html>

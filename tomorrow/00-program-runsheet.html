@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Program Runsheet · Reunion Day</title>
+<!-- PRINT: 1 × A4 portrait. Pin near Bibi's table. -->
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  :root { --cream:#f6ecd2; --paper:#fbf4dd; --ink:#3a2418; --gold:#b8860b; --jade:#2e7d5b; --rose:#b91c4b; --tan:#8b5a2b; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background:#2a1810; font-family:'Georgia',serif; color:var(--ink); }
+  body { padding: 14px; }
+  @media print { body { padding: 0; background: white; } }
+  .page {
+    width: 210mm; height: 297mm; margin: 0 auto;
+    background: var(--cream); padding: 11mm 13mm;
+    position: relative; box-shadow: 0 14px 36px rgba(0,0,0,0.5);
+    display: flex; flex-direction: column;
+  }
+  @media print { .page { box-shadow: none; margin: 0; } }
+  .page::before { content:''; position:absolute; inset:5mm; border:2px double var(--rose); border-radius:3mm; pointer-events:none; }
+  .page::after  { content:''; position:absolute; inset:7mm; border:1px solid var(--gold); border-radius:2mm; pointer-events:none; }
+
+  header { text-align:center; margin-bottom: 4mm; position: relative; z-index: 1; }
+  .stamp { display: inline-block; padding: 1mm 4mm; background: var(--rose); color: var(--cream); border-radius: 1mm; font-style: italic; letter-spacing: 4px; font-size: 8pt; transform: rotate(-2deg); }
+  h1 { font-family:'Brush Script MT',cursive; color: var(--rose); font-size: 30pt; line-height: 1; margin-top: 2mm; text-shadow: 1.5px 1.5px 0 var(--gold); }
+  .sub { color: var(--tan); font-style: italic; font-size: 10pt; margin-top: 1mm; }
+
+  .row {
+    display: grid; grid-template-columns: 22mm 1fr 30mm;
+    gap: 3mm; align-items: stretch;
+    background: var(--paper); border: 1.5px dashed var(--tan); border-radius: 2mm;
+    padding: 3mm 4mm; margin-bottom: 2.5mm;
+    position: relative; z-index: 1;
+  }
+  .row::before { content:''; position:absolute; inset:1mm; border:0.8px solid var(--gold); border-radius:1.5mm; pointer-events:none; }
+  .row.feature { background: rgba(185,28,75,0.08); border-color: var(--rose); }
+  .time { font-family: 'Brush Script MT', cursive; color: var(--rose); font-size: 16pt; line-height: 1.05; align-self: center; position:relative; z-index:1; }
+  .what { position:relative; z-index:1; }
+  .what .name { font-family: 'Brush Script MT', cursive; color: var(--jade); font-size: 14pt; line-height: 1.1; margin-bottom: 0.8mm; }
+  .what .desc { font-size: 9pt; color: var(--ink); line-height: 1.4; }
+  .duration { color: var(--tan); font-style: italic; font-size: 9pt; align-self: center; text-align: right; position:relative; z-index:1; }
+
+  .footer-bar {
+    margin-top: auto; padding-top: 3mm;
+    text-align: center; color: var(--tan); font-style: italic; font-size: 8.5pt;
+    letter-spacing: 2px; position: relative; z-index: 1;
+  }
+  .total {
+    background: var(--ink); color: var(--cream);
+    padding: 2mm 5mm; border-radius: 1mm;
+    display: inline-block; font-size: 9pt; letter-spacing: 3px;
+    margin-bottom: 2mm;
+  }
+</style></head>
+<body>
+<div class="page">
+  <header>
+    <span class="stamp">★ REUNION RUNSHEET · 9 MAY 2026 ★</span>
+    <h1>Roots of the Rose</h1>
+    <div class="sub">~ 陳家根譜 · 1:00 PM – 4:30 PM · 26 pax · 5 teams ~</div>
+  </header>
+
+  <div class="row">
+    <div class="time">12:55</div>
+    <div class="what">
+      <div class="name">Door opens</div>
+      <div class="desc">Each guest draws 1 envelope (5 items × 5 + 1 babi pongteh wildcard). Door greeter takes a quick arrival photo of each guest — used later by AI.</div>
+    </div>
+    <div class="duration">5 min</div>
+  </div>
+
+  <div class="row feature">
+    <div class="time">1:00</div>
+    <div class="what">
+      <div class="name">Welcome by Bibi · Grouping</div>
+      <div class="desc">Bibi greets the hall · ice-breaker · find 4 others with 4 different items → your team of 5. Babi Pongteh joins any team.</div>
+    </div>
+    <div class="duration">10 min</div>
+  </div>
+
+  <div class="row feature">
+    <div class="time">1:10</div>
+    <div class="what">
+      <div class="name">📸 AI Heritage Portrait Challenge</div>
+      <div class="desc">Each team takes a group photo, uses Nano Banana / Gemini to dress all 5 in baba-nyonya costume + Peranakan mansion background. Sent to Bibi's WhatsApp. Selphy prints during Game 1.</div>
+    </div>
+    <div class="duration">15 min</div>
+  </div>
+
+  <div class="row feature">
+    <div class="time">1:30</div>
+    <div class="what">
+      <div class="name">🎲 GAME 1 · Build the Family Tree</div>
+      <div class="desc">All 5 teams gather at long table. Match 20 faces ↔ 20 stories. Stick on whiteboard. Find the 3-digit code (3·?·?) hidden in the tree. All 5 boxes open together → Auntie Mei's recipes revealed.</div>
+    </div>
+    <div class="duration">50 min</div>
+  </div>
+
+  <div class="row">
+    <div class="time">2:20</div>
+    <div class="what">
+      <div class="name">🏆 Prize-giving</div>
+      <div class="desc">Bibi awards: Best Family Tree · Most Accurate AI Portrait · Most Heart. Group photo with Selphy prints in hand.</div>
+    </div>
+    <div class="duration">20 min</div>
+  </div>
+
+  <div class="row feature">
+    <div class="time">2:40</div>
+    <div class="what">
+      <div class="name">🍵 Nyonya Tea Break</div>
+      <div class="desc">Kueh, teh tarik, mingling. Display all 5 AI portraits + the completed family tree.</div>
+    </div>
+    <div class="duration">30 min</div>
+  </div>
+
+  <div class="row feature">
+    <div class="time">3:10</div>
+    <div class="what">
+      <div class="name">🎨 Batik Painting Session</div>
+      <div class="desc">Each guest paints a small batik square — peony, hibiscus, geometric. Soft music. Take home as souvenir.</div>
+    </div>
+    <div class="duration">60 min</div>
+  </div>
+
+  <div class="row feature">
+    <div class="time">4:10</div>
+    <div class="what">
+      <div class="name">💃 Joget Dance · Closing</div>
+      <div class="desc">Bibi leads. Everyone joins. Final group photo. Recipe + batik + Selphy portrait handed out at door.</div>
+    </div>
+    <div class="duration">20 min</div>
+  </div>
+
+  <div class="row">
+    <div class="time">4:30</div>
+    <div class="what">
+      <div class="name">End</div>
+      <div class="desc">Guests leave with three keepsakes: a recipe card, a batik square, and a printed AI portrait of their team.</div>
+    </div>
+    <div class="duration">—</div>
+  </div>
+
+  <div class="footer-bar">
+    <div class="total">★ 3 hr 30 min · 5 teams · 26 hearts · 1 family ★</div>
+    <div>陳家根譜 · Roots of the Rose</div>
+  </div>
+</div>
+</body></html>

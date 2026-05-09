@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Story Cards · Roots of the Rose · Short Match Deck</title>
+<!--
+  PRINT: A4 portrait · 6 cards per page · 4 story pages + 1 answer key
+  Pair with identity-cards.html — players match story letter A-T → identity # 1-20.
+  Stories trimmed to ~2 sentences each for fast play.
+
+  Letter mapping (shuffled):
+    A=#7  B=#3  C=#11 D=#1  E=#16 F=#9
+    G=#4  H=#13 I=#2  J=#19 K=#15 L=#6
+    M=#8  N=#5  O=#20 P=#12 Q=#17 R=#10
+    S=#14 T=#18
+
+  Open in Chrome/Edge → Ctrl+P → margins NONE · background graphics ON
+-->
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  :root {
+    --cream:#f6ecd2; --paper:#fbf4dd; --ink:#3a2418;
+    --gold:#b8860b; --gold-2:#d4a73c; --jade:#2e7d5b;
+    --rose:#b91c4b; --tan:#8b5a2b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background:#2a1810; font-family:'Georgia','Times New Roman',serif; color:var(--ink); }
+  body { padding: 14px; }
+  @media print { body { padding: 0; background: white; } }
+
+  .page {
+    width: 210mm; height: 297mm; margin: 0 auto 14px;
+    background: white; padding: 6mm; position: relative;
+    page-break-after: always;
+    box-shadow: 0 14px 36px rgba(0,0,0,0.5);
+  }
+  @media print { .page { box-shadow: none; margin: 0; } }
+  .page:last-child { page-break-after: auto; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 4mm; width: 100%; height: 100%;
+  }
+
+  .card {
+    background:
+      radial-gradient(ellipse at 88% 12%, rgba(46,125,91,0.10), transparent 50%),
+      radial-gradient(ellipse at 12% 88%, rgba(184,134,11,0.10), transparent 50%),
+      var(--cream);
+    border: 1.5px dashed var(--tan);
+    border-radius: 3mm;
+    padding: 4mm 5mm;
+    position: relative;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+  .card::before { content:''; position:absolute; inset:2.2mm; border:2px double var(--jade); border-radius:2mm; pointer-events:none; }
+  .card::after  { content:''; position:absolute; inset:3.5mm; border:1px solid var(--gold); border-radius:1.5mm; pointer-events:none; }
+
+  .head {
+    display: flex; align-items: center; gap: 4mm;
+    padding-bottom: 2mm; margin-bottom: 2.5mm;
+    border-bottom: 1.5px solid var(--jade);
+    position: relative; z-index: 1;
+  }
+  .letter {
+    flex: 0 0 auto;
+    width: 18mm; height: 18mm; border-radius: 50%;
+    background: var(--jade); color: var(--cream);
+    display: flex; align-items: center; justify-content: center;
+    border: 2px double var(--gold);
+    box-shadow: 1.5px 1.5px 0 var(--tan);
+    font-family:'Brush Script MT',cursive; font-size: 26pt; line-height: 1;
+  }
+  .ttl { flex: 1; min-width: 0; }
+  .ttl .eyebrow { color: var(--rose); font-style: italic; font-size: 8pt; letter-spacing: 2px; text-transform: uppercase; }
+  .ttl .who { color: var(--ink); font-size: 9pt; margin-top: 1mm; font-style: italic; }
+  .ttl .who b { color: var(--rose); font-style: normal; letter-spacing: 1px; }
+
+  .body {
+    flex: 1;
+    background: var(--paper);
+    border-left: 3px solid var(--rose);
+    border-radius: 1mm;
+    padding: 3mm 3.5mm;
+    font-size: 11pt;
+    line-height: 1.55;
+    color: var(--ink);
+    position: relative; z-index: 1;
+    display: flex; align-items: center;
+  }
+  .body p { width: 100%; }
+  .body strong { color: var(--rose); }
+  .body em { color: var(--jade); font-style: italic; }
+
+  .end {
+    background: radial-gradient(ellipse at 50% 50%, rgba(255,248,225,0.95), var(--cream));
+    justify-content: center; align-items: center; text-align: center; padding: 8mm;
+  }
+  .end h3 { font-family:'Brush Script MT',cursive; color: var(--rose); font-size: 24pt; line-height: 1; position: relative; z-index: 1; }
+  .end .body-text { margin-top: 4mm; color: var(--ink); font-size: 9.5pt; line-height: 1.6; position: relative; z-index: 1; }
+
+  /* Answer key page */
+  .key-page { padding: 14mm; }
+  .key-page h1 {
+    font-family:'Brush Script MT',cursive; color: var(--rose);
+    font-size: 32pt; text-align: center; margin-bottom: 2mm;
+  }
+  .key-page .sub { text-align: center; color: var(--tan); font-style: italic; font-size: 11pt; margin-bottom: 6mm; }
+  .key-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 2mm 8mm;
+    background: var(--cream); padding: 6mm; border: 2px solid var(--rose); border-radius: 3mm;
+  }
+  .key-row { display: flex; align-items: center; gap: 4mm; padding: 1.5mm 2mm; border-bottom: 1px dashed var(--tan); font-size: 11pt; }
+  .key-row .L { font-family:'Brush Script MT',cursive; color: var(--jade); font-size: 18pt; width: 12mm; text-align: center; }
+  .key-row .arrow { color: var(--gold); }
+  .key-row .N { font-family:'Brush Script MT',cursive; color: var(--rose); font-size: 18pt; width: 10mm; text-align: center; }
+  .key-row .nm { color: var(--ink); font-size: 9pt; flex: 1; }
+  .key-foot { text-align: center; margin-top: 6mm; color: var(--tan); font-style: italic; font-size: 9pt; }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 · A B C D E F ============ -->
+<div class="page"><div class="grid">
+
+  <div class="card">
+    <div class="head"><div class="letter">A</div>
+      <div class="ttl"><div class="eyebrow">story · A</div><div class="who">match to <b># ___</b></div></div>
+    </div>
+    <div class="body"><p>
+      Inherited <strong>See Hai Chan</strong> and the <strong>brass watch</strong> at twenty-one. Wound the watch every morning at six for forty-seven years. Married a Lee girl in <strong>1947</strong> — an alliance his mother arranged with the words: <em>"She is the one. Do not ask further."</em>
+    </p></div>
+  </div>
+
+  <div class="card">
+    <div class="head"><div class="letter">B</div>
+      <div class="ttl"><div class="eyebrow">story · B</div><div class="who">match to <b># ___</b></div></div>
+    </div>
+    <div class="body"><p>
+      Cooked for the family for seventy-eight years in one pale jade kebaya with a permanent <strong>sambal stain</strong>. Never sat at the <em>tok panjang</em>. Her name was finally written down, by her own niece, in <strong>1992</strong>.
+    </p></div>
+  </div>
+
+  <div class="card">
+    <div class="head"><div class="letter">C</div>
+      <div class="ttl"><div class="eyebrow">story · C</div><div class="who">match to <b># ___</b></div></div>
+    </div>
+    <div class="body"><p>
+      Crossed the causeway to Singapore in 1948 to marry a tycoon. <strong>Widowed eleven months later</strong> at twenty-four — refused to come home. Became the named master of <strong>kasut manik</strong> beadwork; her peony-toe pattern hangs in the Peranakan Museum.
+    </p></div>
+  </div>
+
+  <div class="card">
+    <div class="head"><div class="letter">D</div>
+      <div class="ttl"><div class="eyebrow">story · D</div><div class="who">match to <b># ___</b></div></div>
+    </div>
+    <div class="body"><p>
+      Stepped off the boat at George Town at nineteen with a <strong>brass pocket-watch</strong> his father pressed into his palm. Built <strong>See Hai Chan 西海棧</strong> from the docks. Set the rule: <em>"the eldest son carries both the books and the time."</em>
+    </p></div>
+  </div>
+
+  <div class="card">
+    <div class="head"><div class="letter">E</div>
+      <div class="ttl"><div class="eyebrow">story · E</div><div class="who">match to <b># ___</b></div></div>
+    </div>
+    <div class="body"><p>
+      Came to the kitchen at sixteen with one question: <em>"Auntie, may I write down what your hands do?"</em> Stood at the chopping block for ten years. Published <strong>Resipi Auntie Mei</strong> in 1992 — <strong>240 dishes</strong>, dedicated to the woman the family forgot to name.
+    </p></div>
+  </div>
+
+  <div class="card">
+    <div class="head"><div class="letter">F</div>
+      <div class="ttl"><div class="eyebrow">story · F</div><div class="who">match to <b># ___</b></div></div>
+    </div>
+    <div class="body"><p>
+      Born in the kitchen, never sent to school. The wharf men called him <em>Seoy Yee Kia</em> 細姨仔 — <em>"the mistress's son."</em> Joined the resistance in 1942 and walked into the <strong>jungle north of Kulim</strong> after the surrender in 1945. The family has waited eighty-one years.
+    </p></div>
+  </div>
+
+</div></div>
+
+<!-- ============ PAGE 2 · G H I J K L ============ -->
+<div class="page"><div class="grid">
+
+  <div class="card">
+    <div class="head"><div class="letter">G</div>
+      <div class="ttl"><div class="eyebrow">story · G</div><div class="who">match to <b># ___</b></div></div>
+    </div>
+    <div class="body"><p>
+      <strong>Middle</strong> of the <em>Three Golden Orchids 三朵金蘭</em>. Wore the <strong>Anak A</strong> brooch from her wedding day in 1901. Last words to the housemaid: <em>"Put the brooches back in the tin. The owner will come for them when she is ready."</em>
+    </p></div>
+  </div>
+
+  <div class="card">
+    <div class="head"><div class="letter">H</div>
+      <div class="ttl"><div class="eyebrow">story · H</div><div class="who">match to <b># ___</b></div></div>
+    </div>
+    <div class="body"><p>
+      Took an English name in Sydney and never put it down. Listed <strong>See Hai Chan</strong> on Bursa in 2008. The night their father died he pushed the watch across the table to his younger brother and said: <em>"You keep the time. I will keep the books."</em>
+    </p></div>
+  </div>
+
+  <div class="card">
+    <div class="head"><div class="letter">I</div>
+      <div class="ttl"><div class="eyebrow">story · I</div><div class="who">match to <b># ___</b></div></div>
+    </div>
+    <div class="body"><p>
+      <strong>Eldest</strong> of the Beach Street goldsmith sisters. Wore the <strong>Ibu</strong> brooch for fifty-eight years. In 1920 she <strong>drew a chalk line across the kitchen floor</strong> when the second woman arrived, and meant every inch of it.
+    </p></div>
+  </div>
+
+  <div class="card">
+    <div class="head"><div class="letter">J</div>
+      <div class="ttl"><div class="eyebrow">story · J</div><div class="who">match to <b># ___</b></div></div>
+    </div>
+    <div class="body"><p>
+      <strong>Great-granddaughter</strong> of the Singapore tycoon through his first marriage. Wore Aunt Chen Neo's <strong>1948 peony-toe slippers</strong> under her own wedding kebaya in <strong>2020</strong> — closing a marriage that had ended seventy-two years earlier.
+    </p></div>
+  </div>
+
+  <div class="card">
+    <div class="head"><div class="letter">K</div>
+      <div class="ttl"><div class="eyebrow">story · K</div><div class="who">match to <b># ___</b></div></div>
+    </div>
+    <div class="body"><p>
+      Younger Tan brother. Caught the <strong>brass watch</strong> when his elder brother slid it across the table in 1995, and has wound it every morning at six since. Restored seventeen Penang shophouses. Stroke in 2024 — the watch now sits on a porcelain dish on his bedside table.
+    </p></div>
+  </div>
+
+  <div class="card">
+    <div class="head"><div class="letter">L</div>
+      <div class="ttl"><div class="eyebrow">story · L</div><div class="who">match to <b># ___</b></div></div>
+    </div>
+    <div class="body"><p>
+      Cloth merchant on Penang Road. A man of few words and fewer questions. Folded a length of <strong>cream silk</strong> for his daughter's wedding kebaya the year before he died — and never spoke at table about either child's birthday.
+    </p></div>
+  </div>
+
+</div></div>
+
+<!-- ============ PAGE 3 · M N O P Q R ============ -->
+<div class="page"><div class="grid">
+
+  <div class="card">
+    <div class="head"><div class="letter">M</div>
+      <div class="ttl"><div class="eyebrow">story · M</div><div class="who">match to <b># ___</b></div></div>
+    </div>
+    <div class="body"><p>
+      Born in winter 1921 in the back room of the goldsmith house. Married into the Tan family in 1947 wearing a <strong>cream silk kebaya</strong>; the kerongsang stack was complete on her collar that morning. On her last night she handed her granddaughter a <strong>brass key</strong> and said: <em>"Open the tin when you are ready."</em>
+    </p></div>
+  </div>
+
+  <div class="card">
+    <div class="head"><div class="letter">N</div>
+      <div class="ttl"><div class="eyebrow">story · N</div><div class="who">match to <b># ___</b></div></div>
+    </div>
+    <div class="body"><p>
+      The <strong>youngest</strong> of the Three Golden Orchids — quiet, beautiful, fond of orchids. Never married. Died in the <strong>winter of 1923</strong> at twenty-three. Her brooch was placed in the enamel tin, never worn. Or so the family was told.
+    </p></div>
+  </div>
+
+  <div class="card">
+    <div class="head"><div class="letter">O</div>
+      <div class="ttl"><div class="eyebrow">story · O</div><div class="who">match to <b># ___</b></div></div>
+    </div>
+    <div class="body"><p>
+      Born in Singapore, schooled in Melbourne, finance in London. Knows the <strong>See Hai Chan balance sheet by heart</strong> — could not name three of his great-aunts. Came home tonight because his cousin Bibi put a card with his name on it in his hand before he could say no.
+    </p></div>
+  </div>
+
+  <div class="card">
+    <div class="head"><div class="letter">P</div>
+      <div class="ttl"><div class="eyebrow">story · P</div><div class="who">match to <b># ___</b></div></div>
+    </div>
+    <div class="body"><p>
+      Eldest blood son of the Lees. Five years older than the small sister who arrived one morning <strong>wrapped in temple cloth</strong> — and the only person in the house who never wondered where she had come from. Died of a fever in 1950, aged thirty-two.
+    </p></div>
+  </div>
+
+  <div class="card">
+    <div class="head"><div class="letter">Q</div>
+      <div class="ttl"><div class="eyebrow">story · Q</div><div class="who">match to <b># ___</b></div></div>
+    </div>
+    <div class="body"><p>
+      Peranakan textile conservator. Found the <strong>enamel tin</strong> on the highest shelf of the bridal cupboard in 1998 and waited twenty-six years to open it. Tonight she has lifted the <strong>nine-dumpling kamcheng</strong> down from the altar for the first time in seventy years.
+    </p></div>
+  </div>
+
+  <div class="card">
+    <div class="head"><div class="letter">R</div>
+      <div class="ttl"><div class="eyebrow">story · R</div><div class="who">match to <b># ___</b></div></div>
+    </div>
+    <div class="body"><p>
+      Singapore shipping magnate. Already a widower with a grown son when, in 1948, the families arranged a Penang–Singapore alliance and married him to a girl of twenty-three. <strong>Eleven months later</strong> his heart stopped at his own breakfast table.
+    </p></div>
+  </div>
+
+</div></div>
+
+<!-- ============ PAGE 4 · S T + 4 end cards ============ -->
+<div class="page"><div class="grid">
+
+  <div class="card">
+    <div class="head"><div class="letter">S</div>
+      <div class="ttl"><div class="eyebrow">story · S</div><div class="who">match to <b># ___</b></div></div>
+    </div>
+    <div class="body"><p>
+      KL-born, Wharton-educated, Catholic-married. Married into the family in 1994 at <strong>St Andrew's Cathedral, Singapore</strong>, in a white gown. Attends Bibi's Tok Panjang every two years out of politeness — drinks tea in the parlour, never enters the kitchen.
+    </p></div>
+  </div>
+
+  <div class="card">
+    <div class="head"><div class="letter">T</div>
+      <div class="ttl"><div class="eyebrow">story · T</div><div class="who">match to <b># ___</b></div></div>
+    </div>
+    <div class="body"><p>
+      <strong>Bibi's younger brother.</strong> Internal-medicine doctor at Penang General. Met his wife at a Singapore heritage conference in 2017 — their aunt, then 92, recognised both family names over Sunday lunch and said: <em>"I have been waiting seventy years for this dinner."</em>
+    </p></div>
+  </div>
+
+  <div class="card end">
+    <h3>All twenty matched?</h3>
+    <div class="body-text">Now <em>cut and paste</em> the small story strips under each portrait on the family tree.<br><br>When the tree is complete — <strong>call Bibi</strong>.</div>
+  </div>
+
+  <div class="card end">
+    <h3>Four threads</h3>
+    <div class="body-text" style="text-align:left;">
+      ⏱ <strong>The Watch</strong> — D → A → K<br>
+      🌺 <strong>The Brooches</strong> — I, G, N (in tin held by M)<br>
+      🍲 <strong>The Recipes</strong> — B → E (her own niece)<br>
+      🌿 <strong>The Silence</strong> — B → F → the jungle
+    </div>
+  </div>
+
+  <div class="card end">
+    <h3>Quiet questions</h3>
+    <div class="body-text" style="text-align:left;">
+      ① Whose baby came home wrapped in temple cloth in 1923?<br>
+      ② Who was Ah Cai's father?<br>
+      ③ What happened to him after 1945?<br>
+      ④ What is inside the tin marked <em>"return to Yap if asked"</em>?<br><br>
+      <em style="color:var(--tan);">Bibi will not answer. The cards will.</em>
+    </div>
+  </div>
+
+  <div class="card end">
+    <div style="color: var(--rose); font-style: italic; font-size: 8pt; letter-spacing: 3px; position: relative; z-index: 1;">✦ ROOTS OF THE ROSE ✦</div>
+    <h3 style="margin-top:3mm;">The Twenty</h3>
+    <div style="font-family:'Brush Script MT',cursive; color: var(--jade); font-size: 13pt; margin-top: 2mm; position: relative; z-index: 1;">~ stones do not lie ~</div>
+    <div style="margin-top: 4mm; color: var(--tan); font-size: 8pt; font-style: italic; position: relative; z-index: 1;">20 stories · 4 generations · 1 reunion night</div>
+  </div>
+
+</div></div>
+
+<!-- ============ PAGE 5 · ANSWER KEY (Bibi only) ============ -->
+<div class="page key-page">
+  <h1>Bibi's Answer Key</h1>
+  <div class="sub">~ for the host only · do not place on the table ~</div>
+
+  <div class="key-grid">
+    <div class="key-row"><div class="L">A</div><div class="arrow">→</div><div class="N">7</div><div class="nm">Tan Cheng Hoe · 陳清和 · the watch + ledger heir</div></div>
+    <div class="key-row"><div class="L">B</div><div class="arrow">→</div><div class="N">3</div><div class="nm">Auntie Mei · 林美蘭 · sambal stain · 240 recipes</div></div>
+    <div class="key-row"><div class="L">C</div><div class="arrow">→</div><div class="N">11</div><div class="nm">Tan Chen Neo · 陳珍娘 · kasut manik master</div></div>
+    <div class="key-row"><div class="L">D</div><div class="arrow">→</div><div class="N">1</div><div class="nm">Tan Keo San · 陳橋山 · Fujian founder · brass watch</div></div>
+    <div class="key-row"><div class="L">E</div><div class="arrow">→</div><div class="N">16</div><div class="nm">Lim Soo Hui · 林素慧 · the cookbook niece</div></div>
+    <div class="key-row"><div class="L">F</div><div class="arrow">→</div><div class="N">9</div><div class="nm">Tan Ah Cai · 陳亞財 · Seoy Yee Kia · the jungle</div></div>
+    <div class="key-row"><div class="L">G</div><div class="arrow">→</div><div class="N">4</div><div class="nm">Yap Eng Neo · 葉永娘 · Anak A brooch</div></div>
+    <div class="key-row"><div class="L">H</div><div class="arrow">→</div><div class="N">13</div><div class="nm">Albert Tan · 陳順發 · the books, not the watch</div></div>
+    <div class="key-row"><div class="L">I</div><div class="arrow">→</div><div class="N">2</div><div class="nm">Yap Eng Siew · 葉永秀 · Ibu brooch · chalk line 1920</div></div>
+    <div class="key-row"><div class="L">J</div><div class="arrow">→</div><div class="N">19</div><div class="nm">Khoo Hooi Wen · 邱慧雯 · the 1948 slippers, worn 2020</div></div>
+    <div class="key-row"><div class="L">K</div><div class="arrow">→</div><div class="N">15</div><div class="nm">Tan Soon Heng · 陳順興 · the brass watch today</div></div>
+    <div class="key-row"><div class="L">L</div><div class="arrow">→</div><div class="N">6</div><div class="nm">Lee Poh Soon · 李寶順 · cloth merchant · cream silk</div></div>
+    <div class="key-row"><div class="L">M</div><div class="arrow">→</div><div class="N">8</div><div class="nm">Lee Beng Guat · 李明月 · the enamel tin · brass key</div></div>
+    <div class="key-row"><div class="L">N</div><div class="arrow">→</div><div class="N">5</div><div class="nm">Yap Eng Hooi · 葉永慧 · the orchid sister · died 1923</div></div>
+    <div class="key-row"><div class="L">O</div><div class="arrow">→</div><div class="N">20</div><div class="nm">Kelvin Tan · 陳凱文 · See Hai Chan heir</div></div>
+    <div class="key-row"><div class="L">P</div><div class="arrow">→</div><div class="N">12</div><div class="nm">Lee Boon Kuan · 李文坤 · the brother who never asked</div></div>
+    <div class="key-row"><div class="L">Q</div><div class="arrow">→</div><div class="N">17</div><div class="nm">Bibik Rose · 陳玫瑰 · host of tonight</div></div>
+    <div class="key-row"><div class="L">R</div><div class="arrow">→</div><div class="N">10</div><div class="nm">Khoo Chin Nam · 邱振南 · Singapore tycoon</div></div>
+    <div class="key-row"><div class="L">S</div><div class="arrow">→</div><div class="N">14</div><div class="nm">Alice Wong · 王愛麗 · St Andrew's white wedding</div></div>
+    <div class="key-row"><div class="L">T</div><div class="arrow">→</div><div class="N">18</div><div class="nm">Dr Tan Wei Wen · 陳偉文 · doctor · Bibi's brother</div></div>
+  </div>
+
+  <div class="key-foot">
+    20 stories · 4 generations · 1 reunion night<br>
+    <em>"Stones do not lie. People forget how to read them."</em>
+  </div>
+</div>
+
+</body>
+</html>

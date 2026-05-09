@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Bibi's Host Script · Reunion 1pm</title>
+<!--
+  PRINT: 2 × A4 portrait · home printer is fine
+  Chrome/Edge → Ctrl+P → Margins: NONE · Background graphics: ON
+  This is the ONLY page Bibi needs. Read top to bottom.
+-->
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  :root { --cream:#f6ecd2; --paper:#fbf4dd; --ink:#3a2418; --gold:#b8860b; --jade:#2e7d5b; --rose:#b91c4b; --tan:#8b5a2b; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background:#2a1810; font-family:'Georgia',serif; color:var(--ink); }
+  body { padding: 14px; }
+  @media print { body { padding: 0; background: white; } }
+  .page {
+    width: 210mm; height: 297mm; margin: 0 auto 14px;
+    background: var(--cream); padding: 11mm 13mm;
+    position: relative; box-shadow: 0 14px 36px rgba(0,0,0,0.5);
+    page-break-after: always; display: flex; flex-direction: column;
+  }
+  @media print { .page { box-shadow: none; margin: 0; } }
+  .page:last-child { page-break-after: auto; }
+  .page::before { content:''; position:absolute; inset:5mm; border:2px double var(--rose); border-radius:3mm; pointer-events:none; }
+  .page::after  { content:''; position:absolute; inset:7mm; border:1px solid var(--gold); border-radius:2mm; pointer-events:none; }
+
+  header { text-align:center; margin-bottom: 4mm; position: relative; z-index: 1; }
+  .stamp { display: inline-block; padding: 1mm 4mm; background: var(--rose); color: var(--cream); border-radius: 1mm; font-style: italic; letter-spacing: 4px; font-size: 8pt; transform: rotate(-2deg); }
+  h1 { font-family:'Brush Script MT',cursive; color: var(--rose); font-size: 28pt; line-height: 1; margin-top: 2mm; text-shadow: 1.5px 1.5px 0 var(--gold); }
+  .sub { color: var(--tan); font-style: italic; font-size: 9.5pt; margin-top: 1mm; }
+
+  .step {
+    background: var(--paper);
+    border: 1.5px dashed var(--tan);
+    border-radius: 3mm;
+    padding: 3.5mm 4.5mm;
+    margin-bottom: 3mm;
+    position: relative; z-index: 1;
+  }
+  .step::before { content:''; position:absolute; inset:1.5mm; border:1px solid var(--gold); border-radius:2mm; pointer-events:none; }
+  .step .head {
+    display: flex; align-items: center; gap: 4mm;
+    margin-bottom: 2mm;
+    border-bottom: 1px dashed var(--rose);
+    padding-bottom: 1.5mm;
+    position: relative; z-index: 1;
+  }
+  .num {
+    width: 12mm; height: 12mm; border-radius: 50%;
+    background: var(--rose); color: var(--cream);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Brush Script MT', cursive; font-size: 18pt;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.18);
+  }
+  .ttl { font-family: 'Brush Script MT', cursive; color: var(--jade); font-size: 17pt; line-height: 1.1; flex: 1; }
+  .time { color: var(--tan); font-style: italic; font-size: 9pt; letter-spacing: 1.5px; white-space: nowrap; }
+
+  .body { font-size: 10pt; line-height: 1.5; position: relative; z-index: 1; }
+  .body p { margin-bottom: 1.5mm; }
+  .say {
+    background: white;
+    border-left: 3px solid var(--gold);
+    padding: 2.5mm 3.5mm;
+    font-style: italic; font-size: 10pt; line-height: 1.5;
+    margin-top: 1.5mm;
+  }
+  .say::before { content:'🗣 '; color: var(--rose); font-style: normal; }
+  .do {
+    background: rgba(46,125,91,0.10);
+    border: 1px dashed var(--jade);
+    padding: 2mm 3mm;
+    border-radius: 1.5mm;
+    margin-top: 1.5mm;
+    font-size: 9.5pt; line-height: 1.4;
+  }
+  .do::before { content:'✋ '; color: var(--jade); }
+
+  footer { text-align: center; margin-top: auto; color: var(--tan); font-style: italic; font-size: 8pt; letter-spacing: 2px; padding-top: 3mm; position: relative; z-index: 1; }
+</style></head>
+<body>
+
+<!-- ============ PAGE 1 · OPEN · MATCH · RIDDLE ============ -->
+<div class="page">
+  <header>
+    <span class="stamp">★ FOR BIBI ROSE · keep in apron ★</span>
+    <h1>Tonight · 60 minutes · 5 steps</h1>
+    <div class="sub">~ welcome → match → riddle+sew → lock → reveal+toast ~</div>
+  </header>
+
+  <!-- STEP 1 -->
+  <div class="step">
+    <div class="head">
+      <div class="num">1</div>
+      <div class="ttl">Welcome</div>
+      <div class="time">~3 min</div>
+    </div>
+    <div class="body">
+      <p>Stand in front of the whiteboard (title <b>Tan's Family Tree · 陳家根譜</b> already written across the top). Hold one identity card up. Wait for quiet.</p>
+      <div class="say">"Selamat datang. Tonight is the Tan family reunion — but not the easy kind. I have <b>twenty faces</b> here, and <b>twenty stories</b>. By the end of one hour, you will know who they are to each other, and who they are to <em>us</em>."</div>
+      <div class="say">"This board is empty on purpose. <b>You</b> will build the family tree. There is no right shape. The board is yours."</div>
+      <div class="do"><b>Do:</b> split the room into <b>teams of about 5</b>. Aim for 4 teams. Each team picks a quick name.</div>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step">
+    <div class="head">
+      <div class="num">2</div>
+      <div class="ttl">Round 1 · Match Faces to Stories</div>
+      <div class="time">~20 min</div>
+    </div>
+    <div class="body">
+      <p>Hand each team: identity cards #1–#20, story cards A–T, blue tack.</p>
+      <div class="say">"Round one. Read the stories aloud. Match each story to a face. When you are sure — stick the pair on the whiteboard, in the family tree shape your team thinks is right. Husbands and wives side by side. Children below. <b>You have 20 minutes.</b>"</div>
+      <div class="do"><b>Do:</b> set phone timer for <b>20 min</b>. Walk between teams. Drop tiny hints only if they're stuck for 5+ min:</div>
+      <div class="say">"That brooch in story G… have you read story I yet? They are <em>sisters</em>."</div>
+      <div class="say">"The watch travels through the men of the family — father, son, grandson."</div>
+      <div class="say">"Auntie Mei never sat at the long table. Where on the tree do you think she belongs?"</div>
+      <div class="do">At ~10 min, clap once: <em>"Halfway! Ten of twenty done? Keep going."</em><br>At buzzer: <em>"Pencils down on matching. Stay where you are — round two is coming."</em></div>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step">
+    <div class="head">
+      <div class="num">3</div>
+      <div class="ttl">Round 2 · Riddle &amp; Bead Corner</div>
+      <div class="time">~15 min</div>
+    </div>
+    <div class="body">
+      <p>Walk to each team. Hand them <b>one</b> riddle card from the deck of 4. Set down a small cloth + needle + thread + beads beside each team.</p>
+      <div class="say">"Round two. Each team gets one <b>relationship riddle</b> — a long story hidden inside the cards on your board. Crack it together. <b>15 minutes.</b>"</div>
+      <div class="say">"And the rule — while four of you crack the riddle, <b>one teammate must always be sewing</b> at the bead corner. Pass the needle around. By the end, your team's cloth must have <em>at least 20 beads on it</em>. Riddle + beads, both, or nothing. Hands and head, never separate — that is the Nyonya way."</div>
+      <div class="do"><b>Do:</b> set timer for <b>15 min</b>. Walk between teams. Check the bead corner — if a team has nobody sewing, tap one of them on the shoulder and point. Whisper "yes" or "close, try again" when teams whisper their answer. <b>(See answer-key.html, your eyes only.)</b></div>
+    </div>
+  </div>
+
+  <footer>page 1 of 2 · Bibi's script · keep in apron</footer>
+</div>
+
+<!-- ============ PAGE 2 · LOCK · REVEAL · CLOSE ============ -->
+<div class="page">
+  <header>
+    <span class="stamp">★ FOR BIBI ROSE ★</span>
+    <h1>The Lock · The Reveal · The Toast</h1>
+    <div class="sub">~ the climax, the heart, the close ~</div>
+  </header>
+
+  <!-- STEP 4 -->
+  <div class="step">
+    <div class="head">
+      <div class="num">4</div>
+      <div class="ttl">Round 3 · Crack the Box</div>
+      <div class="time">~7 min</div>
+    </div>
+    <div class="body">
+      <p>When riddle timer ends, clap. Point at the prize box.</p>
+      <div class="say">"Final round. The box. Three questions, three numbers. First team to whisper the right code, in order, opens it."</div>
+      <p>Read the 3 questions out loud, one by one. Give 1 minute between each for teams to huddle.</p>
+      <div class="say">"Question one — <b>how many times did the brass watch change hands?</b>"</div>
+      <div class="say">"Question two — <b>how many sisters wore the matching brooches?</b>"</div>
+      <div class="say">"Question three — <b>how many petals on the peony?</b>"</div>
+      <div class="do"><b>Code = 4 · 3 · 9.</b> First team to whisper "4-3-9" wins. Hand them the box, let them open it dramatically. Inside: red packets / chocolate coins / a family photo. Applause.<br><b>If no one gets it</b> in 5 min, give a hint: <em>"Watch crossed four hands. Three sisters. Nine petals."</em> If still no one, just open it yourself: <em>"The code was 4-3-9. The box belongs to all of you."</em></div>
+    </div>
+  </div>
+
+  <!-- STEP 5 -->
+  <div class="step">
+    <div class="head">
+      <div class="num">5</div>
+      <div class="ttl">Reveal &amp; Toast</div>
+      <div class="time">~15 min</div>
+      <div style="color:var(--rose); font-style:italic; font-size:8pt; margin-top:1mm;">total: 3 + 20 + 15 + 7 + 15 = 60 min</div>
+    </div>
+    <div class="body">
+      <p>Box is open. Everyone is gathered. Turn to the whiteboard.</p>
+      <div class="say">"Now — let's see what you built. Some of you got it right. Some of you got it beautifully wrong. Both are fine."</div>
+      <p>Walk through the board. For each person, say <b>two things</b>: <em>their name + one thing that matters about them</em>. Use answer-key.html for letter→number. Move fast — 30 seconds per person.</p>
+      <div class="say">"#1 Tan Keo San — the reason we are all standing here. Sailed from Fujian at nineteen with a brass watch in his pocket. The watch is still in this family."</div>
+      <div class="say">"#3 Auntie Mei — cooked for us seventy years. Her name was not in any registry until 1992 when her cookbook was published. <b>Tonight is the first time her face is on the family tree.</b>"</div>
+      <div class="say">"#9 Tan Ah Cai — Auntie Mei's son. He walked into the jungle in 1942 and never came home. The family has waited eighty-four years."</div>
+      <p style="margin-top: 2mm; color: var(--tan); font-style: italic; font-size: 9pt;">~ keep going for all 20, fast. Don't correct mistakes — just <em>add</em> the truth. ~</p>
+      <p style="margin-top: 3mm;">Step back. Lower your voice.</p>
+      <div class="say">"Twenty people. Four generations. Some of them you grew up with. Some you only met tonight, on a piece of paper. <b>All of them are us.</b> We did this not because the names matter — but because the <em>silences</em> matter."</div>
+      <div class="do"><b>Do:</b> raise a glass. <em>"To the Tans — to the ones we know, and the ones we are still finding."</em> Drink. Done.</div>
+    </div>
+  </div>
+
+  <footer>page 2 of 2 · Bibi's script · 陳家根譜</footer>
+</div>
+
+</body></html>

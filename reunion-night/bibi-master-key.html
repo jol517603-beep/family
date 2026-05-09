@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Bibi's Master Key · Host Only</title>
+<!-- 2 × A4 portrait · everything Bibi needs in one place · DO NOT show team -->
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  :root { --cream:#f6ecd2; --paper:#fbf4dd; --ink:#3a2418; --gold:#b8860b; --jade:#2e7d5b; --rose:#b91c4b; --tan:#8b5a2b; --soft:#e8dab5; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background:#2a1810; font-family:'Georgia','Times New Roman',serif; color:var(--ink); }
+  body { padding: 14px; }
+  @media print { body { padding: 0; background: white; } }
+  .page { width: 210mm; height: 297mm; margin: 0 auto 14px; background: var(--cream); padding: 12mm 14mm; position: relative; box-shadow: 0 14px 36px rgba(0,0,0,0.5); page-break-after: always; display: flex; flex-direction: column; }
+  @media print { .page { box-shadow: none; margin: 0; } }
+  .page:last-child { page-break-after: auto; }
+  .page::before { content:''; position:absolute; inset:5mm; border:2px double var(--rose); border-radius:3mm; pointer-events:none; }
+  .page::after  { content:''; position:absolute; inset:7mm; border:1px solid var(--gold); border-radius:2mm; pointer-events:none; }
+
+  header { text-align:center; margin-bottom: 4mm; position: relative; z-index: 1; }
+  .stamp { display: inline-block; padding: 1mm 4mm; background: var(--rose); color: var(--cream); border-radius: 1mm; font-style: italic; letter-spacing: 4px; font-size: 8pt; transform: rotate(-2deg); }
+  h1 { font-family:'Brush Script MT',cursive; color: var(--rose); font-size: 28pt; line-height: 1; margin-top: 2mm; text-shadow: 1.5px 1.5px 0 var(--gold); }
+  .sub { color: var(--tan); font-style: italic; font-size: 10pt; margin-top: 1mm; }
+
+  .panel {
+    background: rgba(255,255,255,0.55);
+    border: 1.5px solid var(--tan);
+    border-radius: 2mm;
+    padding: 4mm 5mm;
+    margin-bottom: 4mm;
+    position: relative; z-index: 1;
+  }
+  .panel h2 {
+    font-family:'Brush Script MT',cursive; color: var(--jade);
+    font-size: 17pt; line-height: 1; margin-bottom: 2mm;
+    border-bottom: 1px dashed var(--gold);
+    padding-bottom: 1.5mm;
+  }
+  .panel .note { color: var(--tan); font-style: italic; font-size: 8pt; letter-spacing: 1px; margin-bottom: 2mm; }
+
+  .timeline { font-size: 9.5pt; line-height: 1.7; }
+  .timeline .row { display: flex; gap: 4mm; padding: 1mm 0; border-bottom: 1px dotted var(--soft); }
+  .timeline .row:last-child { border-bottom: none; }
+  .timeline .t { flex: 0 0 22mm; font-family:'Brush Script MT',cursive; color: var(--rose); font-size: 14pt; line-height: 1; padding-top: 1mm; }
+  .timeline .d { flex: 1; }
+  .timeline .d b { color: var(--jade); font-weight: normal; font-style: italic; }
+
+  .map-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1mm 6mm; }
+  .map-row { display: flex; align-items: center; gap: 2mm; padding: 0.8mm 0; border-bottom: 1px dotted var(--soft); font-size: 9pt; }
+  .map-row .L { font-family:'Brush Script MT',cursive; color: var(--jade); font-size: 14pt; width: 8mm; text-align: center; }
+  .map-row .arrow { color: var(--gold); }
+  .map-row .N { font-family:'Brush Script MT',cursive; color: var(--rose); font-size: 14pt; width: 8mm; text-align: center; }
+  .map-row .nm { color: var(--ink); font-size: 8.5pt; flex: 1; }
+
+  .secret {
+    background:
+      radial-gradient(ellipse at 88% 12%, rgba(232,155,181,0.20), transparent 55%),
+      var(--paper);
+    border: 1.5px dashed var(--rose);
+    border-radius: 2mm;
+    padding: 5mm 6mm;
+    margin-bottom: 4mm;
+    position: relative; z-index: 1;
+  }
+  .secret h2 { font-family:'Brush Script MT',cursive; color: var(--rose); font-size: 18pt; margin-bottom: 2mm; }
+  .secret p { font-size: 9.5pt; line-height: 1.6; margin-bottom: 2mm; }
+  .secret p b { color: var(--rose); font-weight: normal; }
+  .secret p em { color: var(--jade); font-style: italic; }
+
+  .lock-box {
+    background: var(--ink); color: var(--cream);
+    border: 2px solid var(--gold);
+    border-radius: 3mm;
+    padding: 5mm; text-align: center;
+    margin-bottom: 4mm;
+    position: relative; z-index: 1;
+  }
+  .lock-box .label { font-family:'Brush Script MT',cursive; color: var(--gold); font-size: 14pt; }
+  .lock-box .digits {
+    margin-top: 2mm;
+    display: flex; justify-content: center; gap: 6mm;
+  }
+  .lock-box .digit {
+    width: 22mm; height: 22mm;
+    border: 2px dashed var(--gold);
+    border-radius: 2mm;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .lock-box .digit .n { font-family:'Brush Script MT',cursive; color: var(--cream); font-size: 28pt; line-height: 1; }
+  .lock-box .digit .lbl { color: var(--gold); font-size: 7pt; letter-spacing: 1px; margin-top: 1mm; }
+  .lock-box .note { margin-top: 3mm; color: var(--soft); font-style: italic; font-size: 8pt; }
+
+  .checklist { font-size: 9.5pt; line-height: 1.7; }
+  .checklist li { list-style: none; padding: 1mm 0 1mm 7mm; position: relative; border-bottom: 1px dotted var(--soft); }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li::before { content: '☐'; position: absolute; left: 0; top: 0.5mm; color: var(--rose); font-size: 12pt; }
+  .checklist li b { color: var(--rose); font-weight: normal; }
+  .checklist li em { color: var(--jade); font-style: italic; }
+
+  .questions-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1mm 5mm; font-size: 8.5pt; line-height: 1.5; }
+  .questions-grid .q { padding: 1mm 0 1mm 6mm; position: relative; border-bottom: 1px dotted var(--soft); }
+  .questions-grid .q::before { content: '#' attr(data-n); position: absolute; left: 0; top: 1mm; font-family:'Brush Script MT',cursive; color: var(--rose); font-size: 12pt; }
+  .questions-grid .q b { color: var(--jade); font-weight: normal; font-style: italic; }
+
+  footer { text-align: center; margin-top: auto; color: var(--tan); font-style: italic; font-size: 8pt; letter-spacing: 2px; position: relative; z-index: 1; padding-top: 4mm; }
+</style></head>
+<body>
+
+<!-- ============ PAGE 1 · MAP, TIMELINE, SECRET ============ -->
+<div class="page">
+  <header>
+    <span class="stamp">★ FOR BIBI ONLY ★</span>
+    <h1>Bibi's Master Key</h1>
+    <div class="sub">~ keep in apron pocket · do not place on table ~</div>
+  </header>
+
+  <!-- Letter → number → name -->
+  <div class="panel">
+    <h2>Letter → Identity Map</h2>
+    <div class="note">~ if a team is stuck, point at a face on the board · do not say the name ~</div>
+    <div class="map-grid">
+      <div class="map-row"><div class="L">A</div><div class="arrow">→</div><div class="N">7</div><div class="nm">Tan Cheng Hoe · 陳清和 · watch heir</div></div>
+      <div class="map-row"><div class="L">B</div><div class="arrow">→</div><div class="N">3</div><div class="nm">Auntie Mei · 林美蘭</div></div>
+      <div class="map-row"><div class="L">C</div><div class="arrow">→</div><div class="N">11</div><div class="nm">Tan Chen Neo · kasut manik</div></div>
+      <div class="map-row"><div class="L">D</div><div class="arrow">→</div><div class="N">1</div><div class="nm">Tan Keo San · 陳橋山 · founder</div></div>
+      <div class="map-row"><div class="L">E</div><div class="arrow">→</div><div class="N">16</div><div class="nm">Lim Soo Hui · cookbook niece</div></div>
+      <div class="map-row"><div class="L">F</div><div class="arrow">→</div><div class="N">9</div><div class="nm">Tan Ah Cai · the jungle</div></div>
+      <div class="map-row"><div class="L">G</div><div class="arrow">→</div><div class="N">4</div><div class="nm">Yap Eng Neo · Anak A</div></div>
+      <div class="map-row"><div class="L">H</div><div class="arrow">→</div><div class="N">13</div><div class="nm">Albert Tan · the books</div></div>
+      <div class="map-row"><div class="L">I</div><div class="arrow">→</div><div class="N">2</div><div class="nm">Yap Eng Siew · Ibu · chalk line</div></div>
+      <div class="map-row"><div class="L">J</div><div class="arrow">→</div><div class="N">19</div><div class="nm">Khoo Hooi Wen · 2020 bride</div></div>
+      <div class="map-row"><div class="L">K</div><div class="arrow">→</div><div class="N">15</div><div class="nm">Tan Soon Heng · the watch today</div></div>
+      <div class="map-row"><div class="L">L</div><div class="arrow">→</div><div class="N">6</div><div class="nm">Lee Poh Soon · cream silk</div></div>
+      <div class="map-row"><div class="L">M</div><div class="arrow">→</div><div class="N">8</div><div class="nm">Lee Beng Guat · brass key</div></div>
+      <div class="map-row"><div class="L">N</div><div class="arrow">→</div><div class="N">5</div><div class="nm">Yap Eng Hooi · "died" 1923</div></div>
+      <div class="map-row"><div class="L">O</div><div class="arrow">→</div><div class="N">20</div><div class="nm">Kelvin Tan · See Hai Chan heir</div></div>
+      <div class="map-row"><div class="L">P</div><div class="arrow">→</div><div class="N">12</div><div class="nm">Lee Boon Kuan · the temple cloth boy</div></div>
+      <div class="map-row"><div class="L">Q</div><div class="arrow">→</div><div class="N">17</div><div class="nm">Bibik Rose · host of tonight</div></div>
+      <div class="map-row"><div class="L">R</div><div class="arrow">→</div><div class="N">10</div><div class="nm">Khoo Chin Nam · the tycoon</div></div>
+      <div class="map-row"><div class="L">S</div><div class="arrow">→</div><div class="N">14</div><div class="nm">Alice Wong · St Andrew's</div></div>
+      <div class="map-row"><div class="L">T</div><div class="arrow">→</div><div class="N">18</div><div class="nm">Dr Tan Wei Wen · Bibi's brother</div></div>
+    </div>
+  </div>
+
+  <!-- Timeline -->
+  <div class="panel">
+    <h2>The Timeline · 6 hinges</h2>
+    <div class="timeline">
+      <div class="row"><div class="t">1898</div><div class="d">Tan Keo San lands in George Town. <b>The watch arrives.</b></div></div>
+      <div class="row"><div class="t">1920</div><div class="d">The chalk line. Auntie Mei comes under the roof.</div></div>
+      <div class="row"><div class="t">1923</div><div class="d"><b>Winter.</b> Yap Eng Hooi "dies." A baby arrives wrapped in temple cloth.</div></div>
+      <div class="row"><div class="t">1945–46</div><div class="d">Ah Cai disappears. Last letter posted from Kulim.</div></div>
+      <div class="row"><div class="t">1948</div><div class="d">Khoo Chin Nam dies. The watch reads 6:47. Aunt Chen Neo widowed.</div></div>
+      <div class="row"><div class="t">1992 / 1995</div><div class="d">The cookbook is published in Mei's name. The watch passes to Soon Heng.</div></div>
+      <div class="row"><div class="t">2020 / 2024</div><div class="d">Khoo Hooi Wen wears the 1948 slippers. Soon Heng's stroke.</div></div>
+      <div class="row"><div class="t">tonight</div><div class="d"><b>The tin is opened. The third brooch comes out.</b></div></div>
+    </div>
+  </div>
+
+  <!-- The Secret -->
+  <div class="secret">
+    <h2>🌺 The Yap Sisters' Secret</h2>
+    <p>The youngest sister, <b>Yap Eng Hooi 葉永慧</b>, did not die in winter 1923. She fell in love with a Singapore man the family would not accept and left the goldsmith house.</p>
+    <p>The "death" was the eldest sister's cover. The grave at <em>Batu Gantong</em> holds only her brooch box.</p>
+    <p>She had one daughter — born <b>1924</b>, raised under another surname. That daughter married a <b>Khoo</b>. Her granddaughter is <b>#19 Khoo Hooi Wen</b>.</p>
+    <p>When Hooi Wen wore the <b>1948 slippers</b> at her 2020 wedding, she closed <em>two</em> broken marriages — Aunt Chen Neo's eleven months in Singapore, and her own great-grandmother's elopement.</p>
+    <p style="margin-top:3mm; text-align:center; color: var(--rose); font-style: italic;">"Yap–Khoo, Khoo–Yap. The names always come back together."</p>
+  </div>
+
+  <footer>page 1 of 2 · Bibi's master key</footer>
+</div>
+
+<!-- ============ PAGE 2 · LOCK, FLOW, CHECKLIST ============ -->
+<div class="page">
+  <header>
+    <span class="stamp">★ FOR BIBI ONLY ★</span>
+    <h1>The Lock & The Flow</h1>
+    <div class="sub">~ what to do, in order, on the night ~</div>
+  </header>
+
+  <!-- Lock code -->
+  <div class="lock-box">
+    <div class="label">~ the three numbers · set before guests arrive ~</div>
+    <div class="digits">
+      <div class="digit"><div class="n">_</div><div class="lbl">⏱ WATCH</div></div>
+      <div class="digit"><div class="n">_</div><div class="lbl">🌺 BROOCH</div></div>
+      <div class="digit"><div class="n">_</div><div class="lbl">🪡 BEAD</div></div>
+    </div>
+    <div class="note">
+      Suggested defaults if you don't want to invent them:<br>
+      ⏱ = <b>4</b> (watch changed hands 3 times + the wrist it stopped on = 4) ·
+      🌺 = <b>3</b> (the third brooch) ·
+      🪡 = <b>9</b> (peony petals) &nbsp;→&nbsp; lock code <b>4 · 3 · 9</b>
+    </div>
+  </div>
+
+  <!-- Flow -->
+  <div class="panel">
+    <h2>The Flow · ~75 minutes</h2>
+    <div class="checklist">
+      <li><b>00:00</b> · welcome · point to the title strip · explain "read · match · pin · wait" · <em>15 min on the clock.</em></li>
+      <li><b>00:15</b> · clock stops · <b>Bibi walks</b>. Visit each team in turn. Use the question deck. Right answer = <em>1 gold coin</em>. Do not correct mistakes.</li>
+      <li><b>00:25</b> · hand each team their <b>info strips</b> (one set of 20). They pin each strip beside the matching identity card.</li>
+      <li><b>00:30</b> · open the <b>3 mission stations</b>. Teams rotate. Watch · Brooches · Beads.</li>
+      <li><b>00:55</b> · teams bring 3 numbers to Bibi. <b>Open the lock.</b></li>
+      <li><b>01:00</b> · Bibi sits down. Reads the <em>last letter from Kulim</em>. The team with most coins reads it aloud.</li>
+      <li><b>01:10</b> · the secret of the Yap sisters · the third brooch · the names that come back together.</li>
+    </div>
+  </div>
+
+  <!-- Pre-night checklist -->
+  <div class="panel">
+    <h2>Before guests arrive</h2>
+    <ul class="checklist">
+      <li>Whiteboard up · title strip taped on top · instruction strip on bottom</li>
+      <li>Identity cards + story cards stacked at each team's table</li>
+      <li>Info strips bundled per team, kept in <b>your apron</b></li>
+      <li>3 mission cards laid at the side station</li>
+      <li>Bead corner: cloth, needle, beads, peony pattern card</li>
+      <li>Enamel tin: 3 brooches inside · brass key beside it · lock <em>set to the chosen 3 digits</em></li>
+      <li>Inside the locked box: the <b>last letter from Kulim</b> · the third brooch's note · 1 gold coin per player</li>
+      <li>Question deck in your apron · master key in your apron · answer key (story-cards page 5) in your apron</li>
+    </ul>
+  </div>
+
+  <footer>page 2 of 2 · "stones do not lie. people forget how to read them."</footer>
+</div>
+
+</body></html>

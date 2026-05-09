@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Team Worksheet · Roots of the Rose</title>
+<style>
+  /* PRINT-READY · A3 PORTRAIT (297mm × 420mm) — one sheet per team */
+  @page { size: A3 portrait; margin: 0; }
+
+  :root {
+    --cream:#f6ecd2; --paper:#fbf4dd; --ink:#3a2418;
+    --gold:#b8860b; --gold-2:#d4a73c; --jade:#2e7d5b;
+    --rose:#b91c4b; --rose-2:#d94872; --tan:#8b5a2b; --tan-2:#a47148;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #2a1810; font-family: 'Georgia', serif; color: var(--ink); }
+  body { padding: 18px; }
+  @media print { body { padding: 0; background: white; } }
+
+  .sheet {
+    width: 297mm; height: 420mm;
+    margin: 0 auto;
+    background: var(--cream);
+    position: relative; overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.55);
+    page-break-after: always;
+  }
+  @media print { .sheet { box-shadow: none; } }
+
+  .bg-wash { position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse at 18% 22%, rgba(184,134,11,0.10) 0, transparent 45%),
+      radial-gradient(ellipse at 82% 78%, rgba(46,125,91,0.10) 0, transparent 45%),
+      linear-gradient(135deg, #f6ecd2 0%, #f0e2c0 100%);
+  }
+  .bg-tile { position: absolute; inset: 0; z-index: 1; opacity: 0.4;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'><g fill='none' stroke='%23b91c4b' stroke-width='1' opacity='0.18'><circle cx='40' cy='40' r='10'/><circle cx='40' cy='40' r='4' fill='%23b91c4b' opacity='0.4'/></g><g fill='none' stroke='%232e7d5b' stroke-width='1' opacity='0.20'><path d='M0 110 Q40 80 80 110 T160 110'/></g><g fill='none' stroke='%23b8860b' stroke-width='1' opacity='0.22'><circle cx='150' cy='150' r='10'/></g></svg>");
+    background-size: 130px 130px;
+  }
+  .frame { position: absolute; top: 8mm; left: 8mm; right: 8mm; bottom: 8mm;
+    border: 3px double var(--rose); z-index: 3; pointer-events: none; }
+  .frame::before { content:''; position:absolute; top:3px; left:3px; right:3px; bottom:3px; border:1px solid var(--gold); }
+
+  .content { position: absolute; top: 14mm; left: 14mm; right: 14mm; bottom: 14mm; z-index: 10;
+    display: flex; flex-direction: column; gap: 5mm; }
+
+  /* ---------- Title ---------- */
+  .title-bar { text-align: center; border-bottom: 2px double var(--tan); padding-bottom: 3mm; position: relative; }
+  .title-eye { color: var(--jade); font-size: 9pt; letter-spacing: 6px; text-transform: uppercase; font-weight: bold; }
+  .title-eye::before, .title-eye::after { content:'✦'; margin: 0 10px; color: var(--gold); }
+  .title-main { font-family: 'Brush Script MT', cursive; font-size: 38pt; color: var(--rose); line-height: 1; margin-top: 2mm;
+    text-shadow: 1.5px 1.5px 0 rgba(184,134,11,0.25); }
+  .title-zh { font-size: 13pt; color: var(--jade); letter-spacing: 4px; margin-top: 1mm; }
+  .title-sub { font-style: italic; font-size: 9pt; color: var(--ink); margin-top: 1mm; opacity: 0.85; }
+
+  .team-box { position: absolute; top: 0; right: 0;
+    background: var(--tan); color: var(--cream); padding: 2mm 4mm; border: 2px solid var(--gold);
+    border-radius: 6px; font-size: 8pt; line-height: 1.3; box-shadow: 1.5px 1.5px 0 var(--gold-2); }
+  .team-box .lab { font-size: 6.5pt; opacity: 0.85; }
+  .team-box .blank { display:inline-block; width: 32mm; border-bottom: 1px solid var(--cream); }
+
+  /* ---------- mission card ---------- */
+  .mission {
+    background: rgba(251,244,221,0.85);
+    border: 1.5px solid var(--jade);
+    border-radius: 8px;
+    padding: 3mm 4mm;
+    box-shadow: 2px 2px 0 var(--jade);
+    position: relative;
+  }
+  .mission .ribbon {
+    position: absolute; top: -3mm; left: 5mm;
+    background: var(--rose); color: var(--cream);
+    padding: 1mm 4mm; font-size: 8pt; font-weight: bold; letter-spacing: 2px;
+    border-radius: 4px; box-shadow: 1px 1px 0 var(--gold);
+  }
+  .mission h3 { color: var(--rose); font-size: 11pt; margin: 1mm 0 1.5mm 30mm; }
+  .mission .blurb { font-size: 8pt; font-style: italic; color: var(--tan); margin-bottom: 2mm; line-height: 1.35; }
+  .mission .blurb b { color: var(--rose); font-style: normal; }
+
+  /* ---------- 5 relationships table ---------- */
+  table.rels {
+    width: 100%; border-collapse: collapse; margin-top: 1.5mm;
+    background: rgba(255,248,225,0.85); font-size: 8.5pt;
+  }
+  table.rels th, table.rels td {
+    border: 1px solid var(--tan); padding: 1.5mm 2mm; vertical-align: top; text-align: left;
+  }
+  table.rels th { background: var(--jade); color: var(--cream); font-size: 7.5pt; letter-spacing: 1px; text-transform: uppercase; }
+  table.rels td.num { width: 6mm; text-align: center; font-weight: bold; color: var(--rose); background: #fff8e1; }
+  table.rels td.who { width: 38mm; }
+  table.rels td.rel { width: 48mm; }
+  table.rels td.line { font-style: italic; color: var(--tan); font-size: 7.5pt; }
+  table.rels .blank-row td { height: 9mm; }
+  table.rels td .write {
+    display: block; height: 7mm; border-bottom: 1px dotted var(--ink); width: 100%;
+  }
+  table.rels td.who .write::before { content:''; }
+
+  /* ---------- 10 heirlooms checklist ---------- */
+  .heir-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2mm; font-size: 8pt; margin-top: 1mm; }
+  .heir-box {
+    background: #fff8e1; border: 1px dashed var(--gold); border-radius: 5px;
+    padding: 1.5mm 2mm; display: flex; align-items: center; gap: 2mm;
+  }
+  .heir-box .check { width: 5mm; height: 5mm; border: 1.5px solid var(--rose); border-radius: 2px; flex-shrink: 0; background: white; }
+  .heir-box .label { flex: 1; line-height: 1.3; }
+  .heir-box .label b { color: var(--rose); }
+  .heir-box .where { font-size: 6.5pt; color: var(--tan); font-style: italic; display: block; }
+  .heir-box.tree { border-color: var(--rose); }
+  .heir-box.outside { border-color: var(--jade); }
+  .heir-box.hidden { border-color: var(--gold); border-style: solid; }
+  .heir-box.herring { border-color: #999; opacity: 0.75; }
+
+  /* ---------- yap secret box ---------- */
+  .yap-box {
+    background: rgba(255,248,225,0.95);
+    border: 2px solid var(--jade);
+    border-radius: 8px;
+    padding: 3mm 4mm;
+    margin-top: 1mm;
+    position: relative;
+  }
+  .yap-box .lines {
+    height: 28mm;
+    background-image: repeating-linear-gradient(to bottom, transparent 0 6mm, var(--tan) 6mm, var(--tan) 6.1mm);
+    margin-top: 2mm;
+  }
+  .yap-box .question { font-style: italic; color: var(--rose); font-size: 9pt; }
+
+  /* ---------- numbers + lock ---------- */
+  .lock-row {
+    display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 4mm; align-items: stretch; margin-top: 1mm;
+  }
+  .num-cell {
+    background: rgba(255,248,225,0.92);
+    border: 1.5px solid var(--gold);
+    border-radius: 8px;
+    padding: 2.5mm 3mm;
+    box-shadow: 1.5px 1.5px 0 var(--gold-2);
+    text-align: center;
+  }
+  .num-cell .src { font-size: 7pt; color: var(--jade); text-transform: uppercase; letter-spacing: 1.5px; font-weight: bold; }
+  .num-cell .label { font-size: 7.5pt; font-style: italic; color: var(--tan); margin: 1mm 0 2mm; }
+  .num-cell .digits {
+    display: flex; gap: 2mm; justify-content: center;
+  }
+  .num-cell .digit {
+    width: 9mm; height: 11mm; border: 1.5px solid var(--rose); background: white;
+    border-radius: 3px; display: flex; align-items: center; justify-content: center;
+    font-family: 'Brush Script MT', cursive; font-size: 18pt; color: var(--rose);
+  }
+
+  .final-lock {
+    background: var(--rose); color: var(--cream);
+    border-radius: 10px;
+    padding: 3mm 5mm;
+    text-align: center;
+    box-shadow: 2px 2px 0 var(--gold), inset 0 0 0 2px var(--gold);
+    border: 2px solid var(--gold);
+    display: flex; flex-direction: column; justify-content: center;
+    min-width: 50mm;
+  }
+  .final-lock .lab { font-size: 7.5pt; letter-spacing: 2px; text-transform: uppercase; opacity: 0.9; }
+  .final-lock .icon { font-size: 18pt; margin: 1mm 0; }
+  .final-lock .small { font-size: 7pt; font-style: italic; opacity: 0.85; }
+
+  /* ---------- coin tracker ---------- */
+  .coins {
+    background: rgba(255,248,225,0.85); border: 1.5px dashed var(--gold);
+    border-radius: 8px; padding: 2.5mm 3mm; font-size: 8pt;
+  }
+  .coins h4 { color: var(--gold); font-size: 9pt; margin-bottom: 1.5mm; letter-spacing: 1.5px; text-transform: uppercase; }
+  .coin-row { display: grid; grid-template-columns: 22mm 1fr 18mm; gap: 2mm; align-items: center; padding: 0.5mm 0; }
+  .coin-row .lab { font-weight: bold; color: var(--rose); font-size: 7.5pt; }
+  .coin-circles { display: flex; gap: 1.2mm; flex-wrap: wrap; }
+  .coin-c { width: 5mm; height: 5mm; border-radius: 50%; border: 1.5px solid var(--gold);
+    background: radial-gradient(circle at 30% 30%, #fff8e1, #f0d27c); }
+  .coin-row .total { text-align: right; font-size: 7.5pt; color: var(--tan); }
+
+  /* footer */
+  .footer-note { text-align: center; font-size: 7.5pt; font-style: italic; color: var(--tan); margin-top: 1mm; }
+</style>
+</head>
+<body>
+
+<div class="sheet">
+  <div class="bg-wash"></div>
+  <div class="bg-tile"></div>
+  <div class="frame"></div>
+
+  <div class="content">
+
+    <!-- Title -->
+    <div class="title-bar">
+      <div class="title-eye">Roots of the Rose · Team Worksheet</div>
+      <div class="title-main">The Family Ledger</div>
+      <div class="title-zh">陈家家谱 · 答题册</div>
+      <div class="title-sub">Five missions. Three numbers. One locked box. 🌺</div>
+      <div class="team-box">
+        <div class="lab">TEAM</div>
+        <div><span class="blank"></span></div>
+        <div class="lab" style="margin-top:1mm;">PLAYERS</div>
+        <div><span class="blank"></span></div>
+      </div>
+    </div>
+
+    <!-- ===== MISSION 2 — 5 RELATIONSHIPS ===== -->
+    <div class="mission">
+      <div class="ribbon">📝 MISSION 2</div>
+      <h3>Bibi's Note · The 5 Special Relationships</h3>
+      <div class="blurb">Read Bibi's whispers. Pair each with the right cards. Write the names AND circle the relationship word. <b>5 correct = Number ① for the lock</b> (count your correct answers).</div>
+      <table class="rels">
+        <thead>
+          <tr><th>#</th><th>Person A (from cards)</th><th>Person B (from cards)</th><th>Their relationship is…</th></tr>
+        </thead>
+        <tbody>
+          <tr class="blank-row">
+            <td class="num">①</td>
+            <td class="who"><span class="write"></span></td>
+            <td class="who"><span class="write"></span></td>
+            <td class="rel line">step- / hidden / raised-by / inheritor / mentor → <span class="write"></span></td>
+          </tr>
+          <tr class="blank-row">
+            <td class="num">②</td>
+            <td class="who"><span class="write"></span></td>
+            <td class="who"><span class="write"></span></td>
+            <td class="rel line">step- / hidden / raised-by / inheritor / mentor → <span class="write"></span></td>
+          </tr>
+          <tr class="blank-row">
+            <td class="num">③</td>
+            <td class="who"><span class="write"></span></td>
+            <td class="who"><span class="write"></span></td>
+            <td class="rel line">step- / hidden / raised-by / inheritor / mentor → <span class="write"></span></td>
+          </tr>
+          <tr class="blank-row">
+            <td class="num">④</td>
+            <td class="who"><span class="write"></span></td>
+            <td class="who"><span class="write"></span></td>
+            <td class="rel line">step- / hidden / raised-by / inheritor / mentor → <span class="write"></span></td>
+          </tr>
+          <tr class="blank-row">
+            <td class="num">⑤</td>
+            <td class="who"><span class="write"></span></td>
+            <td class="who"><span class="write"></span></td>
+            <td class="rel line">step- / hidden / raised-by / inheritor / mentor → <span class="write"></span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ===== MISSION 3 — 10 HEIRLOOMS ===== -->
+    <div class="mission">
+      <div class="ribbon">🟡 MISSION 3</div>
+      <h3>Place the 10 Heirlooms</h3>
+      <div class="blurb">Open Envelope ③. Sort the 10 items into the right slot. Tick each as you place it. <b>All 10 placed = Number ② revealed</b> on the back of one heirloom.</div>
+      <div class="heir-grid">
+        <div class="heir-box tree"><div class="check"></div><div class="label">📌 <b>Kerongsang stack</b> · Ibu + Anak A + Anak B (3 brooches → 1 tree circle)<span class="where">tree circle · cards #2 Eng Siew + #4 Eng Neo + #5 Eng Hooi</span></div></div>
+        <div class="heir-box tree"><div class="check"></div><div class="label">⌚ <b>Jam Saku</b> pocket watch<span class="where">tree circle · gold descent line</span></div></div>
+        <div class="heir-box tree"><div class="check"></div><div class="label">📜 <b>Resipi Auntie Mei</b> cookbook<span class="where">tree circle · convergence circle</span></div></div>
+        <div class="heir-box outside"><div class="check"></div><div class="label">🥟 <b>Kamcheng Mas Kahwin</b> (gold dumpling jar)<span class="where">outside-tree column · slot 1</span></div></div>
+        <div class="heir-box outside"><div class="check"></div><div class="label">🌶️ <b>Kamcheng Tok Panjang</b> (sambal/achar jar)<span class="where">outside-tree column · slot 2</span></div></div>
+        <div class="heir-box outside"><div class="check"></div><div class="label">🍯 <b>Kamcheng Cuci Mulut</b> (sweet finishers)<span class="where">outside-tree column · slot 3</span></div></div>
+        <div class="heir-box hidden"><div class="check"></div><div class="label">🤫 <b>Yap secret note A</b> · tuck inside one sister's card<span class="where">hidden · do not open till Mission 4</span></div></div>
+        <div class="heir-box hidden"><div class="check"></div><div class="label">🤫 <b>Yap secret note B</b> · tuck inside another sister's card<span class="where">hidden · do not open till Mission 4</span></div></div>
+        <div class="heir-box herring"><div class="check"></div><div class="label">🫗 <b>Bunga rampai sachet</b><span class="where">red herring → discard pile</span></div></div>
+        <div class="heir-box herring"><div class="check"></div><div class="label">🪭 <b>Painted folding fan</b><span class="where">red herring → discard pile</span></div></div>
+      </div>
+    </div>
+
+    <!-- ===== MISSION 4 — YAP SECRET ===== -->
+    <div class="mission">
+      <div class="ribbon">🤫 MISSION 4</div>
+      <h3>Crack the Yap Secret</h3>
+      <div class="blurb">Two folded notes are tucked inside <b>two of the three Yap-sister cards</b>. Open them. Read both. Then write — in your own words — <b>the Yap family secret</b>.</div>
+      <div class="yap-box">
+        <div class="question">📜 The Yap secret is…</div>
+        <div class="lines"></div>
+        <div style="display:flex; gap: 4mm; align-items: center; margin-top: 2mm; font-size: 8pt;">
+          <div>Sister cards we opened: <span style="display:inline-block; width: 8mm; border-bottom: 1px solid var(--ink);"></span> &amp; <span style="display:inline-block; width: 8mm; border-bottom: 1px solid var(--ink);"></span></div>
+          <div style="margin-left:auto; font-style: italic; color: var(--rose);">Correct secret = 3 chocolate coins 🪙🪙🪙</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== MISSION 5 — KASUT MANIK ===== -->
+    <div class="mission">
+      <div class="ribbon">👠 MISSION 5</div>
+      <h3>Sew the Kasut Manik · in tribute to Aunt Chen Neo</h3>
+      <div class="blurb">Open Envelope ⑤. Five team members each sew one section of the bead pattern. When complete, a <b>hidden number</b> appears in contrasting beads. Write it below.</div>
+      <div style="display: grid; grid-template-columns: 1fr auto; gap: 4mm; align-items: center; margin-top: 1mm;">
+        <div style="font-size: 8pt; line-height: 1.5; color: var(--ink);">
+          The hidden number sits in the centre of the peony toe.<br>
+          <em style="color:var(--tan)">If beadwork is too tricky, ask Bibi for the printed colour key.</em>
+        </div>
+        <div style="display:flex; gap: 2mm; align-items: center;">
+          <span style="font-size:7.5pt; color: var(--jade); font-weight: bold;">NUMBER ③ →</span>
+          <div style="width: 14mm; height: 14mm; border: 2px solid var(--rose); border-radius: 4px; background: white;
+                       display:flex; align-items:center; justify-content: center;
+                       font-family: 'Brush Script MT', cursive; font-size: 22pt; color: var(--rose);"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== THE LOCK ===== -->
+    <div class="mission" style="border-color: var(--rose); box-shadow: 2px 2px 0 var(--rose);">
+      <div class="ribbon" style="background: var(--gold); color: var(--ink);">🔐 BIBI'S BOX</div>
+      <h3>Three numbers · one combination</h3>
+      <div class="blurb">Bring all three numbers together. Enter the code on Bibi's box. The matriarch's keepsake is yours. 🌺</div>
+      <div class="lock-row">
+        <div class="num-cell">
+          <div class="src">From Mission 2</div>
+          <div class="label">"How many relationships did you crack?"</div>
+          <div class="digits"><div class="digit"></div></div>
+        </div>
+        <div class="num-cell">
+          <div class="src">From Mission 3</div>
+          <div class="label">"A year etched on the back of one heirloom"</div>
+          <div class="digits"><div class="digit"></div><div class="digit"></div><div class="digit"></div><div class="digit"></div></div>
+        </div>
+        <div class="num-cell">
+          <div class="src">From Mission 5</div>
+          <div class="label">"The number woven in contrasting beads"</div>
+          <div class="digits"><div class="digit"></div></div>
+        </div>
+        <div class="final-lock">
+          <div class="lab">CODE</div>
+          <div class="icon">🔐</div>
+          <div class="small">Call Bibi when ready.<br>Wrong code = 1 coin penalty.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== COIN TRACKER ===== -->
+    <div class="coins">
+      <h4>🪙 Chocolate Coin Ledger · for Bibi to mark</h4>
+      <div class="coin-row">
+        <div class="lab">M1 · Tree</div>
+        <div class="coin-circles">
+          <div class="coin-c"></div><div class="coin-c"></div><div class="coin-c"></div><div class="coin-c"></div><div class="coin-c"></div>
+          <div class="coin-c"></div><div class="coin-c"></div><div class="coin-c"></div><div class="coin-c"></div><div class="coin-c"></div>
+          <div class="coin-c"></div><div class="coin-c"></div><div class="coin-c"></div><div class="coin-c"></div><div class="coin-c"></div>
+          <div class="coin-c"></div><div class="coin-c"></div><div class="coin-c"></div><div class="coin-c"></div><div class="coin-c"></div>
+        </div>
+        <div class="total">/ 20</div>
+      </div>
+      <div class="coin-row">
+        <div class="lab">Bibi #1</div>
+        <div class="coin-circles">
+          <div class="coin-c"></div><div class="coin-c"></div><div class="coin-c"></div>
+        </div>
+        <div class="total">/ 3</div>
+      </div>
+      <div class="coin-row">
+        <div class="lab">M2 · Rels</div>
+        <div class="coin-circles">
+          <div class="coin-c"></div><div class="coin-c"></div><div class="coin-c"></div><div class="coin-c"></div><div class="coin-c"></div>
+        </div>
+        <div class="total">/ 5</div>
+      </div>
+      <div class="coin-row">
+        <div class="lab">Bibi #2</div>
+        <div class="coin-circles">
+          <div class="coin-c"></div><div class="coin-c"></div><div class="coin-c"></div>
+        </div>
+        <div class="total">/ 3</div>
+      </div>
+      <div class="coin-row">
+        <div class="lab">M3 · Items</div>
+        <div class="coin-circles">
+          <div class="coin-c"></div><div class="coin-c"></div><div class="coin-c"></div><div class="coin-c"></div><div class="coin-c"></div>
+          <div class="coin-c"></div><div class="coin-c"></div><div class="coin-c"></div><div class="coin-c"></div><div class="coin-c"></div>
+        </div>
+        <div class="total">/ 10</div>
+      </div>
+      <div class="coin-row">
+        <div class="lab">Bibi #3</div>
+        <div class="coin-circles">
+          <div class="coin-c"></div><div class="coin-c"></div><div class="coin-c"></div>
+        </div>
+        <div class="total">/ 3</div>
+      </div>
+      <div class="coin-row">
+        <div class="lab">M4 · Secret</div>
+        <div class="coin-circles">
+          <div class="coin-c"></div><div class="coin-c"></div><div class="coin-c"></div>
+        </div>
+        <div class="total">/ 3</div>
+      </div>
+      <div class="coin-row">
+        <div class="lab">M5 · Beads</div>
+        <div class="coin-circles">
+          <div class="coin-c"></div><div class="coin-c"></div><div class="coin-c"></div><div class="coin-c"></div><div class="coin-c"></div>
+        </div>
+        <div class="total">/ 5</div>
+      </div>
+      <div class="coin-row" style="border-top: 1px dashed var(--gold); padding-top: 1.5mm; margin-top: 1mm;">
+        <div class="lab" style="color: var(--gold);">TOTAL 🪙</div>
+        <div></div>
+        <div class="total" style="font-size: 11pt; color: var(--rose); font-weight: bold;">________ / 52</div>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      🌺 Always call Bibi when a mission is finished. She verifies, she rewards, she opens the next envelope. 🌺
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Roots of the Rose · Character Story Strips · paste under family tree portraits</title>
+<!--
+  PRINT: A4 portrait · 1 page · 20 strips (4 columns × 5 rows)
+  Each strip ≈ 45mm wide × 55mm tall — paste under the matching portrait
+  on the printed family tree board.
+
+  Brooch chain locked:
+    · Yap family = Beach Street goldsmiths
+    · "三朵金蘭 · Three Golden Orchids" = old-nyonya nickname for the 3 Yap sisters
+    · Eng Siew  → IBU   brooch (mother piece)
+    · Eng Neo   → ANAK A brooch
+    · Beng Guat → ANAK B brooch (her own, since childhood)
+    · 1947 wedding: Eng Siew gives the IBU, Eng Neo gives ANAK A,
+      Beng Guat already wears ANAK B → complete kerongsang set of three.
+  Individual strips reveal only PART. Brooch reveal cards complete it.
+-->
+<style>
+  @page { size: A4 portrait; margin: 8mm; }
+
+  :root {
+    --cream:#f6ecd2; --paper:#fbf4dd; --aged:#efdbb0; --ink:#3a2418;
+    --gold:#b8860b; --gold-2:#d4a73c; --jade:#2e7d5b;
+    --rose:#b91c4b; --rose-2:#d94872; --tan:#8b5a2b;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: var(--ink);
+    background: #2a1810;
+  }
+  body { padding: 12px; }
+  @media print { body { padding: 0; background: white; } }
+
+  .sheet {
+    width: 194mm;
+    margin: 0 auto;
+    background: var(--cream);
+    padding: 4mm;
+    box-shadow: 0 14px 36px rgba(0,0,0,0.5);
+  }
+  @media print { .sheet { box-shadow: none; background: white; padding: 0; } }
+
+  .title {
+    text-align: center;
+    margin-bottom: 4mm;
+  }
+  .title h1 {
+    font-family: 'Brush Script MT', cursive;
+    color: var(--rose);
+    font-size: 18pt;
+    line-height: 1;
+  }
+  .title .sub {
+    font-size: 8pt;
+    color: var(--tan);
+    font-style: italic;
+    letter-spacing: 0.15em;
+    margin-top: 1mm;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3mm;
+  }
+
+  .strip {
+    background: var(--paper);
+    border: 1px dashed var(--tan);
+    border-radius: 2mm;
+    padding: 3mm 3mm 2.5mm 3mm;
+    height: 55mm;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+  .strip::before {
+    content: "";
+    position: absolute; inset: 1mm;
+    border: 1px solid rgba(184,134,11,0.3);
+    border-radius: 1.5mm;
+    pointer-events: none;
+  }
+
+  .head {
+    display: flex;
+    align-items: baseline;
+    gap: 2mm;
+    border-bottom: 1px solid var(--gold-2);
+    padding-bottom: 1.2mm;
+    margin-bottom: 1.5mm;
+  }
+  .num {
+    font-family: 'Brush Script MT', cursive;
+    color: var(--rose);
+    font-size: 14pt;
+    line-height: 1;
+    flex: 0 0 auto;
+  }
+  .name {
+    font-size: 8.5pt;
+    font-weight: bold;
+    color: var(--ink);
+    line-height: 1.1;
+    flex: 1;
+  }
+  .name .zh {
+    color: var(--tan);
+    font-weight: normal;
+    font-size: 7.5pt;
+    margin-left: 1mm;
+  }
+  .dates {
+    font-size: 6.5pt;
+    color: var(--tan);
+    font-style: italic;
+    margin-bottom: 1.5mm;
+  }
+  .body {
+    font-size: 6.8pt;
+    line-height: 1.32;
+    color: var(--ink);
+    flex: 1;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .body b { color: var(--rose); font-weight: bold; }
+  .body em { color: var(--gold); font-style: italic; }
+  .clue {
+    margin-top: 1.5mm;
+    padding-top: 1mm;
+    border-top: 1px dotted var(--tan);
+    font-size: 6.3pt;
+    color: var(--jade);
+    font-style: italic;
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  .footer {
+    text-align: center;
+    margin-top: 4mm;
+    font-size: 7pt;
+    color: var(--tan);
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+
+<div class="sheet">
+
+  <div class="title">
+    <h1>The Twenty · cut &amp; paste under each family-tree portrait</h1>
+    <div class="sub">陳 · 葉 · 林 · 李 · 邱 · ROOTS OF THE ROSE</div>
+  </div>
+
+  <div class="grid">
+
+    <!-- 1 KEO SAN -->
+    <div class="strip">
+      <div class="head"><div class="num">1</div><div class="name">Tan Keo San <span class="zh">陳橋山</span></div></div>
+      <div class="dates">Fujian 1872 — Penang 1941 · founder</div>
+      <div class="body">Came from <b>China at nineteen</b> with his father's brass watch. Built <b>See Hai Chan 西海棧</b> on Weld Quay; married into the Beach Street goldsmith family in 1898. Killed when Japanese bombs hit the docks on <b>11 Dec 1941</b>.</div>
+      <div class="clue">⌚ the brass pocket watch</div>
+    </div>
+
+    <!-- 2 ENG SIEW -->
+    <div class="strip">
+      <div class="head"><div class="num">2</div><div class="name">Yap Eng Siew <span class="zh">葉永秀</span></div></div>
+      <div class="dates">Beach Street 1880 — 1956 · matriarch</div>
+      <div class="body"><b>Eldest</b> of the Yap goldsmith sisters — old nyonyas called them <em>三朵金蘭, the Three Golden Orchids</em>. Wore the <b>IBU</b> kerongsang from her wedding in 1898 to her grave. Drew the chalk line in the kitchen, 1920.</div>
+      <div class="clue">✦ IBU brooch · the mother piece</div>
+    </div>
+
+    <!-- 3 MEI LAN -->
+    <div class="strip">
+      <div class="head"><div class="num">3</div><div class="name">Auntie Mei <span class="zh">美姨</span></div></div>
+      <div class="dates">Balik Pulau 1902 — 1998 · the kitchen</div>
+      <div class="body">A fisherman's daughter brought into the back of the Armenian Street house at eighteen. Wore the same pale jade kebaya for seventy-eight years. Cooked over <b>two hundred</b> Tok Panjang and was never allowed to sit at one. Her full name was finally written down in 1992.</div>
+      <div class="clue">🥢 the empty chair · the locked recipe tin</div>
+    </div>
+
+    <!-- 4 ENG NEO -->
+    <div class="strip">
+      <div class="head"><div class="num">4</div><div class="name">Yap Eng Neo <span class="zh">葉永娘</span></div></div>
+      <div class="dates">Beach Street 1882 — 1961 · middle sister</div>
+      <div class="body"><b>Middle</b> of the <em>Three Golden Orchids</em>. Married Lee Poh Soon, the Penang Road cloth merchant, in 1901. Wore the <b>ANAK A</b> kerongsang. The sister who did a favour once and never spoke of it twice.</div>
+      <div class="clue">✦ ANAK A brooch</div>
+    </div>
+
+    <!-- 5 ENG HOOI -->
+    <div class="strip">
+      <div class="head"><div class="num">5</div><div class="name">Yap Eng Hooi <span class="zh">葉永慧</span></div></div>
+      <div class="dates">Beach Street 1900 — 1923 · the orchid sister</div>
+      <div class="body"><b>Youngest</b> of the <em>Three Golden Orchids</em> — born eighteen years after Eng Neo, late and unexpected. Quiet, beautiful, fond of orchids. Never married. Died at <b>twenty-three</b>, winter 1923, in the back of the goldsmith house.</div>
+      <div class="clue">🌸 her brooch was put away</div>
+    </div>
+
+    <!-- 6 LEE POH SOON -->
+    <div class="strip">
+      <div class="head"><div class="num">6</div><div class="name">Lee Poh Soon <span class="zh">李寶順</span></div></div>
+      <div class="dates">Penang Road 1878 — 1948 · cloth merchant</div>
+      <div class="body">A quiet, unflashy <b>Penang Road cloth merchant</b>. Took over his father's small shop in 1905 and turned it into the most reliable batik source on the north coast. Married Eng Neo in 1901. Folded a length of cream silk for his daughter's wedding kebaya the year before he died.</div>
+      <div class="clue">🧵 the cream silk</div>
+    </div>
+
+    <!-- 7 CHENG HOE -->
+    <div class="strip">
+      <div class="head"><div class="num">7</div><div class="name">Tan Cheng Hoe <span class="zh">陳清和</span></div></div>
+      <div class="dates">Penang 1920 — 1995 · towkay</div>
+      <div class="body">Only legitimate son of Keo San &amp; Eng Siew. Inherited <b>See Hai Chan</b> at twenty-one in December 1941. Carried his father's brass watch every day. On his elder son's twenty-first birthday in <b>1969</b> he placed it in the boy's palm.</div>
+      <div class="clue">⌚ the watch passes on</div>
+    </div>
+
+    <!-- 8 BENG GUAT -->
+    <div class="strip">
+      <div class="head"><div class="num">8</div><div class="name">Lee Beng Guat <span class="zh">李明月</span></div></div>
+      <div class="dates">Penang Road 1921 — 2005 · ledger keeper</div>
+      <div class="body">Daughter of Lee Poh Soon &amp; Eng Neo. Has worn an <b>ANAK B</b> brooch since childhood — a gift from her mother. Married Cheng Hoe <b>1947</b>: that day her mother-in-law Eng Siew gave her the <b>IBU</b>, her mother gave the <b>ANAK A</b> — and her own ANAK B made the kerongsang complete. Ran the See Hai Chan ledgers for forty-four years.</div>
+      <div class="clue">✦✦✦ the three brooches united</div>
+    </div>
+
+    <!-- 9 AH CAI -->
+    <div class="strip">
+      <div class="head"><div class="num">9</div><div class="name">Tan Ah Cai <span class="zh">陳亞財</span></div></div>
+      <div class="dates">Penang 1925 — ? · the empty plate</div>
+      <div class="body">Born in the back kitchen, Auntie Mei's only son. The kulis called him <em>Seoy Yee Kia 細姨仔</em> — "the mistress's son." Walked into the Kulim hills in 1942, came down once in <b>September 1945</b>, walked back up with the men who would not lay down their arms. Never seen again.</div>
+      <div class="clue">🍽 his mother set his place for 53 years</div>
+    </div>
+
+    <!-- 10 KHOO CHIN NAM -->
+    <div class="strip">
+      <div class="head"><div class="num">10</div><div class="name">Khoo Chin Nam <span class="zh">邱振南</span></div></div>
+      <div class="dates">Singapore 1898 — 1949 · shipping</div>
+      <div class="body"><b>Singapore shipping tycoon</b>, widower at forty-seven. Married young Tan Chen Neo in November 1948 to seal a post-war Penang–Singapore alliance. Died of a heart attack at his own breakfast table eleven months later, August 1949.</div>
+      <div class="clue">⛵ the eleven-month marriage</div>
+    </div>
+
+    <!-- 11 CHEN NEO -->
+    <div class="strip">
+      <div class="head"><div class="num">11</div><div class="name">Tan Chen Neo <span class="zh">陳珍娘</span></div></div>
+      <div class="dates">Penang 1925 — Singapore 2018 · beadwork</div>
+      <div class="body">Youngest sister of Cheng Hoe. Crossed the causeway as a Singapore bride at twenty-three, widow eleven months later. Apprenticed at twenty-five to an old Telok Ayer beadwork master and stitched <em>kasut manik</em> for sixty-eight years. Her <b>peony-toe</b> pattern hangs in the Peranakan Museum.</div>
+      <div class="clue">👡 the peony slipper</div>
+    </div>
+
+    <!-- 12 BOON KUAN -->
+    <div class="strip">
+      <div class="head"><div class="num">12</div><div class="name">Lee Boon Kuan <span class="zh">李文坤</span></div></div>
+      <div class="dates">Penang Road 1918 — 1950 · empty seat</div>
+      <div class="body">Eldest and only blood son of Lee Poh Soon &amp; Eng Neo. Walked his sister to school every day even when she was old enough to carry her own satchel. Trained as a clerk in his father's shop. <b>Never married</b>. Died of fever, autumn 1950, at thirty-two.</div>
+      <div class="clue">🪑 empty seat at the Lee table</div>
+    </div>
+
+    <!-- 13 ALBERT -->
+    <div class="strip">
+      <div class="head"><div class="num">13</div><div class="name">Albert Tan <span class="zh">陳順發</span></div></div>
+      <div class="dates">Penang 1950 — Singapore 2021 · towkay 2</div>
+      <div class="body">Younger son of Cheng Hoe &amp; Beng Guat. Sent to Sydney at eighteen, took an English name. Inherited <b>See Hai Chan</b> in 1995, modernised the warehouses, listed on Bursa 2008. Married Alice in 1994 at <b>St Andrew's, Singapore</b>. Died of pancreatic cancer, November 2021.</div>
+      <div class="clue">🏛 the modern boats</div>
+    </div>
+
+    <!-- 14 ALICE -->
+    <div class="strip">
+      <div class="head"><div class="num">14</div><div class="name">Alice Wong <span class="zh">王愛麗</span></div></div>
+      <div class="dates">KL 1970 — · banker</div>
+      <div class="body">KL-born, Wharton-educated, Catholic-married. Nyonya by ancestry, English at home, French at school. The first Tan bride in three generations not to wear kebaya at her wedding. Attends every Tok Panjang faithfully — has never entered the kitchen.</div>
+      <div class="clue">📿 a respectful distance</div>
+    </div>
+
+    <!-- 15 SOON HENG -->
+    <div class="strip">
+      <div class="head"><div class="num">15</div><div class="name">Tan Soon Heng <span class="zh">陳順興</span></div></div>
+      <div class="dates">Penang 1948 — · architect</div>
+      <div class="body"><b>Elder</b> of Cheng Hoe &amp; Beng Guat's two sons — the gentler child, always on the kitchen step beside Auntie Mei. Received the brass watch on his <b>21st birthday in 1969</b>. Restored seventeen Penang shophouses including the family godown. Stroke 2024; watch now on his bedside.</div>
+      <div class="clue">⌚ the watch keeper</div>
+    </div>
+
+    <!-- 16 SOO HUI -->
+    <div class="strip">
+      <div class="head"><div class="num">16</div><div class="name">Lim Soo Hui <span class="zh">林素慧</span></div></div>
+      <div class="dates">Ipoh 1966 — · cookbook author</div>
+      <div class="body">Took the bus from Ipoh at sixteen with one school exercise book and one question for an old kitchen woman: <em>"Auntie, may I write down what your hands do?"</em> Stood beside the chopping block ten years. Married Soon Heng 1990. <em>Resipi Auntie Mei</em>, 1992 — the book that finally named her.</div>
+      <div class="clue">📓 the recipe exercise book</div>
+    </div>
+
+    <!-- 17 BIBIK ROSE -->
+    <div class="strip">
+      <div class="head"><div class="num">17</div><div class="name">Bibik Rose <span class="zh">陳玫瑰</span></div></div>
+      <div class="dates">Penang 1974 — · your host</div>
+      <div class="body">Daughter of Soon Heng &amp; Soo Hui. Trained as a Peranakan textile conservator at the Asian Civilisations Museum, Singapore. The only grandchild in whom the Peranakan culture took root completely — kebaya, kuih, beadwork, prayers. Opened the locked tin in 2024. <em>Tonight is her invitation.</em></div>
+      <div class="clue">🌹 the one who opened the tin</div>
+    </div>
+
+    <!-- 18 WEI WEN -->
+    <div class="strip">
+      <div class="head"><div class="num">18</div><div class="name">Dr Tan Wei Wen <span class="zh">陳偉文</span></div></div>
+      <div class="dates">Penang 1990 — · doctor</div>
+      <div class="body">Younger child of Soon Heng &amp; Soo Hui — sixteen years younger than his sister. Internal medicine specialist, Penang General Hospital. Met Hooi Wen at a Singapore conference in 2017 and discovered their families had once been arranged into an eleven-month marriage in 1948. Married November 2020.</div>
+      <div class="clue">⚕ closed an old promise</div>
+    </div>
+
+    <!-- 19 HOOI WEN -->
+    <div class="strip">
+      <div class="head"><div class="num">19</div><div class="name">Khoo Hooi Wen <span class="zh">邱慧雯</span></div></div>
+      <div class="dates">Singapore 1991 — · architect</div>
+      <div class="body">Great-granddaughter of Khoo Chin Nam through his Singapore first marriage. Architect, NUS. Wore Aunt Chen Neo's never-worn <b>peony-toe</b> kasut manik under her wedding kebaya in November 2020 — <b>seventy-two years</b> after they were stitched.</div>
+      <div class="clue">👡 the slipper completes the conversation</div>
+    </div>
+
+    <!-- 20 KELVIN -->
+    <div class="strip">
+      <div class="head"><div class="num">20</div><div class="name">Kelvin Tan <span class="zh">陳凱文</span></div></div>
+      <div class="dates">Singapore 1995 — · heir</div>
+      <div class="body">Only son of Albert &amp; Alice. Lives in <b>London</b>, runs the European desk of a logistics fund holding 14% of his own family's company. Twenty-six when his father died in 2021 — signed his first See Hai Chan board paper four days after the wake. <em>Knows the boats. Does not yet know the kitchen.</em></div>
+      <div class="clue">⚓ takes the chair in 2027</div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    cut along the dashed lines · paste each strip beneath its matching portrait on the family tree board · 五代家族 · Penang · May 2026
+  </div>
+
+</div>
+
+</body>
+</html>

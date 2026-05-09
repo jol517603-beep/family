@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Relationship Clue Cards · 4 cards · 1 per team</title>
+<!--
+  PRINT: 2 × A4 portrait · 2 cards per page · cut along the dashed midline.
+  Bibi hands ONE card to each team AFTER they finish matching.
+  Each card is a long winding riddle. The team must crack the hidden relationship.
+  MEANWHILE one teammate goes to the bead corner to sew.
+  Answers are at the bottom of bibi-simple-script.html (Bibi's eyes only).
+-->
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  :root { --cream:#f6ecd2; --paper:#fbf4dd; --ink:#3a2418; --gold:#b8860b; --jade:#2e7d5b; --rose:#b91c4b; --tan:#8b5a2b; --soft:#e8dab5; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background:#2a1810; font-family:'Georgia','Times New Roman',serif; color:var(--ink); }
+  body { padding: 14px; }
+  @media print { body { padding: 0; background: white; } }
+  .page {
+    width: 210mm; height: 297mm; margin: 0 auto 14px;
+    background: var(--cream);
+    padding: 8mm;
+    position: relative;
+    box-shadow: 0 14px 36px rgba(0,0,0,0.5);
+    page-break-after: always;
+    display: flex; flex-direction: column; gap: 5mm;
+  }
+  @media print { .page { box-shadow: none; margin: 0; } }
+  .page:last-child { page-break-after: auto; }
+
+  .card {
+    flex: 1;
+    background:
+      radial-gradient(circle at 8% 12%, rgba(184,134,11,0.10), transparent 40%),
+      radial-gradient(circle at 92% 88%, rgba(46,125,91,0.08), transparent 40%),
+      var(--paper);
+    border: 2px dashed var(--tan);
+    border-radius: 3mm;
+    padding: 6mm 8mm;
+    position: relative;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .card::before { content:''; position:absolute; inset:2mm; border:2px double var(--rose); border-radius:2.5mm; pointer-events:none; }
+  .card::after  { content:''; position:absolute; inset:4mm; border:1px solid var(--gold); border-radius:2mm; pointer-events:none; }
+
+  .head {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 3mm;
+    border-bottom: 1px dashed var(--rose);
+    padding-bottom: 2mm;
+    position: relative; z-index: 1;
+  }
+  .badge {
+    background: var(--rose); color: var(--cream);
+    padding: 1mm 4mm;
+    font-style: italic; letter-spacing: 4px;
+    font-size: 8.5pt;
+    border-radius: 1mm;
+    transform: rotate(-2deg);
+  }
+  .num-circle {
+    width: 14mm; height: 14mm; border-radius: 50%;
+    background: var(--jade); color: var(--cream);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Brush Script MT', cursive;
+    font-size: 22pt;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+  }
+  h2 {
+    font-family: 'Brush Script MT', cursive;
+    color: var(--rose);
+    font-size: 24pt;
+    line-height: 1;
+    text-shadow: 1.2px 1.2px 0 var(--gold);
+    margin-top: 1mm;
+    position: relative; z-index: 1;
+  }
+  .subtitle {
+    font-style: italic;
+    color: var(--tan);
+    font-size: 9pt;
+    letter-spacing: 2px;
+    margin-top: 0.5mm;
+    position: relative; z-index: 1;
+  }
+  .riddle {
+    font-size: 10.5pt;
+    line-height: 1.7;
+    color: var(--ink);
+    margin-top: 3mm;
+    text-align: justify;
+    position: relative; z-index: 1;
+    flex: 1;
+  }
+  .riddle em { color: var(--rose); font-style: italic; }
+  .riddle b { color: var(--ink); }
+
+  .question {
+    margin-top: 3mm;
+    padding: 3mm 4mm;
+    background: rgba(185, 28, 75, 0.08);
+    border-left: 3px solid var(--rose);
+    border-radius: 1.5mm;
+    font-style: italic;
+    color: var(--rose);
+    font-size: 10.5pt;
+    line-height: 1.5;
+    position: relative; z-index: 1;
+  }
+
+  .footer-strip {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 3mm;
+    padding-top: 2mm;
+    border-top: 1px dashed var(--tan);
+    font-size: 8.5pt;
+    color: var(--tan);
+    font-style: italic;
+    letter-spacing: 1.5px;
+    position: relative; z-index: 1;
+  }
+  .rule {
+    color: var(--jade);
+    font-weight: bold;
+    font-style: normal;
+    letter-spacing: 1px;
+  }
+</style></head>
+<body>
+
+<!-- ============ PAGE 1 · CARDS 1 & 2 ============ -->
+<div class="page">
+
+  <!-- CARD 1 · The Boy in the Storeroom -->
+  <div class="card">
+    <div class="head">
+      <span class="badge">★ TEAM CARD ★ ONE ★</span>
+      <div class="num-circle">壹</div>
+    </div>
+    <h2>The Boy in the Storeroom</h2>
+    <div class="subtitle">~ a riddle of two kitchens and one watch ~</div>
+    <div class="riddle">
+      My great-grandmother slept on a mat in the back storeroom. The household called her the cook. She had one son, born 1921, in the heat of August, on the kitchen floor. The towkay's first wife — the one who wore the brooch <em>Ibu</em> — said the boy was <em>"just the cook's child, no relation, no name in the registry."</em> And so the boy grew up sleeping beside the rice sacks, eating from a tin plate, never crossing the chalk line into the front parlour.
+      <br><br>
+      But every morning before the towkay left for the godown on Beach Street, he walked into the kitchen and pressed one hand briefly on the boy's head. He never spoke. He simply touched, and left. And when the boy turned nineteen in 1940, he was the one given the <b>brass watch</b> to wind every Sunday morning before tea — the same watch that crossed the South China Sea in 1891. <em>A cook's child does not wind the towkay's watch.</em>
+    </div>
+    <div class="question">
+      <b>Crack it:</b> Who was the boy's father? And what does that make the boy — really — to the family standing in the front parlour? Find the boy on the board, and find his true father, and pin them with a string.
+    </div>
+    <div class="footer-strip">
+      <span>15 minutes · whisper your answer to Bibi</span>
+      <span class="rule">✂ send 1 teammate to the bead corner</span>
+    </div>
+  </div>
+
+  <!-- CARD 2 · The Third Brooch -->
+  <div class="card">
+    <div class="head">
+      <span class="badge">★ TEAM CARD ★ TWO ★</span>
+      <div class="num-circle">貳</div>
+    </div>
+    <h2>The Third Brooch</h2>
+    <div class="subtitle">~ a riddle of three sisters and one missing baby ~</div>
+    <div class="riddle">
+      On the goldsmith's dressing table above the Beach Street shop there were three matching kerongsang: <em>Ibu</em> the mother brooch, <em>Anak A</em> the elder daughter, and <em>Anak B</em> the youngest. One brooch for each of three sisters. The eldest wore <em>Ibu</em> until she was buried with it in 1956. The middle sister, careful and quiet, wore <em>Anak A</em> all her life. The youngest sister loved orchids, never married, and was supposed to wear <em>Anak B</em>.
+      <br><br>
+      But in <b>1923</b> the youngest sister "died alone in childbirth" four streets away, in a Lee household where no Tan was supposed to know she had been staying. The third brooch was wrapped in red silk, locked in a teakwood box, and <em>never worn again</em>. The family was told the baby had not survived the night. The eldest two sisters lied for thirty-three years. The baby was a girl. She was raised under the surname <b>Lee</b>. She had a daughter of her own. Her daughter had a daughter.
+    </div>
+    <div class="question">
+      <b>Crack it:</b> Who, on this board tonight, is the youngest sister's <em>blood granddaughter</em> — the one who should have inherited the third brooch? Pin her card to the youngest sister's card with a red string.
+    </div>
+    <div class="footer-strip">
+      <span>15 minutes · whisper your answer to Bibi</span>
+      <span class="rule">✂ send 1 teammate to the bead corner</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============ PAGE 2 · CARDS 3 & 4 ============ -->
+<div class="page">
+
+  <!-- CARD 3 · The Watch That Keeps Walking -->
+  <div class="card">
+    <div class="head">
+      <span class="badge">★ TEAM CARD ★ THREE ★</span>
+      <div class="num-circle">參</div>
+    </div>
+    <h2>The Watch That Keeps Walking</h2>
+    <div class="subtitle">~ a riddle of three men and one ticking heart ~</div>
+    <div class="riddle">
+      The brass watch came across the South China Sea in 1891, in the coat pocket of a nineteen-year-old boy who had been told by his father: <em>"Time is the only thing nobody can steal back from you."</em> The boy became a man, became a towkay, became the founder of <b>See Hai Chan</b>. The watch ticked through three storms, two wives, one war, and a Japanese bomb at the Weld Quay jetty on <b>11 December 1941</b>. It was found three days later in the dead man's coat, still keeping perfect time.
+      <br><br>
+      The towkay's first wife took the watch. She did not give it to the cook's boy. She gave it only to her <em>own</em> son. He carried it through the Japanese years buried under a tile in the kitchen floor, dug it up in 1946, and wore it for the next twenty-two years. On his son's eighteenth birthday in <b>1968</b> he unstrapped it, wound it twice, and laid it on the boy's palm. <em>That son is in this room tonight, at this table, eating with you.</em>
+    </div>
+    <div class="question">
+      <b>Crack it:</b> Name the <em>three Tan men</em> who carried this watch across the four generations — and tell Bibi who is winding it now. Find their cards on the board and pin them in a vertical line, oldest to youngest.
+    </div>
+    <div class="footer-strip">
+      <span>15 minutes · whisper your answer to Bibi</span>
+      <span class="rule">✂ send 1 teammate to the bead corner</span>
+    </div>
+  </div>
+
+  <!-- CARD 4 · The Cookbook Niece -->
+  <div class="card">
+    <div class="head">
+      <span class="badge">★ TEAM CARD ★ FOUR ★</span>
+      <div class="num-circle">肆</div>
+    </div>
+    <h2>The Cookbook Niece</h2>
+    <div class="subtitle">~ a riddle of a wrong surname and a borrowed name ~</div>
+    <div class="riddle">
+      In <b>1982</b> a sixteen-year-old girl from Ipoh walked into the kitchen on Armenian Street with a school exercise book and a pencil. She had the <em>wrong surname</em> — Lim, not Tan. She had no claim to the front parlour, no claim to the long teakwood table, no claim to any of the three brooches. By every rule of the household she was a stranger. But the old woman at the chopping block looked at her once, at the shape of her face, at the Lim surname, and silently made room beside her. The girl stood there for <b>ten years</b>.
+      <br><br>
+      She wrote down everything: the sambal that had no recipe, the asam laksa nobody had been allowed to copy, the exact way to fold a kuih bangkit. In <b>1992</b> she published <em>Resipi Auntie Mei</em>. The dedication on the inside cover read: <em>"To Auntie Mei (Lim Mei Lan 林美蘭) — the woman the family forgot to name."</em> It was the first time the old cook's full name had appeared in print anywhere in seventy years. <b>No Tan blood runs in the girl. None at all.</b> And yet her face is on this board tonight.
+    </div>
+    <div class="question">
+      <b>Crack it:</b> Who is the girl? What is her exact blood relation to the old cook (one word)? And argue with each other for two minutes — does she <em>belong</em> on the family tree? Pin her card wherever your team decides she belongs.
+    </div>
+    <div class="footer-strip">
+      <span>15 minutes · whisper your answer to Bibi</span>
+      <span class="rule">✂ send 1 teammate to the bead corner</span>
+    </div>
+  </div>
+
+</div>
+
+</body></html>
